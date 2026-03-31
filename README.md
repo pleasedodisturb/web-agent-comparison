@@ -14,7 +14,7 @@ A head-to-head comparison of 5 web automation agents tested against real job app
 
 ## Test Flow
 
-Real CareerOS job application pipeline stages:
+Real real job application pipeline stages:
 
 1. **S1** Extract structured job data (Greenhouse — server-rendered)
 2. **S2** Extract from React SPA (Ashby — client-rendered)
