@@ -1,0 +1,526 @@
+- main
+  - link "Anthropic Logo" [ref=e17]
+    - image "Anthropic Logo"
+  - link "Back to jobs" [ref=e1]
+    - image
+    - StaticText "Back to jobs"
+  - heading "Research Engineer, Agents" [level=1, ref=e2]
+  - image
+  - StaticText "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY"
+  - button "Apply" [ref=e3]
+  - heading "About Anthropic" [level=2, ref=e4]
+    - strong
+      - StaticText "About Anthropic"
+  - paragraph
+    - StaticText "Anthropic’s mission is to create reliable, interpretable, and steerable AI systems. We want AI to be safe and beneficial for our users and for society as a whole. Our team is a quickly growing group of committed researchers, engineers, policy experts, and business leaders working together to build beneficial AI systems."
+  - heading "About the role:" [level=2, ref=e5]
+    - strong
+      - StaticText "About the role:"
+  - paragraph
+    - link "Agentic systems" [ref=e18]
+    - StaticText " are becoming an increasingly important part of how AI is deployed. Over the last year, we’ve seen rapid adoption of Claude-powered agentic systems in spaces like coding, research, customer support, network security, and more. We believe this is just the beginning, and we expect Claude to be handling much more complex tasks end-to-end or in cooperation with a human user as time goes on. We have a team striving to make Claude an even more effective agent over longer time horizon tasks, and coordinate with groups of other agents at many different scales to accomplish large tasks. This team endeavors to maximize agent performance by solving challenges at whatever level is needed, whether it’s novel harness design, improved agent affordances and infrastructure, or finetuning."
+  - paragraph
+    - StaticText "Given that this is a nascent field, we ask that you share with us a project built on LLMs that showcases your skill at getting them to do complex tasks. Here are some example projects of interest: design of complex agents, quantitative experiments with prompting, constructing model benchmarks, synthetic data generation, or model finetuning. There is no preferred task; we just want to see what you can build. It’s fine if several people worked on it; simply share what part of it was your contribution. You can also include a short description of the process you used or any roadblocks you hit and how to deal with them, but this is not a requirement."
+  - heading "" [level=3, ref=e6]
+    - strong
+  - heading "Responsibilities:" [level=3, ref=e7]
+    - strong
+      - StaticText "Responsibilities:"
+  - list
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Ideate, develop, and compare the performance of different agent harnesses (eg memory, context compression, communication architectures for agents)"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Design and implement rigorous quantitative benchmarks for large scale agentic tasks"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Assist with automated evaluation of Claude models and prompts across the training and product lifecycle"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Work with our product org to find solutions to our most vexing challenges applying agents to our products"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Help create and optimize data mixes for model training that maximize Claude’s performance or ease of use on agentic tasks"
+  - heading "You may be a good fit if you:" [level=3, ref=e8]
+    - strong
+      - StaticText "You may be a good fit if you:"
+  - list
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Have experience developing complex agentic systems using LLMs"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Have significant software engineering and ML experience"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Have spent time prompting and/or building products with language models"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Have good communication skills and an interest in working with other researchers on difficult tasks"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Have a passion for making powerful technology safe and societally beneficial"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Stay up-to-date and informed by taking an active interest in emerging research and industry trends."
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Enjoy pair programming (we love to pair!)"
+  - heading "Strong candidates may also have experience with:" [level=3, ref=e9]
+    - strong
+      - StaticText "Strong candidates may also have experience with:"
+  - list
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Large-scale RL on language models"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Multi-agent systems"
+  - heading "Representative projects:" [level=3, ref=e10]
+    - strong
+      - StaticText "Representative projects:"
+  - list
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Design and build a novel agent harness that outperforms existing agents on coding or knowledge work benchmarks"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Design and build agent affordances that unlock new capabilities for internal use and deployed products"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Design and build a novel eval that measures how many agents interact in groups to solve problems"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Build a scaled model evaluation framework driven by model-based evaluation techniques."
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Build the prompting and model orchestration for a production application backed by a language model"
+    - listitem [level=1]
+      - ListMarker "• "
+      - StaticText "Finetune Claude to maximize its performance using a particular set of agent tools or harness"
+  - generic
+    - paragraph
+      - StaticText "The annual compensation range for this role is listed below."
+    - paragraph
+      - StaticText "For sales roles, the range provided is the role’s On Target Earnings (\"OTE\") range, meaning that the range includes both the sales commissions/sales bonuses target and annual base salary for the role."
+  - paragraph
+    - StaticText "Annual Salary:"
+  - paragraph
+    - StaticText "$500,000 - $850,000 USD"
+  - heading "Logistics" [level=2, ref=e11]
+    - strong
+      - StaticText "Logistics"
+  - paragraph
+    - strong
+      - StaticText "Education requirements: "
+    - StaticText "We require at least a Bachelor's degree in a related field or equivalent experience."
+    - strong
+      - LineBreak "\n"
+      - LineBreak "\n"
+      - StaticText "Location-based hybrid policy:"
+    - StaticText " Currently, we expect all staff to be in one of our offices at least 25% of the time. However, some roles may require more time in our offices."
+  - paragraph
+    - strong
+      - StaticText "Visa sponsorship:"
+    - StaticText "We do sponsor visas! However, we aren't able to successfully sponsor visas for every role and every candidate. But if we make you an offer, we will make every reasonable effort to get you a visa, and we retain an immigration lawyer to help with this."
+  - paragraph
+    - strong
+      - StaticText "We encourage you to apply even if you do not believe you meet every single qualification."
+    - StaticText " Not all strong candidates will meet every single qualification as listed. Research shows that people who identify as being from underrepresented groups are more prone to experiencing imposter syndrome and doubting the strength of their candidacy, so we urge you not to exclude yourself prematurely and to submit an application if you're interested in this work. We think AI systems like the ones we're building have enormous social and ethical implications. We think this makes representation even more important, and we strive to include a range of diverse perspectives on our team."
+    - LineBreak "\n"
+    - LineBreak "\n"
+    - strong
+      - StaticText "Your safety matters to us."
+    - StaticText " To protect yourself from potential scams, remember that Anthropic recruiters only contact you from@anthropic.comemail addresses. In some cases, we may partner with vetted recruiting agencies who will identify themselves as working on behalf of Anthropic. Be cautious of emails from other domains. Legitimate Anthropic recruiters will never ask for money, fees, or banking information before your first day. If you're ever unsure about a communication, don't click any links—visit"
+    - link "anthropic.com/careers" [ref=e19]
+    - StaticText "directly for confirmed position openings."
+  - heading "How we're different" [level=2, ref=e12]
+    - strong
+      - StaticText "How we're different"
+  - paragraph
+    - StaticText "We believe that the highest-impact AI research will be big science. At Anthropic we work as a single cohesive team on just a few large-scale research efforts. And we value impact — advancing our long-term goals of steerable, trustworthy AI — rather than work on smaller and more specific puzzles. We view AI research as an empirical science, which has as much in common with physics and biology as with traditional efforts in computer science. We're an extremely collaborative group, and we host frequent research discussions to ensure that we are pursuing the highest-impact work at any given time. As such, we greatly value communication skills."
+  - paragraph
+    - StaticText "The easiest way to understand our research directions is to read our recent research. This research continues many of the directions our team worked on prior to Anthropic, including: GPT-3, Circuit-Based Interpretability, Multimodal Neurons, Scaling Laws, AI & Compute, Concrete Problems in AI Safety, and Learning from Human Preferences."
+  - heading "Come work with us!" [level=2, ref=e13]
+    - strong
+      - StaticText "Come work with us!"
+  - paragraph
+    - StaticText "Anthropic is a public benefit corporation headquartered in San Francisco. We offer competitive compensation and benefits, optional equity donation matching, generous vacation and parental leave, flexible working hours, and a lovely office space in which to collaborate with colleagues. "
+    - strong
+      - StaticText "Guidance on Candidates' AI Usage:"
+    - StaticText "Learn about"
+    - link "our policy" [ref=e20]
+    - StaticText "for using AI in our application process"
+  - image
+  - paragraph
+    - StaticText "Create a Job Alert"
+  - paragraph
+    - StaticText "Interested in building your career at Anthropic? Get future opportunities sent straight to your email."
+  - link "Create alert" [ref=e14]
+  - separator
+  - heading "Apply for this job" [level=2, ref=e15]
+  - paragraph
+    - StaticText "*"
+  - paragraph
+    - StaticText "indicates a required field"
+  - generic
+    - generic
+      - LabelText
+        - StaticText "First Name"
+      - textbox "First Name" [required, ref=e26]
+    - generic
+      - LabelText
+        - StaticText "Last Name"
+      - textbox "Last Name" [required, ref=e27]
+    - generic
+      - LabelText
+        - StaticText "Email"
+      - textbox "Email" [required, ref=e28]
+    - group "Phone"
+      - Legend
+        - StaticText "Phone"
+      - LabelText
+        - StaticText "Country"
+      - generic
+        - log
+        - generic
+          - generic
+            - combobox "Country" [expanded=false, required, ref=e76]
+          - button "Toggle flyout" [ref=e77]
+            - image
+      - generic
+        - LabelText
+          - StaticText "Phone"
+        - generic
+          - textbox "Phone" [required, ref=e78]
+    - group "Resume/CV*"
+      - generic
+        - StaticText "Resume/CV*"
+      - generic
+        - button "Attach" [ref=e29]
+        - LabelText
+          - StaticText "Attach"
+        - button "Attach" [ref=e30]: No file chosen
+      - button "Dropbox" [ref=e31]
+      - button "Google Drive" [ref=e32]
+      - generic
+        - button "Enter manually" [ref=e33]
+        - LabelText
+          - StaticText "Enter manually"
+      - paragraph
+        - StaticText "Accepted file types: pdf, doc, docx, txt, rtf"
+    - group "Cover Letter"
+      - StaticText "Cover Letter"
+      - generic
+        - button "Attach" [ref=e34]
+        - LabelText
+          - StaticText "Attach"
+        - button "Attach" [ref=e35]: No file chosen
+      - button "Dropbox" [ref=e36]
+      - button "Google Drive" [ref=e37]
+      - generic
+        - button "Enter manually" [ref=e38]
+        - LabelText
+          - StaticText "Enter manually"
+      - paragraph
+        - StaticText "Accepted file types: pdf, doc, docx, txt, rtf"
+    - separator
+    - generic
+      - LabelText
+        - StaticText "(Optional) Personal Preferences"
+      - textbox "(Optional) Personal Preferences" [required, ref=e39]
+    - paragraph
+      - StaticText "How do you pronounce your name?"
+    - generic
+      - LabelText
+        - StaticText "Website"
+      - textbox "Website" [ref=e40]
+    - generic
+      - LabelText
+        - StaticText "Publications (e.g. Google Scholar) URL"
+      - textbox "Publications (e.g. Google Scholar) URL" [ref=e41]
+    - generic
+      - LabelText
+        - StaticText "GitHub URL"
+      - textbox "GitHub URL" [ref=e42]
+    - LabelText
+      - StaticText "Are you open to working in-person in one of our offices 25% of the time?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Are you open to working in-person in one of our offices 25% of the time?" [expanded=false, required, ref=e52]
+        - button "Toggle flyout" [ref=e53]
+          - image
+    - generic
+      - LabelText
+        - StaticText "When is the earliest you would want to start working with us?"
+      - textbox "When is the earliest you would want to start working with us?" [ref=e43]
+    - generic
+      - LabelText
+        - StaticText "Do you have any deadlines or timeline considerations we should be aware of?"
+      - textbox "Do you have any deadlines or timeline considerations we should be aware of?" [ref=e44]
+    - LabelText
+      - StaticText "AI Policy for Application"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "AI Policy for Application" [expanded=false, required, ref=e54]
+        - button "Toggle flyout" [ref=e55]
+          - image
+    - paragraph
+      - StaticText "We believe that AI will have a transformative impact on the world, and we’re seeking exceptional candidates who collaborate thoughtfully with Claude to realize this vision. At the same time, we want to understand your unique skills, expertise, and perspective through our hiring process. We invite you to review our "
+      - link "AI partnership guidelines for candidates" [ref=e45]
+      - StaticText " and confirm your understanding by selecting “Yes.”"
+    - generic
+      - LabelText
+        - StaticText "Why Anthropic?"
+      - textbox "Why Anthropic?" [required, ref=e46]
+    - paragraph
+      - StaticText "Why do you want to work at Anthropic? (We value this response highly - great answers are often 200-400 words.)"
+    - LabelText
+      - StaticText "Do you require visa sponsorship?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Do you require visa sponsorship?" [expanded=false, required, ref=e56]
+        - button "Toggle flyout" [ref=e57]
+          - image
+    - LabelText
+      - StaticText "Will you now or will you in the future require employment visa sponsorship to work in the country in which the job you're applying for is located? "
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Will you now or will you in the future require employment visa sponsorship to work in the country in which the job you're applying for is located? " [expanded=false, required, ref=e58]
+        - button "Toggle flyout" [ref=e59]
+          - image
+    - LabelText
+      - StaticText "Have you completed any personal or professional projects that makes use of large language models to create complex or interactive functionality?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Have you completed any personal or professional projects that makes use of large language models to create complex or interactive functionality?" [expanded=false, required, ref=e60]
+        - button "Toggle flyout" [ref=e61]
+          - image
+    - LabelText
+      - StaticText "Do you have expertise coding in Python?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Do you have expertise coding in Python?" [expanded=false, required, ref=e62]
+        - button "Toggle flyout" [ref=e63]
+          - image
+    - generic
+      - LabelText
+        - StaticText "Please describe the most complex and interesting thing you have done with an LLM so far, including a description of the specific task you accomplished and the challenges you faced along the way."
+      - textbox "Please describe the most complex and interesting thing you have done with an LLM so far, including a description of the specific task you accomplished and the challenges you faced along the way." [required, ref=e47]
+    - generic
+      - LabelText
+        - StaticText "We would love to see examples of your work with LLMs. Please feel free to include any relevant links or content. "
+      - textbox "We would love to see examples of your work with LLMs. Please feel free to include any relevant links or content. " [required, ref=e48]
+    - generic
+      - LabelText
+        - StaticText "Additional Information"
+      - textbox "Additional Information" [required, ref=e49]
+    - paragraph
+      - StaticText "Add a cover letter or anything else you want to share."
+    - generic
+      - LabelText
+        - StaticText "LinkedIn Profile"
+      - textbox "LinkedIn Profile" [ref=e50]
+    - paragraph
+      - StaticText "Please ensure to provide "
+      - emphasis
+        - StaticText "either"
+      - StaticText " your LinkedIn profile or Resume, we require at least one of the two."
+    - LabelText
+      - StaticText "Are you open to relocation for this role? "
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Are you open to relocation for this role? " [expanded=false, required, ref=e64]
+        - button "Toggle flyout" [ref=e65]
+          - image
+    - generic
+      - LabelText
+        - StaticText "What is the address from which you plan on working? If you would need to relocate, please type \"relocating\"."
+      - textbox "What is the address from which you plan on working? If you would need to relocate, please type \"relocating\"." [ref=e51]
+    - LabelText
+      - StaticText "Have you ever interviewed at Anthropic before?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Have you ever interviewed at Anthropic before?" [expanded=false, required, ref=e66]
+        - button "Toggle flyout" [ref=e67]
+          - image
+    - separator
+    - heading "Voluntary Self-Identification" [level=2, ref=e21]
+    - paragraph
+      - StaticText "For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely voluntary. Whatever your decision, it will not be considered in the hiring process or thereafter. Any information that you do provide will be recorded and maintained in a confidential file."
+    - paragraph
+      - StaticText "As set forth in Anthropic’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any applicable law."
+    - LabelText
+      - StaticText "Gender"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Gender" [expanded=false, ref=e68]
+        - button "Toggle flyout" [ref=e69]
+          - image
+    - LabelText
+      - StaticText "Are you Hispanic/Latino?"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Are you Hispanic/Latino?" [expanded=false, ref=e70]
+        - button "Toggle flyout" [ref=e71]
+          - image
+    - link "Race & Ethnicity Definitions" [ref=e22]
+    - paragraph
+      - StaticText "If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. As a government contractor subject to the Vietnam Era Veterans Readjustment Assistance Act (VEVRAA), we request this information in order to measure the effectiveness of the outreach and positive recruitment efforts we undertake pursuant to VEVRAA. Classification of protected categories is as follows:"
+    - paragraph
+      - StaticText "A \"disabled veteran\" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired pay would be entitled to compensation) under laws administered by the Secretary of Veterans Affairs; or a person who was discharged or released from active duty because of a service-connected disability."
+    - paragraph
+      - StaticText "A \"recently separated veteran\" means any veteran during the three-year period beginning on the date of such veteran's discharge or release from active duty in the U.S. military, ground, naval, or air service."
+    - paragraph
+      - StaticText "An \"active duty wartime or campaign badge veteran\" means a veteran who served on active duty in the U.S. military, ground, naval or air service during a war, or in a campaign or expedition for which a campaign badge has been authorized under the laws administered by the Department of Defense."
+    - paragraph
+      - StaticText "An \"Armed forces service medal veteran\" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, participated in a United States military operation for which an Armed Forces service medal was awarded pursuant to Executive Order 12985."
+    - LabelText
+      - StaticText "Veteran Status"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Veteran Status" [expanded=false, ref=e72]
+        - button "Toggle flyout" [ref=e73]
+          - image
+    - separator
+    - heading "Voluntary Self-Identification of Disability" [level=2, ref=e23]
+    - StaticText "Form CC-305"
+    - StaticText "Page 1 of 1"
+    - StaticText "OMB Control Number 1250-0005"
+    - StaticText "Expires 04/30/2026"
+    - LineBreak "\n"
+    - strong
+      - StaticText "Why are you being asked to complete this form?"
+    - paragraph
+      - StaticText "We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilities. We have a goal of having at least 7% of our workers as people with disabilities. The law says we must measure our progress towards this goal. To do this, we must ask applicants and employees if they have a disability or have ever had one. People can become disabled, so we need to ask this question at least every five years."
+    - paragraph
+      - StaticText "Completing this form is voluntary, and we hope that you will choose to do so. Your answer is confidential. No one who makes hiring decisions will see it. Your decision to complete the form and your answer will not harm you in any way. If you want to learn more about the law or this form, visit the U.S. Department of Labor’s Office of Federal Contract Compliance Programs (OFCCP) website at "
+      - link "www.dol.gov/ofccp" [ref=e25]
+      - StaticText "."
+    - strong
+      - StaticText "How do you know if you have a disability?"
+    - paragraph
+      - StaticText "A disability is a condition that substantially limits one or more of your “major life activities.” If you have or have ever had such a condition, you are a person with a disability. "
+      - strong
+        - StaticText "Disabilities include, but are not limited to:"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Alcohol or other substance use disorder (not currently using drugs illegally)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Blind or low vision"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Cancer (past or present)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Cardiovascular or heart disease"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Celiac disease"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Cerebral palsy"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Deaf or serious difficulty hearing"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Diabetes"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Epilepsy or other seizure disorder"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Intellectual or developmental disability"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Missing limbs or partially missing limbs"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning disabilities"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Partial or complete paralysis (any cause)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Short stature (dwarfism)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Traumatic brain injury"
+    - LabelText
+      - StaticText "Disability Status"
+    - generic
+      - log
+      - generic
+        - generic
+          - StaticText "Select..."
+          - combobox "Disability Status" [expanded=false, ref=e74]
+        - button "Toggle flyout" [ref=e75]
+          - image
+    - paragraph
+      - StaticText "PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information unless such collection displays a valid OMB control number. This survey should take about 5 minutes to complete."
+    - button "Submit application" [ref=e24]
+- contentinfo
+  - paragraph
+    - StaticText "Powered by"
+  - link "Greenhouse logo" [ref=e16]
+    - image "Greenhouse logo"
+- generic
+  - IframePresentational "reCAPTCHA"

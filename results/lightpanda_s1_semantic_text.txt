@@ -1,0 +1,322 @@
+1 RootWebArea 'page_title'
+ 8 link 'Anthropic Logo'
+ 10 link 'Back to jobs'
+ 14 heading 'Research Engineer, Agents'
+ 17 'Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY'
+ 18 button 'Apply'
+ 21 heading 'About Anthropic'
+ 22 paragraph
+  23 'Anthropic’s mission is to create reliable, interpretable, and steerable AI systems. We want AI to be safe and beneficial for our users and for society as a whole. Our team is a quickly growing group of committed researchers, engineers, policy experts, and business leaders working together to build beneficial AI systems.'
+ 25 heading 'About the role:'
+ 26 paragraph
+  27 link 'Agentic systems'
+  28 'are becoming an increasingly important part of how AI is deployed.  Over the last year, we’ve seen rapid adoption of Claude-powered agentic systems in spaces like coding, research, customer support, network security, and more. We believe this is just the beginning, and we expect Claude to be handling much more complex tasks end-to-end or in cooperation with a human user as time goes on.  We have a team striving to make Claude an even more effective agent over longer time horizon tasks, and coordinate with groups of other agents at many different scales to accomplish large tasks. This team endeavors to maximize agent performance by solving challenges at whatever level is needed, whether it’s novel harness design, improved agent affordances and infrastructure, or finetuning.'
+ 29 paragraph
+  30 'Given that this is a nascent field, we ask that you share with us a project built on LLMs that showcases your skill at getting them to do complex tasks. Here are some example projects of interest: design of complex agents, quantitative experiments with prompting, constructing model benchmarks, synthetic data generation, or model finetuning. There is no preferred task; we just want to see what you can build. It’s fine if several people worked on it; simply share what part of it was your contribution. You can also include a short description of the process you used or any roadblocks you hit and how to deal with them, but this is not a requirement.'
+ 31 heading ' '
+ 32 heading 'Responsibilities:'
+ 35 'Ideate, develop, and compare the performance of different agent harnesses  (eg memory, context compression, communication architectures for agents)'
+ 37 'Design and implement rigorous quantitative benchmarks for large scale agentic tasks'
+ 39 'Assist with automated evaluation of Claude models and prompts across the training and product lifecycle'
+ 41 'Work with our product org to find solutions to our most vexing challenges applying agents to our products'
+ 43 'Help create and optimize data mixes for model training that maximize Claude’s performance or ease of use on agentic tasks'
+ 44 heading 'You may be a good fit if you:'
+ 47 'Have experience developing complex agentic systems using LLMs'
+ 49 'Have significant software engineering and ML experience'
+ 51 'Have spent time prompting and/or building products with language models'
+ 53 'Have good communication skills and an interest in working with other researchers on difficult tasks'
+ 55 'Have a passion for making powerful technology safe and societally beneficial'
+ 57 'Stay up-to-date and informed by taking an active interest in emerging research and industry trends.'
+ 59 'Enjoy pair programming (we love to pair!)'
+ 60 heading 'Strong candidates may also have experience with:'
+ 63 'Large-scale RL on language models'
+ 65 'Multi-agent systems'
+ 66 heading 'Representative projects:'
+ 69 'Design and build a novel agent harness that outperforms existing agents on coding or knowledge work benchmarks'
+ 71 'Design and build agent affordances that unlock new capabilities for internal use and deployed products'
+ 73 'Design and build a novel eval that measures how many agents interact in groups to solve problems'
+ 75 'Build a scaled model evaluation framework driven by model-based evaluation techniques.'
+ 77 'Build the prompting and model orchestration for a production application backed by a language model'
+ 79 'Finetune Claude to maximize its performance using a particular set of agent tools or harness'
+ 85 paragraph
+  86 'The annual compensation range for this role is listed below. '
+ 87 paragraph
+  88 'For sales roles, the range provided is the role’s On Target Earnings (\"OTE\") range, meaning that the range includes both the sales commissions/sales bonuses target and annual base salary for the role.'
+ 89 paragraph
+  90 'Annual Salary:'
+ 91 paragraph
+  93 '$500,000'
+  94 '-'
+  96 '$850,000'
+  98 'USD'
+ 100 heading 'Logistics'
+ 101 paragraph
+  102 strong 'Education requirements:'
+  104 'We require at least a Bachelor's degree in a related field or equivalent experience.'
+  105 strong 'Location-based hybrid policy:'
+   106 LineBreak
+   107 LineBreak
+  109 'Currently, we expect all staff to be in one of our offices at least 25% of the time. However, some roles may require more time in our offices.'
+ 110 paragraph
+  111 strong 'Visa sponsorship:'
+  113 ' We do sponsor visas! However, we aren't able to successfully sponsor visas for every role and every candidate. But if we make you an offer, we will make every reasonable effort to get you a visa, and we retain an immigration lawyer to help with this.'
+ 114 paragraph
+  115 strong 'We encourage you to apply even if you do not believe you meet every single qualification.'
+  117 'Not all strong candidates will meet every single qualification as listed.  Research shows that people who identify as being from underrepresented groups are more prone to experiencing imposter syndrome and doubting the strength of their candidacy, so we urge you not to exclude yourself prematurely and to submit an application if you're interested in this work. We think AI systems like the ones we're building have enormous social and ethical implications. We think this makes representation even more important, and we strive to include a range of diverse perspectives on our team.'
+  118 LineBreak
+  119 LineBreak
+  120 strong 'Your safety matters to us.'
+  122 'To protect yourself from potential scams, remember that Anthropic recruiters only contact you from @anthropic.com email addresses. In some cases, we may partner with vetted recruiting agencies who will identify themselves as working on behalf of Anthropic. Be cautious of emails from other domains. Legitimate Anthropic recruiters will never ask for money, fees, or banking information before your first day. If you're ever unsure about a communication, don't click any links—visit '
+  124 link 'anthropic.com/careers'
+  125 ' directly for confirmed position openings.'
+ 126 heading 'How we're different'
+ 127 paragraph
+  128 'We believe that the highest-impact AI research will be big science. At Anthropic we work as a single cohesive team on just a few large-scale research efforts. And we value impact — advancing our long-term goals of steerable, trustworthy AI — rather than work on smaller and more specific puzzles. We view AI research as an empirical science, which has as much in common with physics and biology as with traditional efforts in computer science. We're an extremely collaborative group, and we host frequent research discussions to ensure that we are pursuing the highest-impact work at any given time. As such, we greatly value communication skills.'
+ 129 paragraph
+  130 'The easiest way to understand our research directions is to read our recent research. This research continues many of the directions our team worked on prior to Anthropic, including: GPT-3, Circuit-Based Interpretability, Multimodal Neurons, Scaling Laws, AI & Compute, Concrete Problems in AI Safety, and Learning from Human Preferences.'
+ 131 heading 'Come work with us!'
+ 132 paragraph
+  133 'Anthropic is a public benefit corporation headquartered in San Francisco. We offer competitive compensation and benefits, optional equity donation matching, generous vacation and parental leave, flexible working hours, and a lovely office space in which to collaborate with colleagues.'
+  134 strong 'Guidance on Candidates' AI Usage:'
+  136 ' Learn about '
+  137 link 'our policy'
+  138 ' for using AI in our application process'
+ 141 paragraph
+  142 'Create a Job Alert'
+ 143 paragraph
+  144 'Interested in building your career at Anthropic? Get future opportunities sent straight to your email.'
+ 145 button 'Create alert'
+ 146 separator
+ 151 heading 'Apply for this job'
+ 154 paragraph
+  155 '*'
+ 156 paragraph
+  157 'indicates a required field'
+ 160 form
+  166 'First Name'
+  168 '*'
+  169 textbox 'First Name'
+  174 'Last Name'
+  176 '*'
+  177 textbox 'Last Name'
+  182 'Email'
+  184 '*'
+  185 textbox 'Email'
+  187 group 'Phone Country * Phone *'
+   189 'Phone'
+   194 'Country'
+   196 '*'
+   199 log
+   205 combobox 'Country*'
+   207 button 'Toggle flyout'
+   208 textbox
+   213 'Phone'
+   215 '*'
+   216 textbox 'Phone'
+  218 group 'Resume/CV*'
+   220 'Resume/CV'
+   222 '*'
+   227 button 'Attach'
+   229 'Attach'
+   230 file
+   232 button 'Dropbox'
+   234 button 'Google Drive'
+   237 button 'Enter manually'
+   239 'Enter manually'
+   240 paragraph
+    241 'Accepted file types: pdf, doc, docx, txt, rtf'
+  243 group 'Cover Letter'
+   245 'Cover Letter'
+   250 button 'Attach'
+   252 'Attach'
+   253 file
+   255 button 'Dropbox'
+   257 button 'Google Drive'
+   260 button 'Enter manually'
+   262 'Enter manually'
+   263 paragraph
+    264 'Accepted file types: pdf, doc, docx, txt, rtf'
+  266 separator
+  271 '(Optional) Personal Preferences'
+  273 '*'
+  274 textbox '(Optional) Personal Preferences'
+  277 paragraph
+   278 'How do you pronounce your name?'
+  283 'Website'
+  284 textbox 'Website'
+  289 'Publications (e.g. Google Scholar) URL'
+  290 textbox 'Publications (e.g. Google Scholar) URL'
+  295 'GitHub URL'
+  296 textbox 'GitHub URL'
+  301 'Are you open to working in-person in one of our offices 25% of the time?'
+  303 '*'
+  306 log
+  311 'Select...'
+  313 combobox 'Are you open to working in-person in one of our offices 25% of the time?*'
+  315 button 'Toggle flyout'
+  316 textbox
+  321 'When is the earliest you would want to start working with us?'
+  322 textbox 'When is the earliest you would want to start working with us?'
+  327 'Do you have any deadlines or timeline considerations we should be aware of?'
+  328 textbox 'Do you have any deadlines or timeline considerations we should be aware of?'
+  333 'AI Policy for Application'
+  335 '*'
+  338 log
+  343 'Select...'
+  345 combobox 'AI Policy for Application*'
+  347 button 'Toggle flyout'
+  348 textbox
+  351 paragraph
+   352 'We believe that AI will have a transformative impact on the world, and we’re seeking exceptional candidates who collaborate thoughtfully with Claude to realize this vision. At the same time, we want to understand your unique skills, expertise, and perspective through our hiring process. We invite you to review our'
+   353 link 'AI partnership guidelines for candidates'
+   354 'and confirm your understanding by selecting “Yes.”'
+  359 'Why Anthropic?'
+  361 '*'
+  362 textbox 'Why Anthropic?'
+  365 paragraph
+   366 'Why do you want to work at Anthropic? (We value this response highly - great answers are often 200-400 words.)'
+  371 'Do you require visa sponsorship?'
+  373 '*'
+  376 log
+  381 'Select...'
+  383 combobox 'Do you require visa sponsorship?*'
+  385 button 'Toggle flyout'
+  386 textbox
+  391 'Will you now or will you in the future require employment visa sponsorship to work in the country in which the job you're applying for is located?'
+  393 '*'
+  396 log
+  401 'Select...'
+  403 combobox 'Will you now or will you in the future require employment visa sponsorship to work in the country in which the job you're applying for is located? *'
+  405 button 'Toggle flyout'
+  406 textbox
+  411 'Have you completed any personal or professional projects that makes use of large language models to create complex or interactive functionality?'
+  413 '*'
+  416 log
+  421 'Select...'
+  423 combobox 'Have you completed any personal or professional projects that makes use of large language models to create complex or interactive functionality?*'
+  425 button 'Toggle flyout'
+  426 textbox
+  431 'Do you have expertise coding in Python?'
+  433 '*'
+  436 log
+  441 'Select...'
+  443 combobox 'Do you have expertise coding in Python?*'
+  445 button 'Toggle flyout'
+  446 textbox
+  451 'Please describe the most complex and interesting thing you have done with an LLM so far, including a description of the specific task you accomplished and the challenges you faced along the way.'
+  453 '*'
+  454 textbox 'Please describe the most complex and interesting thing you have done with an LLM so far, including a description of the specific task you accomplished and the challenges you faced along the way.'
+  459 'We would love to see examples of your work with LLMs. Please feel free to include any relevant links or content.'
+  461 '*'
+  462 textbox 'We would love to see examples of your work with LLMs. Please feel free to include any relevant links or content.'
+  467 'Additional Information'
+  469 '*'
+  470 textbox 'Additional Information'
+  473 paragraph
+   474 'Add a cover letter or anything else you want to share.'
+  479 'LinkedIn Profile'
+  480 textbox 'LinkedIn Profile'
+  483 paragraph
+   484 'Please ensure to provide'
+   485 emphasis 'either'
+   487 'your LinkedIn profile or Resume, we require at least one of the two. '
+  492 'Are you open to relocation for this role?'
+  494 '*'
+  497 log
+  502 'Select...'
+  504 combobox 'Are you open to relocation for this role? *'
+  506 button 'Toggle flyout'
+  507 textbox
+  512 'What is the address from which you plan on working? If you would need to relocate, please type \"relocating\".'
+  513 textbox 'What is the address from which you plan on working? If you would need to relocate, please type "relocating".'
+  518 'Have you ever interviewed at Anthropic before?'
+  520 '*'
+  523 log
+  528 'Select...'
+  530 combobox 'Have you ever interviewed at Anthropic before?*'
+  532 button 'Toggle flyout'
+  533 textbox
+  535 separator
+  537 heading 'Voluntary Self-Identification'
+  538 paragraph
+   539 'For government reporting purposes, we ask candidates to respond to the below self-identification survey. Completion of the form is entirely voluntary. Whatever your decision, it will not be considered in the hiring process or thereafter. Any information that you do provide will be recorded and maintained in a confidential file.'
+  540 paragraph
+   541 'As set forth in Anthropic’s Equal Employment Opportunity policy, we do not discriminate on the basis of any protected group status under any applicable law.'
+  546 'Gender'
+  549 log
+  554 'Select...'
+  556 combobox 'Gender'
+  558 button 'Toggle flyout'
+  563 'Are you Hispanic/Latino?'
+  566 log
+  571 'Select...'
+  573 combobox 'Are you Hispanic/Latino?'
+  575 button 'Toggle flyout'
+  576 link 'Race & Ethnicity Definitions'
+  578 paragraph
+   579 'If you believe you belong to any of the categories of protected veterans listed below, please indicate by making the appropriate selection. As a government contractor subject to the Vietnam Era Veterans Readjustment Assistance Act (VEVRAA), we request this information in order to measure the effectiveness of the outreach and positive recruitment efforts we undertake pursuant to VEVRAA. Classification of protected categories is as follows:'
+  580 paragraph
+   581 'A \"disabled veteran\" is one of the following: a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired pay would be entitled to compensation) under laws administered by the Secretary of Veterans Affairs; or a person who was discharged or released from active duty because of a service-connected disability.'
+  582 paragraph
+   583 'A \"recently separated veteran\" means any veteran during the three-year period beginning on the date of such veteran's discharge or release from active duty in the U.S. military, ground, naval, or air service.'
+  584 paragraph
+   585 'An \"active duty wartime or campaign badge veteran\" means a veteran who served on active duty in the U.S. military, ground, naval or air service during a war, or in a campaign or expedition for which a campaign badge has been authorized under the laws administered by the Department of Defense.'
+  586 paragraph
+   587 'An \"Armed forces service medal veteran\" means a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, participated in a United States military operation for which an Armed Forces service medal was awarded pursuant to Executive Order 12985.'
+  592 'Veteran Status'
+  595 log
+  600 'Select...'
+  602 combobox 'Veteran Status'
+  604 button 'Toggle flyout'
+  605 separator
+  607 heading 'Voluntary Self-Identification of Disability'
+  611 'Form CC-305'
+  613 'Page 1 of 1'
+  616 'OMB Control Number 1250-0005'
+  618 'Expires 04/30/2026'
+  619 LineBreak
+  620 strong 'Why are you being asked to complete this form?'
+  622 paragraph
+   623 'We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilities. We have a goal of having at least 7% of our workers as people with disabilities. The law says we must measure our progress towards this goal. To do this, we must ask applicants and employees if they have a disability or have ever had one. People can become disabled, so we need to ask this question at least every five years.'
+  624 paragraph
+   625 'Completing this form is voluntary, and we hope that you will choose to do so. Your answer is confidential. No one who makes hiring decisions will see it. Your decision to complete the form and your answer will not harm you in any way. If you want to learn more about the law or this form, visit the U.S. Department of Labor’s Office of Federal Contract Compliance Programs (OFCCP) website at'
+   626 link 'www.dol.gov/ofccp'
+   627 '.'
+  628 strong 'How do you know if you have a disability?'
+  630 paragraph
+   631 'A disability is a condition that substantially limits one or more of your “major life activities.” If you have or have ever had such a condition, you are a person with a disability.'
+   632 strong 'Disabilities include, but are not limited to:'
+  636 'Alcohol or other substance use disorder (not currently using drugs illegally)'
+  638 'Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS'
+  640 'Blind or low vision'
+  642 'Cancer (past or present)'
+  644 'Cardiovascular or heart disease'
+  646 'Celiac disease'
+  648 'Cerebral palsy'
+  650 'Deaf or serious difficulty hearing'
+  652 'Diabetes'
+  654 'Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders'
+  656 'Epilepsy or other seizure disorder'
+  658 'Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome'
+  660 'Intellectual or developmental disability'
+  662 'Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD'
+  664 'Missing limbs or partially missing limbs'
+  666 'Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports'
+  668 'Nervous system condition, for example, migraine headaches, Parkinson’s disease, multiple sclerosis (MS)'
+  670 'Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning disabilities'
+  672 'Partial or complete paralysis (any cause)'
+  674 'Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema'
+  676 'Short stature (dwarfism)'
+  678 'Traumatic brain injury'
+  683 'Disability Status'
+  686 log
+  691 'Select...'
+  693 combobox 'Disability Status'
+  695 button 'Toggle flyout'
+  697 paragraph
+   698 'PUBLIC BURDEN STATEMENT: According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information unless such collection displays a valid OMB control number. This survey should take about 5 minutes to complete.'
+  700 button 'Submit application'
+ 701 contentinfo
+  703 paragraph
+   704 'Powered by'
+  705 link

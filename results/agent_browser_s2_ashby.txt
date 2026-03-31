@@ -1,0 +1,161 @@
+- generic [ref=e1] clickable [onclick]
+  - list
+    - listitem [level=1]
+      - link "Replit" [ref=e24]
+        - image "Replit"
+    - listitem [level=1]
+      - link "Back to Replit’s Job Listings" [ref=e25]
+        - image
+    - listitem [level=1]
+  - heading "Staff Technical Program Manager, AI / Agent Systems" [level=1, ref=e2]
+  - heading "Location" [level=2, ref=e3]
+  - StaticText "Foster City, CA (Hybrid) In office M,W,F"
+  - heading "Employment Type" [level=2, ref=e4]
+  - StaticText "Full time"
+  - heading "Location Type" [level=2, ref=e5]
+  - StaticText "Hybrid"
+  - heading "Department" [level=2, ref=e6]
+  - StaticText "Engineering"
+  - StaticText "›"
+  - StaticText "Data"
+  - heading "Compensation" [level=2, ref=e7]
+  - list
+    - listitem [level=1]
+      - StaticText "Compensation is determined based on career level, with the base salary for this role ranging from $208K – $286K • Offers Equity"
+  - tablist
+    - tab "Overview" [selected, ref=e11]
+    - tab "Application" [ref=e12]
+  - tabpanel "Overview" [ref=e8] focusable [tabindex]
+    - StaticText "Replit is the agentic software creation platform that enables anyone to build applications using natural language. With millions of users worldwide, Replit is democratizing software development by removing traditional barriers to application creation."
+    - StaticText "  "
+    - heading "About the Role" [level=2, ref=e13]
+      - strong
+        - StaticText "About the Role"
+    - StaticText "We're looking for a senior, deeply technical TPM to own delivery of Replit's highest-stakes, most complex programs—starting with our evergreen Agent roadmaps. This is an IC role for someone who has previously been an engineering manager or senior engineer, can operate comfortably in AI/LLM-heavy systems, and brings order, momentum, and sharp decision-making to cross-team ambiguity. The ideal candidate uses AI and automation aggressively to scale themselves, but understands that the core value is clarity, tradeoffs, and execution, not just tooling."
+    - heading "You Will" [level=2, ref=e14]
+      - strong
+        - StaticText "You Will"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Own end-to-end delivery of Replit's most complex, cross-functional programs, with Agent development as the primary, evergreen focus"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Drive execution across Product, Eng, Research, GTM, and Leadership—surfacing dependencies, risks, and disagreements early"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Operate as the technical glue between teams: able to follow architecture decisions, challenge assumptions, and translate tradeoffs without slowing velocity"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Establish and run program operating cadence (milestones, reviews, decision logs, retros) for long-running bets"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Use AI, automation, and agent workflows to scale program management (status synthesis, risk detection, incident follow-ups, guardrails, retros)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Take on additional high-stakes programs as needed (e.g. Enterprise initiatives, external integrations, priority conflicts)"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Partner closely with EMs and PMs without duplicating their roles—this role exists where ownership is otherwise fragmented"
+    - heading "Required skills and experience" [level=2, ref=e15]
+      - strong
+        - StaticText "Required skills and experience"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "8+ years of TPM experience (or equivalent) with a track record of leading complex, high-impact programs"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Deep technical fluency in systems like distributed architecture, infrastructure, platform engineering, or AI/ML"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Clear, direct communication style with strong decision-making skills"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Thrives in ambiguity and can drive progress independently—this is a high-impact IC role, not the foundation of a TPM organization"
+    - heading "Preferred Qualifications" [level=2, ref=e16]
+      - strong
+        - StaticText "Preferred Qualifications"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Background as an engineering manager or senior engineer"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Experience leveraging AI tools, agents, or automation to increase execution velocity—we'd love to hear specific examples"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "Values clarity and momentum over process for process's sake"
+    - heading "Bonus Points" [level=2, ref=e17]
+      - strong
+        - StaticText "Bonus Points"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "You've led programs for AI/ML or agent-based systems"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "You've brought structure and accountability to cross-functional initiatives in fast-paced environments"
+      - listitem [level=1]
+        - ListMarker "• "
+        - StaticText "You have a portfolio of ways you've used automation or tooling to scale your impact as a program manager"
+    - emphasis
+      - StaticText "This is a full-time role that can be held from our Foster City, CA office. The role has an in-office requirement of Monday, Wednesday, and Friday."
+    - StaticText "  "
+    - strong
+      - StaticText "Full-Time Employee Benefits Include:"
+    - StaticText "💰 Competitive Salary & Equity"
+    - StaticText "💹 401(k) Program with a 4% match"
+    - StaticText "⚕️ Health, Dental, Vision and Life Insurance"
+    - StaticText "🩼 Short Term and Long Term Disability"
+    - StaticText "🚼 Paid Parental, Medical, Caregiver Leave"
+    - StaticText "🚗 Commuter Benefits"
+    - StaticText "📱 Monthly Wellness Stipend"
+    - StaticText "🧑💻 Autonomous Work Environment"
+    - StaticText "🖥 In Office Set-Up Reimbursement"
+    - StaticText "🏝 Flexible Time Off (FTO) + Holidays"
+    - StaticText "🚀 Quarterly Team Gatherings"
+    - StaticText "☕ In Office Amenities"
+    - StaticText "  "
+    - strong
+      - StaticText "Want to learn more about what we are up to?"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Meet the Replit Agent" [ref=e26]
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Replit: Make an app for that" [ref=e27]
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Replit Blog" [ref=e28]
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Amjad TED Talk" [ref=e29]
+    - strong
+      - StaticText "Interviewing + Culture at Replit"
+    - list
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Operating Principles" [ref=e30]
+      - listitem [level=1]
+        - ListMarker "• "
+        - link "Reasons not to work at Replit" [ref=e31]
+    - StaticText "  "
+    - StaticText "To achieve our mission of making programming more accessible around the world, we need our team to be representative of the world. We welcome your unique perspective and experiences in shaping this product. We encourage people from all kinds of backgrounds to apply, including and especially candidates from underrepresented and non-traditional backgrounds."
+    - link "Apply for this Job" [ref=e18]
+      - button "Apply for this Job" [ref=e23]
+  - StaticText "This site is protected by reCAPTCHA and the Google"
+  - link "Privacy Policy" [ref=e9]
+  - StaticText " "
+  - StaticText "and"
+  - link "Terms of Service" [ref=e10]
+  - StaticText " "
+  - StaticText "apply."
+  - contentinfo
+    - link "Learn more about Ashby" [ref=e19]
+      - StaticText "Powered by"
+      - image "Ashby"
+    - link "Privacy Policy" [ref=e20]
+    - link "Security" [ref=e21]
+    - link "Vulnerability Disclosure" [ref=e22]

@@ -1,0 +1,117 @@
+{
+  "WebFetch": {
+    "scores": {
+      "data_quality": 9,
+      "reliability": 10,
+      "speed": 10,
+      "token_efficiency": 10,
+      "interaction_depth": 0,
+      "js_rendering": 3,
+      "setup_complexity": 10,
+      "error_handling": 8
+    },
+    "stages": {
+      "S1": "PASS — extracted all key fields (title, company, location, salary $500K-$850K, requirements, responsibilities, benefits)",
+      "S2": "PASS — extracted Ashby/Replit posting fully ($208K-$286K, 8+ yrs TPM, hybrid Foster City)",
+      "S3": "PASS — identified Greenhouse from footer branding, CDN paths, email domains",
+      "S4": "N/A — read-only tool, cannot interact",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    },
+    "notes": "Zero setup, AI-summarized output (~1.5KB vs raw HTML). Failed on Lever (CSS-only response — Lever requires JS). Best for read-only extraction from server-rendered pages."
+  },
+  "Playwright MCP": {
+    "scores": {
+      "data_quality": 10,
+      "reliability": 9,
+      "speed": 9,
+      "token_efficiency": 7,
+      "interaction_depth": 10,
+      "js_rendering": 10,
+      "setup_complexity": 9,
+      "error_handling": 8
+    },
+    "stages": {
+      "S1": "PASS — full accessibility snapshot (33KB), all fields present",
+      "S2": "PASS — Ashby React SPA rendered fully (10.8KB snapshot)",
+      "S3": "PASS — platform identifiable from snapshot (Greenhouse branding, URL structure)",
+      "S4": "PASS — clicked Apply button via ref, form appeared",
+      "S5": "PASS — browser_fill_form filled 6 fields in ONE tool call",
+      "S6": "PASS — file chooser triggered, mock_resume.pdf uploaded",
+      "S7": "PARTIAL — React Select combobox not native <select>; needed browser_run_code fallback",
+      "S8": "PASS — full-page screenshot captured (1.5MB PNG)"
+    },
+    "notes": "Richest tool surface (28 tools). browser_fill_form is uniquely powerful — batch fills. Stumbled on React Select dropdowns (not <select>). Warm browser = fast navigation (~2-3s). Snapshot format is token-efficient accessibility tree."
+  },
+  "BrowserMCP": {
+    "scores": {
+      "data_quality": 7,
+      "reliability": 3,
+      "speed": 5,
+      "token_efficiency": 7,
+      "interaction_depth": 7,
+      "js_rendering": 10,
+      "setup_complexity": 3,
+      "error_handling": 2
+    },
+    "stages": {
+      "S1": "UNTESTED — disconnected mid-session",
+      "S2": "UNTESTED",
+      "S3": "UNTESTED",
+      "S4": "UNTESTED",
+      "S5": "UNTESTED",
+      "S6": "N/A — no file_upload tool in 12-tool surface",
+      "S7": "UNTESTED",
+      "S8": "UNTESTED"
+    },
+    "notes": "Disconnected from Chrome mid-session — connection instability is itself a major reliability finding. Requires manual 'Connect' click on extension per tab. Only 12 tools (no evaluate, no file_upload, no network intercept). Unique value: authenticated pages (LinkedIn, internal tools). Scored based on documented capabilities + observed instability."
+  },
+  "Lightpanda CLI": {
+    "scores": {
+      "data_quality": 7,
+      "reliability": 7,
+      "speed": 10,
+      "token_efficiency": 6,
+      "interaction_depth": 0,
+      "js_rendering": 2,
+      "setup_complexity": 7,
+      "error_handling": 5
+    },
+    "stages": {
+      "S1": "PASS — clean markdown output (16KB), all key fields present, 1.8s",
+      "S2": "FAIL — 0 bytes returned. Ashby React SPA not rendered by Zig JS engine",
+      "S3": "PASS — Greenhouse identifiable from markdown output (footer, CDN paths)",
+      "S4": "N/A — fetch mode is read-only",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    },
+    "notes": "Blazing fast (1.5-3s). Three dump modes: markdown, semantic_tree, semantic_tree_text. Fatal flaw: cannot render React/SPA pages (0 bytes on Ashby). Has MCP mode (`lightpanda mcp`) but requires Claude Code restart to configure. Best for high-volume scraping of traditional HTML pages."
+  },
+  "Agent Browser CLI": {
+    "scores": {
+      "data_quality": 9,
+      "reliability": 8,
+      "speed": 4,
+      "token_efficiency": 6,
+      "interaction_depth": 9,
+      "js_rendering": 10,
+      "setup_complexity": 8,
+      "error_handling": 7
+    },
+    "stages": {
+      "S1": "PASS — accessibility snapshot (28KB), all fields present, 40.8s (cold start)",
+      "S2": "PASS — Ashby React SPA rendered fully (8.4KB), 25.6s",
+      "S3": "PASS — platform identifiable from snapshot",
+      "S4": "PASS — clicked Apply via ref (bare 'e3' format), form appeared",
+      "S5": "PASS — filled 6 fields (4 fill commands needed vs Playwright's 1)",
+      "S6": "PASS — upload via CSS selector worked (ref-based upload failed)",
+      "S7": "PASS — typed into combobox + pressed Enter",
+      "S8": "PASS — screenshot captured, clearly shows filled fields"
+    },
+    "notes": "Full Chromium-backed CLI. Cold start is slow (~25-40s for first open). Ref format is bare ('e3' not '@ref=e3'). Upload inconsistency: works with CSS selectors but not refs. Snapshot format nearly identical to Playwright. No batch fill — one command per field. Good for scripted automation outside Claude Code."
+  }
+}
