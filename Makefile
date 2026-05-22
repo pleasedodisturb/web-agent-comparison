@@ -25,6 +25,7 @@ RESULTS_DIR := results/$(DATE)
 MCPS := playwright browser-use chrome-devtools lightpanda obscura firecrawl cloakbrowser
 
 .PHONY: bench check score clean coldstart stability tls help \
+        fixtures-serve fixtures-stop fixtures-status smoke-live \
         $(addprefix bench-,$(MCPS))
 
 # ─── Default + help ─────────────────────────────────────────────────────────
@@ -36,6 +37,13 @@ help:
 	@echo "  make bench-<mcp>     # run a single MCP (one of: $(MCPS))"
 	@echo "  make score           # aggregate $(RESULTS_DIR)/scores.json"
 	@echo "  make clean           # nuke .venv, node_modules, __pycache__"
+	@echo ""
+	@echo "Fixtures (plan 01-03):"
+	@echo "  make fixtures-serve  # boot local http server on 127.0.0.1:8765"
+	@echo "  make fixtures-stop   # tear down the fixture server"
+	@echo "  make fixtures-status # show running/stopped"
+	@echo "  make smoke-live      # ONE-shot HEAD against the live source URLs"
+	@echo "                       # — diagnostic drift detector, NOT scored"
 	@echo ""
 	@echo "Stubs (deferred to G-710):"
 	@echo "  make coldstart       # TLS-side: cold-start latency measurement"
@@ -85,6 +93,43 @@ score:
 	    exit 1 ; \
 	fi
 	@uv run python scoring/score.py $(RESULTS_DIR)/scores.json | tee -a $(RESULTS_DIR)/$(DATE)_run.md
+
+# ─── Fixtures (plan 01-03) ───────────────────────────────────────────────────
+# The bench-<mcp> targets will gain a fixtures-serve dependency in plan 01-04
+# once scripts/run_mcp_session.sh lands. For now the targets are standalone so
+# humans (and the snapshot-serve test) can use them.
+
+fixtures-serve:
+	@scripts/serve_fixtures.sh start
+
+fixtures-stop:
+	@scripts/serve_fixtures.sh stop
+
+fixtures-status:
+	@scripts/serve_fixtures.sh status
+
+# Live-URL smoke target — diagnostic only, NOT part of the scored bench
+# flow. CONTEXT.md flags this as "drift signal only — NOT scored". Runs a
+# tiny HEAD request against the source URLs captured in
+# fixtures/snapshots/*/PROVENANCE.md and prints the HTTP status so a
+# reader can tell at a glance whether the live target has 404'd since the
+# snapshot was taken (Pitfall 8). The deeper "is the page still
+# semantically the same" check lands in G-710.
+smoke-live:
+	@for plat in greenhouse ashby ; do \
+	    snap="fixtures/snapshots/$${plat}_$(DATE)" ; \
+	    if [ ! -f "$$snap/PROVENANCE.md" ] ; then \
+	        echo "smoke-live: $$snap/PROVENANCE.md missing — re-run scripts/snapshot_fixtures.sh first" ; \
+	        continue ; \
+	    fi ; \
+	    url=$$(sed -n 's/^- \*\*Source URL:\*\* *//p' "$$snap/PROVENANCE.md" | head -1) ; \
+	    if [ -z "$$url" ] ; then \
+	        echo "smoke-live $$plat: could not extract Source URL from $$snap/PROVENANCE.md" ; \
+	        continue ; \
+	    fi ; \
+	    code=$$(curl -sI -L -o /dev/null --max-time 10 -w "%{http_code}" "$$url") ; \
+	    echo "smoke-live $$plat: HTTP $$code  $$url" ; \
+	done
 
 # ─── Stubs (surface locked; work deferred to G-710) ──────────────────────────
 
