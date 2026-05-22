@@ -113,7 +113,74 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 ## Traceability
 
-(empty — filled by roadmapper, one row per requirement → phase mapping)
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| HARNESS-01 | Phase 1 | Pending |
+| HARNESS-02 | Phase 1 | Pending |
+| HARNESS-03 | Phase 1 | Pending |
+| HARNESS-04 | Phase 1 | Pending |
+| HARNESS-05 | Phase 1 | Pending |
+| HARNESS-06 | Phase 1 | Pending |
+| HARNESS-07 | Phase 1 | Pending |
+| HARNESS-08 | Phase 1 | Pending |
+| HARNESS-09 | Phase 1 | Pending |
+| FAIRNESS-01 | Phase 1 | Pending |
+| FAIRNESS-02 | Phase 1 | Pending |
+| FAIRNESS-03 | Phase 1 | Pending |
+| FAIRNESS-04 | Phase 2 | Pending |
+| FAIRNESS-05 | Phase 2 | Pending |
+| FAIRNESS-06 | Phase 1 | Pending |
+| FAIRNESS-07 | Phase 1 | Pending |
+| MEAS-01 | Phase 3 | Pending |
+| MEAS-02 | Phase 3 | Pending |
+| MEAS-03 | Phase 3 | Pending |
+| MEAS-04 | Phase 3 | Pending |
+| MEAS-05 | Phase 3 | Pending |
+| MEAS-06 | Phase 3 | Pending |
+| MEAS-07 | Phase 3 | Pending |
+| MEAS-08 | Phase 3 | Pending |
+| MEAS-09 | Phase 3 | Pending |
+| REPRO-01 | Phase 4 | Pending |
+| REPRO-02 | Phase 1 | Pending |
+| REPRO-03 | Phase 4 | Pending |
+| REPRO-04 | Phase 1 | Pending |
+| REPRO-05 | Phase 1 | Pending |
+| REPRO-06 | Phase 4 | Pending |
+| REPRO-07 | Phase 4 | Pending |
+| REPORT-01 | Phase 4 | Pending |
+| REPORT-02 | Phase 4 | Pending |
+| REPORT-03 | Phase 4 | Pending |
+| REPORT-04 | Phase 4 | Pending |
+| REPORT-05 | Phase 4 | Pending |
+| REPORT-06 | Phase 4 | Pending |
+| REPORT-07 | Phase 4 | Pending |
+| REPORT-08 | Phase 4 | Pending |
+| REPORT-09 | Phase 4 | Pending |
+| REPORT-10 | Phase 4 | Pending |
+| REPORT-11 | Phase 4 | Pending |
+| REPORT-12 | Phase 4 | Pending |
+| SAFETY-01 | Phase 1 | Pending |
+| SAFETY-02 | Phase 1 | Pending |
+| SAFETY-03 | Phase 1 | Pending |
+| SAFETY-04 | Phase 1 | Pending |
+| SAFETY-05 | Phase 4 | Pending |
+| OUTREACH-01 | Phase 4 | Pending |
+| OUTREACH-02 | Phase 4 | Pending |
+| OUTREACH-03 | Phase 1 | Pending |
+
+### Coverage Summary
+
+| Phase | Requirements | Count |
+|-------|--------------|-------|
+| Phase 1 — Harness Foundation | HARNESS-01..09, FAIRNESS-01/02/03/06/07, REPRO-02/04/05, SAFETY-01..04, OUTREACH-03 | 22 |
+| Phase 2 — Per-MCP Scoring Runs | FAIRNESS-04, FAIRNESS-05 | 2 |
+| Phase 3 — Cross-Cutting Measurements | MEAS-01..09 | 9 |
+| Phase 4 — Synthesis & Reproducibility Validation | REPRO-01/03/06/07, REPORT-01..12, SAFETY-05, OUTREACH-01/02 | 19 |
+| **Total** | **All 52 v1 requirements** | **52** |
+
+Coverage: 52/52 v1 requirements mapped to exactly one phase. No orphans. No duplicates.
+
+**Note on Phase 2 lightness:** Phase 2 only carries 2 requirements explicitly because most per-MCP work is operational execution against the Phase-1 harness (the harness IS the mechanism). FAIRNESS-04/05 land here because dual-mode browser-use scoring and capability-tag matrix-row authoring are decisions made during per-MCP runs, not during harness build. The bulk of Phase 2 work is producing 7 evidence directories worth of artifacts that Phase 4 then aggregates.
 
 ---
 
