@@ -10,7 +10,15 @@ dependencies = [
     "anthropic>=0.40,<0.50",
     "httpx>=0.28",
     "tiktoken>=0.7",
+    # PII scrub (bench/scrub_artifacts.py) — OCR backend. The system
+    # `tesseract` binary is required for image scanning; if absent the
+    # script falls back to text-only mode (see bench/scrub_artifacts.py
+    # module docstring).
+    "pytesseract>=0.3.10",
+    "Pillow>=10.0",
 ]
 
 [dependency-groups]
-dev = []
+dev = [
+    "pytest>=8",
+]
