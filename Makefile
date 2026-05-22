@@ -71,11 +71,12 @@ bench: check $(addprefix bench-,$(MCPS)) score
 # form `targets...: pattern: prereqs` work correctly under 3.81 and remain
 # valid GNU Make syntax under 4.x — so this form is the portable choice.
 #
-# Real driver script lands in plan 01-04 (scripts/run_mcp_session.sh). Until
-# it exists, the recipe emits an explicit deferral message so the surface
-# compiles end-to-end without breaking `make bench`.
+# Wired in plan 01-04 to scripts/run_mcp_session.sh. The `fixtures-serve`
+# dependency is idempotent — serve_fixtures.sh start no-ops with rc=2 if the
+# server is already running, and run_mcp_session.sh re-checks before booting
+# its own server (only stopping it on exit if IT started it).
 
-$(addprefix bench-,$(MCPS)): bench-%: check
+$(addprefix bench-,$(MCPS)): bench-%: check fixtures-serve
 	@if [ -x scripts/run_mcp_session.sh ]; then \
 	    scripts/run_mcp_session.sh $* ; \
 	else \
@@ -100,7 +101,16 @@ score:
 # humans (and the snapshot-serve test) can use them.
 
 fixtures-serve:
-	@scripts/serve_fixtures.sh start
+	@# serve_fixtures.sh start exits 2 if the server is already running;
+	@# that's not a Make failure for our purposes — treat 2 as success so
+	@# `make bench-<mcp>` can re-use an existing fixture server without
+	@# tearing down and re-spawning each time.
+	@scripts/serve_fixtures.sh start || rc=$$? ; \
+	    if [ "$${rc:-0}" -ne 0 ] && [ "$${rc:-0}" -ne 2 ]; then \
+	        echo "fixtures-serve: failed (rc=$$rc)" >&2 ; \
+	        exit $$rc ; \
+	    fi ; \
+	    exit 0
 
 fixtures-stop:
 	@scripts/serve_fixtures.sh stop
