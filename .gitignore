@@ -1,0 +1,40 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+
+# Secrets — NEVER commit. The harness reads FIRECRAWL_API_KEY from env, never disk.
+.env
+.env.*
+.envrc
+/tmp/firecrawl_api_token
+
+# Per-run scratch space (results/<date>/ directories are committed; .scratch/ inside is not)
+results/*/.scratch/
+results/*/*.tmp
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# Note: the following files MUST stay tracked. Listed here for documentation only.
+#   .mcp.json
+#   uv.lock
+#   package-lock.json
+#   pyproject.toml
+#   package.json
+#   .python-version
+#   .nvmrc
