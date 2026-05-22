@@ -1,0 +1,4 @@
+{"type":"system","subtype":"init","mcp_servers":[{"name":"lightpanda"}]}
+{"type":"assistant","message":{"content":[{"type":"text","text":"S1: markdown dumped"}]}}
+{"type":"assistant","message":{"content":[{"type":"text","text":"S2 FAILED: 0 bytes from Ashby React SPA"}]}}
+{"type":"result","subtype":"success"}

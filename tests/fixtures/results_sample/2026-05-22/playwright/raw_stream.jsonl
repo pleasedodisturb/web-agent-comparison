@@ -1,0 +1,4 @@
+{"type":"system","subtype":"init","mcp_servers":[{"name":"playwright"}]}
+{"type":"assistant","message":{"content":[{"type":"text","text":"S1: snapshot captured"}]}}
+{"type":"assistant","message":{"content":[{"type":"text","text":"S5: form fill complete"}]}}
+{"type":"result","subtype":"success"}
