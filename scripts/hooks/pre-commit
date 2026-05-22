@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# pre-commit — block inline secrets in any staged .mcp.json file.
+#
+# Source-of-truth at scripts/hooks/pre-commit; .git/hooks/pre-commit is a
+# symlink to this file (see scripts/install_hooks.sh). Edit here, not in
+# .git/hooks/.
+#
+# Rejects literal API keys / tokens in staged .mcp.json files; allows the
+# `${VAR}` shell-style env reference form. Hooks are NOT bypassable inside
+# this repo's workflow (no --no-verify is used in any tooling — agents are
+# explicitly forbidden from passing --no-verify per global CLAUDE.md).
+#
+# Exit codes:
+#   0 — no inline secrets detected (or no .mcp.json staged)
+#   1 — inline secret detected; commit aborted
+#
+# Regex strategy:
+#   1. Strip `${...}` env references from staged content (they are the
+#      sanctioned form; never match them as a "secret").
+#   2. Scan the stripped content for two OR'd patterns:
+#        (a) (api[_-]?key|token|secret).*"[A-Za-z0-9_-]{20,}"
+#        (b) (fc-|sk-|Bearer )[A-Za-z0-9_-]{20,}
+#      If either fires, fail loudly.
+
+set -eu
+# pipefail intentionally not set — macOS system bash is 3.2 and we want the
+# hook to work under any /usr/bin/env bash. The pipelines below are checked
+# manually via $? where it matters.
+
+# Find staged .mcp.json files (added, copied, or modified — not deletions).
+# Portable to bash 3.2 (macOS system bash) — no `mapfile`/`readarray`.
+staged_list=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null \
+    | grep -E '(^|/)\.mcp\.json$' || true)
+
+if [ -z "$staged_list" ]; then
+    exit 0
+fi
+
+# Patterns. Two OR'd regexes; either match = fail. Use POSIX ERE (grep -E).
+PATTERN_KV='(api[_-]?key|token|secret).*"[A-Za-z0-9_-]{20,}"'
+PATTERN_PREFIX='(fc-|sk-|Bearer )[A-Za-z0-9_-]{20,}'
+
+violations=0
+# Use a here-string + while-read loop; portable to bash 3.2.
+while IFS= read -r path; do
+    [ -z "$path" ] && continue
+    # Read the staged content (the version git is about to commit, not the
+    # working-tree copy). Strip ${...} env references before scanning so the
+    # sanctioned form passes cleanly.
+    if ! staged=$(git show ":${path}" 2>/dev/null); then
+        # File staged for delete, or otherwise unreadable. Skip.
+        continue
+    fi
+
+    # Strip ${VAR} substitutions. The shell-style env reference is the only
+    # sanctioned form for env values in .mcp.json. After this strip step,
+    # nothing remaining should look like a secret.
+    stripped=$(printf '%s\n' "$staged" | sed -E 's/\$\{[^}]+\}//g')
+
+    if printf '%s\n' "$stripped" | grep -E -i -q "$PATTERN_KV" \
+       || printf '%s\n' "$stripped" | grep -E -q "$PATTERN_PREFIX"; then
+        # Re-grep for a useful line-number / excerpt to show the user.
+        printf 'Inline secret detected in %s — use ${ENV_VAR} reference instead.\n' "$path" >&2
+        printf '  Matched lines:\n' >&2
+        printf '%s\n' "$stripped" | grep -E -i -n "$PATTERN_KV" >&2 || true
+        printf '%s\n' "$stripped" | grep -E -n "$PATTERN_PREFIX" >&2 || true
+        violations=$((violations + 1))
+    fi
+done <<EOF
+$staged_list
+EOF
+
+if [ "$violations" -gt 0 ]; then
+    exit 1
+fi
+
+exit 0
