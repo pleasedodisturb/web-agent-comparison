@@ -36,10 +36,6 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 - [ ] **MEAS-01**: Cold-start latency per MCP is captured as a 3-segment split (`t_resolve` / `t_spawn` / `t_first_useful`) for BOTH cold and warm cache; published value is the median of ≥5 runs; lives in `results/<date>/<mcp>/cold_start.json`.
 - [ ] **MEAS-02**: Token efficiency per MCP per task is captured as a 3-scope split (`schema` / `payload` / `turn`); the published headline column is `payload` (the apples-to-apples per-call cost); `schema` uses Anthropic SDK `count_tokens` (free, deterministic); `turn` parses `stream-json` `usage` blocks (actual billed cost); `payload` parses raw JSON-RPC. Lives in `results/<date>/<mcp>/tokens.json`.
-- [ ] **MEAS-03**: TLS fingerprint per MCP captures JA3 + JA3N + JA4 + JA4_h + ALPN order + HTTP/2 frame settings via Scrapfly primary (`tools.scrapfly.io/api/fp/ja3?extended=1`) and peet.ws cross-check (`tls.peet.ws/api/all`); disagreement between the two fails the run with explicit error. Lives in `results/<date>/<mcp>/tls.json`.
-- [ ] **MEAS-04**: A real-Chrome JA4 baseline is captured ONCE per wave (from the host's installed Chrome, same machine) and committed as `results/<date>/_baseline/chrome_tls.json`; per-MCP TLS reports cite their delta from this baseline.
-- [ ] **MEAS-05**: Bot-detection resilience per MCP is tested against a STABLE adversary set: `bot.sannysoft.com`, `fingerprint.com/demo`, `creepjs`, `browserscan.net/bot-detection`, plus ≥1 self-deployed Cloudflare Worker for controlled-tier testing; per attempt records IP + ASN + observed challenge tier; lives in `results/<date>/<mcp>/bot_detection.json`.
-- [ ] **MEAS-06**: Live commercial bot-detection targets (`nowsecure.nl` etc.) are excluded from the per-MCP measurement loop; at most ONE live-canary run per wave as a drift detector, not a per-candidate score input.
 - [ ] **MEAS-07**: A 1hr stability run per MCP loops S1+S5 with 30s sleeps against the local snapshot-fixture server (NOT live targets) and writes to `results/<date>/<mcp>/stability.log`; post-run orphan-process audit must be 0.
 - [ ] **MEAS-08**: Per-stage tool-call count is captured for every S1-S8 attempt; this empirically grounds the Playwright "browser_fill_form fills 6 fields in 1 call" claim and equivalents.
 - [ ] **MEAS-09**: A per-MCP tool-surface inventory (count + 6-category breakdown per chrome-devtools-mcp's category scheme) is captured at harness start; lives in `results/<date>/<mcp>/tools_inventory.json`.
@@ -51,8 +47,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 - [ ] **REPRO-03**: A `MACHINE.md` per `results/<date>/` records the machine specs, network conditions, IP/ASN, time of run, NTP-synced timestamp; the report's methodology section cites it.
 - [ ] **REPRO-04**: Fixtures are self-hosted snapshots at `fixtures/snapshots/<platform>_<date>/` (`wget --mirror`d from the original public URLs, then PII-scrubbed by `bench/scrub_artifacts.py`); the harness serves them via `python3 -m http.server` on `127.0.0.1`; tests target the loopback address, not the live URL.
 - [ ] **REPRO-05**: A `fixtures/snapshots/<platform>_<date>/PROVENANCE.md` documents source URL, mirror date, scrubbing steps applied, and a SHA256 over the served-content directory.
-- [ ] **REPRO-06**: A `docs/REPRODUCIBILITY.md` documents the single command (`make bench`) third parties run; calls out the FIRECRAWL_API_KEY requirement (6/7 acceptable if absent), CloakBrowser Linux availability uncertainty, and the bot-detection IP-rotation strategy.
-- [ ] **REPRO-07**: The report is reproducible on a second machine (MacBook): a clean checkout + `make bench` + `make score` produces per-MCP composites within ±0.5 of the primary (Mac Mini) run; cross-machine validation is a Phase 4 deliverable.
+- [ ] **REPRO-06**: A `docs/REPRODUCIBILITY.md` documents the single command (`make bench`) third parties run; calls out the FIRECRAWL_API_KEY requirement (6/7 acceptable if absent), CloakBrowser Linux availability uncertainty.
 
 ### Report — public-facing deliverables
 
@@ -79,8 +74,6 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 ### Outreach — vendor courtesy and public-rel hygiene
 
-- [ ] **OUTREACH-01**: Any MCP scoring below 5/10 composite triggers a courtesy pre-publication disclosure: a Linear ticket per vendor with the draft score, repro steps, and ≥7-day comment window before the report goes public.
-- [ ] **OUTREACH-02**: The disclosure ticket includes a polite invitation for the vendor to verify the methodology and a commit to publishing their response inline in the report if they provide one.
 - [ ] **OUTREACH-03**: G-703 (the umbrella Linear ticket, estimate=16) is split into per-MCP scoring sub-tickets + 1 synthesis ticket before any Phase 2 work pulls into a cycle — the estimate=16 IS the break-before-cycle signal.
 
 ---
@@ -133,10 +126,6 @@ All requirements below are hypotheses until the report ships with the explicit S
 | FAIRNESS-07 | Phase 1 | Pending |
 | MEAS-01 | Phase 3 | Pending |
 | MEAS-02 | Phase 3 | Pending |
-| MEAS-03 | Phase 3 | Pending |
-| MEAS-04 | Phase 3 | Pending |
-| MEAS-05 | Phase 3 | Pending |
-| MEAS-06 | Phase 3 | Pending |
 | MEAS-07 | Phase 3 | Pending |
 | MEAS-08 | Phase 3 | Pending |
 | MEAS-09 | Phase 3 | Pending |
@@ -146,7 +135,6 @@ All requirements below are hypotheses until the report ships with the explicit S
 | REPRO-04 | Phase 1 | Pending |
 | REPRO-05 | Phase 1 | Pending |
 | REPRO-06 | Phase 4 | Pending |
-| REPRO-07 | Phase 4 | Pending |
 | REPORT-01 | Phase 4 | Pending |
 | REPORT-02 | Phase 4 | Pending |
 | REPORT-03 | Phase 4 | Pending |
@@ -164,8 +152,6 @@ All requirements below are hypotheses until the report ships with the explicit S
 | SAFETY-03 | Phase 1 | Pending |
 | SAFETY-04 | Phase 1 | Pending |
 | SAFETY-05 | Phase 4 | Pending |
-| OUTREACH-01 | Phase 4 | Pending |
-| OUTREACH-02 | Phase 4 | Pending |
 | OUTREACH-03 | Phase 1 | Pending |
 
 ### Coverage Summary
@@ -174,11 +160,13 @@ All requirements below are hypotheses until the report ships with the explicit S
 |-------|--------------|-------|
 | Phase 1 — Harness Foundation | HARNESS-01..09, FAIRNESS-01/02/03/06/07, REPRO-02/04/05, SAFETY-01..04, OUTREACH-03 | 22 |
 | Phase 2 — Per-MCP Scoring Runs | FAIRNESS-04, FAIRNESS-05 | 2 |
-| Phase 3 — Cross-Cutting Measurements | MEAS-01..09 | 9 |
-| Phase 4 — Synthesis & Reproducibility Validation | REPRO-01/03/06/07, REPORT-01..12, SAFETY-05, OUTREACH-01/02 | 19 |
-| **Total** | **All 52 v1 requirements** | **52** |
+| Phase 3 — Cross-Cutting Measurements | MEAS-01/02/07/08/09 | 5 |
+| Phase 4 — Synthesis & Reproducibility Validation | REPRO-01/03/06, REPORT-01..12, SAFETY-05 | 16 |
+| **Total** | **All 45 v1 requirements** | **45** |
 
-Coverage: 52/52 v1 requirements mapped to exactly one phase. No orphans. No duplicates.
+Coverage: 45/45 v1 requirements mapped to exactly one phase. No orphans. No duplicates.
+
+**Scope cut 2026-05-22 (commit `XXXXXXX`):** MEAS-03/04 (TLS fingerprint capture), MEAS-05/06 (bot-detection adversary set + live-canary exclusion), REPRO-07 (MacBook cross-machine validation), and OUTREACH-01/02 (vendor courtesy disclosure) were cut from v1 because (a) Greenhouse/Ashby targets don't aggressively fingerprint-check, so detection-resilience metrics don't bear on the Kestrel/Eyas use case, and (b) cross-machine reproducibility is below the abstraction level the project actually cares about (agents working with Claude). Detection + fingerprint work moved to follow-up wave **[G-710](https://linear.app/abandoned-yachts/issue/G-710)** which reuses this wave's harness once it ships and adds the anti-captcha.com integration. Total v1 reqs: 52 → 45.
 
 **Note on Phase 2 lightness:** Phase 2 only carries 2 requirements explicitly because most per-MCP work is operational execution against the Phase-1 harness (the harness IS the mechanism). FAIRNESS-04/05 land here because dual-mode browser-use scoring and capability-tag matrix-row authoring are decisions made during per-MCP runs, not during harness build. The bulk of Phase 2 work is producing 7 evidence directories worth of artifacts that Phase 4 then aggregates.
 
@@ -187,13 +175,11 @@ Coverage: 52/52 v1 requirements mapped to exactly one phase. No orphans. No dupl
 ## Definition of Done
 
 This wave ships when:
-1. All 38 v1 requirements above are `[x]` checked or explicitly converted to v2 with a written reason
+1. All 45 v1 requirements above are `[x]` checked or explicitly converted to v2 with a written reason
 2. `results/2026-05-XX-mcp-comparison.md` and `results/recommendations.md` are committed
 3. `README.md` is updated with the headline verdict
-4. Cross-machine reproducibility validated (MacBook clean-checkout `make bench` produces ±0.5 composite per MCP)
-5. Every vendor scoring below 5 has a Linear courtesy ticket with the ≥7-day window either elapsed or with vendor input incorporated
-6. G-703 is closed; per-MCP sub-tickets created from G-703 are closed
-7. A wave-close ritual confirms no scope-creep snuck in; what didn't make the cut is documented in `results/recommendations.md` "Future Waves" section
+4. G-703 is closed; per-MCP sub-tickets created from G-703 are closed; G-710 (detection follow-up) is referenced in `results/recommendations.md` "Future Waves" section
+5. A wave-close ritual confirms no scope-creep snuck in; what didn't make the cut is documented in `results/recommendations.md` "Future Waves" section
 
 ---
 *Last updated: 2026-05-22 after initial requirements definition*

@@ -4,7 +4,9 @@
 
 This wave produces a public, reproducible comparison of 7 MCP-layer browser servers (playwright, browser-use, chrome-devtools, lightpanda, obscura, firecrawl, cloakbrowser) scored on the locked 8-dimension rubric + S1-S8 fixtures inherited from the 2026-03-31 app-level wave. The end product is a comparison report + explicit Stage 2 graduation recommendation; it is the gate that unblocks the private terminal-craft toolkit (Stage 2) and the Kestrel/Eyas production agents (Stage 3).
 
-The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundation must land coherently before any MCP runs, per-MCP scoring and cross-cutting measurements (cold-start / TLS / bot-detection / 1hr stability) run in parallel against the same harness, and synthesis + cross-machine reproducibility validation closes the wave. A vertical-MVP slice would force premature scoring decisions before the harness reproduces the known 2026-03 Playwright result, and would collapse the parallelism that lets Phases 2 + 3 overlap.
+The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundation must land coherently before any MCP runs, per-MCP scoring and cross-cutting measurements (cold-start / token efficiency / 1hr stability / tool-call counting) run in parallel against the same harness, and synthesis closes the wave. A vertical-MVP slice would force premature scoring decisions before the harness reproduces the known 2026-03 Playwright result, and would collapse the parallelism that lets Phases 2 + 3 overlap.
+
+**Scope cut 2026-05-22:** TLS-fingerprint capture + bot-detection adversary testing + cross-machine MacBook reproduction + vendor courtesy disclosure were cut from v1 — Greenhouse/Ashby targets don't fingerprint-check, and the work doesn't bear on the Kestrel/Eyas use case. Detection + fingerprint work moved to follow-up wave **[G-710](https://linear.app/abandoned-yachts/issue/G-710)** which reuses this wave's harness once it ships and adds the anti-captcha.com integration.
 
 ## Phases
 
@@ -14,8 +16,8 @@ The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundati
 
 - [ ] **Phase 1: Harness Foundation** - Build the runner, snapshot fixtures, retry gate, scrub pipeline, and version-lock infrastructure; reproduce 2026-03 Playwright score as go/no-go gate
 - [ ] **Phase 2: Per-MCP Scoring Runs** - Score all 7 MCPs end-to-end on S1-S8 with median-of-3 retry, capability tags, and per-row failure attribution
-- [ ] **Phase 3: Cross-Cutting Measurements** - Capture cold-start (3-segment), TLS fingerprint (Scrapfly + peet.ws cross-check), bot-detection (stable adversaries), 1hr stability per MCP
-- [ ] **Phase 4: Synthesis & Reproducibility Validation** - Publish scored matrix + recommendations.md + README verdict; vendor courtesy disclosure; clean-checkout MacBook reproduction within ±0.5 composite
+- [ ] **Phase 3: Cross-Cutting Measurements** - Capture cold-start (3-segment), token efficiency (3-scope), 1hr stability, per-stage tool-call count, and per-MCP tool-surface inventory
+- [ ] **Phase 4: Synthesis** - Publish scored matrix + recommendations.md + README verdict; reproducibility manifest committed
 
 ## Phase Details
 
@@ -46,28 +48,28 @@ The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundati
 **UI hint**: no
 
 ### Phase 3: Cross-Cutting Measurements
-**Goal**: Every MCP has the four new-this-wave measurement artifacts (cold-start, TLS, bot-detection, stability) captured with the discipline that prevents the measurement-attribution traps (wrong-process TLS capture, single-shot cold-start, IP-flagged bot-detection, orphan-induced stability failures) — runs in full parallel with Phase 2 on the shared harness.
+**Goal**: Every MCP has the new-this-wave measurement artifacts (cold-start, token efficiency, 1hr stability, per-stage tool-call counts, tool-surface inventory) captured with discipline that prevents the measurement-attribution traps (single-shot cold-start, token-scope confusion, orphan-induced stability failures) — runs in full parallel with Phase 2 on the shared harness.
 **Depends on**: Phase 1 (harness + `.mcp.json` reading + per-MCP output convention); parallel with Phase 2
-**Requirements**: MEAS-01, MEAS-02, MEAS-03, MEAS-04, MEAS-05, MEAS-06, MEAS-07, MEAS-08, MEAS-09
+**Requirements**: MEAS-01, MEAS-02, MEAS-07, MEAS-08, MEAS-09
 **Success Criteria** (what must be TRUE):
   1. Every MCP's `cold_start.json` contains the 3-segment split (`t_resolve` / `t_spawn` / `t_first_useful`) for BOTH cold and warm cache, with the published value being the median of ≥5 runs.
-  2. Every MCP's `tls.json` contains JA3 + JA3N + JA4 + JA4_h + ALPN order + HTTP/2 frame settings captured via Scrapfly, cross-checked against peet.ws within the same MCP process; a real-Chrome JA4 baseline lives at `results/<date>/_baseline/chrome_tls.json` and per-MCP reports cite their delta from it.
-  3. Every MCP's `bot_detection.json` records IP + ASN + observed-challenge-tier per attempt against the stable adversary set (`bot.sannysoft.com`, `fingerprint.com/demo`, `creepjs`, `browserscan.net/bot-detection`, ≥1 self-deployed CF Worker) — no live commercial targets in the per-candidate loop.
-  4. Every MCP's `stability.log` shows a completed 60min S1+S5 loop against the snapshot fixture server (not live URLs) with the post-run `orphan_audit.log` showing 0 surviving processes; per-tool-call 30s timeouts and `ulimit -v` ceilings were enforced throughout.
-  5. Per-stage tool-call counts are recorded for every S1-S8 attempt across all 7 MCPs (empirically grounds Playwright's `browser_fill_form` batch-fill claim), and a `tools_inventory.json` with count + 6-category breakdown is captured at harness start for each MCP.
+  2. Every MCP's `tokens.json` contains the 3-scope split (`schema` / `payload` / `turn`); the published headline column is `payload`; `schema` came from Anthropic SDK `count_tokens`, `turn` from `stream-json` `usage` blocks, `payload` from parsed JSON-RPC.
+  3. Every MCP's `stability.log` shows a completed 60min S1+S5 loop against the snapshot fixture server (not live URLs) with the post-run `orphan_audit.log` showing 0 surviving processes; per-tool-call 30s timeouts and `ulimit -v` ceilings were enforced throughout.
+  4. Per-stage tool-call counts are recorded for every S1-S8 attempt across all 7 MCPs (empirically grounds Playwright's `browser_fill_form` batch-fill claim).
+  5. A `tools_inventory.json` with count + 6-category breakdown is captured at harness start for each MCP.
 **Plans**: TBD
 **UI hint**: no
 
-### Phase 4: Synthesis & Reproducibility Validation
-**Goal**: The public-facing artifacts (`<date>_run.md`, `recommendations.md`, README headline verdict) ship with the methodology disclaimer, dual-view matrix, per-MCP deep analysis, and explicit Stage 2 graduation tiers — and a clean MacBook checkout reproduces the ranking within ±0.5 composite per MCP, unblocking Stage 2.
+### Phase 4: Synthesis
+**Goal**: The public-facing artifacts (`<date>_run.md`, `recommendations.md`, README headline verdict) ship with the methodology disclaimer, dual-view matrix, per-MCP deep analysis, and explicit Stage 2 graduation tiers — unblocking Stage 2 and pointing to G-710 for the deferred detection-resilience follow-up.
 **Depends on**: Phase 2 + Phase 3 (both must populate every MCP's evidence directory)
-**Requirements**: REPRO-01, REPRO-03, REPRO-06, REPRO-07, REPORT-01, REPORT-02, REPORT-03, REPORT-04, REPORT-05, REPORT-06, REPORT-07, REPORT-08, REPORT-09, REPORT-10, REPORT-11, REPORT-12, SAFETY-05, OUTREACH-01, OUTREACH-02
+**Requirements**: REPRO-01, REPRO-03, REPRO-06, REPORT-01, REPORT-02, REPORT-03, REPORT-04, REPORT-05, REPORT-06, REPORT-07, REPORT-08, REPORT-09, REPORT-10, REPORT-11, REPORT-12, SAFETY-05
 **Success Criteria** (what must be TRUE):
   1. `results/2026-05-XX-mcp-comparison.md` contains the 8-dim weighted score table (7 MCPs × 8 dims + composite, same shape as `results/2026-03-31_run.md`), the S1-S8 × 7 MCPs stage matrix with distinct `N/A` and `UNTESTED` cells, a per-MCP "Deep Analysis" stanza with the "interesting angle" empirical finding, a methodology section + disclaimer header, the 2026-03 → 2026-05 overlay, an explicit "Negative Results" section, a partial-run disclosure if Firecrawl was skipped, sandbox-only callouts on every cloakbrowser mention, and a Linear traceability footer (G-703 + per-MCP sub-tickets).
   2. `results/recommendations.md` publishes the explicit Stage 2 graduation tiers (PRIMARY / SECONDARY / SANDBOX-ONLY / SKIP) for each of the 7 MCPs; the repo README is updated with the headline verdict + methodology summary + link to recommendations.
-  3. Every MCP scoring below 5/10 composite has a Linear courtesy-disclosure ticket with the draft score + repro steps + ≥7-day comment window; vendor responses (if any) are inline in the published report.
-  4. The reproducibility manifest (`versions.lock.md` + `versions.json` + per-MCP binary SHA256s + `uv.lock` + `package-lock.json` + per-run `MACHINE.md`) is committed for the published wave; `bench/capture_versions.py` produced `versions.json` from the live environment.
-  5. A clean checkout on the MacBook (not Mac Mini) runs `make bench && make score` and produces per-MCP composites within ±0.5 of the primary run, with the ranking order preserved; a wave-close ritual confirms no scope-creep snuck in (candidate count unchanged from wave start, rubric column count unchanged, no Stage 2 commits in `terminal-craft`).
+  3. The reproducibility manifest (`versions.lock.md` + `versions.json` + per-MCP binary SHA256s + `uv.lock` + `package-lock.json` + per-run `MACHINE.md`) is committed for the published wave; `bench/capture_versions.py` produced `versions.json` from the live environment.
+  4. `results/recommendations.md` has a "Future Waves" section pointing to G-710 (bot-detection + TLS-fingerprint follow-up) as the explicit next-wave anchor.
+  5. A wave-close ritual confirms no scope-creep snuck in (candidate count unchanged from wave start, rubric column count unchanged, no Stage 2 commits in `terminal-craft`).
 **Plans**: TBD
 **UI hint**: no
 
@@ -81,4 +83,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 | 1. Harness Foundation | 0/TBD | Not started | - |
 | 2. Per-MCP Scoring Runs | 0/TBD | Not started | - |
 | 3. Cross-Cutting Measurements | 0/TBD | Not started | - |
-| 4. Synthesis & Reproducibility Validation | 0/TBD | Not started | - |
+| 4. Synthesis | 0/TBD | Not started | - |

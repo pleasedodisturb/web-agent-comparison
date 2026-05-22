@@ -59,11 +59,16 @@ None yet.
 
 [Issues that affect future work]
 
-- **MacBook binary parity unverified** — Phase 4 cross-machine reproducibility validation may require a sub-task to install missing MCP binaries on MacBook before validation can run.
-- **Browser-use `initialize` timeout** — 2026-05 testbench showed transport mismatch on v0.12.7; Phase 2 must determine whether the bug is fixed and, if not, score 0 with vendor courtesy ticket per OUTREACH-01/02.
+- **Browser-use `initialize` timeout** — 2026-05 testbench showed transport mismatch on v0.12.7; Phase 2 must determine whether the bug is fixed and, if not, score 0 with a Linear bug ticket against the vendor (no courtesy-disclosure window in this wave per 2026-05-22 scope cut).
 - **Obscura engine install on macOS arm64** — known gap from 2026-05 testbench; Phase 1 should attempt `obscura-mcp install` early so Phase 2 isn't surprised.
-- **Bot-detection IP-rotation budget** — Phase 3 needs a yes/no call on $5-15 residential IPs from BrightData/IPRoyal; default fallback is single-IP with 10min idle (extends Phase 3 wall-clock).
 - **CloakBrowser Linux availability** — closed-source binary, macOS verified, Linux unknown; document in `docs/REPRODUCIBILITY.md` so Linux readers expect 6/7 if unavailable.
+
+**Scope cuts 2026-05-22** (per user decision; deferred to **[G-710](https://linear.app/abandoned-yachts/issue/G-710)**):
+- TLS-fingerprint capture per MCP (MEAS-03/04)
+- Bot-detection adversary testing (MEAS-05/06)
+- Cross-machine MacBook reproduction (REPRO-07)
+- Vendor courtesy disclosure (OUTREACH-01/02)
+- Bot-detection IP-rotation budget question — no longer relevant since bot-detection is cut
 
 ## Deferred Items
 
