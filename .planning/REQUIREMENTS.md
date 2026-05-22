@@ -12,15 +12,15 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 ### Harness — test orchestration & evidence capture
 
-- [ ] **HARNESS-01**: A user can run `make bench-<mcp>` to execute one Claude Code session against the named MCP, walked through stages S1-S8 by the locked prompt, with that MCP's tools as the only allowed surface (`--allowedTools "mcp__${MCP}__*,Read,Write,Bash"`) — no fallback to WebFetch.
+- [x] **HARNESS-01**: A user can run `make bench-<mcp>` to execute one Claude Code session against the named MCP, walked through stages S1-S8 by the locked prompt, with that MCP's tools as the only allowed surface (`--allowedTools "mcp__${MCP}__*,Read,Write,Bash"`) — no fallback to WebFetch.
 - [ ] **HARNESS-02**: Each MCP session writes a self-contained evidence directory at `results/<date>/<mcp>/` containing `transcript.md`, `raw_stream.jsonl`, `stage_s*.{yml,md,png,txt}`, `cold_start.json`, `tokens.json`, `tls.json`, `stability.log`, `orphan_audit.log`.
-- [ ] **HARNESS-03**: `.mcp.json` (project scope, already committed) is the single source of truth for MCP commands; all harness scripts read it via `jq` rather than duplicating server-spawn commands.
-- [ ] **HARNESS-04**: The locked S1-S8 task script lives at `prompts/stage_walk.md`, parameterised by the MCP under test; the same prompt drives every MCP for direct comparability.
+- [x] **HARNESS-03**: `.mcp.json` (project scope, already committed) is the single source of truth for MCP commands; all harness scripts read it via `jq` rather than duplicating server-spawn commands.
+- [x] **HARNESS-04**: The locked S1-S8 task script lives at `prompts/stage_walk.md`, parameterised by the MCP under test; the same prompt drives every MCP for direct comparability.
 - [ ] **HARNESS-05**: A user can run `make bench-playwright && make score` and reproduce a composite within ±0.5 of the 2026-03-31 Playwright score (9.07) before any other MCP is added to the wave — this is the harness's go/no-go gate.
 - [ ] **HARNESS-06**: A `scripts/check_prereqs.sh` Bash script verifies all 7 MCP binaries are installed, exits non-zero with a remediation message if any are missing, and is the first step of `make bench`.
-- [ ] **HARNESS-07**: Every MCP server child process is spawned under a `setsid` process-group; a `bench/orphan_audit.py` runs pre/post-bench, diffs `ps` output, and `kill -KILL`s any orphans before the run is considered clean.
-- [ ] **HARNESS-08**: A per-tool-call 30s timeout is enforced by the harness (Claude Code enforces none); a tool call that exceeds it is recorded as `TIMEOUT` in the failure-attribution taxonomy.
-- [ ] **HARNESS-09**: A `ulimit -v` memory ceiling is set per MCP session (default 4GB) so a runaway MCP crashes its own process instead of swapping the Mac Mini.
+- [x] **HARNESS-07**: Every MCP server child process is spawned under a `setsid` process-group; a `bench/orphan_audit.py` runs pre/post-bench, diffs `ps` output, and `kill -KILL`s any orphans before the run is considered clean.
+- [x] **HARNESS-08**: A per-tool-call 30s timeout is enforced by the harness (Claude Code enforces none); a tool call that exceeds it is recorded as `TIMEOUT` in the failure-attribution taxonomy.
+- [x] **HARNESS-09**: A `ulimit -v` memory ceiling is set per MCP session (default 4GB) so a runaway MCP crashes its own process instead of swapping the Mac Mini.
 
 ### Fairness — measurement discipline that prevents 2026-03 class mistakes
 
@@ -30,7 +30,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 - [ ] **FAIRNESS-04**: The published report contains TWO views: same-rubric composite AND a capability matrix with explicit category tags (cloud / stealth / JS-light / LLM-augmented / tool-only) so a reader can't accidentally compare firecrawl-the-cloud to playwright-the-local on a single number.
 - [ ] **FAIRNESS-05**: Browser-use is run in dual mode — `direct` (no LLM) AND `agent` (with LLM key) — scored as two rows; the report explicitly states which mode each row represents.
 - [ ] **FAIRNESS-06**: Every matrix row has a failure-attribution tag from the taxonomy (`tool-bug` / `env-mismatch` / `target-flag` / `transient`); readers can see why a score is what it is, not just that it's low.
-- [ ] **FAIRNESS-07**: The harness MUST NOT bypass an MCP-reported failure (e.g., browser-use `initialize` timeout) by reimplementing what Claude Code does; if the MCP fails Claude Code's normal lifecycle, the published score reflects that and a courtesy-disclosure ticket is filed.
+- [x] **FAIRNESS-07**: The harness MUST NOT bypass an MCP-reported failure (e.g., browser-use `initialize` timeout) by reimplementing what Claude Code does; if the MCP fails Claude Code's normal lifecycle, the published score reflects that and a courtesy-disclosure ticket is filed.
 
 ### Measurements — cross-cutting per-MCP signals
 
@@ -108,22 +108,22 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HARNESS-01 | Phase 1 | Pending |
+| HARNESS-01 | Phase 1 | Complete |
 | HARNESS-02 | Phase 1 | Pending |
-| HARNESS-03 | Phase 1 | Pending |
-| HARNESS-04 | Phase 1 | Pending |
+| HARNESS-03 | Phase 1 | Complete |
+| HARNESS-04 | Phase 1 | Complete |
 | HARNESS-05 | Phase 1 | Pending |
 | HARNESS-06 | Phase 1 | Pending |
-| HARNESS-07 | Phase 1 | Pending |
-| HARNESS-08 | Phase 1 | Pending |
-| HARNESS-09 | Phase 1 | Pending |
+| HARNESS-07 | Phase 1 | Complete |
+| HARNESS-08 | Phase 1 | Complete |
+| HARNESS-09 | Phase 1 | Complete |
 | FAIRNESS-01 | Phase 1 | Pending |
 | FAIRNESS-02 | Phase 1 | Pending |
 | FAIRNESS-03 | Phase 1 | Pending |
 | FAIRNESS-04 | Phase 2 | Pending |
 | FAIRNESS-05 | Phase 2 | Pending |
 | FAIRNESS-06 | Phase 1 | Pending |
-| FAIRNESS-07 | Phase 1 | Pending |
+| FAIRNESS-07 | Phase 1 | Complete |
 | MEAS-01 | Phase 3 | Pending |
 | MEAS-02 | Phase 3 | Pending |
 | MEAS-07 | Phase 3 | Pending |

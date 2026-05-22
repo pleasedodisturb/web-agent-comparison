@@ -80,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Harness Foundation | 0/TBD | Not started | - |
+| 1. Harness Foundation | 4/7 | In Progress|  |
 | 2. Per-MCP Scoring Runs | 0/TBD | Not started | - |
 | 3. Cross-Cutting Measurements | 0/TBD | Not started | - |
 | 4. Synthesis | 0/TBD | Not started | - |
