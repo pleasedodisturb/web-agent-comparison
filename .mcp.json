@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "playwright-mcp",
+      "args": []
+    },
+    "browser-use": {
+      "command": "browser-use",
+      "args": ["--mcp"]
+    },
+    "chrome-devtools": {
+      "command": "chrome-devtools-mcp",
+      "args": []
+    },
+    "lightpanda": {
+      "command": "lightpanda",
+      "args": ["mcp"]
+    },
+    "obscura": {
+      "command": "obscura-mcp",
+      "args": []
+    },
+    "firecrawl": {
+      "command": "firecrawl-mcp",
+      "args": []
+    },
+    "cloakbrowser": {
+      "command": "cloakbrowsermcp",
+      "args": []
+    }
+  }
+}
