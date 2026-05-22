@@ -2,6 +2,8 @@
 
 A head-to-head comparison of 5 web automation agents tested against real job application flows (Anthropic Greenhouse + Replit Ashby).
 
+> **📌 2026-05 update:** Agent Browser is removed (project unmaintained). New entrants (browser-use, chrome-devtools, Obscura, CloakBrowser, Firecrawl) are now installed here as project-scoped MCPs via `.mcp.json`. See the [2026-05 addendum](./results/2026-05_addendum.md) for the new routing matrix, empirical ranking from terminal-craft G-688 Phase 6, and a status diff vs. the historical [2026-03-31 results](./results/2026-03-31_run.md).
+
 ## Agents Tested
 
 | Agent | Type | Score |
