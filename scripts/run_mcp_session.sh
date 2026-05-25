@@ -274,7 +274,124 @@ if [[ ! -s "$TRANSCRIPT" ]]; then
         "$RAW_STREAM" > "$TRANSCRIPT" 2>/dev/null || true
 fi
 
-# ─── 13. Cleanup + exit ──────────────────────────────────────────────────
+# ─── 13. Extract turn-scope token usage (plan 01-06) ────────────────────
+# Phase 1 only captures the `turn`-scope token count from the stream-json
+# `usage` blocks. The 3-scope split (schema / payload / turn) lands in
+# Phase 3 / MEAS-02. The aggregator's `_score_token_efficiency` already
+# treats a {"deferred": ...} payload as neutral; the file we write here
+# always carries the `turn` numbers we DO have, plus null placeholders for
+# `schema` and `payload`, with a top-level "deferred" key pointing at the
+# Phase 3 ticket.
+#
+# jq pipeline:
+#   `select(.type=="result")` → keep only the terminal-result envelope
+#   `.usage`                  → unwrap the usage block
+#   `[ ... ] | last // {}`    → grab the last one (the cumulative total)
+TOKENS_PATH="$OUT_DIR/tokens.json"
+USAGE_BLOCK=$(jq -c '[inputs | select(.type=="result") | .usage] | last // {}' \
+    < "$RAW_STREAM" 2>/dev/null || echo '{}')
+
+cat > "$TOKENS_PATH" <<EOF
+{
+  "mcp": "${MCP_NAME}",
+  "scope": "turn",
+  "deferred": "phase-3",
+  "reason": "3-scope token split (schema/payload/turn) deferred to Phase 3 (MEAS-02). Phase 1 captures only turn-scope from stream-json usage blocks.",
+  "turn": ${USAGE_BLOCK},
+  "schema_bytes": null,
+  "payload_bytes": null
+}
+EOF
+
+# ─── 14. tools_inventory (real measurement, plan 01-06) ─────────────────
+# Spawn the MCP via mcp.client.stdio (Python SDK 1.16), call tools/list,
+# write tools_inventory.json. Failure modes (INITIALIZE_TIMEOUT,
+# SPAWN_OR_RPC_ERROR, MCP_CONFIG_ERROR) all produce a non-zero exit code
+# from the module — we capture it and log, but DO NOT fail the whole
+# session. The aggregator reads tools_inventory.json and attributes
+# `tool-bug` per FAIRNESS-06 when status != "OK".
+echo "==> tools_inventory: probing ${MCP_NAME} via mcp.client.stdio" >&2
+INVENTORY_RC=0
+"$VENV_PY" -m bench.tools_inventory "$MCP_NAME" \
+    --out "$OUT_DIR/tools_inventory.json" \
+    || INVENTORY_RC=$?
+if (( INVENTORY_RC != 0 )); then
+    echo "==> tools_inventory: ${MCP_NAME} exited rc=$INVENTORY_RC (see $OUT_DIR/tools_inventory.json for status field)" >&2
+fi
+
+# ─── 15. Deferred-marker stubs (plan 01-06) ─────────────────────────────
+# Lock the evidence-directory shape by emitting tls.json, cold_start.json,
+# and stability.log as deferred-marker stubs. The aggregator already
+# recognizes {"deferred": ...} and assigns the neutral mid-band score.
+echo "==> stub_writers: emitting tls.json + cold_start.json + stability.log" >&2
+"$VENV_PY" -m bench.stub_writers "$OUT_DIR" --mcp-name "$MCP_NAME" || \
+    echo "==> stub_writers: failed (continuing — Phase 1 policy)" >&2
+
+# ─── 16. Versions manifest (once per run, idempotent) ───────────────────
+# capture_versions.py writes results/$DATE/versions.json +
+# results/$DATE/versions.lock.md. Run only if absent for this date — the
+# manifest covers the whole run, not per-MCP, so re-running for every MCP
+# would just waste cycles on shasum/npm-view calls.
+if [[ ! -f "results/$DATE/versions.json" ]]; then
+    echo "==> capture_versions: writing results/$DATE/versions.{json,lock.md}" >&2
+    "$VENV_PY" -m bench.capture_versions \
+        --date "$DATE" \
+        --results-root "results" \
+        || echo "==> capture_versions: failed (continuing — Phase 1 policy)" >&2
+else
+    echo "==> capture_versions: results/$DATE/versions.json already exists; skipping" >&2
+fi
+
+# ─── 17. MACHINE.md (once per run, idempotent) ──────────────────────────
+# Populate results/$DATE/MACHINE.md from templates/MACHINE.md via envsubst.
+# Pulls every field from versions.json (single source of truth) so the
+# two files cannot disagree about host or tooling versions.
+MACHINE_TEMPLATE="$REPO_ROOT/templates/MACHINE.md"
+MACHINE_OUT="results/$DATE/MACHINE.md"
+if [[ -f "$MACHINE_TEMPLATE" && ! -f "$MACHINE_OUT" ]]; then
+    if [[ -f "results/$DATE/versions.json" ]]; then
+        echo "==> MACHINE.md: rendering from $MACHINE_TEMPLATE" >&2
+        # Export envsubst variables from versions.json (jq -r emits "" for nulls).
+        export CAPTURED_AT_UTC="$(jq -r '.captured_at // ""' "results/$DATE/versions.json")"
+        export HOST_OS="$(jq -r '.host.os // ""' "results/$DATE/versions.json")"
+        export HOST_KERNEL="$(jq -r '.host.kernel_version // ""' "results/$DATE/versions.json")"
+        export HOST_ARCH="$(jq -r '.host.arch // ""' "results/$DATE/versions.json")"
+        export MACOS_VERSION="$(jq -r '.host.macos_version // ""' "results/$DATE/versions.json")"
+        export CLAUDE_VERSION="$(jq -r '.tooling.claude_code // ""' "results/$DATE/versions.json")"
+        export NODE_VERSION="$(jq -r '.tooling.node // ""' "results/$DATE/versions.json")"
+        export NPM_VERSION="$(jq -r '.tooling.npm // ""' "results/$DATE/versions.json")"
+        export PYTHON_VERSION="$(jq -r '.tooling.python // ""' "results/$DATE/versions.json")"
+        export UV_VERSION="$(jq -r '.tooling.uv // ""' "results/$DATE/versions.json")"
+        envsubst < "$MACHINE_TEMPLATE" > "$MACHINE_OUT"
+    else
+        echo "==> MACHINE.md: skipping (versions.json absent)" >&2
+    fi
+fi
+
+# ─── 18. Final missing-file audit ───────────────────────────────────────
+# Per HARNESS-02 the evidence directory MUST contain a fixed file list.
+# We do NOT fail the run on missing files (plan 01-07 owns the strict
+# gate); we just log MISSING markers to stderr so a human sees them.
+REQUIRED_FILES=(
+    transcript.md
+    raw_stream.jsonl
+    cold_start.json
+    tokens.json
+    tls.json
+    stability.log
+    orphan_audit.log
+    tools_inventory.json
+)
+echo "==> evidence-directory audit:" >&2
+for f in "${REQUIRED_FILES[@]}"; do
+    if [[ -f "$OUT_DIR/$f" ]]; then
+        echo "    OK      $f" >&2
+    else
+        echo "    MISSING $f" >&2
+    fi
+done
+
+# ─── 19. Cleanup + exit ─────────────────────────────────────────────────
 
 cleanup_fixtures
 

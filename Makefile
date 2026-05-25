@@ -26,6 +26,7 @@ MCPS := playwright browser-use chrome-devtools lightpanda obscura firecrawl cloa
 
 .PHONY: bench check score clean coldstart stability tls help \
         fixtures-serve fixtures-stop fixtures-status smoke-live \
+        versions \
         $(addprefix bench-,$(MCPS))
 
 # ─── Default + help ─────────────────────────────────────────────────────────
@@ -44,6 +45,9 @@ help:
 	@echo "  make fixtures-status # show running/stopped"
 	@echo "  make smoke-live      # ONE-shot HEAD against the live source URLs"
 	@echo "                       # — diagnostic drift detector, NOT scored"
+	@echo ""
+	@echo "Reproducibility manifest (plan 01-06):"
+	@echo "  make versions        # write/refresh results/$(DATE)/versions.{json,lock.md}"
 	@echo ""
 	@echo "Stubs (deferred to G-710):"
 	@echo "  make coldstart       # TLS-side: cold-start latency measurement"
@@ -140,6 +144,14 @@ smoke-live:
 	    code=$$(curl -sI -L -o /dev/null --max-time 10 -w "%{http_code}" "$$url") ; \
 	    echo "smoke-live $$plat: HTTP $$code  $$url" ; \
 	done
+
+# ─── Reproducibility manifest (plan 01-06) ───────────────────────────────────
+# Regenerable on demand — the manifest captures live tool versions and
+# binary SHA256s, which drift independently of the benchmark runs. Useful
+# for "did anything change since yesterday?" diffs.
+
+versions:
+	@uv run python -m bench.capture_versions --date $(DATE) --results-root results/
 
 # ─── Stubs (surface locked; work deferred to G-710) ──────────────────────────
 
