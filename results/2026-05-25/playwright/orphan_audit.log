@@ -1,0 +1,10 @@
+# orphan_audit run at 2026-05-25T14:21:44Z
+BEFORE_PATH=results/2026-05-25/playwright/.ps_before.tsv
+AFTER_PATH=results/2026-05-25/playwright/.ps_after.tsv
+TARGET_PGID=14544
+BEFORE_COUNT=675
+AFTER_COUNT=691
+DIFF_COUNT=1
+GONE pid=31646 pgid=14135 cmd=/Users/pleasedodisturb/Projects/web-agent-comparison/.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-25/playwright/.ps_after.tsv
+KILLED_COUNT=0
+ORPHANS=1

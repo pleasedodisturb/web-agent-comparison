@@ -1,0 +1,58 @@
+- generic [ref=e353]:
+  - generic [ref=e354]:
+    - generic [ref=e357]:
+      - generic [ref=e358]: Jane Testworth*
+      - textbox "Jane Testworth" [ref=e359]
+    - generic [ref=e362]:
+      - generic [ref=e363]: Jane Testworth*
+      - textbox "Jane Testworth" [ref=e364]
+    - generic [ref=e367]:
+      - generic [ref=e368]: Email*
+      - textbox "Email" [ref=e369]
+    - group "Phone" [ref=e371]:
+      - generic [ref=e372]: Phone
+      - generic [ref=e375]:
+        - generic [ref=e376]: Country
+        - generic [ref=e377]:
+          - log [ref=e379]
+          - generic [ref=e381]:
+            - combobox "Country" [ref=e384]
+            - button "Toggle flyout" [ref=e386] [cursor=pointer]:
+              - img [ref=e387]
+      - generic [ref=e391]:
+        - generic [ref=e392]: Phone
+        - textbox "Phone" [ref=e393]
+    - group "Resume/CV" [ref=e395]:
+      - generic [ref=e396]: Resume/CV
+      - generic [ref=e398]:
+        - generic [ref=e400]:
+          - button "Attach" [ref=e401] [cursor=pointer]
+          - generic [ref=e402]: Attach
+          - button "Attach" [ref=e403]
+        - button "Dropbox" [ref=e405] [cursor=pointer]
+        - button "Jane Testworth" [ref=e407] [cursor=pointer]
+        - generic [ref=e409]:
+          - button "Enter manually" [ref=e410] [cursor=pointer]
+          - generic [ref=e411]: Enter manually
+        - paragraph [ref=e412]: "Accepted file types: pdf, doc, docx, txt, rtf"
+  - generic [ref=e413]:
+    - separator [ref=e414]
+    - generic [ref=e415]:
+      - generic [ref=e417]:
+        - generic [ref=e418]: Please note that you will not be considered unless you complete the Constellation application form. *
+        - generic [ref=e419]:
+          - log [ref=e421]
+          - generic [ref=e423]:
+            - generic [ref=e424]:
+              - generic [ref=e425]: Select...
+              - combobox "Please note that you will not be considered unless you complete the Constellation application form." [ref=e427]
+            - button "Toggle flyout" [ref=e429] [cursor=pointer]:
+              - img [ref=e430]
+          - textbox
+      - paragraph [ref=e434]:
+        - text: To apply, complete this
+        - link "application form" [ref=e435] [cursor=pointer]:
+          - /url: https://bit.ly/afpsafety
+        - text: from our official hiring partner, Constellation.
+        - text: You do not need to submit this Greenhouse application.
+  - button "Submit application" [ref=e437] [cursor=pointer]

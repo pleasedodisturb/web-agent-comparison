@@ -20,6 +20,21 @@ node_modules/
 results/*/.scratch/
 results/*/*.tmp
 
+# Per-MCP evidence subdirs: hide runtime hidden files (.ps_*.tsv, .prompt.md,
+# .watchdog.log, .harness_leaked) — they're internal scratch the aggregator
+# doesn't need and that may carry process noise we don't want in the public repo.
+results/*/*/.ps_before.tsv
+results/*/*/.ps_after.tsv
+results/*/*/.prompt.md
+results/*/*/.watchdog.log
+results/*/*/.harness_leaked
+results/*/.sc4_retry.json
+
+# Playwright MCP runtime cache — written by @playwright/mcp during a session.
+# Console/page logs, screenshots, traces. Not part of the benchmark evidence
+# directory contract; aggregator never reads from here.
+.playwright-mcp/
+
 # OS cruft
 .DS_Store
 Thumbs.db
