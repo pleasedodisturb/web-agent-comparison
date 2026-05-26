@@ -71,3 +71,8 @@ Explanatory Mode
 Learning Mode
 Request User
 Request Contributions
+
+# === DEEP_ANALYSIS narrative bigrams (prose section headings + references) ===
+Deep Analysis
+Empirical Claims
+The Claude

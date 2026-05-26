@@ -1,4 +1,74 @@
 {
+  "browser-use-agent": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {},
+    "capability": "LLM-augmented",
+    "mode": "agent",
+    "scores": {
+      "data_quality": "N/A",
+      "error_handling": "N/A",
+      "interaction_depth": "N/A",
+      "js_rendering": "N/A",
+      "reliability": "N/A",
+      "setup_complexity": "N/A",
+      "speed": "N/A",
+      "token_efficiency": "N/A"
+    },
+    "skip_evidence": "results/2026-05-26/browser-use-agent/SKIPPED.md",
+    "skip_reason": "LLM_KEY_ABSENT",
+    "stages": {
+      "S1": "N/A",
+      "S2": "N/A",
+      "S3": "N/A",
+      "S4": "N/A",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    },
+    "status": "SKIPPED"
+  },
   "browser-use-direct": {
     "attempts": {
       "S1": {
