@@ -1,0 +1,8 @@
+stage: S1
+url: http://127.0.0.1:8765/greenhouse_2026-05-22/
+started_at_utc: 2026-05-26T19:48:13Z
+ended_at_utc: 2026-05-26T19:48:14Z
+response: |
+  {"success":false,"code":"BAD_REQUEST","error":"URL must have a valid top-level domain or be a valid path","details":[{"code":"custom","path":["url"],"message":"URL must have a valid top-level domain or be a valid path"}]}
+  __HTTP_STATUS__400
+  __TIME_TOTAL__0.470326
