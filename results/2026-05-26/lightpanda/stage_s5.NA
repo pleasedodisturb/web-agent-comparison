@@ -1,0 +1,3 @@
+NA — same reason as S4: lightpanda is read-only per fairness policy.
+(See PASS1/_attempted_stage_s5.yml — Claude managed sequential `fill` calls against the SSR
+form scaffold but no React handlers fired, so the fills had no application-layer effect.)

@@ -1,0 +1,214 @@
+{
+  "args": [
+    "mcp"
+  ],
+  "captured_at": "2026-05-26T19:24:10Z",
+  "categories": {
+    "capture": 0,
+    "diagnostics": 1,
+    "inspection": 2,
+    "interaction": 7,
+    "navigation": 2,
+    "other": 8
+  },
+  "command": "lightpanda",
+  "mcp": "lightpanda",
+  "protocol_version": "2024-11-05",
+  "status": "OK",
+  "tool_count": 20,
+  "tools": [
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate to a specified URL and load the page in memory so it can be reused later for info extraction.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "goto"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Alias for goto. Navigate to a specified URL and load the page in memory.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "navigate"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Get the page content in markdown format. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "markdown"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Extract all links in the opened frame. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "links"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Evaluate JavaScript in the current page context. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "script",
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "evaluate"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Alias for evaluate. Evaluate JavaScript in the current page context.",
+      "input_schema_keys": [
+        "script",
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "eval"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Get the page content as a simplified semantic DOM tree for AI reasoning. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "maxDepth",
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "semantic_tree"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Get detailed information about a specific node by its backend node ID. Returns tag, role, name, interactivity, disabled state, value, input type, placeholder, href, checked state, and select options.",
+      "input_schema_keys": [
+        "backendNodeId"
+      ],
+      "name": "nodeDetails"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Extract interactive elements from the opened frame. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "interactiveElements"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Extract structured data (like JSON-LD, OpenGraph, etc) from the opened frame. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "structuredData"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Detect all forms on the page and return their structure including fields, types, and required status. If a url is provided, it navigates to that url first.",
+      "input_schema_keys": [
+        "timeout",
+        "url",
+        "waitUntil"
+      ],
+      "name": "detectForms"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Click on an interactive element. Returns the current page URL and title after the click.",
+      "input_schema_keys": [
+        "backendNodeId"
+      ],
+      "name": "click"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Fill text into an input element. Returns the filled value and current page URL and title.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "text"
+      ],
+      "name": "fill"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Scroll the page or a specific element. Returns the scroll position and current page URL and title.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "x",
+        "y"
+      ],
+      "name": "scroll"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Wait for an element matching a CSS selector to appear in the frame. Returns the backend node ID of the matched element.",
+      "input_schema_keys": [
+        "selector",
+        "timeout"
+      ],
+      "name": "waitForSelector"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Hover over an element, triggering mouseover and mouseenter events. Useful for menus, tooltips, and hover states.",
+      "input_schema_keys": [
+        "backendNodeId"
+      ],
+      "name": "hover"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Press a keyboard key, dispatching keydown and keyup events. Use key names like 'Enter', 'Tab', 'Escape', 'ArrowDown', 'Backspace', or single characters like 'a', '1'.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "key"
+      ],
+      "name": "press"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Select an option in a <select> dropdown element by its value. Dispatches input and change events.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "value"
+      ],
+      "name": "selectOption"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Check or uncheck a checkbox or radio button. Dispatches input, change, and click events.",
+      "input_schema_keys": [
+        "backendNodeId",
+        "checked"
+      ],
+      "name": "setChecked"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Find interactive elements by role and/or accessible name. Returns matching elements with their backend node IDs. Useful for locating specific elements without parsing the full semantic tree.",
+      "input_schema_keys": [
+        "name",
+        "role"
+      ],
+      "name": "findElement"
+    }
+  ],
+  "version_handshake": "0.1.0"
+}

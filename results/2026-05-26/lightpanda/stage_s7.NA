@@ -1,0 +1,3 @@
+NA — react-select cannot be driven without a JS runtime; lightpanda's selectOption tool rejected
+the node with "Node is not a <select> element" (correct refusal at the MCP layer).
+(See PASS1/_attempted_stage_s7.md — Claude documented techniques attempted; all failed.)

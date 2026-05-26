@@ -1,0 +1,39 @@
+stage: S1
+mcp: lightpanda
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tool_used: mcp__lightpanda__markdown + mcp__lightpanda__structuredData
+extracted:
+  title: "Jane Testworth Program"
+  meta_title: "Jane Testworth for Jane Testworth Program at Anthropic"
+  company: "Anthropic"
+  location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+  employment_type: "Full-time, 4 months (program / fellowship)"
+  requirements_summary: |
+    Must:
+      - Fluent in Python programming
+      - Available to work full-time on the Fellows program
+      - Work authorization in US, UK, or Canada (visa NOT sponsored for fellows)
+    Good fit if:
+      - Motivated by making sure AI is safe and beneficial for society
+      - Strong technical background in CS, mathematics, or physics
+      - Thrive in fast-paced collaborative environments
+      - Can implement ideas quickly and communicate clearly
+  salary_band: "3,850 USD / 2,310 GBP / 4,300 CAD per week (40 hrs/week for 4 months)"
+  compute_budget: "~$15k/month per fellow"
+  apply_button_url: "https://bit.ly/afpsafety"
+  canonical_url: "http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html"
+  upstream_url: "https://job-boards.greenhouse.io/anthropic/jobs/5023394008"
+  application_form_inline: true   # form fields render on same page, not a separate /apply route
+  application_fields_visible:
+    - first_name (required)
+    - last_name (required)
+    - email (required)
+    - phone (optional)
+    - country
+    - resume/cv (Attach / Dropbox / Enter manually; accepts pdf, doc, docx, txt, rtf)
+    - "Please note ...complete the Constellation application form" (Select... required)
+notes: |
+  Lightpanda's Zig JS engine rendered the static Greenhouse HTML cleanly.
+  All visible job content + form structure extracted from a single markdown pass.
+  Names in the fixture are scrubbed to 'Jane Testworth' (anonymization);
+  this is property of the snapshot, not Lightpanda.

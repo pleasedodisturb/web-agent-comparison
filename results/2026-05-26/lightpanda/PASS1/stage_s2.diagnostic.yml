@@ -1,0 +1,35 @@
+stage: S2
+mcp: lightpanda
+target: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+tool_used: mcp__lightpanda__markdown + structuredData + semantic_tree + evaluate
+outcome: EXPECTED_FAILURE — SPA never hydrates in Lightpanda's Zig JS engine
+extracted:
+  title: "Jobs"   # only from <meta charset> / <title> head
+  company: null
+  location: null
+  role_summary: null
+  body_text_chars: 55         # essentially empty
+  raw_html_chars: 6805        # SSR shell only — index.html scaffold
+  scripts_in_dom: 2           # React bundle <script> tags present but never executed
+  has_root_div: true
+  root_div_children: 2        # SSR'd placeholders only, never populated
+  semantic_tree: |
+    1 RootWebArea 'Jobs'
+    (no children — body content never rendered)
+  markdown_output: "(empty — mcp__lightpanda__markdown returned no output)"
+  json_ld: []
+  open_graph: {}
+  twitter_card: {}
+findings: |
+  Ashby is a React SPA served as a thin SSR shell + a client bundle.
+  Lightpanda is a headless browser built on the Zig 'Browsercore' engine that
+  intentionally does NOT implement a full JS runtime (no V8/SpiderMonkey).
+  React's client-side hydration step fails silently — the page object exists,
+  the <script> tags load, but the components never mount into #root.
+
+  This is the diagnostic finding for Lightpanda on this benchmark dimension:
+  it is suitable for static HTML and server-rendered content (S1 worked
+  perfectly), but it cannot extract any job data from Ashby-style SPAs.
+
+  Documented openly rather than masked — this is the expected behavior on the
+  rubric's "SPA rendering" axis.
