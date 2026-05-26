@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-06 (cloakbrowser, sandbox-only) complete; 6/7 per-MCP plans done (7 scored MCPs + 1 SKIPPED in matrix). cloakbrowser median 8.33 LEADS the matrix, but Phase-4 tier pre-disposition is SANDBOX-ONLY regardless (closed-binary trust model is the binding constraint). SC #5 sandbox contract upheld via 3-tier audit (SANDBOX_PROOF.md). Stealth claim DEFERRED to G-710. Ready for Plan 02-07 (attribution-audit, last plan in Phase 2)."
-last_updated: "2026-05-26T23:50:00Z"
-last_activity: 2026-05-26
+stopped_at: "Plan 02-07 (cross-row attribution audit) complete; Phase 2 CLOSED. All 5 Phase 2 SCs PASS. scores.json has 8 rows (7 scored + 1 SKIPPED) with valid capability tags + every sub-5 cell carries an attribution tag from {tool-bug, env-mismatch, target-flag, transient}. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact. PHASE2_AUDIT.md emits the per-SC PASS/FAIL summary. Audit injected exactly 2 fields (playwright.capability=tool-only, playwright.mode=default) — scoring values byte-for-byte preserved. scoring/score.py SACROSANCT unchanged. 176/176 Phase-1 tests still pass. Ready for Phase 3 + Phase 4 (can run in parallel)."
+last_updated: "2026-05-27T00:05:00Z"
+last_activity: 2026-05-27
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 13
-  completed_plans: 13
-  percent: 50
+  completed_phases: 2
+  total_plans: 14
+  completed_plans: 14
+  percent: 75
 ---
 
 # Project State
@@ -21,17 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 2 — Per-MCP Scoring Runs (5/7 MCP scoring runs complete beyond Playwright; browser-use produced 2 of those 5 rows per FAIRNESS-05 dual-mode contract)
+**Current focus:** Phase 2 CLOSED 2026-05-27 — attribution audit passed all 5 SCs. Ready for Phase 3 (cross-cutting measurements) + Phase 4 (synthesis); they can run in parallel against the validated scores.json matrix.
 
 ## Current Position
 
-Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 6 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode, cloakbrowser); 1 remaining (attribution-audit, the synthesis check, NOT scored as an MCP)
-Status: Ready to execute Plan 02-07 (attribution-audit, last plan in Phase 2)
-Last activity: 2026-05-26
+Phase: 2 of 4 (Per-MCP Scoring Runs) — **CLOSED**
+Plan: 7 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode, cloakbrowser, attribution-audit)
+Status: Phase 2 complete. Ready to execute Phase 3 + Phase 4 in parallel.
+Last activity: 2026-05-27
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [███████░] 6/7
+Phase-2 progress: [██████████] 7/7
 
 scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
 
@@ -63,6 +63,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 2 P04 (obscura) | 30 | 2 tasks | 55+ files (3 agent-variance passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + INSTALL_LOG + MEMORY_SNAPSHOT 20-sample RSS trace) |
 | Phase 2 P05 (browser-use dual-mode) | 35 | 2 tasks | 72 files (3 direct-mode passes + DEEP_ANALYSIS + .scrub_allow.txt + .merge.py + init_smoke.json per-mode + agent-mode SKIPPED.md) |
 | Phase 2 P06 (cloakbrowser sandbox-only) | 25 | 2 tasks | 55+ files (3 passes + DEEP_ANALYSIS + SANDBOX_PROOF.md + .scrub_allow.txt; pre-flight loopback guard verified positive+negative; 3-tier sandbox audit) |
+| Phase 2 P07 (attribution audit) | 20 | 2 tasks | 5 files (PHASE2_AUDIT.md × 2 + CAPABILITY_MATRIX.md + INJECTIONS.md + scores.json 2-line additive diff) |
 
 ## Accumulated Context
 
@@ -107,6 +108,9 @@ Recent decisions affecting current work:
 - [Phase 2 P05]: Interpretation-variance vs execution-variance distinction surfaced — a finer-grained methodology-honesty datapoint than chrome-devtools/obscura's agent-discovery variance. PASS2's agent marked S5-S8 as capability-N/A after S4 was blocked; PASS1+PASS3 marked them FAIL. Both defensible; majority FAIL wins the median. Reported in DEEP_ANALYSIS.md and the Phase 4 commentary backlog.
 - [Phase 2 P05]: score_with_na.py renders SKIPPED row as composite=0.0 (degenerate-case fallback for total_weight=0). NOT fixed this plan (the file is adjacent to sacrosanct scoring/score.py). The status=SKIPPED field in scores.json is the source of truth for downstream consumers; Phase 4 matrix builder must consult status, not just composite. Documented as a known limitation.
 - [Phase 2 P05]: Agent mode SKIPPED branch chosen for reason=LLM_KEY_ABSENT (OPENAI_API_KEY and ANTHROPIC_API_KEY both zero-length sentinels in this host's env; OPENROUTER_API_KEY also empty; rbw locked and autonomous executor cannot prompt for unlock). The plan's Task 2 explicitly anticipates this branch — followed precedent (firecrawl 02-03 SKIPPED schema, extended with "what was verified before skipping" + "re-run procedure" sections). A follow-up agent-mode run is recoverable via rbw unlock + LLM key export.
+- [Phase 2 P07]: Cross-row attribution audit PASSED all 5 Phase 2 SCs. Exactly ONE injection set (audit-trail logged in INJECTIONS.md): `playwright.capability="tool-only"` + `playwright.mode="default"` — Phase 1 calibration row was authored before the FAIRNESS-04 contract crystallised. All 11 sub-5 cells across the 7 SCORED rows already carried valid attribution tags from their originating plans; no attribution injections required. scoring/score.py SACROSANCT unchanged (git diff main shows 0 lines). scores.json scoring-value preservation: 2-line additive diff on playwright row, nothing else touched.
+- [Phase 2 P07]: FAIRNESS-04 two-view publication contract realised in CAPABILITY_MATRIX.md — MCPs grouped by capability category (tool-only/LLM-augmented/stealth-specialist/cloud/js-light) so readers cannot accidentally compare a cloud service to a local browser on a single composite. Sandbox-only callout for cloakbrowser preserved per SAFETY-04+REPORT-08. Phase 4 will lift this file verbatim as the second-view artifact.
+- [Phase 2 P07]: Three known limitations carried forward to Phase 4 (documented in PHASE2_AUDIT.md): (1) score_with_na.py renders SKIPPED rows as composite=0.0 — Phase 4 matrix builder must consult `status` field, not just composite. (2) The 4-tag taxonomy's `tool-bug` aggregator default loses MCP-fault vs. agent-fault distinction — DEEP_ANALYSIS.md per row has the interpretive nuance; Phase 4 must lift those paragraphs into recommendations.md. (3) playwright lacks per-MCP DEEP_ANALYSIS.md (Phase 1 calibration baseline) — Phase 4 should either generate one from 2026-03-31_run.md lineage or explicitly call out the asymmetry.
 
 ### Pending Todos
 
@@ -141,6 +145,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T23:50:00Z
-Stopped at: Plan 02-06 (cloakbrowser sandbox-only) complete. SC #5 sandbox-only contract upheld via 3-tier audit (pre-flight guard positive+negative + all-active-egress-vector enumeration + transcript hostname sweep with false-positive triage). cloakbrowser median composite 8.33 LEADS the matrix on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model. Stealth claim (Cloudflare/reCAPTCHA/FingerprintJS) DEFERRED to G-710 — the snapshot fixtures don't fingerprint-check. PASS1 SDK-budget termination at S5 was absorbed by 3-pass median (PASS2+PASS3 clean S1-S8 completion). Updated ranking: **cloakbrowser 8.33 (SANDBOX-ONLY)** > playwright 7.93 > lightpanda 6.31 > browser-use-direct 5.87 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27 > browser-use-agent SKIPPED. Phase 2 matrix CLOSED at 7 scored + 1 SKIPPED. Ready for Plan 02-07 (attribution-audit, the synthesis check).
+Last session: 2026-05-27T00:05:00Z
+Stopped at: Plan 02-07 (cross-row attribution audit) complete. **Phase 2 CLOSED.** All 5 Phase 2 success criteria PASS: (SC1) 7 evidence dirs or SKIPPED.md, (SC2) read-only MCPs N/A not 0, (SC3) browser-use dual-mode, (SC4) capability + attribution complete, (SC5) cloakbrowser loopback-only. Audit injected exactly 2 fields on the playwright row (capability=tool-only, mode=default — Phase 1 calibration row pre-dated FAIRNESS-04 contract); scoring values byte-for-byte preserved across all 8 rows. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact (capability-grouped, with sandbox-only callout for cloakbrowser per SAFETY-04+REPORT-08). PHASE2_AUDIT.md emits per-SC PASS/FAIL summary + tag-injection inventory + 3 known limitations carried forward for Phase 4. scoring/score.py SACROSANCT contract upheld (git diff main = 0 lines). 176/176 Phase-1 tests pass. **Phase 3 + Phase 4 can begin in parallel** against the validated scores.json matrix.
 Resume file: None
