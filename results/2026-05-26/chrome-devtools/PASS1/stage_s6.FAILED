@@ -1,0 +1,1 @@
+No file input present — depends on S4 producing a resume <input type="file"> in the DOM. chrome-devtools upload_file is capable in principle; no target uid exists.

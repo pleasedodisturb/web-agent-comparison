@@ -30,6 +30,18 @@ results/*/*/.watchdog.log
 results/*/*/.harness_leaked
 results/*/.sc4_retry.json
 
+# Phase 2 per-pass subdirectories (PASS1/PASS2/PASS3): same runtime-hidden
+# files as the per-MCP root, one level deeper. Plus the inline merge script
+# (.merge.py) and the composite-check stdout capture (.composite_check.txt),
+# which are scratch — their outputs land in scores.json + DEEP_ANALYSIS.md.
+results/*/*/PASS*/.ps_before.tsv
+results/*/*/PASS*/.ps_after.tsv
+results/*/*/PASS*/.prompt.md
+results/*/*/PASS*/.watchdog.log
+results/*/*/PASS*/.harness_leaked
+results/*/*/.merge.py
+results/*/*/.composite_check.txt
+
 # Playwright MCP runtime cache — written by @playwright/mcp during a session.
 # Console/page logs, screenshots, traces. Not part of the benchmark evidence
 # directory contract; aggregator never reads from here.
