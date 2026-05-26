@@ -1,0 +1,1 @@
+Obscura's CDP target wedged after sync XMLHttpRequest in S1 eval; all subsequent navigations return "CDP request timed out: Target.createTarget". Ashby SPA never reached.

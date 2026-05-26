@@ -1,0 +1,1 @@
+Obscura wedged after S1; cannot upload a resume. Additionally, obscura's surface (browse_page/browse_interact/browse_session) exposes no file-upload primitive — there is no equivalent of Playwright's browser_file_upload.

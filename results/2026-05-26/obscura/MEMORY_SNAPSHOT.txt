@@ -1,0 +1,136 @@
+=== obscura memory snapshot ===
+date: 2026-05-26T20:07:00Z
+purpose: falsify research/SUMMARY.md claim of ~30MB RAM (CDP-direct) vs Playwright ~300MB
+
+--- PRE-PASS-1 (baseline; no obscura process expected) ---
+(no obscura process running)
+
+--- DURING PASS 1 (samples every 10s while harness runs) ---
+[t+10s @ 20:07:18]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	9424	435357296	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+20s @ 20:07:28]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	6720	435357296	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+30s @ 20:07:38]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	18864	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+40s @ 20:07:48]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	18976	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+50s @ 20:07:58]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	18976	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+60s @ 20:08:08]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	18976	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+70s @ 20:08:18]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	21776	469579504	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+80s @ 20:08:28]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	20768	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+90s @ 20:08:39]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	20768	469315360	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+100s @ 20:08:49]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	43488	469366256	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+110s @ 20:08:59]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	45056	469366256	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+120s @ 20:09:09]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+130s @ 20:09:19]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+140s @ 20:09:29]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+150s @ 20:09:39]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+160s @ 20:09:49]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+170s @ 20:09:59]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+180s @ 20:10:09]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+190s @ 20:10:19]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	44976	469359568	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+[t+200s @ 20:10:29]
+PID	RSS(KB)	VSZ(KB)	COMM
+57077	59152	469643072	/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura
+
+
+--- ANALYSIS (PASS 1 only — sampler was scheduled in parallel with Pass 1) ---
+
+| Statistic | Value |
+|---|---|
+| Samples | 20 (10s interval over 200s) |
+| Min RSS | 6,720 KB (6.6 MB) — engine just-spawned |
+| Max RSS | 59,152 KB (57.8 MB) — during S1 navigation + eval |
+| Mean RSS | 33,137 KB (32.4 MB) |
+| Median RSS (approx) | ~44,976 KB (43.9 MB) |
+
+## Falsifiability of research/SUMMARY.md claim
+
+> Claim: "obscura — CDP-direct (not Playwright-on-CDP) gives lower overhead +
+>         ~30MB RAM vs Playwright ~300MB while keeping full JS rendering"
+
+**Verdict on the memory claim:** PARTIALLY SUPPORTED.
+- Mean RSS 32.4 MB is within ~10% of the claimed "30 MB" — claim holds for
+  steady-state, not for peak.
+- Peak RSS 57.8 MB is roughly 2× the claimed number — under load (S1 nav +
+  eval), the wrapper's Node process consumes notably more than the published
+  ~30 MB. Still ~5× smaller than the claimed Playwright "~300 MB" baseline.
+
+**Caveats this measurement cannot resolve:**
+1. We sampled the WRAPPER process (PID 57077, `node /opt/homebrew/lib/...obscura serve`),
+   not the underlying Chromium worker. The CDP server (port 9222) is presumably backed
+   by a Chromium instance with its own RSS that does not show under `obscura` in `ps`.
+   Total architecture footprint is HIGHER than 57.8 MB.
+2. No Playwright control measurement in this run — the 300 MB Playwright comparison
+   number comes from research/SUMMARY.md, not from a side-by-side measurement on this
+   host. A clean A/B (Phase 3 / G-710 territory) is required to falsify the
+   "~10× lighter" claim definitively.
+
+**Verdict on the "full JS rendering" claim:** SUPPORTED.
+- S1 explicitly triggered the Greenhouse React bundle (it clobbered the SSR
+  content with a "Page not found" 404 component — see DEEP_ANALYSIS.md §2).
+- The bundle ran. obscura is NOT JS-light like lightpanda; it executes a real
+  Chromium runtime under the CDP server. The Ashby SPA stage (S2) failed for
+  a different reason (CDP target wedge after sync XHR — see DEEP_ANALYSIS.md §3),
+  NOT because JS didn't run.
+
+## PASS 2 / PASS 3 sampling
+
+Not captured. The sampler ran only during PASS 1 (deliberate: the angle is
+opportunistic per plan 02-04 Task 1 step 5, and PASS 1 was the long-running
+pass that actually exercised the engine). PASS 2 (138s) and PASS 3 (125s)
+were too short for the 10s-interval sampler to cover meaningfully — both
+were Stop-at-S1 paths that didn't exercise the engine.

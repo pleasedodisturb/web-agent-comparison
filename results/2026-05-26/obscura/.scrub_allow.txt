@@ -1,0 +1,57 @@
+# PII scrub allow-list for obscura row (G-718).
+# Plan 02-04 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / prose / brand Title-Case bigrams that appear in the
+# obscura evidence — DEEP_ANALYSIS section headings, tool-description
+# bigrams, transcript narrative bigrams, Claude Code metadata bigrams,
+# error-message bigrams.
+# Allow-listing does NOT loosen the real-PII guard (resembles-name +
+# resembles-email regex still active — only LITERAL allow-listed bigrams
+# are skipped).
+
+# === DEEP_ANALYSIS + transcript section headings + prose bigrams ===
+Stage Walk
+For Stage
+React Select
+Greenhouse React
+Ashby React
+The Ashby
+The Greenhouse
+Page Not
+Page Found
+Deep Analysis
+Stage Results
+Final Ranking
+Scoring Comparison
+Data Quality
+Token Efficiency
+Setup Complexity
+Interaction Depth
+Error Handling
+Weighted Composite
+No Playwright
+Implicit Playwright
+Empirical Claims
+Execution Order
+Headless Browser
+Electron Framework
+Tue May
+
+# === Brand / product Title-Case bigrams that appear in Claude Code
+# stream-json metadata, tool descriptions, or Greenhouse/Ashby snapshot ===
+Brave Browser
+Claude Code
+Application Support
+Hugging Face
+Google Calendar
+Google Drive
+Proton Mail
+Software Engineer
+San Francisco
+
+# === Error-message + Claude Code internal-system Title-Case bigrams ===
+Execution Error
+Example Request
+Explanatory Mode
+Learning Mode
+Request User
+Request Contributions
