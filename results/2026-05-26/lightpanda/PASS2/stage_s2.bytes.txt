@@ -1,0 +1,21 @@
+# S2 Ashby raw-byte capture — PASS2
+# Falsifiable 2026-03 claim: lightpanda returned 0 bytes on Ashby
+# 2026-05 nightly observation:
+
+pass: PASS2
+body_html_chars: 4555
+body_text_chars: 55
+scripts_in_dom: 2
+has_root_div: true
+root_div_children: 2
+markdown_tool_output_empty: true
+semantic_tree_children: 0
+job_data_fields_extracted: 0
+
+# Note: PASS2 captured bodyHtmlLen=4555 vs PASS1's raw_html_chars=6805 —
+# different sub-measurements of the same DOM (innerHTML of <body> vs full
+# document HTML). Both confirm: shell present, but content never hydrates.
+
+# Interpretation: identical to PASS1.
+# - "0 bytes" claim REFUTED on raw-shell axis.
+# - "React-blind" claim CONFIRMED on hydrated-content axis.

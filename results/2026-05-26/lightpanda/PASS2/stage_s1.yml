@@ -1,0 +1,59 @@
+stage: S1
+mcp: lightpanda
+target_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+extraction_method: mcp__lightpanda__markdown + mcp__lightpanda__structuredData
+status: SUCCESS
+
+job:
+  title: "Jane Testworth Program"   # canonical title from OG meta (snapshot scrubbed proper nouns to 'Jane Testworth')
+  page_title: "Jane Testworth for Jane Testworth Program at Anthropic"
+  company: "Anthropic"
+  ats_platform: greenhouse
+  locations:
+    - "London, UK"
+    - "Ontario, CAN"
+    - "Remote-Friendly"
+    - "Jane Testworth, CA"
+  employment_type: "Fellowship / 4 months full-time"
+  duration: "4 months, full-time (with possible extension)"
+  start_dates: "Cohorts starting July 2026 and beyond; next cohort late September"
+  compensation:
+    weekly_stipend:
+      usd: 3850
+      gbp: 2310
+      cad: 4300
+    hours_per_week: 40
+    compute_budget: "~$15k/month + other research expenses"
+    benefits: "vary by country"
+  workstreams:
+    - "AI Jane Testworth (Safety)"
+    - "AI Jane Testworth (Red Team / Security)"
+    - "ML Systems & Jane Testworth"
+    - "Jane Testworth Fellows (RL / Capabilities)"
+    - "Jane Testworth (Economics & Policy)"
+  requirements_summary:
+    must_have:
+      - "Fluent in Python"
+      - "Available full-time for the program"
+      - "Work authorization in US, UK, or Canada (no visa sponsorship)"
+    nice_to_have:
+      - "Strong technical background in CS, math, or physics"
+      - "Experience with empirical ML research"
+      - "Experience with large language models"
+      - "Track record of open-source contributions"
+  apply_button_url: "https://bit.ly/afpsafety"   # external Constellation portal (primary)
+  greenhouse_apply_form_present: true            # secondary in-page form also rendered
+  form_fields_detected:
+    - "First Name (required)"
+    - "Last Name (required)"
+    - "Email (required)"
+    - "Phone (Country code + number)"
+    - "Resume/CV (file upload — pdf, doc, docx, txt, rtf)"
+    - "Constellation application confirmation (required dropdown)"
+  recruiting_partner: "Constellation (https://www.constellation.org/)"
+  ai_usage_policy_link: "https://www.anthropic.com/candidate-ai-guidance"
+notes: |
+  Fixture is the "Jane Testworth"-scrubbed snapshot — proper nouns replaced
+  for privacy, but DOM/structure intact. Greenhouse is server-rendered, so
+  lightpanda (no JS engine for React) renders it fully on first byte.
+  Extraction took a directory-listing → anthropic/ → jobs/ → 5023394008.html drill.
