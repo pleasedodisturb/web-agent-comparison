@@ -1,0 +1,5 @@
+{
+  "deferred": "G-710",
+  "reason": "TLS fingerprint capture (JA3/JA4) cut from v1 per 2026-05-22 scope cut.",
+  "see": "https://linear.app/abandoned-yachts/issue/G-710"
+}

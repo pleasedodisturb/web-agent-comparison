@@ -1,0 +1,1 @@
+Downstream of S4: Greenhouse "How did you hear about us?" React-Select combobox is destroyed with the rest of the form. No combobox/listbox is present in browser_get_state output. (browser-use lacks a browser_evaluate / run_code tool that could drive React state directly even if the node existed.)

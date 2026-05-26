@@ -1,0 +1,51 @@
+stage: s1
+mcp: browser-use
+target_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tools_used:
+  - mcp__browser-use__browser_navigate
+  - mcp__browser-use__browser_extract_content
+  - mcp__browser-use__browser_get_state
+  - mcp__browser-use__browser_get_html
+
+extracted:
+  title: "Jane Testworth for Jane Testworth Program at Anthropic"
+  company: Anthropic
+  location: null
+  employment_type: null
+  requirements_summary: null
+  salary_band: null
+  apply_url: null
+
+page_state: "job_board_inactive"
+page_message: "The job board you were viewing is no longer active. / Page not found."
+
+fixture_caveat: |
+  Per fixtures/snapshots/greenhouse_2026-05-22/PROVENANCE.md, the live
+  Greenhouse posting 5023394008 was already removed when the snapshot was
+  captured on 2026-05-22T15:49:32Z. The wget mirror therefore captured the
+  Greenhouse "job board no longer active" interstitial rather than the
+  job posting itself. The 84,609-byte HTML contains:
+    - the recruiting-logo SVG (the Greenhouse "greenhouse" wordmark, used
+      as one of the platform-detection markers in S3),
+    - a flash-contents banner saying "The job board you were viewing is no
+      longer active.",
+    - a Page-not-found <main> region,
+    - no job-posting body, no employment metadata, no apply button.
+  All MCPs in the 2026-05-26 wave see the same fixture and the same
+  inactive-board page; the harness is honest about what content actually
+  exists in the snapshot.
+
+mcp_observations:
+  - browser_navigate succeeded against the loopback URL with no
+    fingerprinting / Cloudflare layer in play (SimpleHTTP/0.6 server).
+  - browser_extract_content returned "No content extracted" twice — the
+    extractor appears to require structured job-listing schema and bails
+    on a plain error page. browser_get_html returned the full <body> as
+    expected, confirming the navigation + DOM access primitives work; the
+    empty extract is a content limitation, not a tool failure.
+  - browser_get_state correctly surfaced 2 interactive elements (the
+    dismiss icon on the "no longer active" flash banner). The page title
+    "Jane Testworth for Jane Testworth Program at Anthropic" is an
+    artifact of fixtures/snapshots/greenhouse_2026-05-22/PROVENANCE.md
+    scrubbing — 190 pre-scrub two-word capitalized matches were rewritten
+    to "Jane Testworth" before fixture commit.

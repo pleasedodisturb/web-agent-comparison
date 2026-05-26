@@ -1,0 +1,11 @@
+{
+  "deferred": "G-710",
+  "mcp": "browser-use",
+  "n_runs": 0,
+  "reason": "Full 3-segment cold-start measurement deferred to Phase 3 (MEAS-01); Phase 1 ships the directory contract only.",
+  "see": "https://linear.app/abandoned-yachts/issue/G-710",
+  "t_first_useful_ms": null,
+  "t_resolve_ms": null,
+  "t_spawn_ms": null,
+  "warm_cache": null
+}

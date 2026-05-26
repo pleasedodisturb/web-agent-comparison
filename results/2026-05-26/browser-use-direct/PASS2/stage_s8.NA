@@ -1,0 +1,1 @@
+N/A: depends on S5/S6/S7 producing a filled form. browser-use DOES expose mcp__browser-use__browser_screenshot with full_page support — the screenshot primitive itself is available and would have succeeded — but the precondition (a filled form) was never reached. Capturing a screenshot of the hydrated 404 page would be misleading evidence; instead writing N/A.

@@ -1,0 +1,1 @@
+Downstream of S4: no form fields exist in the post-render DOM (React replaced body with empty react-portal-mount-point + "Page not found"). first_name/last_name/email/phone/linkedin/github inputs cannot be located via browser_get_state, so browser_type/browser_click have no valid index to target.

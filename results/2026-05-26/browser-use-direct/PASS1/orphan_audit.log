@@ -1,0 +1,10 @@
+# orphan_audit run at 2026-05-26T20:46:24Z
+BEFORE_PATH=results/2026-05-26/browser-use/.ps_before.tsv
+AFTER_PATH=results/2026-05-26/browser-use/.ps_after.tsv
+TARGET_PGID=74909
+BEFORE_COUNT=808
+AFTER_COUNT=806
+DIFF_COUNT=1
+GONE pid=61428 pgid=74838 cmd=/Users/pleasedodisturb/Projects/web-agent-comparison/.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-26/browser-use/.ps_after.tsv
+KILLED_COUNT=0
+ORPHANS=1
