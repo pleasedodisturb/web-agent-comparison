@@ -1,0 +1,1 @@
+Skipped: S4 failed (no form reachable) and Obscura has no batch-fill primitive analogous to Playwright browser_fill_form; per-field type via browse_session.type would still require loopback access which the server rejects.

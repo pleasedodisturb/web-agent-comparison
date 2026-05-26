@@ -1,0 +1,1 @@
+obscura cannot navigate to the apply form: browse_session.goto and browse_page both reject 127.0.0.1 with the SSRF block error.
