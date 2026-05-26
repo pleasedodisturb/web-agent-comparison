@@ -1,0 +1,226 @@
+{
+  "interesting": {
+    "s5_calls_per_field_filled": null
+  },
+  "mcp": "cloakbrowser",
+  "median_per_stage": {
+    "S1": {
+      "Bash": 5,
+      "Read": 2,
+      "ToolSearch": 1,
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_click": 3,
+      "mcp__cloakbrowser__cloak_evaluate": 1,
+      "mcp__cloakbrowser__cloak_launch": 1,
+      "mcp__cloakbrowser__cloak_navigate": 1,
+      "mcp__cloakbrowser__cloak_read_page": 1,
+      "mcp__cloakbrowser__cloak_snapshot": 2
+    },
+    "S2": {
+      "Read": 0,
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_click": 0,
+      "mcp__cloakbrowser__cloak_evaluate": 2,
+      "mcp__cloakbrowser__cloak_navigate": 1,
+      "mcp__cloakbrowser__cloak_read_page": 1,
+      "mcp__cloakbrowser__cloak_wait": 1
+    },
+    "S3": {
+      "Write": 1
+    },
+    "S4": {
+      "Bash": 2,
+      "Read": 1,
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_evaluate": 1,
+      "mcp__cloakbrowser__cloak_navigate": 1,
+      "mcp__cloakbrowser__cloak_snapshot": 1
+    },
+    "S5": {
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_evaluate": 1,
+      "mcp__cloakbrowser__cloak_type": 4
+    },
+    "S6": {
+      "Bash": 2,
+      "Read": 0,
+      "ToolSearch": 0,
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_evaluate": 1
+    },
+    "S7": {
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_click": 0,
+      "mcp__cloakbrowser__cloak_evaluate": 2,
+      "mcp__cloakbrowser__cloak_type": 0
+    },
+    "unattributed": {
+      "Bash": 2,
+      "Write": 1,
+      "mcp__cloakbrowser__cloak_close": 1,
+      "mcp__cloakbrowser__cloak_screenshot": 1,
+      "mcp__cloakbrowser__cloak_type": 0
+    }
+  },
+  "median_total_calls": 53,
+  "median_total_per_stage": {
+    "S1": 18,
+    "S2": 6,
+    "S3": 1,
+    "S4": 7,
+    "S5": 6,
+    "S6": 4,
+    "S7": 3,
+    "unattributed": 5
+  },
+  "passes": {
+    "PASS1": {
+      "S1": {
+        "Bash": 5,
+        "Read": 1,
+        "ToolSearch": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_click": 3,
+        "mcp__cloakbrowser__cloak_evaluate": 2,
+        "mcp__cloakbrowser__cloak_launch": 1,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_read_page": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 2
+      },
+      "S2": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 2,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_wait": 1
+      },
+      "S3": {
+        "Write": 1
+      },
+      "S4": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 2,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 1
+      },
+      "unattributed": {
+        "mcp__cloakbrowser__cloak_type": 4
+      }
+    },
+    "PASS2": {
+      "S1": {
+        "Bash": 6,
+        "Read": 2,
+        "ToolSearch": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_click": 3,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_launch": 1,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_read_page": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 2
+      },
+      "S2": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 3,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_read_page": 1
+      },
+      "S3": {
+        "Write": 1
+      },
+      "S4": {
+        "Bash": 2,
+        "Read": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 1
+      },
+      "S5": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_type": 4
+      },
+      "S6": {
+        "Bash": 4,
+        "ToolSearch": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1
+      },
+      "S7": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 2
+      },
+      "unattributed": {
+        "Bash": 2,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_close": 1,
+        "mcp__cloakbrowser__cloak_screenshot": 1
+      }
+    },
+    "PASS3": {
+      "S1": {
+        "Bash": 2,
+        "Read": 2,
+        "ToolSearch": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_click": 2,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_launch": 1,
+        "mcp__cloakbrowser__cloak_navigate": 2,
+        "mcp__cloakbrowser__cloak_read_page": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 1
+      },
+      "S2": {
+        "Read": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_click": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_navigate": 2,
+        "mcp__cloakbrowser__cloak_read_page": 1,
+        "mcp__cloakbrowser__cloak_wait": 1
+      },
+      "S3": {
+        "Write": 1
+      },
+      "S4": {
+        "Bash": 3,
+        "Read": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_navigate": 1,
+        "mcp__cloakbrowser__cloak_snapshot": 1
+      },
+      "S5": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1,
+        "mcp__cloakbrowser__cloak_type": 4
+      },
+      "S6": {
+        "Bash": 2,
+        "Read": 1,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 1
+      },
+      "S7": {
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_click": 1,
+        "mcp__cloakbrowser__cloak_evaluate": 3,
+        "mcp__cloakbrowser__cloak_type": 1
+      },
+      "unattributed": {
+        "Bash": 2,
+        "Write": 1,
+        "mcp__cloakbrowser__cloak_close": 1,
+        "mcp__cloakbrowser__cloak_screenshot": 1
+      }
+    }
+  },
+  "stage_attribution_mode": "marker",
+  "status": "OK",
+  "total_calls_per_pass": {
+    "PASS1": 33,
+    "PASS2": 54,
+    "PASS3": 53
+  }
+}

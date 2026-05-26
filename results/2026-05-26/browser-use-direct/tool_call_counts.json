@@ -1,0 +1,220 @@
+{
+  "interesting": {
+    "s5_calls_per_field_filled": null
+  },
+  "mcp": "browser-use-direct",
+  "median_per_stage": {
+    "S1": {
+      "Bash": 6,
+      "Read": 1,
+      "TaskCreate": 0,
+      "TaskUpdate": 0,
+      "ToolSearch": 2,
+      "Write": 1,
+      "mcp__browser-use__browser_click": 1,
+      "mcp__browser-use__browser_extract_content": 3,
+      "mcp__browser-use__browser_get_html": 3,
+      "mcp__browser-use__browser_get_state": 3,
+      "mcp__browser-use__browser_navigate": 2
+    },
+    "S2": {
+      "Bash": 1,
+      "TaskUpdate": 0,
+      "Write": 1,
+      "mcp__browser-use__browser_click": 0,
+      "mcp__browser-use__browser_extract_content": 1,
+      "mcp__browser-use__browser_get_html": 1,
+      "mcp__browser-use__browser_get_state": 1,
+      "mcp__browser-use__browser_navigate": 1
+    },
+    "S3": {
+      "TaskUpdate": 0,
+      "Write": 1
+    },
+    "S4": {
+      "Bash": 1,
+      "Read": 0,
+      "TaskUpdate": 0,
+      "Write": 1,
+      "mcp__browser-use__browser_get_state": 1,
+      "mcp__browser-use__browser_navigate": 1
+    },
+    "S5": {
+      "Write": 1
+    },
+    "S6": {
+      "Write": 1
+    },
+    "S7": {
+      "Write": 1
+    },
+    "S8": {
+      "Write": 0
+    },
+    "unattributed": {
+      "Bash": 2,
+      "TaskUpdate": 0,
+      "Write": 1,
+      "mcp__browser-use__browser_close_all": 0,
+      "mcp__browser-use__browser_screenshot": 1
+    }
+  },
+  "median_total_calls": 51,
+  "median_total_per_stage": {
+    "S1": 22,
+    "S2": 6,
+    "S3": 1,
+    "S4": 4,
+    "S5": 1,
+    "S6": 1,
+    "S7": 1,
+    "S8": 0,
+    "unattributed": 4
+  },
+  "passes": {
+    "PASS1": {
+      "S1": {
+        "Bash": 5,
+        "Read": 1,
+        "TaskCreate": 8,
+        "TaskUpdate": 1,
+        "ToolSearch": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_click": 1,
+        "mcp__browser-use__browser_extract_content": 3,
+        "mcp__browser-use__browser_get_html": 3,
+        "mcp__browser-use__browser_get_state": 3,
+        "mcp__browser-use__browser_navigate": 2
+      },
+      "S2": {
+        "Bash": 1,
+        "TaskUpdate": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_extract_content": 1,
+        "mcp__browser-use__browser_get_html": 1,
+        "mcp__browser-use__browser_get_state": 1,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S3": {
+        "TaskUpdate": 2,
+        "Write": 1
+      },
+      "S4": {
+        "TaskUpdate": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_get_state": 1,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S5": {
+        "Write": 1
+      },
+      "S6": {
+        "Write": 1
+      },
+      "S7": {
+        "Write": 1
+      },
+      "unattributed": {
+        "Bash": 2,
+        "TaskUpdate": 6,
+        "Write": 1,
+        "mcp__browser-use__browser_screenshot": 1
+      }
+    },
+    "PASS2": {
+      "S1": {
+        "Bash": 7,
+        "Read": 1,
+        "ToolSearch": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_click": 3,
+        "mcp__browser-use__browser_extract_content": 3,
+        "mcp__browser-use__browser_get_html": 3,
+        "mcp__browser-use__browser_get_state": 4,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S2": {
+        "Write": 1,
+        "mcp__browser-use__browser_click": 2,
+        "mcp__browser-use__browser_extract_content": 1,
+        "mcp__browser-use__browser_get_html": 1,
+        "mcp__browser-use__browser_get_state": 3,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S3": {
+        "Write": 1
+      },
+      "S4": {
+        "Bash": 4,
+        "Read": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_get_state": 1,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S5": {
+        "Write": 1
+      },
+      "S6": {
+        "Write": 1
+      },
+      "S7": {
+        "Write": 1
+      },
+      "S8": {
+        "Write": 1
+      },
+      "unattributed": {
+        "Bash": 1,
+        "Write": 1,
+        "mcp__browser-use__browser_close_all": 1
+      }
+    },
+    "PASS3": {
+      "S1": {
+        "Bash": 6,
+        "ToolSearch": 1,
+        "Write": 1,
+        "mcp__browser-use__browser_extract_content": 2,
+        "mcp__browser-use__browser_get_html": 1,
+        "mcp__browser-use__browser_get_state": 3,
+        "mcp__browser-use__browser_navigate": 3
+      },
+      "S2": {
+        "Bash": 1,
+        "Write": 1,
+        "mcp__browser-use__browser_extract_content": 1,
+        "mcp__browser-use__browser_get_state": 1,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S3": {
+        "Write": 1
+      },
+      "S4": {
+        "Bash": 1,
+        "Write": 1,
+        "mcp__browser-use__browser_navigate": 1
+      },
+      "S5": {
+        "Write": 1
+      },
+      "S6": {
+        "Write": 1
+      },
+      "S7": {
+        "Write": 1
+      },
+      "unattributed": {
+        "Bash": 2,
+        "Write": 1,
+        "mcp__browser-use__browser_screenshot": 1
+      }
+    }
+  },
+  "stage_attribution_mode": "marker",
+  "status": "OK",
+  "total_calls_per_pass": {
+    "PASS1": 59,
+    "PASS2": 51,
+    "PASS3": 33
+  }
+}
