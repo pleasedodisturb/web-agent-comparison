@@ -209,6 +209,74 @@
       "S8": "FAIL"
     }
   },
+  "cloakbrowser": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {},
+    "capability": "stealth-specialist",
+    "mode": "sandbox-loopback",
+    "sandbox_only": true,
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 8,
+      "interaction_depth": 10,
+      "js_rendering": 10,
+      "reliability": 10,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS",
+      "S8": "PASS"
+    }
+  },
   "firecrawl": {
     "attempts": {
       "S1": {
