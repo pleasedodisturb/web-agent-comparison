@@ -1,0 +1,71 @@
+{
+  "obscura": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "data_quality": "tool-bug",
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug"
+    },
+    "scores": {
+      "data_quality": 0,
+      "error_handling": 2,
+      "interaction_depth": 0,
+      "js_rendering": 5,
+      "reliability": 9,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "FAIL",
+      "S2": "UNTESTED",
+      "S3": "UNTESTED",
+      "S4": "UNTESTED",
+      "S5": "UNTESTED",
+      "S6": "UNTESTED",
+      "S7": "UNTESTED",
+      "S8": "UNTESTED"
+    }
+  }
+}
