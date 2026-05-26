@@ -157,10 +157,100 @@ smoke-live:
 versions:
 	@uv run python -m bench.capture_versions --date $(DATE) --results-root results/
 
-# ─── Stubs (surface locked; work deferred to G-710) ──────────────────────────
+# ─── Stability soak (Phase 3 plan 03-04, MEAS-07) ────────────────────────────
+# Per-MCP target: drive the MCP through S1+S5 (or S1 only for read-only
+# lightpanda) against the 127.0.0.1:8765 snapshot fixture server for
+# STABILITY_MINUTES wall-clock, 30s sleep between iterations, per-tool-call
+# 30s timeout, post-run orphan_audit.
+#
+# Three wall-clock decision recipes are exposed:
+#   make stability-strict-60min      — 60min × 6 SCORED MCPs (~6.5 hours)
+#   make stability-selective-top3    — 60min top-3 + 30min rest (~4.5 hours)
+#   make stability-reduced-30min     — 30min × 6 (~3.5 hours)
+#
+# Each recipe also writes the two SKIPPED rows (firecrawl, browser-use-agent)
+# so the matrix has all 7+1 rows accounted for.
+#
+# Per-MCP override:
+#   make stability-playwright STABILITY_MINUTES=10  (10-minute smoke run)
+#
+# DATE override (default UTC today):
+#   make stability-strict-60min DATE=2026-05-26
+#
+# Mode override is exposed by scripts/run_stability.sh directly — the
+# Makefile only routes lightpanda → read-only and firecrawl/agent → skip,
+# matching the rubric's MCP-by-MCP mode assignment.
 
-stability:
-	@echo "stability: deferred to G-710 (scope cut 2026-05-22)"
+STABILITY_MINUTES ?= 60
+STABILITY_MCPS_FULL    := playwright chrome-devtools cloakbrowser obscura browser-use-direct
+STABILITY_MCPS_RO      := lightpanda
+STABILITY_MCPS_SKIPPED := firecrawl browser-use-agent
+STABILITY_MCPS_ALL     := $(STABILITY_MCPS_FULL) $(STABILITY_MCPS_RO) $(STABILITY_MCPS_SKIPPED)
+
+.PHONY: stability stability-strict-60min stability-selective-top3 \
+        stability-reduced-30min stability-skipped-rows \
+        $(addprefix stability-,$(STABILITY_MCPS_ALL))
+
+# Default `make stability` runs the selective top-3 sweep — the wallclock
+# decision the orchestrator pre-decided per 03-04 PLAN context.
+stability: stability-selective-top3
+
+# Per-MCP (full-mode) target — used by every recipe below for the
+# interactive MCPs.
+$(addprefix stability-,$(STABILITY_MCPS_FULL)): stability-%:
+	@bash scripts/run_stability.sh $* $(STABILITY_MINUTES) full
+
+# Read-only lightpanda: S1 only, S5 marked N/A_READONLY each iteration.
+stability-lightpanda:
+	@bash scripts/run_stability.sh lightpanda $(STABILITY_MINUTES) read-only
+
+# Skipped rows: firecrawl (loopback-unreachable) + browser-use-agent (LLM-gated).
+# Duration arg is ignored when MODE=skip — pass 0 for clarity.
+stability-firecrawl:
+	@STABILITY_SKIP_REASON=LOOPBACK_UNREACHABLE \
+	    bash scripts/run_stability.sh firecrawl 0 skip
+
+stability-browser-use-agent:
+	@STABILITY_SKIP_REASON=LLM_KEY_ABSENT \
+	    bash scripts/run_stability.sh browser-use-agent 0 skip
+
+stability-skipped-rows: stability-firecrawl stability-browser-use-agent
+
+# ── Strict 60-min × 6 SCORED runs (~6.5 hours wall-clock) ──
+# All SCORED MCPs run at 60 minutes; SKIPPED rows still get a metadata file.
+stability-strict-60min:
+	@echo "stability-strict-60min: starting 60min × 6 SCORED runs (~6.5 hours)"
+	@STABILITY_WALLCLOCK=strict_60min STABILITY_MINUTES=60 $(MAKE) stability-playwright STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-cloakbrowser STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-lightpanda STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-chrome-devtools STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-obscura STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-browser-use-direct STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=strict_60min $(MAKE) stability-skipped-rows
+
+# ── Selective: top-3 (cloakbrowser/playwright/lightpanda) at 60min,
+# rest (browser-use-direct/chrome-devtools/obscura) at 30min (~4.5 hours) ──
+# This is the orchestrator's pre-decided wallclock budget for Plan 03-04.
+stability-selective-top3:
+	@echo "stability-selective-top3: starting 3×60min + 3×30min runs (~4.5 hours)"
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-cloakbrowser STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-playwright STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-lightpanda STABILITY_MINUTES=60
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-browser-use-direct STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-chrome-devtools STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-obscura STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=selective_top3_60min_rest_30min $(MAKE) stability-skipped-rows
+
+# ── Reduced 30-min × 6 (~3.5 hours wall-clock) ──
+stability-reduced-30min:
+	@echo "stability-reduced-30min: starting 30min × 6 SCORED runs (~3.5 hours)"
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-playwright STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-cloakbrowser STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-lightpanda STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-chrome-devtools STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-obscura STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-browser-use-direct STABILITY_MINUTES=30
+	@STABILITY_WALLCLOCK=reduced_30min_all $(MAKE) stability-skipped-rows
 
 tls:
 	@echo "tls: deferred to G-710 (scope cut 2026-05-22)"
