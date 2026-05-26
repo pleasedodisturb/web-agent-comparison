@@ -532,6 +532,8 @@
       }
     },
     "attribution": {},
+    "capability": "tool-only",
+    "mode": "default",
     "scores": {
       "data_quality": 10,
       "error_handling": 5,
