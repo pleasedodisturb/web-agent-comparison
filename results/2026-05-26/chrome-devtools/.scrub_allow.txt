@@ -1,0 +1,137 @@
+# PII scrub allow-list for chrome-devtools row (G-715).
+# Plan 02-01 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / brand / prose bigrams and OCR misreads (AI → Al).
+# Allow-listing them does NOT loosen the real-PII guard — the regex still
+# catches any unallow-listed two-word Title Case name (e.g. real applicants).
+
+# Brand / product names appearing in transcripts and dependency descriptions
+Anthropic Fellows
+Apple Silicon
+Claude Code
+Claude Opus
+Constellation Talent
+Google Calendar
+Google Drive
+Hugging Face
+Microsoft Office
+React Select
+San Francisco
+United States
+Hong Kong
+Sao Paulo
+
+# Section headers and prose bigrams from rubric / transcript text
+Best For
+Comparison Report
+Core Web
+Data Quality
+Deep Analysis
+Demonstrate React-Select
+Discriminated Greenhou
+Discriminated Greenhouse
+Error Handling
+Example Request
+Execution Order
+Executive Summary
+Explanatory Mode
+Extract Ashby
+Extract Greenhouse
+Fill Form
+Final Ranking
+Find Ashby
+Get Lighthouse
+Greenhouse React
+Greenhouse Remix
+Handle Dropdown
+Hugging Face
+Inspect Ashby
+Inspect Greenhouse
+Interaction Depth
+Job Board
+Learning Mode
+Mock Data
+Performance Insight
+Platform Detection
+Privacy Policy
+Reinforcement Learning
+Request Contributions
+Request User
+Scoring Comparison
+Search Ashby
+Setup Complexity
+Sources Of
+Source Of
+Stage Walk
+Stop Conditions
+Subject Of
+Submit Application
+Submit Form
+Task Bar
+Technical Knowledge
+Test Worth
+Tools Available
+Tools Inventory
+Total Tools
+Tracking Pixel
+Trial Run
+Type Of
+Unit Of
+Upload Resume
+User Email
+Vulnerability Disclosure
+Weighted Composite
+Work From
+Work Permit
+Working Hours
+Agent Browser
+Check Ashby
+How Al
+The Apply
+Toggle Flyout
+File Types
+
+# OCR misreads of AI/A1/Al on the stage_s8.png screenshot (Anthropic AI Welfare etc.)
+Al Jane
+Al Welfare
+Technical Al
+Al Safety
+Al Welfare
+Al Policy
+Al Research
+Al Engineer
+Al Risks
+
+# Linear / GitHub / Notion UI bigrams that may appear in stack screenshots
+Pull Request
+Issue Title
+Page Number
+File Name
+Last Updated
+First Name
+Last Name
+Country Code
+Phone Number
+Resume CV
+
+# Common prose bigrams starting with The / Stop / Stage / etc.
+Stage Results
+Stop Greenhouse
+Test Environment
+The Anthropic
+The Ashby
+The Chrome
+The Greenhouse
+The React
+The React-Select
+The Remix
+Title Case
+Token Efficiency
+Vulnerability Dis
+Web Agent
+# "Testworth Jane" / "Testworth Program" appear in SSR data where Greenhouse
+# placeholder text reads "Jane Testworth Program" — Anthropic's anonymized
+# job title where the applicant name was scrubbed but the form's "first_name"
+# default value "Jane Testworth" leaked into the title field. This is the
+# allow-listed mock identity in reversed order; not a real applicant.
+Testworth Jane
+Testworth Program
