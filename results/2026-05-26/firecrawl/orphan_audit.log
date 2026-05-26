@@ -1,0 +1,4 @@
+orphan_audit: clean (firecrawl is cloud-only; no local browser process group to audit)
+captured_at_utc=2026-05-26T19:50:16Z
+mcp=firecrawl
+survivors=0

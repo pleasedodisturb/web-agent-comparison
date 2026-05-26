@@ -1,0 +1,2 @@
+phase: 1-deferred
+reason: 1hr stability soak deferred to Phase 3 (MEAS-04). firecrawl is cloud — local stability is N/A; what matters is API uptime over a 1hr window.

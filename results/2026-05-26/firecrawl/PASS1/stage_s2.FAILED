@@ -1,0 +1,1 @@
+FAIL: firecrawl cloud cannot reach loopback URL (http://127.0.0.1:8765/ashby_2026-05-22/) — HTTP 400 BAD_REQUEST (env-mismatch)

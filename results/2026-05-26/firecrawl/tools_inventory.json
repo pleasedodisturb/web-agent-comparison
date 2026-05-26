@@ -1,0 +1,306 @@
+{
+  "args": [],
+  "captured_at": "2026-05-26T19:50:35Z",
+  "categories": {
+    "capture": 0,
+    "diagnostics": 0,
+    "inspection": 5,
+    "interaction": 0,
+    "navigation": 1,
+    "other": 18
+  },
+  "command": "firecrawl-mcp",
+  "mcp": "firecrawl",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 24,
+  "tools": [
+    {
+      "category": "inspection",
+      "description_excerpt": "Scrape content from a single URL with advanced options.\nThis is the most powerful, fastest and most reliable scraper tool, if available you should always default to using this tool for any web scra...",
+      "input_schema_keys": [
+        "actions",
+        "excludeTags",
+        "formats",
+        "includeTags",
+        "jsonOptions",
+        "location",
+        "lockdown",
+        "maxAge",
+        "mobile",
+        "onlyMainContent",
+        "parsers",
+        "pdfOptions",
+        "profile",
+        "proxy",
+        "queryOptions",
+        "removeBase64Images",
+        "screenshotOptions",
+        "skipTlsVerification",
+        "storeInCache",
+        "url",
+        "waitFor",
+        "zeroDataRetention"
+      ],
+      "name": "firecrawl_scrape"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Map a website to discover all indexed URLs on the site.\n\n**Best for:** Discovering URLs on a website before deciding what to scrape; finding specific sections or pages within a large site; locating...",
+      "input_schema_keys": [
+        "ignoreQueryParameters",
+        "includeSubdomains",
+        "limit",
+        "search",
+        "sitemap",
+        "url"
+      ],
+      "name": "firecrawl_map"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Search the web and optionally extract content from search results. This is the most powerful web search tool available, and if available you should always default to using this tool for any web sea...",
+      "input_schema_keys": [
+        "enterprise",
+        "excludeDomains",
+        "filter",
+        "includeDomains",
+        "limit",
+        "location",
+        "query",
+        "scrapeOptions",
+        "sources",
+        "tbs"
+      ],
+      "name": "firecrawl_search"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Send structured feedback on a previous `firecrawl_search` result. **Call this immediately after a search where you used the results** so we can improve search quality and refund 1 credit (search co...",
+      "input_schema_keys": [
+        "missingContent",
+        "querySuggestions",
+        "rating",
+        "searchId",
+        "valuableSources"
+      ],
+      "name": "firecrawl_search_feedback"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Starts a crawl job on a website and extracts content from all pages.\n \n **Best for:** Extracting content from multiple related pages, when you need comprehensive coverage.\n **Not recommended for:**...",
+      "input_schema_keys": [
+        "allowExternalLinks",
+        "allowSubdomains",
+        "crawlEntireDomain",
+        "deduplicateSimilarURLs",
+        "delay",
+        "excludePaths",
+        "ignoreQueryParameters",
+        "includePaths",
+        "limit",
+        "maxConcurrency",
+        "maxDiscoveryDepth",
+        "prompt",
+        "scrapeOptions",
+        "sitemap",
+        "url",
+        "webhook",
+        "webhookHeaders"
+      ],
+      "name": "firecrawl_crawl"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Check the status of a crawl job.\n\n**Usage Example:**\n```json\n{\n  \"name\": \"firecrawl_check_crawl_status\",\n  \"arguments\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\"\n  }\n}\n```\n**Returns:** Sta...",
+      "input_schema_keys": [
+        "id"
+      ],
+      "name": "firecrawl_check_crawl_status"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Extract structured information from web pages using LLM capabilities. Supports both cloud AI and self-hosted LLM extraction.\n\n**Best for:** Extracting specific structured data like prices, names, d...",
+      "input_schema_keys": [
+        "allowExternalLinks",
+        "enableWebSearch",
+        "includeSubdomains",
+        "prompt",
+        "schema",
+        "urls"
+      ],
+      "name": "firecrawl_extract"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Autonomous web research agent. This is a separate AI agent layer that independently browses the internet, searches for information, navigates through pages, and extracts structured data based on yo...",
+      "input_schema_keys": [
+        "prompt",
+        "schema",
+        "urls"
+      ],
+      "name": "firecrawl_agent"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Check the status of an agent job and retrieve results when complete. Use this to poll for results after starting an agent with `firecrawl_agent`.\n\n**IMPORTANT - Be patient with polling:**\n- Poll ev...",
+      "input_schema_keys": [
+        "id"
+      ],
+      "name": "firecrawl_agent_status"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "**DEPRECATED \u2014 prefer firecrawl_scrape + firecrawl_interact instead.** Interact lets you scrape a page and then click, fill forms, and navigate without managing sessions manually.\n\nCreate a browser...",
+      "input_schema_keys": [
+        "activityTtl",
+        "profile",
+        "streamWebView",
+        "ttl"
+      ],
+      "name": "firecrawl_browser_create"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "**DEPRECATED \u2014 prefer firecrawl_scrape + firecrawl_interact instead.** Interact lets you scrape a page and then click, fill forms, and navigate without managing sessions manually.\n\nExecute code in ...",
+      "input_schema_keys": [
+        "code",
+        "language",
+        "sessionId"
+      ],
+      "name": "firecrawl_browser_execute"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "**DEPRECATED \u2014 prefer firecrawl_scrape + firecrawl_interact instead.**\n\nDestroy a browser session.\n\n**Usage Example:**\n```json\n{\n  \"name\": \"firecrawl_browser_delete\",\n  \"arguments\": {\n    \"sessionI...",
+      "input_schema_keys": [
+        "sessionId"
+      ],
+      "name": "firecrawl_browser_delete"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "**DEPRECATED \u2014 prefer firecrawl_scrape + firecrawl_interact instead.**\n\nList browser sessions, optionally filtered by status.\n\n**Usage Example:**\n```json\n{\n  \"name\": \"firecrawl_browser_list\",\n  \"ar...",
+      "input_schema_keys": [
+        "status"
+      ],
+      "name": "firecrawl_browser_list"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Interact with a previously scraped page in a live browser session. Scrape a page first with firecrawl_scrape, then use the returned scrapeId to click buttons, fill forms, extract dynamic content, o...",
+      "input_schema_keys": [
+        "code",
+        "language",
+        "prompt",
+        "scrapeId",
+        "timeout"
+      ],
+      "name": "firecrawl_interact"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Stop an interact session for a scraped page. Call this when you are done interacting to free resources.\n\n**Usage Example:**\n```json\n{\n  \"name\": \"firecrawl_interact_stop\",\n  \"arguments\": {\n    \"scra...",
+      "input_schema_keys": [
+        "scrapeId"
+      ],
+      "name": "firecrawl_interact_stop"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Parse a file from the local filesystem using a self-hosted Firecrawl API's /v2/parse endpoint.\nThis is the fastest and most reliable way to extract content from a document on disk \u2014 if the file liv...",
+      "input_schema_keys": [
+        "contentType",
+        "excludeTags",
+        "filePath",
+        "formats",
+        "includeTags",
+        "jsonOptions",
+        "maxAge",
+        "onlyMainContent",
+        "parsers",
+        "pdfOptions",
+        "proxy",
+        "queryOptions",
+        "removeBase64Images",
+        "skipTlsVerification",
+        "storeInCache",
+        "zeroDataRetention"
+      ],
+      "name": "firecrawl_parse"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Create a Firecrawl monitor \u2014 a recurring scrape or crawl that diffs each result against the last retained snapshot.\n\nPass the full request body. Required fields: `name`, `schedule` (with `cron` or ...",
+      "input_schema_keys": [
+        "body"
+      ],
+      "name": "firecrawl_monitor_create"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "List all Firecrawl monitors for the authenticated account.\n\n**Usage Example:**\n```json\n{ \"name\": \"firecrawl_monitor_list\", \"arguments\": { \"limit\": 20 } }\n```",
+      "input_schema_keys": [
+        "limit",
+        "offset"
+      ],
+      "name": "firecrawl_monitor_list"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Get a single monitor by ID.\n\n**Usage Example:**\n```json\n{ \"name\": \"firecrawl_monitor_get\", \"arguments\": { \"id\": \"mon_abc123\" } }\n```",
+      "input_schema_keys": [
+        "id"
+      ],
+      "name": "firecrawl_monitor_get"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Update a monitor. Pass any subset of fields to patch: `name`, `status` (\"active\" | \"paused\"), `schedule`, `targets`, `webhook`, `notification`, `retentionDays`.\n\n**Usage Example:**\n```json\n{\n  \"nam...",
+      "input_schema_keys": [
+        "body",
+        "id"
+      ],
+      "name": "firecrawl_monitor_update"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Permanently delete a monitor and stop its schedule. This cannot be undone.\n\n**Usage Example:**\n```json\n{ \"name\": \"firecrawl_monitor_delete\", \"arguments\": { \"id\": \"mon_abc123\" } }\n```",
+      "input_schema_keys": [
+        "id"
+      ],
+      "name": "firecrawl_monitor_delete"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Trigger a monitor check immediately, outside its normal schedule. Returns the queued check.\n\n**Usage Example:**\n```json\n{ \"name\": \"firecrawl_monitor_run\", \"arguments\": { \"id\": \"mon_abc123\" } }\n```",
+      "input_schema_keys": [
+        "id"
+      ],
+      "name": "firecrawl_monitor_run"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "List historical checks for a monitor.\n\n**Usage Example:**\n```json\n{ \"name\": \"firecrawl_monitor_checks\", \"arguments\": { \"id\": \"mon_abc123\", \"limit\": 10 } }\n```",
+      "input_schema_keys": [
+        "id",
+        "limit",
+        "offset"
+      ],
+      "name": "firecrawl_monitor_checks"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Get a single check with page-level diff results. Filter `pageStatus` to surface only the pages that changed (or were new, removed, etc.).\n\nEach entry in `data.pages[]` has `url`, `status` (`same` |...",
+      "input_schema_keys": [
+        "checkId",
+        "id",
+        "limit",
+        "pageStatus",
+        "skip"
+      ],
+      "name": "firecrawl_monitor_check"
+    }
+  ],
+  "version_handshake": "3.0.0"
+}

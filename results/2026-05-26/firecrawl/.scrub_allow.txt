@@ -1,0 +1,56 @@
+# PII scrub allow-list for firecrawl row (G-717).
+# Plan 02-03 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / brand / prose bigrams that appear in the firecrawl
+# evidence — trimmed live-probe metadata, tool descriptions, DEEP_ANALYSIS
+# section headings. Allow-listing them does NOT loosen the real-PII guard.
+
+# Brand / product names appearing in transcripts and outputs
+Anthropic Logo
+Anthropic Fellows
+About Anthropic
+The Anthropic
+Job Application
+Ashby React
+Legitimate Anthropic
+
+# Geographic bigrams from job-listing metadata (extracted from the
+# Anthropic Fellows posting which lists offices/eligible-work locations).
+United States
+San Francisco
+Hong Kong
+
+# Brand bigrams from Ashby footer (S2 empty-shell evidence)
+Privacy Policy
+Vulnerability Disclosure
+
+# tools_inventory.json description bigrams from firecrawl-mcp's own
+# tool docstrings (the MCP advertises "Usage Example" sections per tool).
+Usage Example
+
+# Prose-style "For X" / "This X" bigrams from explanatory text
+For Phase
+
+# DEEP_ANALYSIS.md + transcript.md section-heading bigrams
+Capability Tag
+Data Quality
+Deep Analysis
+Empirical Finding
+Error Handling
+Interaction Depth
+Interesting Angle
+Implementation Decisions
+Median Composite
+Median Score
+Pass Variance
+Attribution Table
+Scope Cut
+Setup Complexity
+Semantics Callout
+Stop Conditions
+Stretch Items
+The Falsifiable
+The Phase
+This Deep
+Token Efficiency
+Tool Inventory
+Linear Sub

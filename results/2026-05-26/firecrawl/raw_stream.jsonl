@@ -1,0 +1,1 @@
+{"type":"meta","mcp":"firecrawl","mode":"empirical-api-probe","reason":"Phase-1 fixture-loopback contract incompatible with firecrawl cloud; harness session would produce 3x identical FAIL with no additional signal. Empirical API probes captured under PASS{1,2,3}/stage_s{1,2,3}.* for the canonical FAIL evidence + live_probe_s{1,2}.yml for the interesting-angle deviation."}
