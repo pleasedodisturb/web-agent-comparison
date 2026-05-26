@@ -1,0 +1,152 @@
+{
+  "args": [
+    "--mcp"
+  ],
+  "captured_at": "2026-05-26T22:32:30Z",
+  "categories": {
+    "capture": 1,
+    "diagnostics": 0,
+    "inspection": 5,
+    "interaction": 3,
+    "navigation": 2,
+    "other": 5
+  },
+  "command": "browser-use",
+  "mcp": "browser-use",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 16,
+  "tools": [
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate to a URL in the browser",
+      "input_schema_keys": [
+        "new_tab",
+        "url"
+      ],
+      "name": "browser_navigate"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Click an element by index or at specific viewport coordinates. Use index for elements from browser_get_state, or coordinate_x/coordinate_y for pixel-precise clicking.",
+      "input_schema_keys": [
+        "coordinate_x",
+        "coordinate_y",
+        "index",
+        "new_tab"
+      ],
+      "name": "browser_click"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text into an input field. Clears existing text by default; pass text=\"\" to clear only.",
+      "input_schema_keys": [
+        "index",
+        "text"
+      ],
+      "name": "browser_type"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Get the current state of the page including all interactive elements",
+      "input_schema_keys": [
+        "include_screenshot"
+      ],
+      "name": "browser_get_state"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Extract structured content from the current page based on a query",
+      "input_schema_keys": [
+        "extract_links",
+        "query"
+      ],
+      "name": "browser_extract_content"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Get the raw HTML of the current page or a specific element by CSS selector",
+      "input_schema_keys": [
+        "selector"
+      ],
+      "name": "browser_get_html"
+    },
+    {
+      "category": "capture",
+      "description_excerpt": "Take a screenshot of the current page. Returns viewport metadata as text and the screenshot as an image.",
+      "input_schema_keys": [
+        "full_page"
+      ],
+      "name": "browser_screenshot"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Scroll the page",
+      "input_schema_keys": [
+        "direction"
+      ],
+      "name": "browser_scroll"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Go back to the previous page",
+      "input_schema_keys": [],
+      "name": "browser_go_back"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "List all open tabs",
+      "input_schema_keys": [],
+      "name": "browser_list_tabs"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Switch to a different tab",
+      "input_schema_keys": [
+        "tab_id"
+      ],
+      "name": "browser_switch_tab"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Close a tab",
+      "input_schema_keys": [
+        "tab_id"
+      ],
+      "name": "browser_close_tab"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Retry a task using the browser-use agent. Only use this as a last resort if you fail to interact with a page multiple times.",
+      "input_schema_keys": [
+        "allowed_domains",
+        "max_steps",
+        "model",
+        "task",
+        "use_vision"
+      ],
+      "name": "retry_with_browser_use_agent"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "List all active browser sessions with their details and last activity time",
+      "input_schema_keys": [],
+      "name": "browser_list_sessions"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Close a specific browser session by its ID",
+      "input_schema_keys": [
+        "session_id"
+      ],
+      "name": "browser_close_session"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Close all active browser sessions and clean up resources",
+      "input_schema_keys": [],
+      "name": "browser_close_all"
+    }
+  ],
+  "version_handshake": "0.1.0"
+}

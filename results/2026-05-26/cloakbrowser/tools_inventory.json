@@ -1,0 +1,213 @@
+{
+  "args": [],
+  "captured_at": "2026-05-26T22:32:40Z",
+  "categories": {
+    "capture": 1,
+    "diagnostics": 1,
+    "inspection": 3,
+    "interaction": 6,
+    "navigation": 3,
+    "other": 6
+  },
+  "command": "cloakbrowsermcp",
+  "mcp": "cloakbrowser",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 20,
+  "tools": [
+    {
+      "category": "other",
+      "description_excerpt": "Launch a stealth CloakBrowser instance. All anti-detection is ON by default.\n\nCloakBrowser is a source-patched Chromium passing Cloudflare Turnstile,\nreCAPTCHA v3 (0.9 score), FingerprintJS, Browse...",
+      "input_schema_keys": [
+        "color_scheme",
+        "extra_args",
+        "fingerprint_seed",
+        "geoip",
+        "headless",
+        "human_preset",
+        "humanize",
+        "locale",
+        "proxy",
+        "stealth_args",
+        "timezone",
+        "user_agent",
+        "user_data_dir",
+        "viewport_height",
+        "viewport_width"
+      ],
+      "name": "cloak_launch"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Close the stealth browser and release all resources. Always call when done.",
+      "input_schema_keys": [],
+      "name": "cloak_close"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Capture the page's accessibility tree \u2014 the PRIMARY way to understand pages.\n\nReturns interactive elements with [@eN] ref IDs for use with cloak_click,\ncloak_type, cloak_select, etc. Call this BEFO...",
+      "input_schema_keys": [
+        "full",
+        "max_length",
+        "page_id"
+      ],
+      "name": "cloak_snapshot"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Click an element by its [@eN] ref ID from cloak_snapshot.\n\nAuto-retries once if the element moved. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    ref: Ref ID from snapshot (e....",
+      "input_schema_keys": [
+        "page_id",
+        "ref"
+      ],
+      "name": "cloak_click"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text into an input by its [@eN] ref ID from cloak_snapshot.\n\nClears the field first by default. Set submit=True to press Enter after.\nReturns an updated snapshot.\n\nArgs:\n    page_id: Target pa...",
+      "input_schema_keys": [
+        "clear",
+        "page_id",
+        "ref",
+        "submit",
+        "text"
+      ],
+      "name": "cloak_type"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Select a dropdown option by ref ID. Provide one of: value, label, or index.\n\nReturns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    ref: Ref ID of the <select> element.\n    value: Opt...",
+      "input_schema_keys": [
+        "index",
+        "label",
+        "page_id",
+        "ref",
+        "value"
+      ],
+      "name": "cloak_select"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Hover over an element by ref ID. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    ref: Ref ID from snapshot.",
+      "input_schema_keys": [
+        "page_id",
+        "ref"
+      ],
+      "name": "cloak_hover"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Check or uncheck a checkbox/radio by ref ID. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    ref: Ref ID from snapshot.\n    checked: True to check, False to uncheck.",
+      "input_schema_keys": [
+        "checked",
+        "page_id",
+        "ref"
+      ],
+      "name": "cloak_check"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Get the page content as clean, readable markdown.\n\nBest for reading articles, docs, search results, or any content-heavy page.\nStrips navigation, ads, footers \u2014 returns just the main content.\nMuch ...",
+      "input_schema_keys": [
+        "max_length",
+        "page_id"
+      ],
+      "name": "cloak_read_page"
+    },
+    {
+      "category": "capture",
+      "description_excerpt": "Take an annotated screenshot with element indices overlaid.\n\nEach numbered element maps to [@eN] refs from cloak_snapshot.\nUse when you need VISUAL context \u2014 images, charts, CAPTCHAs, or layout.\nFo...",
+      "input_schema_keys": [
+        "full_page",
+        "page_id"
+      ],
+      "name": "cloak_screenshot"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate to a URL. Auto-waits for the page to settle (network idle + DOM stable).\n\nHandles Cloudflare challenge pages with extra wait time.\nReturns an updated snapshot of the loaded page.\n\nArgs:\n  ...",
+      "input_schema_keys": [
+        "page_id",
+        "timeout",
+        "url"
+      ],
+      "name": "cloak_navigate"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate back in browser history. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.",
+      "input_schema_keys": [
+        "page_id"
+      ],
+      "name": "cloak_back"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate forward in browser history. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.",
+      "input_schema_keys": [
+        "page_id"
+      ],
+      "name": "cloak_forward"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Press a keyboard key (Enter, Tab, Escape, ArrowDown, etc.).\n\nReturns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    key: Key name (DOM KeyboardEvent key).",
+      "input_schema_keys": [
+        "key",
+        "page_id"
+      ],
+      "name": "cloak_press_key"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Scroll the page. Returns an updated snapshot.\n\nArgs:\n    page_id: Target page ID.\n    direction: 'up' or 'down'.\n    amount: Pixels to scroll.",
+      "input_schema_keys": [
+        "amount",
+        "direction",
+        "page_id"
+      ],
+      "name": "cloak_scroll"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Wait for the page to settle (no DOM mutations + network idle).\n\nUse after actions that trigger dynamic content loading.\nReturns whether the page settled and how many DOM mutations occurred.\n\nArgs:\n...",
+      "input_schema_keys": [
+        "page_id",
+        "timeout_ms"
+      ],
+      "name": "cloak_wait"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Execute JavaScript in the page context and return the result.\n\nArgs:\n    page_id: Target page ID.\n    expression: JavaScript expression to evaluate.",
+      "input_schema_keys": [
+        "expression",
+        "page_id"
+      ],
+      "name": "cloak_evaluate"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Open a new browser page/tab. Optionally navigate to a URL.\n\nArgs:\n    url: URL to navigate to after creating the page.",
+      "input_schema_keys": [
+        "url"
+      ],
+      "name": "cloak_new_page"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "List all open pages with their IDs and URLs.",
+      "input_schema_keys": [],
+      "name": "cloak_list_pages"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Close a specific page by ID.\n\nArgs:\n    page_id: Page ID to close.",
+      "input_schema_keys": [
+        "page_id"
+      ],
+      "name": "cloak_close_page"
+    }
+  ],
+  "version_handshake": "1.27.1"
+}
