@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-05 (browser-use dual-mode) complete; 5/7 MCPs scored beyond Playwright calibration (browser-use direct=5.87 scored, browser-use agent=SKIPPED LLM_KEY_ABSENT). FAIRNESS-05 contract satisfied (both rows present). HANDOFF #2 init-timeout: CONFIRMED FIXED in v0.12.7. Ready for Plan 02-06 (cloakbrowser)."
-last_updated: "2026-05-26T23:10:00Z"
+stopped_at: "Plan 02-06 (cloakbrowser, sandbox-only) complete; 6/7 per-MCP plans done (7 scored MCPs + 1 SKIPPED in matrix). cloakbrowser median 8.33 LEADS the matrix, but Phase-4 tier pre-disposition is SANDBOX-ONLY regardless (closed-binary trust model is the binding constraint). SC #5 sandbox contract upheld via 3-tier audit (SANDBOX_PROOF.md). Stealth claim DEFERRED to G-710. Ready for Plan 02-07 (attribution-audit, last plan in Phase 2)."
+last_updated: "2026-05-26T23:50:00Z"
 last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
   percent: 50
 ---
 
@@ -26,14 +26,14 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 ## Current Position
 
 Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 5 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode); 2 remaining (cloakbrowser, attribution-audit)
-Status: Ready to execute Plan 02-06 (cloakbrowser)
+Plan: 6 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode, cloakbrowser); 1 remaining (attribution-audit, the synthesis check, NOT scored as an MCP)
+Status: Ready to execute Plan 02-07 (attribution-audit, last plan in Phase 2)
 Last activity: 2026-05-26
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [██████░] 5/7
+Phase-2 progress: [███████░] 6/7
 
-scores.json now has 7 rows: playwright (7.93), browser-use-direct (5.87), lightpanda (6.31 N/A-aware), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). Note: matrix-builder must use row.status field, NOT just composite, to distinguish SKIPPED from scored — score_with_na.py renders all-N/A as 0.0 (documented limitation).
+scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
 
 ## Performance Metrics
 
@@ -62,6 +62,7 @@ scores.json now has 7 rows: playwright (7.93), browser-use-direct (5.87), lightp
 | Phase 2 P03 (firecrawl) | 25 | 2 tasks | 45+ files (3 deterministic-FAIL passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + live-URL interesting-angle probes + loopback_probe) |
 | Phase 2 P04 (obscura) | 30 | 2 tasks | 55+ files (3 agent-variance passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + INSTALL_LOG + MEMORY_SNAPSHOT 20-sample RSS trace) |
 | Phase 2 P05 (browser-use dual-mode) | 35 | 2 tasks | 72 files (3 direct-mode passes + DEEP_ANALYSIS + .scrub_allow.txt + .merge.py + init_smoke.json per-mode + agent-mode SKIPPED.md) |
+| Phase 2 P06 (cloakbrowser sandbox-only) | 25 | 2 tasks | 55+ files (3 passes + DEEP_ANALYSIS + SANDBOX_PROOF.md + .scrub_allow.txt; pre-flight loopback guard verified positive+negative; 3-tier sandbox audit) |
 
 ## Accumulated Context
 
@@ -140,6 +141,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T23:10:00Z
-Stopped at: Plan 02-05 (browser-use dual-mode) complete. FAIRNESS-05 contract satisfied: scores.json now contains BOTH browser-use-direct (composite 5.87, capability=LLM-augmented, mode=direct, 3-pass median across 6.07/6.20/5.87) AND browser-use-agent (SKIPPED, reason=LLM_KEY_ABSENT). HANDOFF-GSD-AUTO STOP #2 RESOLVED — v0.12.7 initialize timeout no longer reproduces (~7s handshake). Vitalik's "no-LLM-key" headline question answered with nuance (CONFIRMED for S1+S2+S3+S8, REFUTED for S4-S7 with React-clobber CAVEAT). Updated ranking: playwright 7.93 > lightpanda 6.31 > browser-use-direct 5.87 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27. Ready for Plan 02-06 (cloakbrowser — last per-MCP plan before attribution-audit).
+Last session: 2026-05-26T23:50:00Z
+Stopped at: Plan 02-06 (cloakbrowser sandbox-only) complete. SC #5 sandbox-only contract upheld via 3-tier audit (pre-flight guard positive+negative + all-active-egress-vector enumeration + transcript hostname sweep with false-positive triage). cloakbrowser median composite 8.33 LEADS the matrix on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model. Stealth claim (Cloudflare/reCAPTCHA/FingerprintJS) DEFERRED to G-710 — the snapshot fixtures don't fingerprint-check. PASS1 SDK-budget termination at S5 was absorbed by 3-pass median (PASS2+PASS3 clean S1-S8 completion). Updated ranking: **cloakbrowser 8.33 (SANDBOX-ONLY)** > playwright 7.93 > lightpanda 6.31 > browser-use-direct 5.87 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27 > browser-use-agent SKIPPED. Phase 2 matrix CLOSED at 7 scored + 1 SKIPPED. Ready for Plan 02-07 (attribution-audit, the synthesis check).
 Resume file: None
