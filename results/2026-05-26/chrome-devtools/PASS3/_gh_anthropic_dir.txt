@@ -1,0 +1,4 @@
+uid=2_0 RootWebArea "Directory listing for /greenhouse_2026-05-22/anthropic/" url="http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/"
+  uid=2_1 heading "Directory listing for /greenhouse_2026-05-22/anthropic/" level="1"
+  uid=2_2 link "jobs/" url="http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/"
+    uid=2_3 StaticText "jobs/"
