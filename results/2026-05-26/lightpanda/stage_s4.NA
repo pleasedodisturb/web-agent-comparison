@@ -1,5 +1,1 @@
-NA — Lightpanda is categorically read-only per FAIRNESS-03 (READ_ONLY_MCPS contract in aggregate_scores.py).
-Even though lightpanda exposes `fill`/`click`/`selectOption`/`detectForms` tools at the MCP layer,
-the Zig 'Browsercore' engine has no full JS runtime — React/Remix SPAs never hydrate, so interactive
-form work is architecturally unreachable. Stage scored NA, not 0.
-(See PASS1/_attempted_stage_s4.yml for what Claude DID produce — preserved as diagnostic evidence.)
+MCP is read-only, no interaction surface (per prompt-locked classification). Lightpanda exposes goto/markdown/structuredData/links/semantic_tree/interactiveElements/detectForms primarily as read tools; the Greenhouse apply form is embedded inline on the S1 page but lightpanda has no screenshot/upload primitives required by S6/S8, so the read-only treatment matches the prompt's rule for this MCP. Skipping S5-S8.

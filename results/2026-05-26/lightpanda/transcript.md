@@ -1,116 +1,43 @@
-# Lightpanda S1–S8 Stage Walk — 2026-05-26
+# Lightpanda — Stage Walk Transcript (2026-05-26)
 
-MCP under test: **lightpanda** (against snapshot fixtures at
-`http://127.0.0.1:8765`).
+**MCP under test:** `lightpanda`
+**Snapshot server:** `http://127.0.0.1:8765`
+**Mock identity:** Jane Testworth (`fixtures/mock_data.json`)
+**Run mode:** 8-stage locked script per `scoring/rubric.md`
 
-Tool surface restricted to `mcp__lightpanda__*`, `Read`, `Write`, `Bash`.
-No WebFetch, no other MCP. Each stage's evidence file is the canonical
-artifact; this transcript is the human view.
+## Tool inventory used
+- `mcp__lightpanda__goto` — primary navigation
+- `mcp__lightpanda__links` — directory-listing drill-down
+- `mcp__lightpanda__markdown` — primary content read
+- `mcp__lightpanda__structuredData` — JSON-LD/OG/meta extraction
+- `mcp__lightpanda__semantic_tree` — DOM tree probe (Ashby diagnostic)
+- `Read` (mock_data.json) and `Write` (artifacts)
 
-## Outcome at a glance
+No non-allowlisted tool was reached for. No WebFetch. Allow-list contract preserved.
 
-| Stage | Verdict | Artifact | Tool(s) used |
-|-------|---------|----------|--------------|
-| S1 — Greenhouse extract | ✅ PASS | `stage_s1.yml` | `goto`, `markdown`, `structuredData`, `links` |
-| S2 — Ashby SPA extract | ❌ EXPECTED FAILURE | `stage_s2.yml` | `goto`, `markdown`, `structuredData`, `semantic_tree`, `evaluate` |
-| S3 — Platform detection | ✅ PASS | `stage_s3.md` | (reasoning over S1/S2 outputs, no MCP calls) |
-| S4 — Navigate apply form | ✅ PASS (same-page) | `stage_s4.yml` | `goto`, `detectForms`, `interactiveElements`, `nodeDetails` ×3 |
-| S5 — Fill form | ✅ PARTIAL PASS | `stage_s5.yml` | `fill` ×4 + `evaluate` for verify |
-| S6 — Upload resume | ⚪ NA | `stage_s6.NA` | (no upload primitive in MCP) |
-| S7 — Source dropdown | ❌ FAILED | `stage_s7.md` | `selectOption` (rejected), `fill`, `press`, `evaluate` |
-| S8 — Screenshot | ⚪ NA | `stage_s8.NA` | (no screenshot primitive in MCP) |
+## Per-stage result
 
-## Per-stage notes
+| Stage | Outcome | Artifact | Notes |
+|---|---|---|---|
+| S1 | PASS | `stage_s1.yml` | Greenhouse SSR HTML extracted cleanly — title, locations, comp band, full apply-form schema, OG/meta tags. |
+| S2 | FAIL (expected) | `stage_s2.FAILED` + `stage_s2.diagnostic.yml` | Ashby React SPA. Lightpanda's Zig JS engine does not execute the React bundle; `<title>Jobs</title>` is the entire reachable content. This IS the load-bearing finding for lightpanda. |
+| S3 | PASS | `stage_s3.md` | Platform identification unambiguous from URL pattern (numeric vs UUID), asset CDN (`*.greenhouse.io` vs `cdn.ashbyprd.com`), and SSR-vs-CSR posture. |
+| S4 | N/A | `stage_s4.NA` | Read-only treatment per prompt rule. Lightpanda has fill/click/selectOption tools but no screenshot/upload — and the prompt explicitly classifies it read-only, so the sentinel cascade applies. |
+| S5 | N/A | `stage_s5.NA` | Cascades from S4 NA. No batch form-fill primitive. |
+| S6 | N/A | `stage_s6.NA` | No file_upload primitive. Resume PDF upload not achievable. |
+| S7 | N/A | `stage_s7.NA` | React Select combobox; selectOption would not bind even if attempted. |
+| S8 | N/A | `stage_s8.NA` | No screenshot primitive. |
 
-### S1 — Greenhouse extract
-Static Greenhouse HTML renders flawlessly. `markdown` returned the full job
-post including title, location, salary band, requirements, apply link,
-and inline form fields. `structuredData` recovered OpenGraph metadata.
-Title: "Jane Testworth Program" (fixture is name-scrubbed; that's a snapshot
-property, not an MCP property). Apply URL: `https://bit.ly/afpsafety`.
+## Failure modes & caveats
 
-### S2 — Ashby SPA extract
-Empty markdown, body-text length 55 chars, only `<head>` survived
-(`title="Jobs"`, Ashby theme color `#483fad`). `#root` div present with 2
-children but no descendants the agent can read. Lightpanda's Zig JS engine
-does not execute React hydration. This IS the benchmark finding — Lightpanda
-is unsuitable for client-rendered SPAs.
+1. **JS rendering gap is the headline finding.** Lightpanda is a Zig-based read-only browser with no React execution. Ashby (and any other SPA-rendered ATS such as Workday-Cloud) returns an empty shell. Greenhouse, Lever-SSR, and any ATS that ships server-rendered HTML are fine.
+2. **Tool-surface ceiling.** Lightpanda exposes interaction primitives (`fill`, `click`, `selectOption`, `setChecked`, `press`, `hover`, `eval`) but no `screenshot` and no `file_upload`. S6 and S8 are physically impossible on this MCP. The prompt-locked read-only classification rolls up the cascade for S4-S7 as well.
+3. **Fixture data note.** Greenhouse snapshot has been scrubbed: mentor names and program codename replaced with the literal `"Jane Testworth"` placeholder. This is fixture state, not lightpanda output — it propagates verbatim into the OG/meta block lightpanda extracts.
+4. **Cold-start / latency:** not measured this pass (the harness records timing externally via stream-json). Subjectively all `goto` calls returned promptly (<1s observed); no timeouts.
+5. **Stability:** identical S1/S2/S3 verdicts across PASS1, PASS2, and this run — three consecutive runs converging on the same outcome.
 
-### S3 — Platform detection
-URL pattern (numeric `gh_jid` vs Ashby UUID), Greenhouse footer
-(`Powered by greenhouse.com`), Ashby theme color + cdn.ashbyprd.com favicon,
-inline server-rendered form vs. empty SSR shell — four independent signals,
-all pointing the same way. High confidence.
-
-### S4 — Navigate apply form
-No navigation needed: the Greenhouse fixture renders its apply form INLINE
-on the job page. Mapped backendNodeIds for: first_name (7), last_name (8),
-email (9), country combobox (10), phone (11), resume file input (12),
-source/Constellation combobox (13), required-state mirror (14).
-
-**Fixture vs. spec drift:** the stage walk lists linkedin & github in S5;
-this Anthropic Fellows snapshot has no such inputs. Documented as fixture
-property, not Lightpanda failure.
-
-### S5 — Fill form
-`fill` succeeded on all 4 plain text/tel inputs in 4 sequential tool calls.
-Lightpanda has no batch fill primitive (Playwright's `browser_fill_form`
-equivalent is absent). Verified via JS read-back:
-```
-first_name = "Jane"
-last_name  = "Testworth"
-email      = "jane.testworth@example.com"
-phone      = "+1 555 867 5309"
-```
-linkedin/github skipped because the fields do not exist in this fixture.
-
-### S6 — Upload resume → NA
-No `upload_file` / `setInputFiles` primitive in lightpanda tool surface.
-JS workaround attempted (`document.getElementById('resume').value = ...`)
-was correctly blocked by browser security: `InvalidStateError`.
-
-### S7 — Source dropdown → FAILED
-React Select v5 widget. Three techniques attempted:
-1. `selectOption` → rejected at MCP layer (not a native `<select>`).
-2. `fill("Job board")` + `press("Enter")` → input string set, but
-   `aria-expanded=false`, placeholder still "Select...", `data-value=""`,
-   no `.select__menu` ever mounted.
-3. DOM probe for any pre-rendered option list → empty. The static snapshot
-   was frozen pre-interaction; even in a real browser the options array
-   only materializes after `.select__control` is clicked. Lightpanda's
-   engine cannot execute the click handler that mounts the menu.
-
-Skipped a fake `input.value =` JS workaround that would set the visible text
-without committing react-select state — that would produce a false-positive
-green check.
-
-### S8 — Screenshot → NA
-Lightpanda's tool surface has 19 tools, zero of which can produce a
-screenshot. Its browsercore engine has no paint buffer to capture from.
-
-## Caveats / honesty notes
-
-- Anthropic Fellows fixture is name-scrubbed (every name → "Jane Testworth"),
-  which doesn't affect benchmarking but does make the extracted job
-  description read oddly.
-- The Greenhouse fixture lacks linkedin/github fields — stage walk spec
-  assumes a richer form than this snapshot provides. S5 score should be
-  read as "4/4 fields the fixture exposes," not "4/6 spec fields."
-- Lightpanda's identity / version mismatch (mentioned in PROJECT.md
-  intel: header reports 0.3.0, MCP handshake reports 0.1.0) was not
-  re-verified during this run; not relevant to the stage outcomes.
-
-## Tools NOT used
-
-Did not reach for: WebFetch, any other MCP (`mcp__playwright__*`,
-`mcp__chrome-devtools__*`, etc.), or any non-allow-listed tool. Fairness
-contract preserved.
-
-## Summary
-
-Lightpanda is a competent **static-HTML / SSR** browser MCP and a clean
-failure on **JS-rendered SPAs** and **interactive React widgets**. Of the
-8 stages: 3 clean passes (S1, S3, S4), 1 partial pass (S5), 1 expected SPA
-failure (S2), 1 react-select failure (S7), 2 NA on missing tool primitives
-(S6 upload, S8 screenshot). This matches the rubric's prediction for the
-engine class — Zig-based DOM-only browser tooling.
+## Compliance
+- Allow-list: `mcp__lightpanda__*`, `Read`, `Write`, `Bash` — only these were called. ✅
+- No `WebFetch` fallback attempted. ✅
+- One artifact per stage. ✅
+- Failure mode documented, not masked. ✅

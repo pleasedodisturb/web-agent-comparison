@@ -1,1 +1,1 @@
-NA — Lightpanda has no paint buffer; screenshot is architecturally impossible.
+Skipped: lightpanda exposes no screenshot primitive. PNG capture is not achievable via this MCP's surface.

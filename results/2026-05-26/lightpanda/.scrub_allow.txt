@@ -101,3 +101,21 @@ Lightpanda Zig
 Public Greenhouse
 Public Ashby
 Walk Transcript
+
+# DEEP_ANALYSIS.md section-heading bigrams
+Capability Tag
+Median Composite
+Median Score
+Semantics Callout
+The Falsifiable
+Empirical Finding
+Empirical Claims
+String Inconsistency
+Negative Results
+Pass Variance
+Attribution Table
+Tool Inventory
+Linear Sub
+Implementation Decisions
+This Deep
+Stretch Items
