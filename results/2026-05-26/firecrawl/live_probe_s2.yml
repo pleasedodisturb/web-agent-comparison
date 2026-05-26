@@ -1,0 +1,15 @@
+# Live-URL probe (interesting-angle evidence) — S2 Ashby
+# Empty-shell finding: firecrawl returned 203 bytes of footer chrome.
+
+{
+  "stage": "S2",
+  "url": "https://jobs.ashbyhq.com/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13",
+  "http_status": 200,
+  "success": true,
+  "markdown_bytes": 203,
+  "markdown_full_body": "[Powered by Ashby](https://www.ashbyhq.com/)\n\n[Privacy Policy](https://www.ashbyhq.com/privacy) [Security](https://www.ashbyhq.com/security) [Vulnerability Disclosure](https://www.ashbyhq.com/disclosure)",
+  "metadata_title": "Jobs",
+  "creditsUsed": 1,
+  "cacheState": "miss",
+  "_note": "S2 is the empty-shell finding (Ashby SPA defeats firecrawl too). Full 203-byte body preserved; it's chrome links from Ashby's own footer, not job content."
+}

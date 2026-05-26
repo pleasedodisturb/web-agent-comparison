@@ -69,6 +69,76 @@
       "S8": "FAIL"
     }
   },
+  "firecrawl": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "data_quality": "env-mismatch",
+      "js_rendering": "env-mismatch"
+    },
+    "capability": "cloud",
+    "mode": "markdown",
+    "scores": {
+      "data_quality": 0,
+      "error_handling": 5,
+      "interaction_depth": "N/A",
+      "js_rendering": 2,
+      "reliability": 7,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "FAIL",
+      "S2": "FAIL",
+      "S3": "FAIL",
+      "S4": "N/A",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    }
+  },
   "lightpanda": {
     "attempts": {
       "S1": {
