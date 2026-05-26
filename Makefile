@@ -49,8 +49,12 @@ help:
 	@echo "Reproducibility manifest (plan 01-06):"
 	@echo "  make versions        # write/refresh results/$(DATE)/versions.{json,lock.md}"
 	@echo ""
+	@echo "Cross-cutting measurements (Phase 3):"
+	@echo "  make cold-start         # 3-segment cold + warm sweep across all 8 MCP rows"
+	@echo "  make cold-start-<mcp>   # one MCP only (e.g. cold-start-playwright)"
+	@echo "                          # override N_RUNS=10 for more samples"
+	@echo ""
 	@echo "Stubs (deferred to G-710):"
-	@echo "  make coldstart       # TLS-side: cold-start latency measurement"
 	@echo "  make stability       # 60-min stability soak"
 	@echo "  make tls             # JA3/JA4 fingerprint capture"
 
@@ -155,14 +159,42 @@ versions:
 
 # ─── Stubs (surface locked; work deferred to G-710) ──────────────────────────
 
-coldstart:
-	@echo "coldstart: deferred to G-710 (scope cut 2026-05-22)"
-
 stability:
 	@echo "stability: deferred to G-710 (scope cut 2026-05-22)"
 
 tls:
 	@echo "tls: deferred to G-710 (scope cut 2026-05-22)"
+
+# ─── Cold-start measurement (Phase 3 plan 03-03, MEAS-01) ────────────────────
+# Per-MCP target: spawn the MCP via mcp.client.stdio, time the 3 segments
+# (t_resolve / t_spawn / t_first_useful) across N_RUNS cold + N_RUNS warm
+# samples, write results/$(DATE)/<mcp>/cold_start.json.
+#
+# Cold means: pkill -f <pattern> + 200ms sleep before each sample.
+# Warm means: no pkill (binary in OS page cache from the prior cold run).
+# N_RUNS defaults to 5 per the plan's "median of >=5" requirement.
+#
+# The per-MCP rule fans through the static-pattern list to keep GNU Make 3.81
+# (macOS system Make) happy, same convention as bench-<mcp>.
+
+N_RUNS ?= 5
+COLD_START_MCPS := playwright chrome-devtools lightpanda obscura firecrawl cloakbrowser browser-use-direct browser-use-agent
+
+.PHONY: cold-start $(addprefix cold-start-,$(COLD_START_MCPS))
+
+$(addprefix cold-start-,$(COLD_START_MCPS)): cold-start-%:
+	@mkdir -p $(RESULTS_DIR)/$*
+	@.venv/bin/python -m bench.measure_cold_start $* \
+	    --out $(RESULTS_DIR)/$*/cold_start.json \
+	    --n-runs $(N_RUNS)
+
+# Aggregate: run sequentially per Phase 2 sequential-runs contract
+# (orphan-process clashes if parallel).
+cold-start: $(addprefix cold-start-,$(COLD_START_MCPS))
+	@echo "cold-start: complete — see $(RESULTS_DIR)/*/cold_start.json"
+
+# Legacy alias the help target advertised; now points at the real sweep.
+coldstart: cold-start
 
 # ─── Housekeeping ────────────────────────────────────────────────────────────
 
