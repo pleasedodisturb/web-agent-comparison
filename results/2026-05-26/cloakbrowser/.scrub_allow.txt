@@ -1,0 +1,49 @@
+# PII scrub allow-list for cloakbrowser row (G-720).
+# Plan 02-06 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / prose / brand Title-Case bigrams that appear in the
+# cloakbrowser evidence — DEEP_ANALYSIS section headings, tool-description
+# bigrams, transcript narrative bigrams, agent React-Select discussion,
+# Claude Code metadata bigrams, the synthetic Jane Testworth fixture
+# identity, snapshot fixture content (Anthropic-Fellows program name).
+# Allow-listing does NOT loosen the real-PII guard (resembles-name +
+# resembles-email regex still active — only LITERAL allow-listed bigrams
+# are skipped).
+
+# === Synthetic fixture identity (Jane Testworth + permutations) ===
+Testworth Program
+Testworth Jane
+Testworth Fellows
+
+# === Snapshot fixture content (Anthropic-Fellows = job program name) ===
+Greenhouse Anthropic-Fellows
+Anthropic Fellows
+The Anthropic
+Jane Test
+United States
+Walk Transcript
+Same React
+Apply Form
+Batch Primitives
+Testworth Anthropic
+Compensation The
+Fellows Jane
+Testworth Across
+Anthropic Have
+
+# === DEEP_ANALYSIS + transcript section headings + prose bigrams ===
+Platform Detection
+Real Chromium
+The Apply
+The React
+Privacy Policy
+Vulnerability Disclosure
+Press Enter
+Arrow Down
+Per Phase
+Deferred Ideas
+
+# === React-Select agent-narrative bigrams (cloakbrowser stage_s7 prose) ===
+Greenhouse React-Select
+
+# === Cloakbrowser tool description bigrams (tools_inventory.json) ===
+Cloudflare Turnstile

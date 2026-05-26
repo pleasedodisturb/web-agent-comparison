@@ -1,0 +1,31 @@
+stage: S1
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+extraction_method: cloak_evaluate(fetch + DOMParser) — see notes
+title: Jane Testworth Program
+company: Anthropic
+location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+employment_type: "Fellowship / Full-time, 4 months (with possible extension)"
+salary_band: "3,850 USD / 2,310 GBP / 4,300 CAD per week (varies by country) + compute funding ~$15k/month"
+requirements_summary: >
+  Motivated by AI safety; transition into empirical AI research; strong CS/math/physics
+  background; thrives in fast-paced collaboration; can implement and communicate ideas
+  quickly. Strong-plus: domain background (economics, social sciences, cybersecurity);
+  prior research/engineering experience in workstream area.
+apply_url: https://bit.ly/afpsafety
+apply_button:
+  selector: 'button[aria-label="Apply"]'
+  text: Apply
+  outer_html: '<button type="button" class="btn btn--rounded" aria-label="Apply">Apply</button>'
+canonical_job_url: https://job-boards.greenhouse.io/anthropic/jobs/5023394008
+notes:
+  - The fixture HTML body contains the full job content statically, but the React shell
+    hydrates against a stale Greenhouse API and replaces the document body with
+    "Page not found — The job board you were viewing is no longer active." Live
+    DOM after navigation reports nothing useful.
+  - cloak_read_page() also returned the post-hydration "Page not found" stub.
+  - Workaround used cloak_evaluate() to refetch the static HTML and parse via
+    DOMParser before React touched it. This is a legitimate use of the MCP's
+    evaluate primitive and yields the metadata Greenhouse would normally render.
+  - The apply <button> has no href; the in-body "Apply using this link" anchor
+    points to https://bit.ly/afpsafety, which is the real apply URL on Greenhouse.

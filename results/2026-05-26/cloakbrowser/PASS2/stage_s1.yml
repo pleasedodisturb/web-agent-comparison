@@ -1,0 +1,39 @@
+stage: S1
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+extraction_method: cloak_evaluate(fetch + DOMParser) to bypass React hydration
+title: Jane Testworth Program
+company: Anthropic
+location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+employment_type: "Fellowship / Full-time, 4 months (with possible extension)"
+salary_band: "3,850 USD / 2,310 GBP / 4,300 CAD per week (varies by country); compute funding ~$15k/month"
+requirements_summary: >
+  Motivated by AI safety; eager to transition into empirical AI research; strong CS,
+  mathematics, or physics background; thrives in fast-paced collaborative environments;
+  can implement ideas quickly and communicate clearly. Strong-plus: background in
+  workstream-specific disciplines (economics, social sciences, cybersecurity, ML systems);
+  prior research/engineering experience aligned to a workstream.
+apply_url: https://bit.ly/afpsafety
+apply_button:
+  selector: 'button[aria-label="Apply"]'
+  text: Apply
+  outer_html: '<button type="button" class="btn btn--rounded" aria-label="Apply">Apply</button>'
+canonical_job_url: https://job-boards.greenhouse.io/anthropic/jobs/5023394008
+workstreams:
+  - AI Jane Testworth
+  - ML Systems & Jane Testworth
+  - Jane Testworth Fellows
+  - Jane Testworth Jane Testworth (Economics & Policy)
+notes:
+  - The fixture HTML is a 84,577-byte snapshot whose static body contains the full job
+    posting. The included React shell then hydrates against a stale Greenhouse API and
+    replaces the visible body with "Page not found — The job board you were viewing is
+    no longer active."
+  - cloak_read_page() and cloak_snapshot() against the live DOM both returned only the
+    post-hydration "Page not found" stub.
+  - Workaround uses cloak_evaluate() to refetch the same URL via fetch() and parse via
+    DOMParser before React ever touches the document. This is a legitimate primitive
+    exposed by the MCP and yields the metadata Greenhouse would normally render
+    server-side / on a non-stale React build.
+  - The Apply <button> has no href; the in-body "Apply using this link" and "Apply here"
+    anchors both point to https://bit.ly/afpsafety, which is the real apply URL.
