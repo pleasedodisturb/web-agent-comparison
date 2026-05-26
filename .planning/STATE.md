@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-01 (chrome-devtools) complete; 1/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-02 (lightpanda)."
-last_updated: "2026-05-26T19:15:00Z"
+stopped_at: "Plan 02-02 (lightpanda) complete; 2/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-03 (firecrawl)."
+last_updated: "2026-05-26T19:48:00Z"
 last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 13
-  completed_plans: 8
-  percent: 35
+  completed_plans: 9
+  percent: 38
 ---
 
 # Project State
@@ -21,17 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 2 — Per-MCP Scoring Runs (1/7 MCPs scored beyond Playwright)
+**Current focus:** Phase 2 — Per-MCP Scoring Runs (2/7 MCPs scored beyond Playwright)
 
 ## Current Position
 
 Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 1 of 7 complete in Phase 2 (chrome-devtools); 6 remaining (lightpanda, firecrawl, obscura, browser-use, cloakbrowser, attribution-audit)
-Status: Ready to execute Plan 02-02 (lightpanda)
+Plan: 2 of 7 complete in Phase 2 (chrome-devtools, lightpanda); 5 remaining (firecrawl, obscura, browser-use, cloakbrowser, attribution-audit)
+Status: Ready to execute Plan 02-03 (firecrawl)
 Last activity: 2026-05-26
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [█░░░░░░] 1/7
+Phase-2 progress: [██░░░░░] 2/7
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Phase-2 progress: [█░░░░░░] 1/7
 | Phase 1 P04 | 75 | 7 tasks | 10 files |
 | Phase 1 P7 | 35 | 4 tasks | 8 files |
 | Phase 2 P01 (chrome-devtools) | 35 | 2 tasks | 75+ files (3 evidence passes × ~16 files each + canonical + DEEP_ANALYSIS) |
+| Phase 2 P02 (lightpanda) | 30 | 2 tasks | 80+ files (3 evidence passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + S2 diagnostic split) |
 
 ## Accumulated Context
 
@@ -77,6 +78,11 @@ Recent decisions affecting current work:
 - [Phase 2 P01]: 3-pass FAIRNESS-01 surfaces agent-discovery effects: chrome-devtools composite ranged 5.6/5.6/8.33 across passes because PASS3 alone found the SSR-rescue trick (fetch+DOMParser+document.write to bypass the React-hydration "Page not found" wipe). Median=5.6 is the published value. Single-pass results would have masked this variance.
 - [Phase 2 P01]: chrome-devtools' 7 DevTools-exclusive tools (list_console_messages, list_network_requests, performance_start_trace, etc.) are structurally inventoried but NOT exercised by the natural S1-S8 walk in any of 3 passes. The candidate's distinguishing advantage exists but is invisible to the current rubric. CONTEXT.md's deferred "9th DevTools-Probe stage" is the path to surfacing it.
 - [Phase 2 P01]: Per-pass gap shortened from "≥30 min" to "<60s" — wall-clock economics. Compensating control: clean orphan_audit between each pass. Recommend Phase-2 plans update the formal guideline.
+- [Phase 2 P02]: FAIRNESS-03 N/A semantics validated end-to-end with lightpanda as the first read-only row. score_with_na.py drops N/A cells from weighted denominator (13 not 15) producing composite 6.31 instead of the artificial 5.47 that zero-fill would give. Math verified: 7×3+9×3+5×2+5×2+2×1+7×1+5×1 = 82 ÷ 13 = 6.31.
+- [Phase 2 P02]: Lightpanda exposes 7 interaction tools (click/fill/selectOption/etc.) at the MCP layer but the Zig engine has no JS runtime — React-hydrated state is unreachable, so writes have no application-layer effect. Categorically N/A is correct per FAIRNESS-03 despite the nominally-interactive tool surface. Capability tag = js-light (not "read-only" literally) reflects this nuance.
+- [Phase 2 P02]: 2026-03 "lightpanda is React-blind, 0 bytes on Ashby" claim CONFIRMED at high specificity on mcp__lightpanda__markdown (0 bytes across all 3 passes), partially refuted on raw-shell axis (4-7KB shell delivered but never hydrated). The right framing: "0 bytes of usable extraction; ~5KB of dead shell".
+- [Phase 2 P02]: Lightpanda version-string inconsistency reproduced — binary self-reports 0.3.0, MCP serverInfo.version handshake says 0.1.0. SHA256 pin is canonical for reproducibility.
+- [Phase 2 P02]: Zero pass-to-pass variance for architecturally-bounded candidates. 3-pass median is most valuable for candidates with unused capability a smart agent might discover (chrome-devtools); single-pass would suffice for hard-architectural ceilings (lightpanda, firecrawl).
 
 ### Pending Todos
 
@@ -111,6 +117,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T19:15:00Z
-Stopped at: Plan 02-01 (chrome-devtools) complete. Median row 5.6 published in results/2026-05-26/scores.json. Ready for Plan 02-02 (lightpanda).
+Last session: 2026-05-26T19:48:00Z
+Stopped at: Plan 02-02 (lightpanda) complete. Median row 6.31 published in results/2026-05-26/scores.json. Ranking now: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6. Ready for Plan 02-03 (firecrawl).
 Resume file: None

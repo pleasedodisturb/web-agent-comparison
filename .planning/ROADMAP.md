@@ -81,6 +81,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Harness Foundation | 7/7 | Complete (calibration PASS 2026-05-26 per `results/2026-05-25/PHASE1_CALIBRATION.md`) | 2026-05-26 |
-| 2. Per-MCP Scoring Runs | 1/7 | In Progress (chrome-devtools complete; lightpanda next) | - |
+| 2. Per-MCP Scoring Runs | 2/7 | In Progress (chrome-devtools + lightpanda complete; firecrawl next) | - |
 | 3. Cross-Cutting Measurements | 0/TBD | Not started | - |
 | 4. Synthesis | 0/TBD | Not started | - |
