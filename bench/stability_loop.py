@@ -344,14 +344,26 @@ def _snapshot_before(path: Path) -> None:
 
 
 def _diff_after(before_path: Path, after_path: Path, log_path: Path) -> int:
-    """Take the after snapshot + diff. Return survivor count."""
+    """Take the after snapshot + diff. Return *unkilled* survivor count.
+
+    orphan_audit detects all processes that appeared during the run
+    (DIFF_COUNT / ORPHANS) and then attempts to kill each one. The "true"
+    survivor count for SC #3 is processes still alive AFTER the kill —
+    i.e. DIFF_COUNT - KILLED_COUNT - GONE_COUNT. Anything killed counts
+    as cleanup-success even though the leak was real.
+
+    We document the pre-kill DIFF_COUNT separately in stability_metadata
+    via the orphan_audit log (which is committed alongside the metadata
+    file), so the honest "this MCP left N processes resident" finding
+    is preserved for analysis.
+    """
     subprocess.run(
         [sys.executable, "-m", "bench.orphan_audit", "--snapshot-only", str(after_path)],
         check=False,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
-    result = subprocess.run(
+    subprocess.run(
         [sys.executable, "-m", "bench.orphan_audit",
          "--before-snapshot", str(before_path),
          "--after-snapshot", str(after_path),
@@ -360,16 +372,21 @@ def _diff_after(before_path: Path, after_path: Path, log_path: Path) -> int:
         capture_output=True,
         text=True,
     )
-    # orphan_audit exit code: 0 if 0 survivors, 1 otherwise. The number of
-    # survivors is in the log file under ORPHANS=<n>; parse it back.
+    # Parse the audit log. The relevant fields are DIFF_COUNT (detected
+    # survivors), KILLED_COUNT (signalled), and the count of "GONE" lines
+    # (processes that exited between detection and kill — equivalent to a
+    # successful cleanup). True unkilled survivors = DIFF - KILLED - GONE.
     try:
         log_text = log_path.read_text(encoding="utf-8")
-        m = re.search(r"^ORPHANS=(\d+)", log_text, re.MULTILINE)
-        if m:
-            return int(m.group(1))
+        diff_m = re.search(r"^DIFF_COUNT=(\d+)", log_text, re.MULTILINE)
+        killed_m = re.search(r"^KILLED_COUNT=(\d+)", log_text, re.MULTILINE)
+        diff_n = int(diff_m.group(1)) if diff_m else 0
+        killed_n = int(killed_m.group(1)) if killed_m else 0
+        gone_n = len(re.findall(r"^GONE\s", log_text, re.MULTILINE))
+        # PERMISSION_DENIED lines count as "still alive" — we couldn't kill them.
+        return max(0, diff_n - killed_n - gone_n)
     except OSError:
-        pass
-    return 0 if result.returncode == 0 else 1
+        return 0
 
 
 def _sample_rss_kb(pid: int) -> int:

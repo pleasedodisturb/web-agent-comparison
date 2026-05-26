@@ -29,6 +29,15 @@ results/*/*/.prompt.md
 results/*/*/.watchdog.log
 results/*/*/.harness_leaked
 results/*/.sc4_retry.json
+# Stability soak scratch (plan 03-04). The committed artefacts are
+# stability.log + stability_metadata.json + stability_orphan_audit.log;
+# the raw ps tables and stdout dumps are debugging-only.
+results/*/*/.stability_ps_before.tsv
+results/*/*/.stability_ps_after.tsv
+results/*/*/.stability_ps_outer_before.tsv
+results/*/*/.stability_ps_outer_after.tsv
+results/*/*/stability.stdout.log
+results/*/*/stability.err
 
 # Phase 2 per-pass subdirectories (PASS1/PASS2/PASS3): same runtime-hidden
 # files as the per-MCP root, one level deeper. Plus the inline merge script

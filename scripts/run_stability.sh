@@ -122,6 +122,10 @@ else
     PYTHON_CMD=(.venv/bin/python -m bench.stability_loop)
 fi
 
+# `"${SKIP_ARGS[@]+"${SKIP_ARGS[@]}"}"` is the bash-3-safe way to expand
+# a possibly-empty array under `set -u` (otherwise empty-array expansion
+# triggers "unbound variable"). On bash 4+ `${SKIP_ARGS[@]+}` would also
+# work, but macOS still ships bash 3 by default.
 "${PYTHON_CMD[@]}" "$MCP" \
     --duration-minutes "$DURATION" \
     --sleep-s 30 \
@@ -129,7 +133,7 @@ fi
     --out-dir "$OUT_DIR" \
     --mode "$MODE" \
     --wallclock-decision "$WALLCLOCK" \
-    "${SKIP_ARGS[@]}" \
+    ${SKIP_ARGS[@]+"${SKIP_ARGS[@]}"} \
     > "$OUT_DIR/stability.stdout.log" \
     2> "$OUT_DIR/stability.err"
 
