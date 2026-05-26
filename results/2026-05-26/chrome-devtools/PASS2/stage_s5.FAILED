@@ -1,0 +1,1 @@
+Upstream S4 failure: no apply form reachable in the snapshot fixture, so there are no form fields to fill. chrome-devtools has fill_form (batch) and fill (single) tools that would have been used had a form been reachable.

@@ -1,0 +1,40 @@
+stage: S2
+mcp: chrome-devtools
+target: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+tool_used: mcp__chrome-devtools__evaluate_script (post-hydration DOM read + fetch of raw HTML)
+
+extraction_result: EMPTY_SHELL
+extraction_notes: |
+  chrome-devtools is fully JS-capable and DID render the SPA, but the rendered
+  output is the Ashby empty-state "Page not found" screen — NOT a chrome-devtools
+  rendering failure. The snapshot HTML (6,294 bytes) is the bare Ashby shell,
+  the inline window.__appData payload contains:
+      organization: null,
+      posting: null,
+      jobBoard: null
+  These fields are populated at runtime by a fetch against the live Ashby API
+  (https://jobs.ashbyhq.com/...), which the loopback snapshot does not include.
+  See ashby_2026-05-22/PROVENANCE.md — "SPA-shell detected" caveat explicitly
+  documents this as the expected reproducibility surface for the bench. Every
+  candidate MCP gets the same empty shell against this fixture.
+
+job:
+  title: null
+  company: "Replit (inferred from URL path, not from extracted content)"
+  location: null
+  role_summary: null
+  apply_url: null
+rendered_body_chars: 113
+rendered_body_text: "Page not found / The page you requested was not found / Powered by / Privacy Policy / Security / Vulnerability Disclosure"
+static_html_bytes: 6294
+runtime_api_fetched: false
+
+interpretation: |
+  This is the SPA-rendering test result for chrome-devtools: PASS the JS-rendering
+  pillar (the SPA executed and produced its actual empty-state UI rather than
+  returning raw HTML), but FAIL the data-extraction pillar (no job data is
+  recoverable from this snapshot regardless of MCP capability). Distinguishing
+  this MCP from lightpanda (which would have produced 6,294 bytes of un-hydrated
+  shell HTML and never executed JS) requires looking at HOW the page failed:
+  chrome-devtools failed at the API-fetch step, lightpanda would fail at the
+  parse-script-tags step.

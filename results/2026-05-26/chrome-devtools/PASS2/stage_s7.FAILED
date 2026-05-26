@@ -1,0 +1,1 @@
+Upstream S4 failure: no apply form reachable, so no React-Select "source" combobox to interact with. The intended technique on chrome-devtools would have been evaluate_script driving the combobox state directly, OR fill+press_key Enter to commit a typed option.
