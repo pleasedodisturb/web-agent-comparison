@@ -3,14 +3,39 @@
 # verify_calibration.sh — Phase 1's go/no-go gate.
 #
 # Drives an end-to-end Playwright run against the snapshot fixtures, then
-# compares the composite score against the 2026-03-31 published baseline
-# of 9.07 with a ±0.5 tolerance. Pass ⇒ Phase 1 is done; fail ⇒ STOP and
-# surface a structured diagnostic per HANDOFF-GSD-AUTO.md STOP condition #1.
+# compares the composite score against the **harness re-baseline** of 8.33
+# with a ±0.5 tolerance. Pass ⇒ Phase 1 is done; fail ⇒ STOP and surface
+# a structured diagnostic per HANDOFF-GSD-AUTO.md STOP condition #1.
+#
+# CALIBRATION RE-BASELINE (2026-05-26, user-approved Option C)
+# ------------------------------------------------------------
+# The 2026-03-31 published Playwright composite is 9.07 (via
+# `scoring/score.py` on the human-judged scores in `results/scores.json`).
+# That number is the historical record and is PRESERVED — see
+# `tests/test_calibration_math.py::TestCompositeReproducesFromPublishedResults`
+# which still pins it.
+#
+# The Phase 1 harness re-scores the same 2026-03 evidence through the new
+# heuristic scorers in `scripts/aggregate_scores.py` +
+# `scripts/score_with_na.py`. Four of the eight scorers (Speed, Token
+# Efficiency, Setup Complexity, Error Handling) return neutral defaults
+# during Phase 1 because their real measurement is deferred to Phase 3
+# (G-710). Re-scoring the 2026-03 evidence through the same heuristics
+# produces 8.33 — see `results/2026-03-31_rebaseline/scores.json` for the
+# regenerable artifact and `scoring/rubric_notes.md` "Calibration
+# Re-Baseline (2026-05-26)" for the audit trail.
+#
+# This re-baseline is for harness self-validation only. The published
+# 2026-03 wave-1 number (9.07) remains the methodology's anchor when
+# comparing waves to each other; the heuristic re-baseline (8.33) is what
+# the Phase 1 calibration GATE validates against, so we can detect
+# regressions in the heuristic scorers without confusing them with the
+# documented Phase-1-vs-Phase-3 scope cut.
 #
 # The script also exercises the other four Phase 1 success criteria so the
 # acceptance check is single-command:
 #
-#   SC #1  composite ∈ [8.57, 9.57]                       (the gate itself)
+#   SC #1  composite ∈ [7.83, 8.83]                       (the gate itself)
 #   SC #2  evidence-directory contract is complete        (file inventory)
 #   SC #3  check_prereqs.sh fails when a binary is hidden (hide+restore probe)
 #   SC #4  3-pass-of-3 retry gate handles a synthetic transient
@@ -54,9 +79,16 @@ PASS_PATH="${RESULTS_DIR}/PHASE1_CALIBRATION.md"
 # Calibration constants (mirror tests/test_calibration_math.py — DO NOT EDIT
 # without also updating that test, or the band logic will silently diverge
 # between the unit test and the live gate).
-TARGET_COMPOSITE=9.07
-LOWER_BAND=8.57
-UPPER_BAND=9.57
+#
+# TARGET_COMPOSITE is the HARNESS RE-BASELINE (2026-03 evidence re-scored
+# through aggregate_scores.py + score_with_na.py). The PUBLISHED 2026-03
+# composite (9.07) is preserved separately in tests/test_calibration_math.py
+# and results/scores.json — see the module-header note above for the full
+# audit trail.
+TARGET_COMPOSITE=8.33
+LOWER_BAND=7.83
+UPPER_BAND=8.83
+PUBLISHED_2026_03_COMPOSITE=9.07
 
 SKIP_BENCH="${SKIP_BENCH:-0}"
 DO_PREREQ_HIDE=1
@@ -130,7 +162,8 @@ write_diagnostic_if_missing() {
 
 | | Value |
 |---|---|
-| 2026-03-31 published Playwright composite | ${TARGET_COMPOSITE} |
+| 2026-03-31 published Playwright composite (historical) | ${PUBLISHED_2026_03_COMPOSITE} |
+| Harness re-baseline (2026-03 evidence re-scored) | ${TARGET_COMPOSITE} |
 | Tolerance | ±0.5 |
 | Accept band | [${LOWER_BAND}, ${UPPER_BAND}] |
 | Observed composite | (see Observation below) |
@@ -504,14 +537,21 @@ cat > "$PASS_PATH" <<EOF
 
 | | Value |
 |---|---|
-| 2026-03-31 published Playwright composite | ${TARGET_COMPOSITE} |
-| Observed (${DATE}) | **${COMPOSITE}** |
-| Delta | ${DELTA} |
+| 2026-03-31 published Playwright composite (historical, via \`scoring/score.py\`) | ${PUBLISHED_2026_03_COMPOSITE} |
+| Harness re-baseline (2026-03 evidence re-scored via \`aggregate_scores.py\`) | ${TARGET_COMPOSITE} |
+| Observed (${DATE}, this run) | **${COMPOSITE}** |
+| Delta vs re-baseline | ${DELTA} |
 | Accept band | [${LOWER_BAND}, ${UPPER_BAND}] |
 | Tolerance | ±0.5 |
 
 **Phase 1 calibration PASS. Harness reproduces the 2026-03 Playwright
-result within ±0.5. Phase 2 may proceed.**
+evidence under its own heuristic scoring within ±0.5 of the apples-to-
+apples re-baseline. Phase 2 may proceed.**
+
+The published 2026-03 composite (9.07) is unchanged and remains the
+methodology's wave-to-wave anchor — see \`scoring/rubric_notes.md\`
+"Calibration Re-Baseline (2026-05-26)" for why the gate validates
+against the heuristic re-baseline (8.33) instead.
 
 ## Environment
 
@@ -550,15 +590,23 @@ Aggregated scores: \`${SCORES_JSON}\`
 EOF
 
 # If a stale diagnostic from a prior failed run is sitting next to the new
-# pass doc, remove it so the directory tells a coherent story.
+# pass doc, remove it so the directory tells a coherent story. Exception:
+# if the diagnostic carries a "SUPERSEDED" marker, it's part of an audit
+# trail (e.g. the 2026-05-25 FAIL → 2026-05-26 re-baseline PASS sequence)
+# and must NOT be deleted.
 if [[ -f "$DIAGNOSTIC_PATH" ]]; then
-    echo "verify_calibration: removing stale $DIAGNOSTIC_PATH (now superseded by PASS)" >&2
-    rm -f "$DIAGNOSTIC_PATH"
+    if grep -q "SUPERSEDED" "$DIAGNOSTIC_PATH" 2>/dev/null; then
+        echo "verify_calibration: $DIAGNOSTIC_PATH carries SUPERSEDED marker — preserving for audit trail" >&2
+    else
+        echo "verify_calibration: removing stale $DIAGNOSTIC_PATH (now superseded by PASS)" >&2
+        rm -f "$DIAGNOSTIC_PATH"
+    fi
 fi
 
 echo "" >&2
 echo "✓ Calibration passes: ${COMPOSITE}" >&2
-echo "  Target ${TARGET_COMPOSITE} ± 0.5  (band [${LOWER_BAND}, ${UPPER_BAND}])" >&2
-echo "  Delta from baseline: ${DELTA}" >&2
+echo "  Re-baseline target ${TARGET_COMPOSITE} ± 0.5  (band [${LOWER_BAND}, ${UPPER_BAND}])" >&2
+echo "  Published 2026-03 composite (historical, preserved): ${PUBLISHED_2026_03_COMPOSITE}" >&2
+echo "  Delta vs re-baseline: ${DELTA}" >&2
 echo "  PASS document: ${PASS_PATH}" >&2
 exit 0
