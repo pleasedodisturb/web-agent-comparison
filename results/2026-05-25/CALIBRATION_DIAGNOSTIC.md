@@ -1,8 +1,27 @@
-# Phase 1 Calibration — DIAGNOSTIC (FAIL)
+# Phase 1 Calibration — DIAGNOSTIC (FAIL) — SUPERSEDED 2026-05-26
+
+> **STATUS: SUPERSEDED on 2026-05-26.** The user reviewed this diagnostic
+> and chose **Option C — Re-baseline** from the three options below. The
+> 2026-03 Playwright evidence was re-scored through the same
+> `aggregate_scores.py` + `score_with_na.py` heuristics, producing a
+> harness re-baseline of **8.33** (see
+> `results/2026-03-31_rebaseline/scores.json`). With ±0.5 tolerance the
+> new accept band is **[7.83, 8.83]**, which contains the 7.93 actual
+> composite below — Phase 1 now PASSES. The new PASS document is at
+> `results/2026-05-25/PHASE1_CALIBRATION.md`. The 9.07 published
+> composite remains the historical record (preserved in
+> `results/scores.json` and `results/2026-03-31_run.md`). See
+> `scoring/rubric_notes.md` "Calibration Re-Baseline (2026-05-26)" for
+> the full audit trail.
+>
+> This file is retained as part of the audit trail. The body below
+> remains as written on 2026-05-25.
+
+---
 
 **Date (UTC):** 2026-05-25
 **Gate:** `scripts/verify_calibration.sh`
-**Result:** **FAIL** — composite 7.93 OUTSIDE band [8.57, 9.57]
+**Result:** **FAIL** — composite 7.93 OUTSIDE band [8.57, 9.57] (band-as-of-2026-05-25)
 **HANDOFF policy:** STOP per HANDOFF-GSD-AUTO.md STOP condition #1.
 
 ## TL;DR
