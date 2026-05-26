@@ -82,5 +82,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 |-------|----------------|--------|-----------|
 | 1. Harness Foundation | 7/7 | Complete (calibration PASS 2026-05-26 per `results/2026-05-25/PHASE1_CALIBRATION.md`) | 2026-05-26 |
 | 2. Per-MCP Scoring Runs | 7/7 | Complete (all 6 per-MCP runs + attribution audit; all 5 SCs PASS per `.planning/phases/02-per-mcp-scoring-runs/PHASE2_AUDIT.md`) | 2026-05-27 |
-| 3. Cross-Cutting Measurements | 0/TBD | Not started | - |
+| 3. Cross-Cutting Measurements | 2/5 | In Progress|  |
 | 4. Synthesis | 0/TBD | Not started | - |
