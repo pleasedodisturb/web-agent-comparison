@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-03 (firecrawl) complete; 3/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-04 (obscura)."
-last_updated: "2026-05-26T22:10:00Z"
+stopped_at: "Plan 02-04 (obscura) complete; 4/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-05 (browser-use)."
+last_updated: "2026-05-26T22:35:00Z"
 last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 13
-  completed_plans: 10
-  percent: 42
+  completed_plans: 11
+  percent: 46
 ---
 
 # Project State
@@ -26,12 +26,12 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 ## Current Position
 
 Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 3 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl); 4 remaining (obscura, browser-use, cloakbrowser, attribution-audit)
-Status: Ready to execute Plan 02-04 (obscura)
+Plan: 4 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura); 3 remaining (browser-use, cloakbrowser, attribution-audit)
+Status: Ready to execute Plan 02-05 (browser-use)
 Last activity: 2026-05-26
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [███░░░░] 3/7
+Phase-2 progress: [████░░░] 4/7
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Phase-2 progress: [███░░░░] 3/7
 | Phase 2 P01 (chrome-devtools) | 35 | 2 tasks | 75+ files (3 evidence passes × ~16 files each + canonical + DEEP_ANALYSIS) |
 | Phase 2 P02 (lightpanda) | 30 | 2 tasks | 80+ files (3 evidence passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + S2 diagnostic split) |
 | Phase 2 P03 (firecrawl) | 25 | 2 tasks | 45+ files (3 deterministic-FAIL passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + live-URL interesting-angle probes + loopback_probe) |
+| Phase 2 P04 (obscura) | 30 | 2 tasks | 55+ files (3 agent-variance passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + INSTALL_LOG + MEMORY_SNAPSHOT 20-sample RSS trace) |
 
 ## Accumulated Context
 
@@ -88,6 +89,13 @@ Recent decisions affecting current work:
 - [Phase 2 P03]: "Cloud LLM-extraction lifts Data Quality (3x weight) above raw-page MCPs; 96% success on JS-heavy sites" claim PARTIALLY REFUTED via single-shot live-URL probes. Confirmed lift on Greenhouse SSR (24,237 markdown bytes vs Playwright's 2,663-byte structured YAML — 9× the byte count, full natural-language body with 31 headings). Refuted on Ashby React 18 SPA (203 bytes of footer chrome only — same React-blind failure mode as lightpanda). Firecrawl is the right tool for SSR-heavy targets, NOT a JS-SPA fallback.
 - [Phase 2 P03]: Single-shot live-URL probe pattern established for cloud-only candidates — captures the candidate's testable surface without breaking the loopback scoring contract. Bodies trimmed for public-repo hygiene (preserves metadata + heading inventory + counts, removes third-party content like real-person mentor names).
 - [Phase 2 P03]: firecrawl composite 4.23 / 10 — 4th of 4 measured MCPs. N/A-aware (denominator=13). Ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23. The rubric's honest answer about an MCP that cannot comply with the apples-to-apples loopback invariant.
+- [Phase 2 P04]: Obscura engine install SUCCEEDED on macOS arm64 — HANDOFF-GSD-AUTO STOP #3 (install gap) did NOT trip. Bundled binary ships with the npm wrapper. INSTALL_LOG.md documents wrapper version 0.1.4-2 vs engine version 0.1.0 (the research/STACK.md "wrapper ≠ engine" quirk reproduced).
+- [Phase 2 P04]: SAFETY-03 enforcement worked example: `.mcp.json` obscura entry has args=[] — no `--stealth` flag, per macOS Sec-CH-UA-Platform-* leak rule. Capability tag `stealth-specialist` describes positioning, not the conditional-on-Linux measurement. Phase 4 must NOT promote obscura to SECONDARY-tier without a Linux A/B (G-710 territory).
+- [Phase 2 P04]: Second-instance agent-discovery variance (after chrome-devtools 02-01): 3-pass spread 3.27/4.07/3.27 — Pass 1 found the 0.0.0.0 SSRF-guard workaround (obscura rejects 127.0.0.1/localhost/[::1] by design), Pass 2 stopped at S1, Pass 3 walked full list with capability-correct NA markers. Pass 2's 4.07 is a numerator/denominator artifact (reliability=9 because 0 fails out of 1 attempt), not improved performance. Same fairness-critical finding 3-pass median exists to surface.
+- [Phase 2 P04]: "~30MB CDP-direct vs ~300MB Playwright" research claim PARTIALLY SUPPORTED — mean RSS 32.4 MB (within 10% of "~30 MB") via 20-sample ps trace during PASS 1, but peak 57.8 MB under S1 nav+eval (~2× the claim). Still ~5× smaller than the unverified Playwright "~300 MB" baseline; direct A/B is G-710. "Full JS rendering" claim CONFIRMED: PASS 1 S1 explicitly triggered Greenhouse React bundle (clobbered SSR with "Page not found" component).
+- [Phase 2 P04]: obscura's 4-tool surface (browse_page, browse_interact, browse_session, browse_scrape) has NO screenshot primitive and NO file-upload primitive — S6 and S8 are uncompletable on obscura's surface regardless of harness compatibility. Pass 3's NA markers for S5-S8 are the most epistemically honest verdict.
+- [Phase 2 P04]: obscura's `eval` has no async path (async functions return literal string "Promise"); sync XHR in eval permanently wedged the CDP target in Pass 1 with no client-side reset primitive. Different bug class from the plan's predicted "in-page-fetch silent-fail" — Phase 4 should NOT cite obscura with that attribution without follow-up.
+- [Phase 2 P04]: obscura composite 3.27 / 10 — 5th of 5 measured MCPs. N/A-aware (denominator=15, interaction_depth=0 numeric not N/A — obscura has interactive surface). Updated ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27.
 
 ### Pending Todos
 
@@ -122,6 +130,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T22:10:00Z
-Stopped at: Plan 02-03 (firecrawl) complete. Median row 4.23 published in results/2026-05-26/scores.json. Ranking now: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23. Ready for Plan 02-04 (obscura).
+Last session: 2026-05-26T22:35:00Z
+Stopped at: Plan 02-04 (obscura) complete. Median row 3.27 published in results/2026-05-26/scores.json with capability=stealth-specialist + mode=no-stealth-flag. Engine install succeeded on macOS arm64 (HANDOFF STOP #3 did NOT trip). SAFETY-03 --stealth-disabled enforced. Updated ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27. Memory-footprint claim from research/SUMMARY.md partially supported (mean 32.4 MB matches; peak 57.8 MB exceeds 2×). Ready for Plan 02-05 (browser-use).
 Resume file: None
