@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-04 (obscura) complete; 4/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-05 (browser-use)."
-last_updated: "2026-05-26T22:35:00Z"
+stopped_at: "Plan 02-05 (browser-use dual-mode) complete; 5/7 MCPs scored beyond Playwright calibration (browser-use direct=5.87 scored, browser-use agent=SKIPPED LLM_KEY_ABSENT). FAIRNESS-05 contract satisfied (both rows present). HANDOFF #2 init-timeout: CONFIRMED FIXED in v0.12.7. Ready for Plan 02-06 (cloakbrowser)."
+last_updated: "2026-05-26T23:10:00Z"
 last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 13
-  completed_plans: 11
-  percent: 46
+  completed_plans: 12
+  percent: 50
 ---
 
 # Project State
@@ -21,17 +21,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 2 — Per-MCP Scoring Runs (3/7 MCPs scored beyond Playwright)
+**Current focus:** Phase 2 — Per-MCP Scoring Runs (5/7 MCP scoring runs complete beyond Playwright; browser-use produced 2 of those 5 rows per FAIRNESS-05 dual-mode contract)
 
 ## Current Position
 
 Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 4 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura); 3 remaining (browser-use, cloakbrowser, attribution-audit)
-Status: Ready to execute Plan 02-05 (browser-use)
+Plan: 5 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode); 2 remaining (cloakbrowser, attribution-audit)
+Status: Ready to execute Plan 02-06 (cloakbrowser)
 Last activity: 2026-05-26
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [████░░░] 4/7
+Phase-2 progress: [██████░] 5/7
+
+scores.json now has 7 rows: playwright (7.93), browser-use-direct (5.87), lightpanda (6.31 N/A-aware), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). Note: matrix-builder must use row.status field, NOT just composite, to distinguish SKIPPED from scored — score_with_na.py renders all-N/A as 0.0 (documented limitation).
 
 ## Performance Metrics
 
@@ -59,6 +61,7 @@ Phase-2 progress: [████░░░] 4/7
 | Phase 2 P02 (lightpanda) | 30 | 2 tasks | 80+ files (3 evidence passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + S2 diagnostic split) |
 | Phase 2 P03 (firecrawl) | 25 | 2 tasks | 45+ files (3 deterministic-FAIL passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + live-URL interesting-angle probes + loopback_probe) |
 | Phase 2 P04 (obscura) | 30 | 2 tasks | 55+ files (3 agent-variance passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + INSTALL_LOG + MEMORY_SNAPSHOT 20-sample RSS trace) |
+| Phase 2 P05 (browser-use dual-mode) | 35 | 2 tasks | 72 files (3 direct-mode passes + DEEP_ANALYSIS + .scrub_allow.txt + .merge.py + init_smoke.json per-mode + agent-mode SKIPPED.md) |
 
 ## Accumulated Context
 
@@ -96,6 +99,13 @@ Recent decisions affecting current work:
 - [Phase 2 P04]: obscura's 4-tool surface (browse_page, browse_interact, browse_session, browse_scrape) has NO screenshot primitive and NO file-upload primitive — S6 and S8 are uncompletable on obscura's surface regardless of harness compatibility. Pass 3's NA markers for S5-S8 are the most epistemically honest verdict.
 - [Phase 2 P04]: obscura's `eval` has no async path (async functions return literal string "Promise"); sync XHR in eval permanently wedged the CDP target in Pass 1 with no client-side reset primitive. Different bug class from the plan's predicted "in-page-fetch silent-fail" — Phase 4 should NOT cite obscura with that attribution without follow-up.
 - [Phase 2 P04]: obscura composite 3.27 / 10 — 5th of 5 measured MCPs. N/A-aware (denominator=15, interaction_depth=0 numeric not N/A — obscura has interactive surface). Updated ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27.
+- [Phase 2 P05]: HANDOFF-GSD-AUTO STOP #2 status CONFIRMED FIXED — browser-use v0.12.7 initialize handshake completes in ~7s ≪ 30s timeout in BOTH agent-mode and direct-mode env states. The 2026-05-21 testbench's "0/15 initialize timeout" regression is no longer reproducible. init_smoke.json saved per-mode as forward-looking evidence. The pre-flight smoke-test (`bench.tools_inventory <mcp>`) is now the recommended first step of any plan following a vendor-bug STOP precedent.
+- [Phase 2 P05]: FAIRNESS-05 dual-row contract enforced for browser-use. scores.json contains BOTH `browser-use-direct` (scored, composite 5.87) and `browser-use-agent` (SKIPPED, reason=LLM_KEY_ABSENT) — distinguished by `mode` field. Capability tag `LLM-augmented` describes architecture (shared); mode tag (`direct` vs `agent`) describes the specific measurement. Reusable pattern for any future MCP with similar mode-switching.
+- [Phase 2 P05]: Vitalik's headline empirical claim ("does browser-use work without user's LLM key?") answered with nuance: CONFIRMED for S1+S2+S3+S8 (deterministic tool surface, no LLM needed), REFUTED for S4-S7 (form interaction) — with the CRUCIAL CAVEAT that S4-S7 fail for fixture-side React-hydration clobber (same wall chrome-devtools and obscura hit), NOT for missing LLM. Negative evidence in 3 transcripts: `retry_with_browser_use_agent` (the LLM escape hatch) was explicitly NOT invoked.
+- [Phase 2 P05]: browser-use-direct composite 5.87 / 10 (per-pass spread 6.07/6.20/5.87, Δ=0.33) — slots into 3rd place ahead of chrome-devtools (5.6). The 0.33-point spread is the SMALLEST of any agent-driven MCP this wave (chrome-devtools=2.73, obscura=0.80). Updated ranking: playwright 7.93 > lightpanda 6.31 > browser-use-direct 5.87 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27 (browser-use-agent SKIPPED).
+- [Phase 2 P05]: Interpretation-variance vs execution-variance distinction surfaced — a finer-grained methodology-honesty datapoint than chrome-devtools/obscura's agent-discovery variance. PASS2's agent marked S5-S8 as capability-N/A after S4 was blocked; PASS1+PASS3 marked them FAIL. Both defensible; majority FAIL wins the median. Reported in DEEP_ANALYSIS.md and the Phase 4 commentary backlog.
+- [Phase 2 P05]: score_with_na.py renders SKIPPED row as composite=0.0 (degenerate-case fallback for total_weight=0). NOT fixed this plan (the file is adjacent to sacrosanct scoring/score.py). The status=SKIPPED field in scores.json is the source of truth for downstream consumers; Phase 4 matrix builder must consult status, not just composite. Documented as a known limitation.
+- [Phase 2 P05]: Agent mode SKIPPED branch chosen for reason=LLM_KEY_ABSENT (OPENAI_API_KEY and ANTHROPIC_API_KEY both zero-length sentinels in this host's env; OPENROUTER_API_KEY also empty; rbw locked and autonomous executor cannot prompt for unlock). The plan's Task 2 explicitly anticipates this branch — followed precedent (firecrawl 02-03 SKIPPED schema, extended with "what was verified before skipping" + "re-run procedure" sections). A follow-up agent-mode run is recoverable via rbw unlock + LLM key export.
 
 ### Pending Todos
 
@@ -107,7 +117,7 @@ None yet.
 
 [Issues that affect future work]
 
-- **Browser-use `initialize` timeout** — 2026-05 testbench showed transport mismatch on v0.12.7; Phase 2 must determine whether the bug is fixed and, if not, score 0 with a Linear bug ticket against the vendor (no courtesy-disclosure window in this wave per 2026-05-22 scope cut).
+- ~~**Browser-use `initialize` timeout**~~ — RESOLVED 2026-05-26 in Plan 02-05. v0.12.7 handshake completes in ~7s ≪ 30s timeout in BOTH direct-mode and agent-mode env states. init_smoke.json saved per-mode as evidence. The 2026-05-21 testbench's "0/15 initialize timeout" regression was fixed by the vendor in or before v0.12.7. No Linear bug filed (no longer needed).
 - **Obscura engine install on macOS arm64** — known gap from 2026-05 testbench; Phase 1 should attempt `obscura-mcp install` early so Phase 2 isn't surprised.
 - **CloakBrowser Linux availability** — closed-source binary, macOS verified, Linux unknown; document in `docs/REPRODUCIBILITY.md` so Linux readers expect 6/7 if unavailable.
 
@@ -130,6 +140,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T22:35:00Z
-Stopped at: Plan 02-04 (obscura) complete. Median row 3.27 published in results/2026-05-26/scores.json with capability=stealth-specialist + mode=no-stealth-flag. Engine install succeeded on macOS arm64 (HANDOFF STOP #3 did NOT trip). SAFETY-03 --stealth-disabled enforced. Updated ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27. Memory-footprint claim from research/SUMMARY.md partially supported (mean 32.4 MB matches; peak 57.8 MB exceeds 2×). Ready for Plan 02-05 (browser-use).
+Last session: 2026-05-26T23:10:00Z
+Stopped at: Plan 02-05 (browser-use dual-mode) complete. FAIRNESS-05 contract satisfied: scores.json now contains BOTH browser-use-direct (composite 5.87, capability=LLM-augmented, mode=direct, 3-pass median across 6.07/6.20/5.87) AND browser-use-agent (SKIPPED, reason=LLM_KEY_ABSENT). HANDOFF-GSD-AUTO STOP #2 RESOLVED — v0.12.7 initialize timeout no longer reproduces (~7s handshake). Vitalik's "no-LLM-key" headline question answered with nuance (CONFIRMED for S1+S2+S3+S8, REFUTED for S4-S7 with React-clobber CAVEAT). Updated ranking: playwright 7.93 > lightpanda 6.31 > browser-use-direct 5.87 > chrome-devtools 5.6 > firecrawl 4.23 > obscura 3.27. Ready for Plan 02-06 (cloakbrowser — last per-MCP plan before attribution-audit).
 Resume file: None
