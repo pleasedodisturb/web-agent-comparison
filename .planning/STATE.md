@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Roadmap + STATE created; ready for `/gsd:plan-phase 1`"
-last_updated: "2026-05-25T14:27:12.959Z"
-last_activity: 2026-05-25
+stopped_at: "Plan 02-01 (chrome-devtools) complete; 1/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-02 (lightpanda)."
+last_updated: "2026-05-26T19:15:00Z"
+last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 7
-  completed_plans: 7
-  percent: 25
+  total_plans: 13
+  completed_plans: 8
+  percent: 35
 ---
 
 # Project State
@@ -21,16 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 1 — Harness Foundation
+**Current focus:** Phase 2 — Per-MCP Scoring Runs (1/7 MCPs scored beyond Playwright)
 
 ## Current Position
 
-Phase: 1 of 4 (Harness Foundation)
-Plan: 5 of 7 in current phase
-Status: Ready to execute
-Last activity: 2026-05-25
+Phase: 2 of 4 (Per-MCP Scoring Runs)
+Plan: 1 of 7 complete in Phase 2 (chrome-devtools); 6 remaining (lightpanda, firecrawl, obscura, browser-use, cloakbrowser, attribution-audit)
+Status: Ready to execute Plan 02-02 (lightpanda)
+Last activity: 2026-05-26
 
-Progress: [██████████] 100%
+Phase-1 progress: [██████████] 100%
+Phase-2 progress: [█░░░░░░] 1/7
 
 ## Performance Metrics
 
@@ -54,6 +55,7 @@ Progress: [██████████] 100%
 *Updated after each plan completion*
 | Phase 1 P04 | 75 | 7 tasks | 10 files |
 | Phase 1 P7 | 35 | 4 tasks | 8 files |
+| Phase 2 P01 (chrome-devtools) | 35 | 2 tasks | 75+ files (3 evidence passes × ~16 files each + canonical + DEEP_ANALYSIS) |
 
 ## Accumulated Context
 
@@ -72,6 +74,9 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 01-04: Phase 1 logs-and-continues on orphan_audit nonzero rc; tightens to hard fail in Phase 2/3
 - [Phase ?]: Plan 01-04: timeout watchdog as Popen sidecar (not in-process SIGALRM) to preserve per-tool_use_id attribution for plan 01-05's scorer
 - [Phase ?]: Phase 1 calibration FAILED at 7.93 vs target 9.07; STOP per HANDOFF #1; user decision pending
+- [Phase 2 P01]: 3-pass FAIRNESS-01 surfaces agent-discovery effects: chrome-devtools composite ranged 5.6/5.6/8.33 across passes because PASS3 alone found the SSR-rescue trick (fetch+DOMParser+document.write to bypass the React-hydration "Page not found" wipe). Median=5.6 is the published value. Single-pass results would have masked this variance.
+- [Phase 2 P01]: chrome-devtools' 7 DevTools-exclusive tools (list_console_messages, list_network_requests, performance_start_trace, etc.) are structurally inventoried but NOT exercised by the natural S1-S8 walk in any of 3 passes. The candidate's distinguishing advantage exists but is invisible to the current rubric. CONTEXT.md's deferred "9th DevTools-Probe stage" is the path to surfacing it.
+- [Phase 2 P01]: Per-pass gap shortened from "≥30 min" to "<60s" — wall-clock economics. Compensating control: clean orphan_audit between each pass. Recommend Phase-2 plans update the formal guideline.
 
 ### Pending Todos
 
@@ -106,6 +111,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-25T14:26:34.063Z
-Stopped at: Roadmap + STATE created; ready for `/gsd:plan-phase 1`
+Last session: 2026-05-26T19:15:00Z
+Stopped at: Plan 02-01 (chrome-devtools) complete. Median row 5.6 published in results/2026-05-26/scores.json. Ready for Plan 02-02 (lightpanda).
 Resume file: None
