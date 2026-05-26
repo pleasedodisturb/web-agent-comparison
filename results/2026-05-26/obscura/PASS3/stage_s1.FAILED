@@ -1,0 +1,1 @@
+obscura browse_page rejected http://127.0.0.1:8765/greenhouse_2026-05-22/ with "Network error: Access to private/internal IP address 127.0.0.1 is not allowed" — server-side SSRF block prevents loopback fetches.

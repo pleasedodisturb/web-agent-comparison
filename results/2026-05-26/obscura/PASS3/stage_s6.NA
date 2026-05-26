@@ -1,0 +1,1 @@
+Obscura MCP surface (browse_page, browse_interact, browse_session, browse_scrape) exposes no file-upload primitive — resume upload is not expressible with this MCP regardless of network reachability.
