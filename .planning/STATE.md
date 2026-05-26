@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 02-02 (lightpanda) complete; 2/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-03 (firecrawl)."
-last_updated: "2026-05-26T19:48:00Z"
+stopped_at: "Plan 02-03 (firecrawl) complete; 3/7 MCPs scored beyond Playwright calibration. Ready for Plan 02-04 (obscura)."
+last_updated: "2026-05-26T22:10:00Z"
 last_activity: 2026-05-26
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 13
-  completed_plans: 9
-  percent: 38
+  completed_plans: 10
+  percent: 42
 ---
 
 # Project State
@@ -21,17 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 2 — Per-MCP Scoring Runs (2/7 MCPs scored beyond Playwright)
+**Current focus:** Phase 2 — Per-MCP Scoring Runs (3/7 MCPs scored beyond Playwright)
 
 ## Current Position
 
 Phase: 2 of 4 (Per-MCP Scoring Runs)
-Plan: 2 of 7 complete in Phase 2 (chrome-devtools, lightpanda); 5 remaining (firecrawl, obscura, browser-use, cloakbrowser, attribution-audit)
-Status: Ready to execute Plan 02-03 (firecrawl)
+Plan: 3 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl); 4 remaining (obscura, browser-use, cloakbrowser, attribution-audit)
+Status: Ready to execute Plan 02-04 (obscura)
 Last activity: 2026-05-26
 
 Phase-1 progress: [██████████] 100%
-Phase-2 progress: [██░░░░░] 2/7
+Phase-2 progress: [███░░░░] 3/7
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Phase-2 progress: [██░░░░░] 2/7
 | Phase 1 P7 | 35 | 4 tasks | 8 files |
 | Phase 2 P01 (chrome-devtools) | 35 | 2 tasks | 75+ files (3 evidence passes × ~16 files each + canonical + DEEP_ANALYSIS) |
 | Phase 2 P02 (lightpanda) | 30 | 2 tasks | 80+ files (3 evidence passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + S2 diagnostic split) |
+| Phase 2 P03 (firecrawl) | 25 | 2 tasks | 45+ files (3 deterministic-FAIL passes + canonical + DEEP_ANALYSIS + .scrub_allow.txt + live-URL interesting-angle probes + loopback_probe) |
 
 ## Accumulated Context
 
@@ -83,6 +84,10 @@ Recent decisions affecting current work:
 - [Phase 2 P02]: 2026-03 "lightpanda is React-blind, 0 bytes on Ashby" claim CONFIRMED at high specificity on mcp__lightpanda__markdown (0 bytes across all 3 passes), partially refuted on raw-shell axis (4-7KB shell delivered but never hydrated). The right framing: "0 bytes of usable extraction; ~5KB of dead shell".
 - [Phase 2 P02]: Lightpanda version-string inconsistency reproduced — binary self-reports 0.3.0, MCP serverInfo.version handshake says 0.1.0. SHA256 pin is canonical for reproducibility.
 - [Phase 2 P02]: Zero pass-to-pass variance for architecturally-bounded candidates. 3-pass median is most valuable for candidates with unused capability a smart agent might discover (chrome-devtools); single-pass would suffice for hard-architectural ceilings (lightpanda, firecrawl).
+- [Phase 2 P03]: firecrawl cloud-vs-loopback architectural mismatch confirmed at HTTP-validation layer — `POST api.firecrawl.dev/v1/scrape` with a 127.0.0.1 URL returns HTTP 400 BAD_REQUEST ("URL must have a valid top-level domain or be a valid path") before any scrape attempt. Per FAIRNESS-06: tagged `env-mismatch` (not `tool-bug`) because firecrawl's URL validator is doing its job correctly; the conflict is between the cloud-only model and Phase-1's fixture-loopback contract. Aggregator's default fallback `tool-bug` manually overridden.
+- [Phase 2 P03]: "Cloud LLM-extraction lifts Data Quality (3x weight) above raw-page MCPs; 96% success on JS-heavy sites" claim PARTIALLY REFUTED via single-shot live-URL probes. Confirmed lift on Greenhouse SSR (24,237 markdown bytes vs Playwright's 2,663-byte structured YAML — 9× the byte count, full natural-language body with 31 headings). Refuted on Ashby React 18 SPA (203 bytes of footer chrome only — same React-blind failure mode as lightpanda). Firecrawl is the right tool for SSR-heavy targets, NOT a JS-SPA fallback.
+- [Phase 2 P03]: Single-shot live-URL probe pattern established for cloud-only candidates — captures the candidate's testable surface without breaking the loopback scoring contract. Bodies trimmed for public-repo hygiene (preserves metadata + heading inventory + counts, removes third-party content like real-person mentor names).
+- [Phase 2 P03]: firecrawl composite 4.23 / 10 — 4th of 4 measured MCPs. N/A-aware (denominator=13). Ranking: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23. The rubric's honest answer about an MCP that cannot comply with the apples-to-apples loopback invariant.
 
 ### Pending Todos
 
@@ -117,6 +122,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T19:48:00Z
-Stopped at: Plan 02-02 (lightpanda) complete. Median row 6.31 published in results/2026-05-26/scores.json. Ranking now: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6. Ready for Plan 02-03 (firecrawl).
+Last session: 2026-05-26T22:10:00Z
+Stopped at: Plan 02-03 (firecrawl) complete. Median row 4.23 published in results/2026-05-26/scores.json. Ranking now: playwright 7.93 > lightpanda 6.31 > chrome-devtools 5.6 > firecrawl 4.23. Ready for Plan 02-04 (obscura).
 Resume file: None
