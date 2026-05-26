@@ -64,7 +64,7 @@ class IterationCounterTests(unittest.TestCase):
     def test_one_minute_thirty_second_sleep_yields_two_iterations(self):
         """duration=1.0min, sleep=30s -> iterations at t=0 and t=30, totalling 2."""
 
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             return ("PASS", 5, None)  # status, elapsed_ms, error
 
         # Use a synthetic clock so the test runs in milliseconds, not minutes.
@@ -156,7 +156,7 @@ class ReadOnlyModeTests(unittest.TestCase):
     """Test 3: lightpanda mode='read-only' skips S5 with N/A_READONLY."""
 
     def test_read_only_mode_marks_s5_na_and_increments_counter(self):
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             return ("PASS", 5, None)
 
         clock = {"now": 0.0}
@@ -201,7 +201,7 @@ class TimeoutEnforcementTests(unittest.TestCase):
     def test_timeout_records_timeout_status_and_thirty_thousand_ms(self):
         # Simulate the per-tool-call timeout firing. The internal call
         # function should catch asyncio.TimeoutError and return TIMEOUT.
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             # Caller wraps in wait_for(timeout=30) — surface a TimeoutError.
             raise asyncio.TimeoutError("simulated 30s tool-call timeout")
 
@@ -232,11 +232,11 @@ class TimeoutEnforcementTests(unittest.TestCase):
                     mode="full",
                 ))
 
-        # Every iteration logged TIMEOUT for s1.
-        self.assertGreaterEqual(result.iterations_failed["s1"], 1)
-        # Read the log file back; expect TIMEOUT and s1_ms=30000 at least once.
-        log = (out_dir / "stability.log").read_text(encoding="utf-8")
-        self.assertIn("s1=TIMEOUT", log)
+            # Every iteration logged TIMEOUT for s1.
+            self.assertGreaterEqual(result.iterations_failed["s1"], 1)
+            # Read the log file back; expect TIMEOUT and s1_ms=30000 at least once.
+            log = (out_dir / "stability.log").read_text(encoding="utf-8")
+            self.assertIn("s1=TIMEOUT", log)
 
 
 # ─── Test 5: loopback-only enforcement for cloakbrowser ─────────────────
@@ -279,7 +279,7 @@ class MemoryTrackingTests(unittest.TestCase):
             except StopIteration:
                 return 180_000
 
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             return ("PASS", 5, None)
 
         clock = {"now": 0.0}
@@ -322,7 +322,7 @@ class OrphanAuditTests(unittest.TestCase):
     """Test 7: post-run orphan audit returns survivor count; nonzero -> COMPLETED_WITH_ORPHANS."""
 
     def test_zero_survivors_yields_completed_status(self):
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             return ("PASS", 5, None)
 
         clock = {"now": 0.0}
@@ -356,7 +356,7 @@ class OrphanAuditTests(unittest.TestCase):
         self.assertEqual(result.completion_status, "COMPLETED")
 
     def test_nonzero_survivors_yields_completed_with_orphans(self):
-        async def fake_call(stage, recipe, base_url):
+        async def fake_call(stage, recipe, base_url, **kwargs):
             return ("PASS", 5, None)
 
         clock = {"now": 0.0}
@@ -407,21 +407,21 @@ class SkipModeTests(unittest.TestCase):
                 wallclock_decision="selective_top3_60min_rest_30min",
             )
 
-        self.assertEqual(result.completion_status, "SKIPPED")
-        self.assertEqual(result.skip_reason, "CLOUD_NO_LOOPBACK")
+            self.assertEqual(result.completion_status, "SKIPPED")
+            self.assertEqual(result.skip_reason, "CLOUD_NO_LOOPBACK")
 
-        meta_path = out_dir / "stability_metadata.json"
-        self.assertTrue(meta_path.exists())
-        meta = json.loads(meta_path.read_text(encoding="utf-8"))
-        self.assertEqual(meta["completion_status"], "SKIPPED")
-        self.assertEqual(meta["skip_reason"], "CLOUD_NO_LOOPBACK")
-        self.assertEqual(meta["orphan_audit_survivors"], 0)
-        self.assertEqual(meta["iterations_completed"], 0)
+            meta_path = out_dir / "stability_metadata.json"
+            self.assertTrue(meta_path.exists())
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            self.assertEqual(meta["completion_status"], "SKIPPED")
+            self.assertEqual(meta["skip_reason"], "CLOUD_NO_LOOPBACK")
+            self.assertEqual(meta["orphan_audit_survivors"], 0)
+            self.assertEqual(meta["iterations_completed"], 0)
 
-        # A stability.log marker should be written so the SUMMARY scanner
-        # finds something at the canonical path.
-        log_path = out_dir / "stability.log"
-        self.assertTrue(log_path.exists())
+            # A stability.log marker should be written so the SUMMARY scanner
+            # finds something at the canonical path.
+            log_path = out_dir / "stability.log"
+            self.assertTrue(log_path.exists())
 
 
 # ─── Test 9: TOOL_RECIPES coverage ──────────────────────────────────────
