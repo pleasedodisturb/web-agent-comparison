@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: milestone
 status: verifying
 stopped_at: "Plan 02-07 (cross-row attribution audit) complete. **Phase 2 CLOSED.** All 5 Phase 2 success criteria PASS: (SC1) 7 evidence dirs or SKIPPED.md, (SC2) read-only MCPs N/A not 0, (SC3) browser-use dual-mode, (SC4) capability + attribution complete, (SC5) cloakbrowser loopback-only. Audit injected exactly 2 fields on the playwright row (capability=tool-only, mode=default — Phase 1 calibration row pre-dated FAIRNESS-04 contract); scoring values byte-for-byte preserved across all 8 rows. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact (capability-grouped, with sandbox-only callout for cloakbrowser per SAFETY-04+REPORT-08). PHASE2_AUDIT.md emits per-SC PASS/FAIL summary + tag-injection inventory + 3 known limitations carried forward for Phase 4. scoring/score.py SACROSANCT contract upheld (git diff main = 0 lines). 176/176 Phase-1 tests pass. **Phase 3 + Phase 4 can begin in parallel** against the validated scores.json matrix."
-last_updated: "2026-05-26T22:58:12.923Z"
-last_activity: 2026-05-26
+last_updated: "2026-05-27T00:34:34.838Z"
+last_activity: 2026-05-27
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 19
-  completed_plans: 17
+  completed_plans: 18
   percent: 50
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 Phase: 2 of 4 (Per-MCP Scoring Runs) — **CLOSED**
 Plan: 7 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode, cloakbrowser, attribution-audit)
 Status: Phase complete — ready for verification
-Last activity: 2026-05-26
+Last activity: 2026-05-27
 
 Phase-1 progress: [██████████] 100%
 Phase-2 progress: [██████████] 7/7
@@ -66,6 +66,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 2 P07 (attribution audit) | 20 | 2 tasks | 5 files (PHASE2_AUDIT.md × 2 + CAPABILITY_MATRIX.md + INJECTIONS.md + scores.json 2-line additive diff) |
 | Phase 3 P02 | 25 | 2 tasks | 12 files |
 | Phase 3 P03 | 41 | 2 tasks | 11 files |
+| Phase 03 P04 | 88min | 3 tasks | 21 files |
 
 ## Accumulated Context
 
@@ -115,6 +116,9 @@ Recent decisions affecting current work:
 - [Phase 2 P07]: Three known limitations carried forward to Phase 4 (documented in PHASE2_AUDIT.md): (1) score_with_na.py renders SKIPPED rows as composite=0.0 — Phase 4 matrix builder must consult `status` field, not just composite. (2) The 4-tag taxonomy's `tool-bug` aggregator default loses MCP-fault vs. agent-fault distinction — DEEP_ANALYSIS.md per row has the interpretive nuance; Phase 4 must lift those paragraphs into recommendations.md. (3) playwright lacks per-MCP DEEP_ANALYSIS.md (Phase 1 calibration baseline) — Phase 4 should either generate one from 2026-03-31_run.md lineage or explicitly call out the asymmetry.
 - [Phase ?]: [Phase 3 P02] Token efficiency 3-scope (MEAS-02) split (schema/payload/turn) recovered for all 8 MCPs. Headline payload-bytes ranking among scored: obscura 16,394 < lightpanda 44,633 < chrome-devtools 62,318 < cloakbrowser 77,228 < browser-use-direct 120,059. 7.3x spread (not the 20x the 2026-03 wave reported once the three units are separated). firecrawl payload=0 (no Claude session ever ran — cloud API can't reach loopback); playwright NO_EVIDENCE (PASS dirs at 2026-05-25/). Schema scope null this run — ANTHROPIC_API_KEY absent; idempotent re-run will backfill four schema_* fields without disturbing payload/turn data.
 - [Phase ?]: [Phase 3 P03] Cold-start (MEAS-01) 3-segment cold+warm medians captured for all 8 MCP rows via bench/measure_cold_start.py (mcp.client.stdio + time.perf_counter_ns). Headline cold-totals (ms): lightpanda 13 < obscura 158 < firecrawl 171 < playwright 197 < cloakbrowser 235 < chrome-devtools 358 < browser-use-direct 668. Cold-vs-warm delta within ±5 ms for every MCP; only sudo purge would surface true uncached-filesystem cold-start (deferred G-710). browser-use v0.12.7 timeout remains fixed (10/10 runs). 216/216 tests; scoring/score.py + scores.json byte-for-byte unchanged.
+- [Phase ?]: Plan 03-04: Executor-reduced selective_top3 wallclock budget 4× (15min top-3 + 7min rest = ~66min total instead of 4.5 hours)
+- [Phase ?]: Plan 03-04: Stability harness measures transport-level PASS, not semantic-output PASS — Phase 4 reconciliation needed
+- [Phase ?]: Plan 03-04: _diff_after reports POST-kill unkilled-survivor count; pre-kill detection preserved in stability_orphan_audit.log
 
 ### Pending Todos
 
@@ -149,6 +153,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-26T22:58:04.394Z
+Last session: 2026-05-27T00:34:27.283Z
 Stopped at: Plan 02-07 (cross-row attribution audit) complete. **Phase 2 CLOSED.** All 5 Phase 2 success criteria PASS: (SC1) 7 evidence dirs or SKIPPED.md, (SC2) read-only MCPs N/A not 0, (SC3) browser-use dual-mode, (SC4) capability + attribution complete, (SC5) cloakbrowser loopback-only. Audit injected exactly 2 fields on the playwright row (capability=tool-only, mode=default — Phase 1 calibration row pre-dated FAIRNESS-04 contract); scoring values byte-for-byte preserved across all 8 rows. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact (capability-grouped, with sandbox-only callout for cloakbrowser per SAFETY-04+REPORT-08). PHASE2_AUDIT.md emits per-SC PASS/FAIL summary + tag-injection inventory + 3 known limitations carried forward for Phase 4. scoring/score.py SACROSANCT contract upheld (git diff main = 0 lines). 176/176 Phase-1 tests pass. **Phase 3 + Phase 4 can begin in parallel** against the validated scores.json matrix.
 Resume file: None

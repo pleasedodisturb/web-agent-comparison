@@ -36,7 +36,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 
 - [x] **MEAS-01**: Cold-start latency per MCP is captured as a 3-segment split (`t_resolve` / `t_spawn` / `t_first_useful`) for BOTH cold and warm cache; published value is the median of ≥5 runs; lives in `results/<date>/<mcp>/cold_start.json`.
 - [x] **MEAS-02**: Token efficiency per MCP per task is captured as a 3-scope split (`schema` / `payload` / `turn`); the published headline column is `payload` (the apples-to-apples per-call cost); `schema` uses Anthropic SDK `count_tokens` (free, deterministic); `turn` parses `stream-json` `usage` blocks (actual billed cost); `payload` parses raw JSON-RPC. Lives in `results/<date>/<mcp>/tokens.json`.
-- [ ] **MEAS-07**: A 1hr stability run per MCP loops S1+S5 with 30s sleeps against the local snapshot-fixture server (NOT live targets) and writes to `results/<date>/<mcp>/stability.log`; post-run orphan-process audit must be 0.
+- [x] **MEAS-07**: A 1hr stability run per MCP loops S1+S5 with 30s sleeps against the local snapshot-fixture server (NOT live targets) and writes to `results/<date>/<mcp>/stability.log`; post-run orphan-process audit must be 0.
 - [ ] **MEAS-08**: Per-stage tool-call count is captured for every S1-S8 attempt; this empirically grounds the Playwright "browser_fill_form fills 6 fields in 1 call" claim and equivalents.
 - [ ] **MEAS-09**: A per-MCP tool-surface inventory (count + 6-category breakdown per chrome-devtools-mcp's category scheme) is captured at harness start; lives in `results/<date>/<mcp>/tools_inventory.json`.
 
@@ -126,7 +126,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 | FAIRNESS-07 | Phase 1 | Complete |
 | MEAS-01 | Phase 3 | Complete |
 | MEAS-02 | Phase 3 | Complete |
-| MEAS-07 | Phase 3 | Pending |
+| MEAS-07 | Phase 3 | Complete |
 | MEAS-08 | Phase 3 | Pending |
 | MEAS-09 | Phase 3 | Pending |
 | REPRO-01 | Phase 4 | Pending |
