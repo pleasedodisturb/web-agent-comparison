@@ -86,7 +86,7 @@ Does not graduate this wave. Documented reasons below; follow-up tickets noted i
 
 **Evidence:**
 - Per-MCP deep analysis — `results/2026-05-26/obscura/DEEP_ANALYSIS.md`
-- SAFETY-03 macOS stealth leak — `~/.claude/docs/browser-tools.md` (2026-05-21)
+- SAFETY-03 macOS stealth leak — [`docs/external-findings/browser-tools-2026-05-21.md`](../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03
 
 ### `browser-use-agent` — composite **SKIPPED** (`LLM-augmented` / `agent`)
 
@@ -127,5 +127,6 @@ Audit summary for this wave (full audit in Plan 04-06):
 ## Linear Traceability
 
 - Umbrella: [G-703](https://linear.app/abandoned-yachts/issue/G-703) — Phase 4 synthesis under this wave's break-before-cycle estimate=16 split.
-- Per-MCP sub-tickets: G-715 (browser-use), G-716 (lightpanda), G-717 (firecrawl), G-718 (obscura), G-719 (chrome-devtools), G-720 (SANDBOX-ONLY tier; see that section for the sandbox callout). Playwright is the Phase-1 calibration baseline and does not carry a per-MCP sub-ticket.
+- Per-MCP sub-tickets (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../docs/LINEAR_SUBTICKETS.md)): G-714 (playwright), G-715 (browser-use), G-716 (chrome-devtools), G-717 (lightpanda), G-718 (obscura), G-719 (firecrawl), G-720 (cloakbrowser).
+**Sandbox only — do not point at authenticated sessions.**
 - Future-wave anchor: [G-710](https://linear.app/abandoned-yachts/issue/G-710) — bot-detection + TLS-fingerprint + cross-machine reproducibility follow-up. Reuses this wave's harness; ships in a follow-up wave.

@@ -78,7 +78,7 @@ Per-stage outcomes across the 8-stage job-application pipeline. `N/A` (categoric
 | MCP | S1 | S2 | S3 | S4 | S5 | S6 | S7 | S8 | Row status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `cloakbrowser` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | SCORED |
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 | `playwright` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | SCORED |
 | `lightpanda` | PASS | FAIL | PASS | N/A | N/A | N/A | N/A | N/A | SCORED |
 | `browser-use-direct` | PASS | PASS | PASS | FAIL | FAIL | FAIL | FAIL | PASS | SCORED |
@@ -158,7 +158,7 @@ SKIPPED, so the comparison is honest about what was measured.
 #### stealth-specialist (anti-detection focus)
 
 - `cloakbrowser` — closed-source binary patched for stealth; passes
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
   Cloudflare, reCAPTCHA, FingerprintJS (per vendor claims); **sandbox
   only — do not point at authenticated sessions.** Composite 8.33 in
   the loopback harness; stealth claims DEFERRED to G-710 per CONTEXT.md
@@ -214,7 +214,7 @@ that preserve a single-axis ranking while signalling the caveat.
 - `results/2026-05-26/{mcp}/DEEP_ANALYSIS.md` — per-MCP capability
   rationale (chrome-devtools, lightpanda, firecrawl, obscura,
   browser-use-direct, cloakbrowser)
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 - `results/2026-05-26/cloakbrowser/SANDBOX_PROOF.md` — SC #5 evidence
 - `results/2026-05-26/browser-use-agent/SKIPPED.md` — LLM_KEY_ABSENT
   re-run procedure
@@ -674,7 +674,7 @@ later session), the falsifiable test for agent mode is:
 **Mode:** `default` (no special invocation flags)
 **Median composite (3-pass, N/A-aware):** **5.6 / 10**
 **Run dates:** 2026-05-26 (all 3 passes within a 26-minute window)
-**Linear ticket:** G-715 (chrome-devtools sub-ticket of G-703)
+**Linear ticket:** G-716 (chrome-devtools sub-ticket of G-703 — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 
 ### Capability tag
 
@@ -817,10 +817,11 @@ sequentially with 3-pass median. Within plan budget; no time-budget escalation n
 
 ### Linear ticket
 
-Per CONTEXT.md `## Decisions § Execution Order`, this row belongs under sub-ticket
-**G-715** (chrome-devtools split of G-703). A summary comment will be posted via
-`linearis comments create G-715` referencing this DEEP_ANALYSIS.md and the median row in
-`scores.json`.
+Per CONTEXT.md `## Decisions § Execution Order` and the canonical mapping in
+[`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md), this row
+belongs under sub-ticket **G-716** (chrome-devtools split of G-703). A
+summary comment will be posted via `linearis comments create G-716`
+referencing this DEEP_ANALYSIS.md and the median row in `scores.json`.
 
 ### Sources
 
@@ -836,7 +837,7 @@ Per CONTEXT.md `## Decisions § Execution Order`, this row belongs under sub-tic
 ## lightpanda — Deep Analysis
 
 **Run date:** 2026-05-26
-**Linear sub-ticket:** G-716 (Phase-2 per-MCP scoring; see G-703 umbrella)
+**Linear sub-ticket:** G-717 (Phase-2 per-MCP scoring; see G-703 umbrella — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 **Plan:** [02-02-lightpanda-PLAN.md](../../../.planning/phases/02-per-mcp-scoring-runs/02-02-lightpanda-PLAN.md)
 **Binary:** `~/.local/bin/lightpanda` (sha256 `4ca3897a1547c9b3b843a0a921c2b4d044afb3ad4914091a845ac608fe1cb047`)
 
@@ -906,7 +907,7 @@ The `bench/capture_versions.py` step and the live MCP handshake disagree about w
 | MCP JSON-RPC `initialize` response → `serverInfo.version` (sent by the running server) | **`0.1.0`** |
 | `versions.json` → `mcps.lightpanda.sha256` (canonical pin) | `4ca3897a1547c9b3b843a0a921c2b4d044afb3ad4914091a845ac608fe1cb047` |
 
-This was documented in `~/.claude/docs/browser-tools.md` (2026-05-21 verification) and reproduced byte-for-byte here. We **do not resolve the contradiction** — both numbers are recorded so a future Phase-4 reader can cite the actual artifact source. The canonical version reference for reproducibility is the SHA256 pin, not either human-facing version string. Phase 4's "Negative Results" section can use this as a documentation-hygiene callout against the vendor.
+This was documented in [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) and reproduced byte-for-byte here. We **do not resolve the contradiction** — both numbers are recorded so a future Phase-4 reader can cite the actual artifact source. The canonical version reference for reproducibility is the SHA256 pin, not either human-facing version string. Phase 4's "Negative Results" section can use this as a documentation-hygiene callout against the vendor.
 
 ### Pass-to-Pass Variance
 
@@ -944,7 +945,7 @@ No other sub-5 cells in the row (data_quality=7, reliability=9, speed=5, token_e
 
 ### Linear Sub-ticket Reference
 
-G-716 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G-720 split is owned by the OUTREACH-03 sweep and was not created at run time). This Deep Analysis can be lifted verbatim into the G-716 comment thread when it lands.
+G-717 (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md); the G-714..G-720 split was filed 2026-05-22 by plan 01-02). This Deep Analysis can be lifted verbatim into the G-717 comment thread when it lands.
 
 ### Stretch Items NOT Done (Deferred)
 
@@ -964,7 +965,7 @@ G-716 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G
 ### Capability tag
 
 `stealth-specialist` — obscura's market positioning and architectural choice is anti-detection: a CDP-direct (not Playwright-on-CDP) engine intended for scraping behind bot-detection layers. Same category as `cloakbrowser`; distinct from `playwright` / `chrome-devtools` (`tool-only`), `browser-use-agent` (`LLM-augmented`), and `firecrawl` (`cloud`).
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 
 The tag is honest about positioning, not about measurement. Phase 2's S1-S8 walk does NOT exercise bot-detection avoidance (that is deferred to G-710). The tag flags that obscura's competitive advantage lives outside the dimensions this phase scores.
 
@@ -972,7 +973,7 @@ The tag is honest about positioning, not about measurement. Phase 2's S1-S8 walk
 
 Obscura's tool surface exposes a per-call `stealth` parameter, and the underlying engine supports a `--stealth` command-line flag. **Neither was enabled in this benchmark.** The reason:
 
-- Per CLAUDE.md `## Conventions` + `~/.claude/docs/browser-tools.md` (2026-05-21): enabling `--stealth` on macOS leaks `Sec-CH-UA-Platform-*` client hints emitted by the network stack, regardless of any JS-level User-Agent shim. Cloudflare cross-checks this. The MCP would be tagged `stealth: leaks` under SAFETY-03 — a methodology-honesty choice, not a workaround.
+- Per CLAUDE.md `## Conventions` + [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03: enabling `--stealth` on macOS leaks `Sec-CH-UA-Platform-*` client hints emitted by the network stack, regardless of any JS-level User-Agent shim. Cloudflare cross-checks this. The MCP would be tagged `stealth: leaks` under SAFETY-03 — a methodology-honesty choice, not a workaround.
 - Per `.mcp.json` (verified pre-flight): `obscura` entry has `command: "obscura-mcp"`, `args: []`. No `--stealth`. The harness `scripts/run_mcp_session.sh` invokes the entry verbatim — no override.
 
 ```bash
@@ -1164,7 +1165,7 @@ Per CONTEXT.md `## Decisions § Execution Order`, this row belongs under sub-tic
 ## firecrawl — Deep Analysis
 
 **Run date:** 2026-05-26
-**Linear sub-ticket:** G-717 (Phase-2 per-MCP scoring; see G-703 umbrella)
+**Linear sub-ticket:** G-719 (Phase-2 per-MCP scoring; see G-703 umbrella — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 **Plan:** [02-03-firecrawl-PLAN.md](../../../.planning/phases/02-per-mcp-scoring-runs/02-03-firecrawl-PLAN.md)
 **Package:** `firecrawl-mcp@3.17.0` (npm; sha256 `55d5fbb20270518f9cb6f0c16fb054e934847fe9a557b355503c0f05dce7d89f`)
 
@@ -1292,7 +1293,7 @@ This row's headline for Stage 2 toolkit selection: **adopt firecrawl as a comple
 
 ### Linear Sub-ticket Reference
 
-G-717 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G-720 split is owned by the OUTREACH-03 sweep and was not created at run time). This Deep Analysis can be lifted verbatim into the G-717 comment thread when it lands.
+G-719 (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md); the G-714..G-720 split was filed 2026-05-22 by plan 01-02). This Deep Analysis can be lifted verbatim into the G-719 comment thread when it lands.
 
 ### Stretch Items NOT Done (Deferred)
 
@@ -1311,7 +1312,7 @@ G-717 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G
 > snapshot fixtures, audited in `SANDBOX_PROOF.md`.
 
 **MCP:** `cloakbrowsermcp` v2.0.4 (PyPI, author `overtimepog`)
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 **Engine:** Source-patched Chromium (closed-source binary, bundled with the PyPI wheel)
 **Capability tag:** `stealth-specialist`
 **Mode:** `sandbox-loopback` (the ONLY supported mode under SAFETY-04)
@@ -1319,7 +1320,7 @@ G-717 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G
 **Median composite (3-pass, N/A-aware):** **8.33 / 10**
 **Run dates:** 2026-05-26 (all 3 passes within a 23-minute window, 21:20-21:43 UTC)
 **Linear ticket:** G-720 (cloakbrowser sub-ticket of G-703)
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 
 ### Capability tag
 
@@ -1333,7 +1334,7 @@ BrowserScan. Same category as `obscura`; distinct from `playwright` /
 Phase 2's S1-S8 walk does NOT exercise bot-detection avoidance — the snapshot
 fixtures don't fingerprint-check; they are static HTML served from loopback.
 cloakbrowser's stealth advantage is NOT validated by an 8.33 composite on this
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 walk. See § "Stealth claims — DEFERRED to G-710" below.
 
 ### Median composite & sub-rubric
@@ -1363,7 +1364,7 @@ measurement task). Same constants every MCP carries this wave.
 |---|---|---|---|---|---|
 | S1 — Greenhouse extract | **PASS** | PASS | PASS | PASS | All 3 passes used `cloak_evaluate(fetch + DOMParser)` to extract the static SSR HTML before the React shell hydrated and clobbered the body. Workaround is durable. |
 | S2 — Ashby SPA extract | **PASS** | PASS | PASS | PASS | All 3 passes acknowledged the Ashby fixture is a 6,294-byte bootstrap shell (no inline data island) and documented the "Page not found" post-hydration result. Cloakbrowser's full Chromium ran the SPA bundle; the fixture lacks live API backing, which IS the finding. |
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 | S3 — Platform detection | **PASS** | PASS | PASS | PASS | Distinguishing markers cited consistently (URL shape, CDN host, SSR-vs-bundle ratio, og:url meta). |
 | S4 — Apply-form snapshot | **PASS** | PASS | PASS | PASS | All 3 used `cloak_evaluate` to inject the static form HTML into the live document and `remove()` scripts so React couldn't re-clobber it. Pattern is robust. |
 | S5 — Fill form | **PASS** (2-of-3) | UNTESTED | PASS | PASS | Pass 1 hit a Claude Code SDK rejection after typing 4 of 4 fields and never wrote `stage_s5.md`; Passes 2 and 3 wrote substantive artifacts (4-field state capture in PASS2, 5-field in PASS3). |
@@ -1387,7 +1388,7 @@ non-interactive mode with `permissionMode=auto`.) The session exited without
 writing S5-S8 artifacts.
 
 **This is NOT a cloakbrowser defect.** The first 4 stages plus 4 typed
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 form fields all succeeded; the agent had a working session with a healthy
 browser when the SDK pushed back. The same `--allowedTools
 mcp__cloakbrowser__*,Read,Write,Bash` allow-list was in place; the
@@ -1398,7 +1399,7 @@ clean completion (`subtype=success`, 54-55 turns, all 8 stages).
 
 **Attribution:** the PASS 1 termination is `tool-bug`-coded in the harness
 taxonomy by default, but the *MCP* under test (cloakbrowser) ran without
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 any tool-call error in PASS 1 up to and including the rejected `cloak_type`
 turn. The rejection came from the orchestrating Claude Code SDK, not the
 MCP server. Per the precedent set in plans 02-01 (chrome-devtools PASS3
@@ -1421,7 +1422,7 @@ Per `.planning/research/SUMMARY.md § Empirical Claims to Falsify`:
 
 This plan does NOT test the stealth claim. The snapshot fixtures don't
 fingerprint-check, so cloakbrowser's 8/8 PASS on Greenhouse/Ashby loopback
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 proves **only** that cloakbrowser CAN drive a browser session (forms,
 clicks, screenshots, JS execution, file upload). It is silent on whether
 the source-patched Chromium can pass any of the named detectors.
@@ -1453,7 +1454,7 @@ intent, comparing pass-fail outcomes.
   form. This is the same defensive pattern other MCPs *attempted* on
   this fixture (chrome-devtools PASS3 SSR-rescue, obscura PASS1
   `0.0.0.0` workaround); cloakbrowser executed it cleanly twice.
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 - **Accessibility-tree snapshots return refs cleanly.** `cloak_snapshot`
   returned a 15-ref interactive tree after the form-injection workaround;
   every subsequent `cloak_type(ref=@eN, ...)` call resolved correctly.
@@ -1468,7 +1469,7 @@ intent, comparing pass-fail outcomes.
   the agent surfaced as a positive insight in transcripts.
 
 ### Tool surface gaps (what cloakbrowser lacks)
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 
 Independent of the stealth-claim deferral, cloakbrowser's surface is
 **missing some primitives that Playwright provides**:
@@ -1509,7 +1510,7 @@ For reference, the matrix-wide attribution context:
 | MCP | Sub-5 cells | Median composite |
 |---|---|---|
 | cloakbrowser | **0** | 8.33 |
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 | playwright | 0 | 7.93 |
 | lightpanda | 1 (js_rendering=2) | 6.31 |
 | browser-use-direct | 2 (error_handling=2, interaction_depth=2) | 5.87 |
@@ -1537,12 +1538,13 @@ to PRIMARY tier on the strength of an 8.33 composite alone.**
 The binding constraint is the closed-source binary trust model:
 
 - **Closed-source** — `cloakbrowsermcp` ships a binary from PyPI (author
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
   `overtimepog`) that no third-party audit has reviewed.
-- **Touches cookies on launch** — per `~/.claude/docs/browser-tools.md`
-  (2026-05-21), the binary modifies host cookies before the harness has
-  a chance to intercept. This is the architectural reason for the
-  loopback-only contract.
+- **Touches cookies on launch** — per
+  [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md)
+  § "Cookie-touch on launch", the binary modifies host cookies before
+  the harness has a chance to intercept. This is the architectural
+  reason for the loopback-only contract.
 - **Telemetry surface unknown** — the binary may phone home; we have
   no way to know without reverse engineering. Loopback restriction
   bounds the exposure to the harness's ephemeral session.
@@ -1550,7 +1552,7 @@ The binding constraint is the closed-source binary trust model:
 For PRIMARY-tier graduation to the Stage-2 terminal-craft toolkit
 (which runs against authenticated sessions on real Greenhouse / Ashby
 hosts), an MCP must be auditable or behavior-bounded. cloakbrowser fails
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 both:
 
 - It cannot be audited (closed source).
@@ -1575,7 +1577,7 @@ Phase 4's `recommendations.md` should tier cloakbrowser as
 Three passes against an identical MCP/fixture/harness produced composites
 {7.27, 8.13, 8.33}. The variance is dominated by PASS 1's premature
 termination (S5-S8 = UNTESTED), not by cloakbrowser behavior:
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 
 - **PASS 1** (terminated at S5 by Claude Code SDK): completed S1-S4
   cleanly, typed 4 of 4 form fields, then the SDK rejected the next
@@ -1591,7 +1593,7 @@ termination (S5-S8 = UNTESTED), not by cloakbrowser behavior:
 **The MCP behaved consistently across all 3 passes** where attempted.
 The session-length variance is a Claude Code SDK budget phenomenon
 unrelated to cloakbrowser's surface.
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 
 ### Wall-clock budget posture
 
@@ -1651,14 +1653,14 @@ ticket sweep per OUTREACH-03 ownership precedent).
 ### Sources
 
 - `results/2026-05-26/cloakbrowser/PASS{1,2,3}/` — per-pass evidence
-**Sandbox only — do not point at authenticated sessions**
+**Sandbox only — do not point at authenticated sessions.**
 - `results/2026-05-26/cloakbrowser/PASS{1,2,3}.json` — per-pass aggregated rows
 - `results/2026-05-26/cloakbrowser/SANDBOX_PROOF.md` — SC #5 audit
 - `results/2026-05-26/cloakbrowser/PASS2/tools_inventory.json` — 20-tool inventory
 - `results/2026-05-26/scores.json` — median row alongside the 7 other MCPs
 - `bench/cloakbrowser_guard.py` — sandbox enforcement primitive
 - `CLAUDE.md ## Constraints` — sandbox-only policy origin
-- `~/.claude/docs/browser-tools.md` (2026-05-21) — closed-binary cookie-touching note
+- [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) — closed-binary cookie-touching note
 - `.planning/research/SUMMARY.md § Empirical Claims to Falsify` — stealth claim (DEFERRED to G-710)
 
 **Sacrosanct check:** `scoring/score.py` byte-for-byte unchanged
@@ -1684,7 +1686,7 @@ The findings below are publishable failures — limitations the rubric surfaced 
 
 1. **`firecrawl` loopback-incompatibility (env-mismatch by design).** Firecrawl's cloud-API URL validator refuses `http://127.0.0.1:8765/...` before any scrape attempt, returning HTTP 400 BAD_REQUEST with `"URL must have a valid top-level domain or be a valid path"`. This is not a Firecrawl bug — the cloud validator is correctly preventing SSRF — but it makes Firecrawl architecturally incompatible with the loopback fixture contract (REPRO-04). Tagged `env-mismatch` per FAIRNESS-06 on `data_quality` + `js_rendering`. Single-shot live-URL probes confirm Firecrawl is genuinely strong on SSR targets (24,237-byte Anthropic JD vs Playwright's 2,663-byte YAML) and weak on React SPAs (203 bytes of Ashby footer chrome only). See `results/2026-05-26/firecrawl/DEEP_ANALYSIS.md` for the full probe data.
 
-2. **`obscura` macOS-only stealth leak (SAFETY-03).** Obscura's `--stealth` flag (and per-call `stealth` parameter) was DISABLED on macOS for this benchmark: enabling stealth on macOS leaks `Sec-CH-UA-Platform-*` client hints from the network stack regardless of any JS-level User-Agent shim — Cloudflare cross-checks this signal (per `~/.claude/docs/browser-tools.md` 2026-05-21 verification). Running Obscura on Linux (where Sec-CH-UA-Platform-* is honest) is the right comparison; deferred to G-710. Phase 4 must NOT promote Obscura to SECONDARY-tier on the basis of "stealth-specialist" without that Linux A/B.
+2. **`obscura` macOS-only stealth leak (SAFETY-03).** Obscura's `--stealth` flag (and per-call `stealth` parameter) was DISABLED on macOS for this benchmark: enabling stealth on macOS leaks `Sec-CH-UA-Platform-*` client hints from the network stack regardless of any JS-level User-Agent shim — Cloudflare cross-checks this signal (per [`docs/external-findings/browser-tools-2026-05-21.md`](../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03). Running Obscura on Linux (where Sec-CH-UA-Platform-* is honest) is the right comparison; deferred to G-710. Phase 4 must NOT promote Obscura to SECONDARY-tier on the basis of "stealth-specialist" without that Linux A/B.
 
 3. **`browser-use-agent` SKIPPED — `LLM_KEY_ABSENT`.** The autonomous executor's env had `OPENAI_API_KEY=<empty>` and `ANTHROPIC_API_KEY=<unset>` (intentional zero-length sentinels), so the agent-mode code path (`retry_with_browser_use_agent`) could not be exercised. The initialize handshake works (tool_count=16 in both modes), confirming the 2026-05-21 testbench's `initialize` timeout regression is fixed in v0.12.7. Full re-run procedure in `results/2026-05-26/browser-use-agent/SKIPPED.md`. SKIPPED is not the same as scored-0: the row contributes no composite to the matrix, only a documented gap.
 
@@ -1706,9 +1708,11 @@ Three known limitations are surfaced explicitly here so external readers see the
 
 ## Linear traceability
 
-This report closes Phase 4 Wave 2 of the G-703 umbrella ticket. Per-MCP sub-tickets G-715..G-720 carry the per-row evidence comments; G-710 is the deferred-follow-up anchor for the bot-detection + TLS-fingerprint adversary set (Cloudflare nowsecure.nl, reCAPTCHA demo, BrowserScan, FingerprintJS) and the Linux A/B for Obscura.
+This report closes Phase 4 Wave 2 of the G-703 umbrella ticket. Per-MCP sub-tickets G-714..G-720 carry the per-row evidence comments; G-710 is the deferred-follow-up anchor for the bot-detection + TLS-fingerprint adversary set (Cloudflare nowsecure.nl, reCAPTCHA demo, BrowserScan, FingerprintJS) and the Linux A/B for Obscura.
 
 - **[G-703](https://linear.app/abandoned-yachts/issue/G-703)** — umbrella ticket (estimate=16, broken into 7 per-MCP sub-tickets + 1 synthesis ticket).
 - **[G-710](https://linear.app/abandoned-yachts/issue/G-710)** — deferred follow-up: bot-detection adversary set, TLS-fingerprint capture, MacBook cross-machine parity, OS-file-cache cold-start, scoring-engine SKIPPED composite fix, Obscura Linux A/B.
-- Per-MCP sub-tickets: G-715 (chrome-devtools), G-716 (lightpanda), G-717 (firecrawl), G-718 (obscura), G-719 (browser-use direct + agent), G-720 (cloakbrowser). Evidence comments lifted verbatim from each row's `DEEP_ANALYSIS.md`.
-**Sandbox only — do not point at authenticated sessions**
+- Per-MCP sub-tickets (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../docs/LINEAR_SUBTICKETS.md)): G-714 (playwright), G-715 (browser-use), G-716 (chrome-devtools), G-717 (lightpanda), G-718 (obscura), G-719 (firecrawl), G-720 (cloakbrowser). Evidence comments lifted verbatim from each row's `DEEP_ANALYSIS.md`.
+**Sandbox only — do not point at authenticated sessions.**
+
+_Note: some embedded Phase 2 `DEEP_ANALYSIS.md` content was authored before the canonical sub-ticket mapping was filed and may cite stale ticket IDs inline; the authoritative mapping is [`docs/LINEAR_SUBTICKETS.md`](../docs/LINEAR_SUBTICKETS.md) — this footer above._
