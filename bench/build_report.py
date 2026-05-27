@@ -372,11 +372,24 @@ def render_executive_summary(scores: dict, partial_run_flag: bool = False) -> st
 def render_methodology_disclaimer(run_date: Any) -> str:
     """REPORT-05 — snapshot-framing disclaimer that the report measures
     "configuration on date X" not intrinsic tool quality.
+
+    Raises ValueError if `run_date` is None, empty, or otherwise yields an
+    empty date string. The CLI's `--run-date` argument is required so
+    this only fires for programmatic callers that omit the date (WR-07);
+    failing loudly is preferable to rendering "evaluated on ****" in the
+    artifact.
     """
     if isinstance(run_date, dict):
         date_str = run_date.get("run_date") or run_date.get("date") or ""
     else:
         date_str = str(run_date or "")
+    date_str = date_str.strip()
+    if not date_str:
+        raise ValueError(
+            "render_methodology_disclaimer requires a non-empty run_date "
+            "(got None / empty); refusing to emit a malformed disclaimer "
+            "header with no date."
+        )
     return (
         f"## Methodology disclaimer\n"
         f"\n"

@@ -353,6 +353,66 @@ class TestRenderAuditMd(unittest.TestCase):
         md = render_audit_md(audit, "2026-05-28T00:00:00Z")
         self.assertIn("FAIL", md)
 
+    def test_md_accepts_minimal_audit_without_actual_keys(self):
+        """WR-01: render_audit_md must tolerate dicts missing actual_keys /
+        baseline_keys / all_pass — derive defaults from the value fields.
+        """
+        minimal = {
+            "candidate_count": 7,
+            "rubric_columns": 8,
+            "terminal_craft_commits": 0,
+            "no_new_mcps": True,
+        }
+        # Must not raise KeyError.
+        md = render_audit_md(minimal, "2026-05-28T00:00:00Z")
+        self.assertIn("SAFETY-05", md)
+        self.assertIn("PASS", md)
+
+    def test_md_accepts_minimal_audit_with_failing_value(self):
+        """WR-01: minimal audit with a failing value should render FAIL."""
+        minimal = {
+            "candidate_count": 8,  # not 7 → should derive candidate_count_pass=False
+            "rubric_columns": 8,
+            "terminal_craft_commits": 0,
+            "no_new_mcps": False,  # explicit False → no_new_mcps_pass=False
+        }
+        md = render_audit_md(minimal, "2026-05-28T00:00:00Z")
+        self.assertIn("FAIL", md)
+
+
+class TestTerminalCraftCommitsGitFailure(unittest.TestCase):
+    """WR-02: a git failure must raise (not silently return 0)."""
+
+    def test_git_failure_raises_runtime_error(self):
+        bad_result = subprocess.CompletedProcess(
+            args=[], returncode=128, stdout="",
+            stderr="fatal: not a git repository",
+        )
+        with mock.patch(
+            "bench.wave_close_check.subprocess.run",
+            return_value=bad_result,
+        ):
+            with self.assertRaises(RuntimeError) as ctx:
+                audit_terminal_craft_commits(Path("/nonexistent"))
+            self.assertIn("git log", str(ctx.exception))
+            self.assertIn("rc=128", str(ctx.exception))
+
+    def test_git_failure_on_second_invocation_also_raises(self):
+        """The second `git log -- terminal-craft/` call's failure must also raise."""
+        def _se(argv, *args, **kwargs):
+            if "--" in argv and "terminal-craft/" in argv:
+                return subprocess.CompletedProcess(
+                    args=argv, returncode=129, stdout="", stderr="boom",
+                )
+            return _ok("")  # first call succeeds
+        with mock.patch(
+            "bench.wave_close_check.subprocess.run",
+            side_effect=_se,
+        ):
+            with self.assertRaises(RuntimeError) as ctx:
+                audit_terminal_craft_commits(Path("."))
+            self.assertIn("terminal-craft/", str(ctx.exception))
+
 
 class TestCli(unittest.TestCase):
     def test_cli_rc0_when_all_pass(self):

@@ -427,6 +427,12 @@ class TestBuildReport(unittest.TestCase):
         out_dict = render_methodology_disclaimer({"run_date": "2026-05-27"})
         self.assertIn("2026-05-27", out_dict)
 
+    def test_05_methodology_disclaimer_rejects_empty_date(self) -> None:
+        """WR-07: refuse to emit a malformed header when date is missing."""
+        for bad in (None, "", "   ", {}, {"run_date": ""}, {"run_date": None}):
+            with self.assertRaises(ValueError):
+                render_methodology_disclaimer(bad)
+
     # Test 6 — methodology body section
     def test_06a_methodology_h2_heading(self) -> None:
         out = render_methodology_section({})

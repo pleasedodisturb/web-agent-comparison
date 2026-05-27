@@ -117,13 +117,13 @@ def audit_rubric_columns(rubric_path: Path) -> int:
     for line in text.splitlines():
         stripped = line.strip()
         # Track section boundaries — only count dimension-row matches
-        # that appear under a "## Dimensions" heading. This is belt and
-        # suspenders against a future rubric.md that grows a second
-        # `**bold**`-rowed table elsewhere.
+        # that appear under a heading whose text contains "dimension"
+        # (case-insensitive). This is belt-and-suspenders against a
+        # future rubric.md that grows a second `**bold**`-rowed table
+        # elsewhere, while still tolerating renames like
+        # "## Weighted Dimensions" or "## Scoring Dimensions" (WR-06).
         if stripped.startswith("## "):
-            in_dimensions_section = stripped.lower().startswith(
-                "## dimensions"
-            )
+            in_dimensions_section = "dimension" in stripped.lower()
             continue
         if not in_dimensions_section:
             continue
@@ -158,6 +158,12 @@ def audit_terminal_craft_commits(repo_root: Path = Path(".")) -> int:
     # `git log --pretty=format:%H %s` prints HASH SUBJECT — we filter
     # subjects whose first token is a terminal-craft conventional-commit
     # scope.
+    #
+    # WR-02 fix: distinguish "ran successfully, found 0 leaks" from
+    # "could not run". Both subprocess invocations now raise RuntimeError
+    # on non-zero return code; the SAFETY-05 audit cannot silently PASS
+    # because git was broken, the repo was corrupt, or the cwd was not
+    # a git repo.
     result_a = subprocess.run(
         ["git", "log", "--pretty=format:%H %s"],
         cwd=str(repo_root),
@@ -165,20 +171,25 @@ def audit_terminal_craft_commits(repo_root: Path = Path(".")) -> int:
         text=True,
         check=False,
     )
-    subject_leaks: set[str] = set()
-    if result_a.returncode == 0:
-        subject_re = re.compile(
-            r"^(?:terminal-craft\b|"
-            r"(?:feat|fix|chore|docs|refactor|perf|test|style|build|ci|revert)"
-            r"\(terminal-craft(?:[/-][^)]*)?\))[:\s]",
-            re.IGNORECASE,
+    if result_a.returncode != 0:
+        raise RuntimeError(
+            f"audit_terminal_craft_commits: `git log --pretty=format:%H %s` "
+            f"failed in {repo_root!s} (rc={result_a.returncode}): "
+            f"{result_a.stderr.strip() or '<no stderr>'}"
         )
-        for line in result_a.stdout.splitlines():
-            if not line.strip():
-                continue
-            sha, _, subject = line.partition(" ")
-            if subject_re.match(subject):
-                subject_leaks.add(sha)
+    subject_leaks: set[str] = set()
+    subject_re = re.compile(
+        r"^(?:terminal-craft\b|"
+        r"(?:feat|fix|chore|docs|refactor|perf|test|style|build|ci|revert)"
+        r"\(terminal-craft(?:[/-][^)]*)?\))[:\s]",
+        re.IGNORECASE,
+    )
+    for line in result_a.stdout.splitlines():
+        if not line.strip():
+            continue
+        sha, _, subject = line.partition(" ")
+        if subject_re.match(subject):
+            subject_leaks.add(sha)
 
     # Vector (b): a commit touches a top-level `terminal-craft/` path.
     result_b = subprocess.run(
@@ -188,12 +199,17 @@ def audit_terminal_craft_commits(repo_root: Path = Path(".")) -> int:
         text=True,
         check=False,
     )
+    if result_b.returncode != 0:
+        raise RuntimeError(
+            f"audit_terminal_craft_commits: `git log -- terminal-craft/` "
+            f"failed in {repo_root!s} (rc={result_b.returncode}): "
+            f"{result_b.stderr.strip() or '<no stderr>'}"
+        )
     path_leaks: set[str] = set()
-    if result_b.returncode == 0:
-        for line in result_b.stdout.splitlines():
-            line = line.strip()
-            if line:
-                path_leaks.add(line)
+    for line in result_b.stdout.splitlines():
+        line = line.strip()
+        if line:
+            path_leaks.add(line)
 
     return len(subject_leaks | path_leaks)
 
@@ -293,7 +309,9 @@ def render_audit_md(audit: dict[str, Any], timestamp: str) -> str:
     """
     # Allow callers (especially tests) to pass minimal audit dicts that
     # contain only the headline value fields. Derive the per-check pass
-    # status from the value if the explicit `_pass` flag is absent.
+    # status from the value if the explicit `_pass` flag is absent, and
+    # default the baseline/actual key lists + all_pass to sensible values
+    # if also absent (WR-01).
     candidate_count_pass = audit.get(
         "candidate_count_pass",
         audit["candidate_count"] == EXPECTED_CANDIDATE_COUNT,
@@ -308,17 +326,32 @@ def render_audit_md(audit: dict[str, Any], timestamp: str) -> str:
     )
     no_new_mcps_pass = audit.get("no_new_mcps_pass", bool(audit["no_new_mcps"]))
 
-    overall = _status_str(audit["all_pass"])
+    all_pass = audit.get(
+        "all_pass",
+        all(
+            [
+                candidate_count_pass,
+                rubric_columns_pass,
+                terminal_craft_commits_pass,
+                no_new_mcps_pass,
+            ]
+        ),
+    )
+
+    baseline_keys = audit.get("baseline_keys", sorted(WAVE2_BASELINE))
+    actual_keys = audit.get("actual_keys", sorted(WAVE2_BASELINE))
+
+    overall = _status_str(all_pass)
     candidate_pass = _status_str(candidate_count_pass)
     rubric_pass = _status_str(rubric_columns_pass)
     tc_pass = _status_str(terminal_craft_commits_pass)
     nnm_pass = _status_str(no_new_mcps_pass)
 
     extra_in_actual = sorted(
-        set(audit["actual_keys"]) - set(audit["baseline_keys"])
+        set(actual_keys) - set(baseline_keys)
     )
     missing_from_actual = sorted(
-        set(audit["baseline_keys"]) - set(audit["actual_keys"])
+        set(baseline_keys) - set(actual_keys)
     )
     drift_note = ""
     if extra_in_actual or missing_from_actual:
@@ -360,15 +393,15 @@ def render_audit_md(audit: dict[str, Any], timestamp: str) -> str:
     lines.append("")
     lines.append("## Baseline vs Actual Key Set")
     lines.append("")
-    lines.append(f"- Baseline (frozen at wave start): `{audit['baseline_keys']}`")
-    lines.append(f"- Actual (this run):              `{audit['actual_keys']}`")
+    lines.append(f"- Baseline (frozen at wave start): `{baseline_keys}`")
+    lines.append(f"- Actual (this run):              `{actual_keys}`")
     lines.append("")
     lines.append("## Conclusion")
     lines.append("")
     lines.append(
         f"Wave 2 (2026-05-27) wave-close ritual: ALL CHECKS {overall}."
     )
-    if audit["all_pass"]:
+    if all_pass:
         lines.append("")
         lines.append(
             "Stage 2 (terminal-craft toolkit) is unblocked per "
