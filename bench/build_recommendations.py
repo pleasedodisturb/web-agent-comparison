@@ -177,7 +177,9 @@ EVIDENCE_LINKS: dict[str, list[str]] = {
     ],
     "obscura": [
         "Per-MCP deep analysis — `results/2026-05-26/obscura/DEEP_ANALYSIS.md`",
-        "SAFETY-03 macOS stealth leak — `~/.claude/docs/browser-tools.md` (2026-05-21)",
+        "SAFETY-03 macOS stealth leak — "
+        "[`docs/external-findings/browser-tools-2026-05-21.md`]"
+        "(../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03",
     ],
     "browser-use-agent": [
         "Skip evidence + re-run procedure — `results/2026-05-26/browser-use-agent/SKIPPED.md`",
