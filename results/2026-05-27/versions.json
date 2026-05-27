@@ -1,0 +1,65 @@
+{
+  "captured_at": "2026-05-27T22:00:43Z",
+  "date": "2026-05-27",
+  "host": {
+    "arch": "arm64",
+    "kernel_version": "25.5.0",
+    "macos_version": "26.5",
+    "os": "Darwin"
+  },
+  "mcps": {
+    "browser-use": {
+      "binary_path": "~/.local/bin/browser-use",
+      "binary_self_report": "0.12.7",
+      "command": "browser-use",
+      "sha256": "e0a00e383b7f32c822aaae8a8980d3ba60e43f922225ec635c620b850dba1e63"
+    },
+    "chrome-devtools": {
+      "binary_path": "/opt/homebrew/bin/chrome-devtools-mcp",
+      "command": "chrome-devtools-mcp",
+      "package_name": "chrome-devtools-mcp",
+      "package_version": "1.1.1",
+      "sha256": "9f380d06e1ac05b257e27e708c0cc4b4ba190e285ed6eb6c8aa50978d98a12c5"
+    },
+    "cloakbrowser": {
+      "binary_path": "~/.local/bin/cloakbrowsermcp",
+      "binary_self_report": "2.0.4",
+      "command": "cloakbrowsermcp",
+      "sha256": "7219449a7a869c0a3299deefd5ee55a85b4ad4e56e3836cedc8ba2603657f6e1"
+    },
+    "firecrawl": {
+      "binary_path": "/opt/homebrew/bin/firecrawl-mcp",
+      "command": "firecrawl-mcp",
+      "package_name": "firecrawl-mcp",
+      "package_version": "3.17.0",
+      "sha256": "55d5fbb20270518f9cb6f0c16fb054e934847fe9a557b355503c0f05dce7d89f"
+    },
+    "lightpanda": {
+      "binary_path": "~/.local/bin/lightpanda",
+      "binary_self_report": "0.3.0",
+      "command": "lightpanda",
+      "sha256": "4ca3897a1547c9b3b843a0a921c2b4d044afb3ad4914091a845ac608fe1cb047"
+    },
+    "obscura": {
+      "binary_path": "/opt/homebrew/bin/obscura-mcp",
+      "command": "obscura-mcp",
+      "package_name": "obscura-mcp",
+      "package_version": "0.1.4-2",
+      "sha256": "ec8b7bf0823c4ce24518e75594fb62fab71d9a699c02477c84dbe728cdc13e8b"
+    },
+    "playwright": {
+      "binary_path": "/opt/homebrew/bin/playwright-mcp",
+      "command": "playwright-mcp",
+      "package_name": "@playwright/mcp",
+      "package_version": "0.0.75",
+      "sha256": "70dab09ab9a5bc1943fb78e2655f00af7349f9931073833919f19c5d7d786ad6"
+    }
+  },
+  "tooling": {
+    "claude_code": "2.1.142 (Claude Code)",
+    "node": "v26.0.0",
+    "npm": "11.12.1",
+    "python": "Python 3.14.5",
+    "uv": "uv 0.11.16 (Homebrew 2026-05-21 aarch64-apple-darwin)"
+  }
+}
