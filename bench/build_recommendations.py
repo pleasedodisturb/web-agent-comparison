@@ -36,6 +36,14 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from bench._linear import (
+    G703_URL as _LINEAR_G703_URL,
+    G710_URL as _LINEAR_G710_URL,
+    LINEAR_SUBTICKETS_DOC,
+    SUBTICKETS,
+    render_subtickets_inline,
+)
+
 # ─── LOCKED tier assignments (per 04-CONTEXT.md) ─────────────────────────
 
 
@@ -187,9 +195,10 @@ SANDBOX_CALLOUT = (
 SANDBOX_RECOGNITION_RE = re.compile(r"sandbox[\- ]?only", re.IGNORECASE)
 
 
-# Linear ticket anchors
-G710_URL = "https://linear.app/abandoned-yachts/issue/G-710"
-G703_URL = "https://linear.app/abandoned-yachts/issue/G-703"
+# Linear ticket anchors — re-exported from bench._linear (single source of
+# truth) so the URLs cannot drift between build_report.py and build_recommendations.py.
+G710_URL = _LINEAR_G710_URL
+G703_URL = _LINEAR_G703_URL
 
 
 # ─── Pure helpers ────────────────────────────────────────────────────────
@@ -546,17 +555,17 @@ def build_recommendations(scores_path: Path, out_path: Path) -> str:
     parts.append(render_wave_close_compliance())
     parts.append("")
 
-    # Linear traceability footer
+    # Linear traceability footer — mapping pulled from bench._linear so it
+    # cannot drift from build_report.py (CR-01 fix).
+    subtickets_inline = render_subtickets_inline()
     parts.append("## Linear Traceability")
     parts.append("")
     parts.append(
         f"- Umbrella: [G-703]({G703_URL}) — Phase 4 synthesis under "
         "this wave's break-before-cycle estimate=16 split.\n"
-        "- Per-MCP sub-tickets: G-715 (browser-use), G-716 (lightpanda), "
-        "G-717 (firecrawl), G-718 (obscura), G-719 (chrome-devtools), "
-        "G-720 (SANDBOX-ONLY tier; see that section for the sandbox "
-        "callout). Playwright is the Phase-1 calibration baseline and "
-        "does not carry a per-MCP sub-ticket.\n"
+        f"- Per-MCP sub-tickets (canonical mapping per "
+        f"[`{LINEAR_SUBTICKETS_DOC}`](../{LINEAR_SUBTICKETS_DOC})): "
+        f"{subtickets_inline}.\n"
         f"- Future-wave anchor: [G-710]({G710_URL}) — bot-detection + "
         "TLS-fingerprint + cross-machine reproducibility follow-up. "
         "Reuses this wave's harness; ships in a follow-up wave."

@@ -32,6 +32,14 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from bench._linear import (
+    G703_URL,
+    G710_URL,
+    LINEAR_SUBTICKETS_DOC,
+    SUBTICKETS,
+    render_subtickets_inline,
+)
+
 # ─── Constants ──────────────────────────────────────────────────────────
 
 RUBRIC_WEIGHTS = {
@@ -860,25 +868,30 @@ def render_carried_forward_limitations() -> str:
 
 
 def render_linear_traceability_footer() -> str:
+    subtickets_inline = render_subtickets_inline()
     return (
         "## Linear traceability\n"
         "\n"
         "This report closes Phase 4 Wave 2 of the G-703 umbrella ticket. "
-        "Per-MCP sub-tickets G-715..G-720 carry the per-row evidence comments; "
+        "Per-MCP sub-tickets G-714..G-720 carry the per-row evidence comments; "
         "G-710 is the deferred-follow-up anchor for the bot-detection + "
         "TLS-fingerprint adversary set (Cloudflare nowsecure.nl, reCAPTCHA "
         "demo, BrowserScan, FingerprintJS) and the Linux A/B for Obscura.\n"
         "\n"
-        "- **[G-703](https://linear.app/abandoned-yachts/issue/G-703)** — umbrella "
+        f"- **[G-703]({G703_URL})** — umbrella "
         "ticket (estimate=16, broken into 7 per-MCP sub-tickets + 1 synthesis ticket).\n"
-        "- **[G-710](https://linear.app/abandoned-yachts/issue/G-710)** — deferred "
+        f"- **[G-710]({G710_URL})** — deferred "
         "follow-up: bot-detection adversary set, TLS-fingerprint capture, MacBook "
         "cross-machine parity, OS-file-cache cold-start, scoring-engine SKIPPED "
         "composite fix, Obscura Linux A/B.\n"
-        "- Per-MCP sub-tickets: G-715 (chrome-devtools), G-716 (lightpanda), "
-        "G-717 (firecrawl), G-718 (obscura), G-719 (browser-use direct + agent), "
-        "G-720 (cloakbrowser). Evidence comments lifted verbatim from each row's "
-        "`DEEP_ANALYSIS.md`.\n"
+        f"- Per-MCP sub-tickets (canonical mapping per [`{LINEAR_SUBTICKETS_DOC}`]"
+        f"(../{LINEAR_SUBTICKETS_DOC})): {subtickets_inline}. Evidence comments "
+        "lifted verbatim from each row's `DEEP_ANALYSIS.md`.\n"
+        "\n"
+        "_Note: some embedded Phase 2 `DEEP_ANALYSIS.md` content was authored "
+        "before the canonical sub-ticket mapping was filed and may cite stale "
+        f"ticket IDs inline; the authoritative mapping is [`{LINEAR_SUBTICKETS_DOC}`]"
+        f"(../{LINEAR_SUBTICKETS_DOC}) — this footer above._\n"
     )
 
 
