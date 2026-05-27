@@ -559,7 +559,8 @@ def build_recommendations(scores_path: Path, out_path: Path) -> str:
     # Final pass: inject sandbox callouts where missing. Idempotent.
     md = inject_sandbox_callouts(md)
 
-    # Write to disk
+    # Write to disk. WR-05: parent must exist; match wave_close_check.
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(md, encoding="utf-8")
     return md
 

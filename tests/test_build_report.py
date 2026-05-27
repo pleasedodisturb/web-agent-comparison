@@ -552,6 +552,16 @@ class TestBuildReport(unittest.TestCase):
             "executive summary mis-attributes SKIPPED to firecrawl",
         )
 
+    # WR-05 — build_report creates parent directory
+    def test_wr05_build_report_creates_parent_directory(self) -> None:
+        nested_out = self.tmp / "nested" / "dirs" / "report.md"
+        self.assertFalse(nested_out.parent.is_dir())
+        build_report(
+            self.scores_path, self.cross_path, self.cap_path,
+            self.deep_dir, "2026-05-27", nested_out,
+        )
+        self.assertTrue(nested_out.is_file())
+
 
 if __name__ == "__main__":
     unittest.main()

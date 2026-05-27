@@ -959,6 +959,9 @@ def build_report(
     # CAPABILITY_MATRIX.md and per-MCP DEEP_ANALYSIS.md content.
     final = inject_sandbox_callouts(raw)
     if out_path is not None:
+        # WR-05: parent must exist before write_text; match wave_close_check's
+        # behavior so all three sibling builders share the same UX.
+        out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(final, encoding="utf-8")
     return final
 

@@ -477,3 +477,16 @@ def test_render_tier_section_uses_display_heading_for_sandbox_only(
     )
     assert "## SANDBOX-ONLY" in out
     assert "## SANDBOX_ONLY" not in out
+
+
+# ─── WR-05: build_recommendations creates parent directory ───────────────
+
+
+def test_wr05_build_recommendations_creates_parent_directory(
+    scores_path: Path, tmp_path: Path
+):
+    """WR-05: nested output paths should be created on demand."""
+    nested_out = tmp_path / "nested" / "dirs" / "recommendations.md"
+    assert not nested_out.parent.is_dir()
+    build_recommendations(scores_path, nested_out)
+    assert nested_out.is_file()
