@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: "Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap."
-last_updated: "2026-05-27T22:19:54.059Z"
+status: complete
+stopped_at: "Phase 4 (Synthesis) CLOSED. Wave 2 complete. All 5 SCs PASS. results/recommendations.md is the Stage 2 unblock gate. terminal-craft toolkit work can proceed in private repo using this wave's recommendations as input."
+last_updated: "2026-05-27T22:30:00Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 25
-  completed_plans: 21
-  percent: 75
+  completed_plans: 25
+  percent: 100
 ---
 
 # Project State
@@ -21,18 +21,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 3 CLOSED 2026-05-27 — Cross-cutting measurements + synthesis complete. CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Phase 4 (synthesis / recommendations.md) is the only remaining phase.
+**Current focus:** Wave 2 CLOSED 2026-05-27 — All 4 phases complete. SAFETY-05 wave-close audit passed on all 4 invariants. Stage 2 (terminal-craft toolkit) unblocked per `results/recommendations.md`.
 
 ## Current Position
 
-Phase: 3 of 4 (Cross-Cutting Measurements) — **CLOSED**
-Plan: 5 of 5 complete in Phase 3 (tool-call counts + tools_inventory rollup, tokens 3-scope, cold-start 3-segment, stability soak, synthesis aggregator)
-Status: Phase complete — ready for verification
+Phase: 4 of 4 (Synthesis) — **CLOSED**
+Plan: 6 of 6 complete in Phase 4 (reproducibility manifest, REPRODUCIBILITY.md recipe, scored report, recommendations.md tiers, README headline, wave-close ritual)
+Status: Wave 2 complete — all 4 SAFETY-05 invariants PASS
 Last activity: 2026-05-27
 
 Phase-1 progress: [██████████] 100%
 Phase-2 progress: [██████████] 7/7
 Phase-3 progress: [██████████] 5/5
+Phase-4 progress: [██████████] 6/6
 
 scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
 
@@ -71,6 +72,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 3 P5 | 30 | 2 tasks | 4 files |
 | Phase 04 P04 | 45 minutes | 2 tasks | 3 files |
 | Phase 04 P05 | 2min | 1 tasks | 1 files |
+| Phase 04 P06 | 25min | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -128,6 +130,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 04-04: cloakbrowser entry carries 3 sandbox callouts (sandwich pattern) to keep every citation-path mention within ±3 lines of a callout
 - [Phase ?]: Plan 04-04: per-MCP rationale prose names only the MCP under discussion (no cross-tier MCP literals); keeps tier sections self-contained and tier-membership tests trivially enforceable
 - [Phase ?]: REPORT-07 closed: README.md headline updated to 2026-05-27 MCP-layer Stage 2 graduation tiers
+- [Phase 4 P06]: SAFETY-05 wave-close ritual implemented in bench/wave_close_check.py (stdlib-only, 27 unit tests, all PASS). Audit refines naive `--grep=terminal-craft` to detect actual Stage 2 leak via subject-line conventional-commit scope OR `terminal-craft/` path touch. Body-only mentions for downstream-consumer traceability intentionally not counted. ALL 4 invariants PASS: candidate_count=7, rubric_columns=8, terminal_craft_commits=0, no_new_mcps=True. WAVE_CLOSE_AUDIT.md committed as the evidence file; ROADMAP.md Phase 4 marked complete with Phase 1/2/3 status rows byte-identical (WARNING-2 gate held). Wave 2 CLOSED.
 
 ### Pending Todos
 
@@ -162,6 +165,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-27T22:19:49.628Z
-Stopped at: Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap.
+Last session: 2026-05-27T22:30:00Z
+Stopped at: Phase 4 (Synthesis) CLOSED. Wave 2 complete. All 5 SCs PASS. results/recommendations.md is the Stage 2 unblock gate. terminal-craft toolkit work can proceed in private repo using this wave's recommendations as input.
 Resume file: None
