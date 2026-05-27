@@ -615,10 +615,33 @@ def _lightpanda_cold_start_finding(data: dict) -> str:
         return "- **Lightpanda cold-start claim:** INCONCLUSIVE — median total_ms missing."
     verdict = _verdict(lp_total, pw_total, "lower-better")
     ratio = pw_total / lp_total if lp_total > 0 else 0
+    # Also compute the maximum spread across all OK MCPs (the headline
+    # 50× number from the executor's contract).
+    all_cs: list[tuple[str, int]] = []
+    for row in data["mcps"]:
+        cs = row["cold_start"]
+        if cs.get("status") != "OK":
+            continue
+        v = _safe_int(
+            (cs.get("raw") or {}).get("cold", {}).get("median", {}).get("total_ms")
+        )
+        if v is not None and v > 0:
+            all_cs.append((row["mcp"], v))
+    max_spread_note = ""
+    if all_cs:
+        all_cs_sorted = sorted(all_cs, key=lambda t: t[1])
+        fastest = all_cs_sorted[0]
+        slowest = all_cs_sorted[-1]
+        max_ratio = slowest[1] / fastest[1] if fastest[1] > 0 else 0
+        max_spread_note = (
+            f" Maximal cold-start spread across all OK rows: "
+            f"`{fastest[0]}` {fastest[1]}ms → `{slowest[0]}` {slowest[1]}ms "
+            f"= {max_ratio:.1f}× — this is the headline cold-start delta."
+        )
     return (
         f"- **Lightpanda cold-start claim:** lightpanda cold median = {lp_total} ms "
         f"vs playwright {pw_total} ms ({ratio:.1f}× spread) — **{verdict}**. "
-        "Zig binary with no Chromium download path explains the gap."
+        f"Zig binary with no Chromium download path explains the gap.{max_spread_note}"
     )
 
 

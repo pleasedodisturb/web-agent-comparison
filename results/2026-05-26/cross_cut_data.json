@@ -1,0 +1,365 @@
+{
+  "mcps": [
+    {
+      "cold_start": {
+        "cold_median_total_ms": 235,
+        "status": "OK",
+        "warm_median_total_ms": 240
+      },
+      "inventory": {
+        "categories": {
+          "capture": 1,
+          "diagnostics": 1,
+          "inspection": 3,
+          "interaction": 6,
+          "navigation": 3,
+          "other": 6
+        },
+        "status": "OK",
+        "tool_count": 20
+      },
+      "mcp": "cloakbrowser",
+      "stability": {
+        "iterations_completed": 30,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 84032,
+        "rss_growth_kb": 0,
+        "rss_max_kb": 84032,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "median_total_calls": 53,
+        "median_total_per_stage": {
+          "S1": 18,
+          "S2": 6,
+          "S3": 1,
+          "S4": 7,
+          "S5": 6,
+          "S6": 4,
+          "S7": 3,
+          "unattributed": 5
+        },
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 77228,
+        "median_turn_input_tokens": 63,
+        "median_turn_output_tokens": 24476,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 197,
+        "status": "OK",
+        "warm_median_total_ms": 198
+      },
+      "inventory": {
+        "categories": {
+          "capture": 1,
+          "diagnostics": 5,
+          "inspection": 1,
+          "interaction": 11,
+          "navigation": 2,
+          "other": 3
+        },
+        "status": "OK",
+        "tool_count": 23
+      },
+      "mcp": "playwright",
+      "stability": {
+        "iterations_completed": 30,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 143936,
+        "rss_growth_kb": 18416,
+        "rss_max_kb": 162352,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "status": "NO_EVIDENCE"
+      },
+      "tokens": {
+        "status": "NO_EVIDENCE"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 13,
+        "status": "OK",
+        "warm_median_total_ms": 12
+      },
+      "inventory": {
+        "categories": {
+          "capture": 0,
+          "diagnostics": 1,
+          "inspection": 2,
+          "interaction": 7,
+          "navigation": 2,
+          "other": 8
+        },
+        "status": "OK",
+        "tool_count": 20
+      },
+      "mcp": "lightpanda",
+      "stability": {
+        "iterations_completed": 30,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 51344,
+        "rss_growth_kb": 4544,
+        "rss_max_kb": 55888,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "median_total_calls": 34,
+        "median_total_per_stage": {
+          "S1": 14,
+          "S2": 11,
+          "S3": 1,
+          "S4": 1,
+          "S5": 1,
+          "S6": 1,
+          "S7": 1,
+          "S8": 1,
+          "unattributed": 2
+        },
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 44633,
+        "median_turn_input_tokens": 48,
+        "median_turn_output_tokens": 11046,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 668,
+        "status": "OK",
+        "warm_median_total_ms": 671
+      },
+      "inventory": {
+        "categories": {
+          "capture": 1,
+          "diagnostics": 0,
+          "inspection": 5,
+          "interaction": 3,
+          "navigation": 2,
+          "other": 5
+        },
+        "status": "OK",
+        "tool_count": 16
+      },
+      "mcp": "browser-use-direct",
+      "stability": {
+        "iterations_completed": 14,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 178352,
+        "rss_growth_kb": 5616,
+        "rss_max_kb": 183968,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "median_total_calls": 51,
+        "median_total_per_stage": {
+          "S1": 22,
+          "S2": 6,
+          "S3": 1,
+          "S4": 4,
+          "S5": 1,
+          "S6": 1,
+          "S7": 1,
+          "S8": 0,
+          "unattributed": 4
+        },
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 120059,
+        "median_turn_input_tokens": 62,
+        "median_turn_output_tokens": 20173,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 358,
+        "status": "OK",
+        "warm_median_total_ms": 361
+      },
+      "inventory": {
+        "categories": {
+          "capture": 1,
+          "diagnostics": 10,
+          "inspection": 3,
+          "interaction": 10,
+          "navigation": 1,
+          "other": 4
+        },
+        "status": "OK",
+        "tool_count": 29
+      },
+      "mcp": "chrome-devtools",
+      "stability": {
+        "iterations_completed": 14,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 220016,
+        "rss_growth_kb": 32,
+        "rss_max_kb": 220048,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "median_total_calls": 39,
+        "median_total_per_stage": {
+          "S1": 18,
+          "S2": 9,
+          "S3": 1,
+          "S4": 6,
+          "S5": 1,
+          "S6": 1,
+          "S7": 1,
+          "S8": 1,
+          "unattributed": 2
+        },
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 62318,
+        "median_turn_input_tokens": 55,
+        "median_turn_output_tokens": 20942,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 171,
+        "status": "OK",
+        "warm_median_total_ms": 169
+      },
+      "inventory": {
+        "categories": {
+          "capture": 0,
+          "diagnostics": 0,
+          "inspection": 5,
+          "interaction": 0,
+          "navigation": 1,
+          "other": 18
+        },
+        "status": "OK",
+        "tool_count": 24
+      },
+      "mcp": "firecrawl",
+      "stability": {
+        "skip_reason": "LOOPBACK_UNREACHABLE",
+        "status": "SKIPPED"
+      },
+      "tcc": {
+        "median_total_calls": 0,
+        "median_total_per_stage": {},
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 0,
+        "median_turn_input_tokens": null,
+        "median_turn_output_tokens": null,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 158,
+        "status": "OK",
+        "warm_median_total_ms": 158
+      },
+      "inventory": {
+        "categories": {
+          "capture": 0,
+          "diagnostics": 0,
+          "inspection": 1,
+          "interaction": 0,
+          "navigation": 0,
+          "other": 3
+        },
+        "status": "OK",
+        "tool_count": 4
+      },
+      "mcp": "obscura",
+      "stability": {
+        "iterations_completed": 14,
+        "orphan_audit_survivors": 0,
+        "rss_first_kb": 19888,
+        "rss_growth_kb": 1152,
+        "rss_max_kb": 21040,
+        "skip_reason": null,
+        "status": "COMPLETED",
+        "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+      },
+      "tcc": {
+        "median_total_calls": 19,
+        "median_total_per_stage": {
+          "S1": 10,
+          "S2": 1,
+          "S3": 1,
+          "S4": 1,
+          "S5": 1,
+          "S6": 1,
+          "S7": 1,
+          "S8": 1,
+          "unattributed": 1
+        },
+        "status": "OK"
+      },
+      "tokens": {
+        "headline_payload_bytes": 16394,
+        "median_turn_input_tokens": 27,
+        "median_turn_output_tokens": 8356,
+        "status": "OK"
+      }
+    },
+    {
+      "cold_start": {
+        "cold_median_total_ms": 668,
+        "status": "OK",
+        "warm_median_total_ms": 671
+      },
+      "inventory": {
+        "categories": {
+          "capture": 1,
+          "diagnostics": 0,
+          "inspection": 5,
+          "interaction": 3,
+          "navigation": 2,
+          "other": 5
+        },
+        "status": "OK",
+        "tool_count": 16
+      },
+      "mcp": "browser-use-agent",
+      "stability": {
+        "skip_reason": "LLM_KEY_ABSENT",
+        "status": "SKIPPED"
+      },
+      "tcc": {
+        "status": "SKIPPED"
+      },
+      "tokens": {
+        "status": "SKIPPED"
+      }
+    }
+  ],
+  "metadata": {
+    "generator": "bench.build_cross_cut_summary",
+    "n_mcps": 8
+  },
+  "missing_files": [],
+  "results_date_dir": "results/2026-05-26"
+}
