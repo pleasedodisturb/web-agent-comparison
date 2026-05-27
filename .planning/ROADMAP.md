@@ -70,7 +70,13 @@ The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundati
   3. The reproducibility manifest (`versions.lock.md` + `versions.json` + per-MCP binary SHA256s + `uv.lock` + `package-lock.json` + per-run `MACHINE.md`) is committed for the published wave; `bench/capture_versions.py` produced `versions.json` from the live environment.
   4. `results/recommendations.md` has a "Future Waves" section pointing to G-710 (bot-detection + TLS-fingerprint follow-up) as the explicit next-wave anchor.
   5. A wave-close ritual confirms no scope-creep snuck in (candidate count unchanged from wave start, rubric column count unchanged, no Stage 2 commits in `terminal-craft`).
-**Plans**: TBD
+**Plans**:
+- [ ] 04-01-PLAN.md — Reproducibility manifest (versions.json + versions.lock.md + MACHINE.md)
+- [ ] 04-02-PLAN.md — docs/REPRODUCIBILITY.md third-party recipe
+- [ ] 04-03-PLAN.md — Scored comparison report (bench/build_report.py + results/2026-05-27-mcp-comparison.md)
+- [ ] 04-04-PLAN.md — Stage 2 graduation recommendations (bench/build_recommendations.py + results/recommendations.md)
+- [ ] 04-05-PLAN.md — README headline verdict update
+- [ ] 04-06-PLAN.md — Wave-close ritual + final ROADMAP close
 **UI hint**: no
 
 ## Progress
@@ -83,4 +89,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 | 1. Harness Foundation | 7/7 | Complete (calibration PASS 2026-05-26 per `results/2026-05-25/PHASE1_CALIBRATION.md`) | 2026-05-26 |
 | 2. Per-MCP Scoring Runs | 7/7 | Complete (all 6 per-MCP runs + attribution audit; all 5 SCs PASS per `.planning/phases/02-per-mcp-scoring-runs/PHASE2_AUDIT.md`) | 2026-05-27 |
 | 3. Cross-Cutting Measurements | 5/5 | Complete   | 2026-05-27 |
-| 4. Synthesis | 0/TBD | Not started | - |
+| 4. Synthesis | 0/6 | In progress (planned 2026-05-27) | - |
