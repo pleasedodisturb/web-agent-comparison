@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: milestone
 status: verifying
 stopped_at: "Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap."
-last_updated: "2026-05-27T22:14:57.720Z"
+last_updated: "2026-05-27T22:19:54.059Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 25
-  completed_plans: 20
+  completed_plans: 21
   percent: 75
 ---
 
@@ -70,6 +70,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 03 P04 | 88min | 3 tasks | 21 files |
 | Phase 3 P5 | 30 | 2 tasks | 4 files |
 | Phase 04 P04 | 45 minutes | 2 tasks | 3 files |
+| Phase 04 P05 | 2min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -126,6 +127,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 04-04: TIER_ASSIGNMENTS locked dict + TIER_DISPLAY_NAMES mapping (SANDBOX_ONLY → SANDBOX-ONLY per WARNING 3)
 - [Phase ?]: Plan 04-04: cloakbrowser entry carries 3 sandbox callouts (sandwich pattern) to keep every citation-path mention within ±3 lines of a callout
 - [Phase ?]: Plan 04-04: per-MCP rationale prose names only the MCP under discussion (no cross-tier MCP literals); keeps tier sections self-contained and tier-membership tests trivially enforceable
+- [Phase ?]: REPORT-07 closed: README.md headline updated to 2026-05-27 MCP-layer Stage 2 graduation tiers
 
 ### Pending Todos
 
@@ -160,6 +162,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-27T22:14:47.666Z
+Last session: 2026-05-27T22:19:49.628Z
 Stopped at: Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap.
 Resume file: None

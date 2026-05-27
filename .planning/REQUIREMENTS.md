@@ -57,7 +57,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 - [ ] **REPORT-04**: A methodology section explains the rubric, fixtures, harness, measurement approach, and reproducibility model; cites `MACHINE.md` for run-specific specifics.
 - [ ] **REPORT-05**: A methodology disclaimer header on the public report states "evaluated as of `<date>` with configuration `<X>`; not intrinsic tool quality" so future readers see the snapshot framing.
 - [x] **REPORT-06**: `results/recommendations.md` contains an explicit Stage 2 graduation recommendation with tiers: PRIMARY (graduates into terminal-craft toolkit), SECONDARY (fallback / specialised use), SANDBOX-ONLY (cloakbrowser tier), SKIP (excluded from toolkit with reason). This recommendation IS the Stage 2 unblock gate.
-- [ ] **REPORT-07**: The repo `README.md` is updated with the headline verdict, the methodology summary, and a link to `results/recommendations.md`.
+- [x] **REPORT-07**: The repo `README.md` is updated with the headline verdict, the methodology summary, and a link to `results/recommendations.md`.
 - [ ] **REPORT-08**: Every cloakbrowser mention in any report file carries an explicit `**Sandbox only — do not point at authenticated sessions**` callout.
 - [ ] **REPORT-09**: If the run is partial (e.g., Firecrawl skipped because no API key), an executive-summary disclosure + matrix-row note + recommendations note flags it; the report does NOT silently emit 6/7.
 - [ ] **REPORT-10**: A "Negative Results" section explicitly documents what didn't work, what was skipped, what was punted to a follow-up wave; this is non-optional honesty content.
@@ -141,7 +141,7 @@ All requirements below are hypotheses until the report ships with the explicit S
 | REPORT-04 | Phase 4 | Pending |
 | REPORT-05 | Phase 4 | Pending |
 | REPORT-06 | Phase 4 | Complete |
-| REPORT-07 | Phase 4 | Pending |
+| REPORT-07 | Phase 4 | Complete |
 | REPORT-08 | Phase 4 | Pending |
 | REPORT-09 | Phase 4 | Pending |
 | REPORT-10 | Phase 4 | Pending |
