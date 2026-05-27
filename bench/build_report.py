@@ -39,6 +39,11 @@ from bench._linear import (
     SUBTICKETS,
     render_subtickets_inline,
 )
+from bench._sandbox import (
+    SANDBOX_CALLOUT as SANDBOX_CALLOUT_CANONICAL,
+    SANDBOX_RECOGNITION_RE as SANDBOX_CALLOUT_REGEX,
+    inject_sandbox_callouts,
+)
 
 # ─── Constants ──────────────────────────────────────────────────────────
 
@@ -104,10 +109,11 @@ SEVEN_MCPS = (
 
 STAGES = tuple(f"S{i}" for i in range(1, 9))
 
-SANDBOX_CALLOUT_CANONICAL = (
-    "**Sandbox only — do not point at authenticated sessions**"
-)
-SANDBOX_CALLOUT_REGEX = re.compile(r"sandbox[- ]?only", re.IGNORECASE)
+# SANDBOX_CALLOUT_CANONICAL + SANDBOX_CALLOUT_REGEX + inject_sandbox_callouts
+# are re-exported from bench._sandbox (single source of truth — WR-04, IN-03).
+# The aliases above preserve the original module's public surface so any
+# external import of `bench.build_report.SANDBOX_CALLOUT_CANONICAL` still
+# resolves; the underlying value now matches build_recommendations.py exactly.
 
 # Hard-coded list of rows whose Phase-3 stability column was COMPLETED at the
 # transport level while Phase-2 semantic-output FAILed — per Phase 3 P05
@@ -244,53 +250,11 @@ def _demote_headings(md: str, levels: int = 1) -> str:
 
 
 # ─── Sandbox callout injection (idempotent) ─────────────────────────────
-
-
-def inject_sandbox_callouts(md: str) -> str:
-    """Ensure every cloakbrowser mention is within 5 lines of a sandbox callout.
-
-    Idempotent: running twice yields the same output. Recognises existing
-    callouts via the case-insensitive `sandbox[- ]?only` regex so embedded
-    CAPABILITY_MATRIX.md content (which already carries the callout, sometimes
-    with a trailing period) does not trigger double-injection.
-    """
-    if not md:
-        return md
-    lines = md.splitlines()
-    # Indices (0-based) that mention cloakbrowser (case-insensitive)
-    cloak_idx = [i for i, ln in enumerate(lines) if "cloakbrowser" in ln.lower()]
-    if not cloak_idx:
-        return md
-    # Indices that already carry a recognised callout
-    callout_idx_set = {
-        i for i, ln in enumerate(lines) if SANDBOX_CALLOUT_REGEX.search(ln)
-    }
-    # For each cloakbrowser mention, decide whether to inject. We collect
-    # *insertion plans* (insert canonical callout AFTER line `i`) and apply
-    # them in reverse order so indices stay stable.
-    insertions: list[int] = []  # positions AFTER which to insert
-    # Running set of "would-be-callout" lines, updated as we plan insertions
-    # so two adjacent cloakbrowser mentions don't both get their own callout.
-    effective_callout_set = set(callout_idx_set)
-    for idx in cloak_idx:
-        # If any callout (real or planned) is within 5 lines (inclusive), skip.
-        window_min = max(0, idx - 5)
-        window_max = idx + 5
-        has_nearby = any(
-            window_min <= c <= window_max for c in effective_callout_set
-        )
-        if has_nearby:
-            continue
-        insertions.append(idx)
-        # The planned callout will land at idx+1 (just after the cloak line);
-        # add idx+1 to effective set so subsequent cloak mentions see it.
-        effective_callout_set.add(idx + 1)
-    if not insertions:
-        return md
-    # Apply insertions from highest to lowest so positions stay valid.
-    for pos in sorted(insertions, reverse=True):
-        lines.insert(pos + 1, SANDBOX_CALLOUT_CANONICAL)
-    return "\n".join(lines)
+#
+# inject_sandbox_callouts is imported from bench._sandbox above (WR-04).
+# Re-exported via the import statement so existing callers continue to
+# work; the underlying implementation is now shared with
+# bench.build_recommendations.
 
 
 # ─── Render: Executive summary ──────────────────────────────────────────

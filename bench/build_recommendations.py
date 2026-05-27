@@ -31,7 +31,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -42,6 +41,11 @@ from bench._linear import (
     LINEAR_SUBTICKETS_DOC,
     SUBTICKETS,
     render_subtickets_inline,
+)
+from bench._sandbox import (
+    SANDBOX_CALLOUT,
+    SANDBOX_RECOGNITION_RE,
+    inject_sandbox_callouts,
 )
 
 # ─── LOCKED tier assignments (per 04-CONTEXT.md) ─────────────────────────
@@ -188,13 +192,10 @@ EVIDENCE_LINKS: dict[str, list[str]] = {
 }
 
 
-# Sandbox callout phrase used by inject_sandbox_callouts. Idempotent
-# recognition regex matches "sandbox-only", "sandbox only", and
-# "sandboxonly" (case-insensitive).
-SANDBOX_CALLOUT = (
-    "**Sandbox only — do not point at authenticated sessions.**"
-)
-SANDBOX_RECOGNITION_RE = re.compile(r"sandbox[\- ]?only", re.IGNORECASE)
+# SANDBOX_CALLOUT + SANDBOX_RECOGNITION_RE + inject_sandbox_callouts are
+# imported from bench._sandbox above — single source of truth (WR-04 + IN-03).
+# The original module-level definitions are removed so the two builders
+# cannot drift on callout phrasing or injection algorithm.
 
 
 # Linear ticket anchors — re-exported from bench._linear (single source of
@@ -480,33 +481,12 @@ def render_wave_close_compliance() -> str:
 
 
 # ─── Sandbox callout enforcement (idempotent) ────────────────────────────
-
-
-def inject_sandbox_callouts(md: str) -> str:
-    """Ensure every cloakbrowser mention has a sandbox callout within ≤5 lines.
-
-    Idempotent — the recognition regex matches any "sandbox-only" /
-    "sandbox only" / "sandboxonly" (case-insensitive). If a callout
-    already exists within the window, no injection happens.
-
-    Mirrors the precedent in `bench/build_report.py` (plan 04-03) when
-    that module ships. Until then this is the canonical implementation.
-    """
-    lines = md.splitlines()
-    out: list[str] = []
-    for i, line in enumerate(lines):
-        out.append(line)
-        if "cloakbrowser" not in line.lower():
-            continue
-        # Window: ±5 lines around this line in the ORIGINAL doc.
-        window_lo = max(0, i - 5)
-        window_hi = min(len(lines), i + 6)
-        window_text = "\n".join(lines[window_lo:window_hi])
-        if SANDBOX_RECOGNITION_RE.search(window_text):
-            continue  # already has a callout in window — idempotent
-        # Inject right after the cloakbrowser line.
-        out.append(SANDBOX_CALLOUT)
-    return "\n".join(out)
+#
+# inject_sandbox_callouts is imported from bench._sandbox at the top of
+# the module (WR-04). The shared implementation produces fewer callouts
+# than the original per-line algorithm in this file — one callout per
+# cloakbrowser cluster instead of one per mention — and is byte-identical
+# to the one bench.build_report uses.
 
 
 # ─── Top-level orchestrator ──────────────────────────────────────────────
