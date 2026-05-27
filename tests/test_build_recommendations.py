@@ -25,10 +25,25 @@ Run with:
 from __future__ import annotations
 
 import json
+import re
 import tempfile
 from pathlib import Path
 
 import pytest
+
+
+def _mcp_not_in(haystack: str, needle: str) -> bool:
+    """Return True iff `needle` does not appear in `haystack` as a whole token.
+
+    IN-06: plain `needle in haystack` is unsound for MCP names that share
+    prefixes (e.g. 'playwright' would falsely match in 'playwright-stealth'
+    if a future MCP gained that name). We treat hyphen, slash, dot, and
+    word-chars as "still inside the identifier" so the check is robust to
+    new MCPs whose names are super/substring of existing ones.
+    """
+    # Identifier boundary: anything that is not [A-Za-z0-9_-]
+    pattern = rf"(?<![\w\-]){re.escape(needle)}(?![\w\-])"
+    return re.search(pattern, haystack) is None
 
 from bench.build_recommendations import (
     TIER_ASSIGNMENTS,
@@ -198,6 +213,8 @@ def test_primary_section_exact_membership(rendered_output):
     assert "playwright" in primary_text
     assert "lightpanda" in primary_text
     # MCPs that belong to OTHER tiers must NOT be named in the PRIMARY section.
+    # Use word-boundary regex (IN-06) so future MCPs with overlapping name
+    # prefixes do not cause spurious failures or false negatives.
     for other in (
         "browser-use-direct",
         "browser-use-agent",
@@ -206,7 +223,7 @@ def test_primary_section_exact_membership(rendered_output):
         "obscura",
         "cloakbrowser",
     ):
-        assert other not in primary_text, (
+        assert _mcp_not_in(primary_text, other), (
             f"{other} (not a PRIMARY MCP) appears in PRIMARY section"
         )
 
@@ -231,6 +248,9 @@ def test_secondary_section_exact_membership(rendered_output):
     assert "browser-use-direct" in sec_text
     assert "chrome-devtools" in sec_text
     assert "firecrawl" in sec_text
+    # IN-06: word-boundary regex so 'browser-use-direct' substring matching
+    # does not interact with the 'browser-use-agent' check (both contain
+    # 'browser-use' as a prefix).
     for other in (
         "playwright",
         "lightpanda",
@@ -238,9 +258,7 @@ def test_secondary_section_exact_membership(rendered_output):
         "cloakbrowser",
         "browser-use-agent",
     ):
-        # Be careful: 'browser-use-direct' substring contains nothing else.
-        # Use word-boundary-ish check via surrounding non-alpha chars.
-        assert other not in sec_text, (
+        assert _mcp_not_in(sec_text, other), (
             f"{other} (not a SECONDARY MCP) appears in SECONDARY section"
         )
 
@@ -271,7 +289,7 @@ def test_sandbox_only_section_exact_membership_and_callout(rendered_output):
         sb_lines.append(line)
     sb_text = "\n".join(sb_lines)
     assert "cloakbrowser" in sb_text
-    # No other tier members in this section
+    # No other tier members in this section (IN-06: word-boundary check).
     for other in (
         "playwright",
         "lightpanda",
@@ -281,7 +299,7 @@ def test_sandbox_only_section_exact_membership_and_callout(rendered_output):
         "firecrawl",
         "obscura",
     ):
-        assert other not in sb_text, (
+        assert _mcp_not_in(sb_text, other), (
             f"{other} (not a SANDBOX-ONLY MCP) appears in SANDBOX-ONLY section"
         )
 
@@ -317,6 +335,8 @@ def test_skip_section_exact_membership(rendered_output):
     skip_text = "\n".join(skip_lines)
     assert "obscura" in skip_text
     assert "browser-use-agent" in skip_text
+    # IN-06: word-boundary check. 'browser-use-direct' would falsely trigger
+    # against 'browser-use-agent' under naive substring matching.
     for other in (
         "playwright",
         "lightpanda",
@@ -325,7 +345,7 @@ def test_skip_section_exact_membership(rendered_output):
         "firecrawl",
         "cloakbrowser",
     ):
-        assert other not in skip_text, (
+        assert _mcp_not_in(skip_text, other), (
             f"{other} (not a SKIP MCP) appears in SKIP section"
         )
 

@@ -80,20 +80,6 @@ DIMENSION_LABELS = {
     "error_handling": "Error Handling",
 }
 
-# Ranking order for tables — leads with the headline composite.
-# Note: browser-use-direct + browser-use-agent both surface (dual-row contract);
-# the per-MCP "browser-use" Deep Analysis stanza folds them.
-SCORE_TABLE_ORDER = (
-    "cloakbrowser",
-    "playwright",
-    "lightpanda",
-    "browser-use-direct",
-    "chrome-devtools",
-    "firecrawl",
-    "obscura",
-    "browser-use-agent",
-)
-
 # The 7 candidate MCPs as the public matrix calls them out (browser-use rolled
 # up into ONE name; browser-use-direct + browser-use-agent surface as two
 # table rows but as ONE Deep Analysis stanza per FAIRNESS-05).
@@ -105,6 +91,34 @@ SEVEN_MCPS = (
     "obscura",
     "firecrawl",
     "cloakbrowser",
+)
+
+# Ranking order for tables — leads with the headline composite.
+# Note: browser-use-direct + browser-use-agent both surface (dual-row contract);
+# the per-MCP "browser-use" Deep Analysis stanza folds them.
+#
+# IN-05: derived from SEVEN_MCPS so the two lists cannot drift if a future
+# MCP is added. The static literal below documents the desired *order*
+# (cloakbrowser first, etc.) — the assert validates it stays a permutation
+# of SEVEN_MCPS modulo the browser-use split.
+SCORE_TABLE_ORDER = (
+    "cloakbrowser",
+    "playwright",
+    "lightpanda",
+    "browser-use-direct",
+    "chrome-devtools",
+    "firecrawl",
+    "obscura",
+    "browser-use-agent",
+)
+# Sanity: every name in SCORE_TABLE_ORDER must trace back to SEVEN_MCPS,
+# allowing "browser-use" to expand to two rows.
+_score_table_origins = {
+    "browser-use" if n.startswith("browser-use-") else n for n in SCORE_TABLE_ORDER
+}
+assert _score_table_origins == set(SEVEN_MCPS), (
+    f"SCORE_TABLE_ORDER drifted from SEVEN_MCPS: "
+    f"score_origins={_score_table_origins}, seven={set(SEVEN_MCPS)}"
 )
 
 STAGES = tuple(f"S{i}" for i in range(1, 9))
@@ -134,12 +148,22 @@ STAGE_CELLS = ("PASS", "FAIL", "PARTIAL", "N/A", "UNTESTED", "SKIPPED")
 
 
 def _safe_load_json(path: Path) -> dict | None:
-    """Read a JSON file; return None on missing or parse error."""
+    """Read a JSON file; return None on missing or parse error.
+
+    IN-01: log a warning to stderr when parsing fails so silent
+    fall-through (e.g. malformed scores.json producing an empty report)
+    surfaces a diagnostic instead of a zero-row artifact. Missing-file
+    is NOT logged — callers handle the missing-file branch explicitly.
+    """
     if not path.is_file():
         return None
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
+    except (OSError, json.JSONDecodeError) as exc:
+        print(
+            f"build_report: WARN failed to parse JSON at {path}: {exc}",
+            file=sys.stderr,
+        )
         return None
 
 
@@ -1070,6 +1094,18 @@ def main(argv: list[str] | None = None) -> int:
         print(f"build_report: ERROR deep-dir not found: {args.deep_dir}",
               file=sys.stderr)
         return 2
+
+    # IN-01: surface empty-scores as a CLI error so a malformed scores.json
+    # does not silently produce a zero-row report.
+    pre_scores = aggregate_scores(args.scores)
+    if not pre_scores:
+        print(
+            f"build_report: ERROR scores.json at {args.scores} loaded to "
+            f"an empty dict — refusing to write a zero-row report. Check "
+            f"the file for JSON parse errors (see preceding WARN).",
+            file=sys.stderr,
+        )
+        return 3
 
     md = build_report(
         args.scores, args.cross_cut, args.capability,
