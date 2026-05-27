@@ -16,7 +16,7 @@ The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundati
 
 - [x] **Phase 1: Harness Foundation** - Build the runner, snapshot fixtures, retry gate, scrub pipeline, and version-lock infrastructure; reproduce 2026-03 Playwright score as go/no-go gate
 - [x] **Phase 2: Per-MCP Scoring Runs** - Score all 7 MCPs end-to-end on S1-S8 with median-of-3 retry, capability tags, and per-row failure attribution
-- [ ] **Phase 3: Cross-Cutting Measurements** - Capture cold-start (3-segment), token efficiency (3-scope), 1hr stability, per-stage tool-call count, and per-MCP tool-surface inventory
+- [x] **Phase 3: Cross-Cutting Measurements** - Capture cold-start (3-segment), token efficiency (3-scope), 1hr stability, per-stage tool-call count, and per-MCP tool-surface inventory (completed 2026-05-27)
 - [ ] **Phase 4: Synthesis** - Publish scored matrix + recommendations.md + README verdict; reproducibility manifest committed
 
 ## Phase Details
@@ -82,5 +82,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 |-------|----------------|--------|-----------|
 | 1. Harness Foundation | 7/7 | Complete (calibration PASS 2026-05-26 per `results/2026-05-25/PHASE1_CALIBRATION.md`) | 2026-05-26 |
 | 2. Per-MCP Scoring Runs | 7/7 | Complete (all 6 per-MCP runs + attribution audit; all 5 SCs PASS per `.planning/phases/02-per-mcp-scoring-runs/PHASE2_AUDIT.md`) | 2026-05-27 |
-| 3. Cross-Cutting Measurements | 4/5 | In Progress|  |
+| 3. Cross-Cutting Measurements | 5/5 | Complete   | 2026-05-27 |
 | 4. Synthesis | 0/TBD | Not started | - |

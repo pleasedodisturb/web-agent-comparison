@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: "Plan 02-07 (cross-row attribution audit) complete. **Phase 2 CLOSED.** All 5 Phase 2 success criteria PASS: (SC1) 7 evidence dirs or SKIPPED.md, (SC2) read-only MCPs N/A not 0, (SC3) browser-use dual-mode, (SC4) capability + attribution complete, (SC5) cloakbrowser loopback-only. Audit injected exactly 2 fields on the playwright row (capability=tool-only, mode=default — Phase 1 calibration row pre-dated FAIRNESS-04 contract); scoring values byte-for-byte preserved across all 8 rows. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact (capability-grouped, with sandbox-only callout for cloakbrowser per SAFETY-04+REPORT-08). PHASE2_AUDIT.md emits per-SC PASS/FAIL summary + tag-injection inventory + 3 known limitations carried forward for Phase 4. scoring/score.py SACROSANCT contract upheld (git diff main = 0 lines). 176/176 Phase-1 tests pass. **Phase 3 + Phase 4 can begin in parallel** against the validated scores.json matrix."
-last_updated: "2026-05-27T00:34:34.838Z"
+stopped_at: "Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap."
+last_updated: "2026-05-27T00:47:25.298Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 19
-  completed_plans: 18
-  percent: 50
+  completed_plans: 19
+  percent: 75
 ---
 
 # Project State
@@ -21,17 +21,18 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-22)
 
 **Core value:** Pick the right browser MCP(s) for production agent use, backed by reproducible scores on the same fixtures every candidate is measured against.
-**Current focus:** Phase 2 CLOSED 2026-05-27 — attribution audit passed all 5 SCs. Ready for Phase 3 (cross-cutting measurements) + Phase 4 (synthesis); they can run in parallel against the validated scores.json matrix.
+**Current focus:** Phase 3 CLOSED 2026-05-27 — Cross-cutting measurements + synthesis complete. CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Phase 4 (synthesis / recommendations.md) is the only remaining phase.
 
 ## Current Position
 
-Phase: 2 of 4 (Per-MCP Scoring Runs) — **CLOSED**
-Plan: 7 of 7 complete in Phase 2 (chrome-devtools, lightpanda, firecrawl, obscura, browser-use dual-mode, cloakbrowser, attribution-audit)
+Phase: 3 of 4 (Cross-Cutting Measurements) — **CLOSED**
+Plan: 5 of 5 complete in Phase 3 (tool-call counts + tools_inventory rollup, tokens 3-scope, cold-start 3-segment, stability soak, synthesis aggregator)
 Status: Phase complete — ready for verification
 Last activity: 2026-05-27
 
 Phase-1 progress: [██████████] 100%
 Phase-2 progress: [██████████] 7/7
+Phase-3 progress: [██████████] 5/5
 
 scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
 
@@ -67,6 +68,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 3 P02 | 25 | 2 tasks | 12 files |
 | Phase 3 P03 | 41 | 2 tasks | 11 files |
 | Phase 03 P04 | 88min | 3 tasks | 21 files |
+| Phase 3 P5 | 30 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -119,6 +121,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 03-04: Executor-reduced selective_top3 wallclock budget 4× (15min top-3 + 7min rest = ~66min total instead of 4.5 hours)
 - [Phase ?]: Plan 03-04: Stability harness measures transport-level PASS, not semantic-output PASS — Phase 4 reconciliation needed
 - [Phase ?]: Plan 03-04: _diff_after reports POST-kill unkilled-survivor count; pre-kill detection preserved in stability_orphan_audit.log
+- [Phase ?]: Plan 03-05: Phase 3 closed via synthesis aggregator. CROSS_CUT_SUMMARY.md (171 lines, 60 table rows, 9 sections) + cross_cut_data.json companion. Headline cold-start spread 51.4x (lightpanda 13ms vs browser-use 668ms); payload spread 7.3x (obscura 16,394 vs browser-use-direct 120,059 bytes); Playwright batch-fill = NO_EVIDENCE (PASS dirs at 2026-05-25 not 2026-05-26). Three limitations carried forward to Phase 4: SKIPPED-row composite=0.0 sentinel, transport-vs-semantic stability annotation needed for obscura + browser-use-direct, Playwright cross-cut data gap.
 
 ### Pending Todos
 
@@ -153,6 +156,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-27T00:34:27.283Z
-Stopped at: Plan 02-07 (cross-row attribution audit) complete. **Phase 2 CLOSED.** All 5 Phase 2 success criteria PASS: (SC1) 7 evidence dirs or SKIPPED.md, (SC2) read-only MCPs N/A not 0, (SC3) browser-use dual-mode, (SC4) capability + attribution complete, (SC5) cloakbrowser loopback-only. Audit injected exactly 2 fields on the playwright row (capability=tool-only, mode=default — Phase 1 calibration row pre-dated FAIRNESS-04 contract); scoring values byte-for-byte preserved across all 8 rows. CAPABILITY_MATRIX.md emits the FAIRNESS-04 second-view artifact (capability-grouped, with sandbox-only callout for cloakbrowser per SAFETY-04+REPORT-08). PHASE2_AUDIT.md emits per-SC PASS/FAIL summary + tag-injection inventory + 3 known limitations carried forward for Phase 4. scoring/score.py SACROSANCT contract upheld (git diff main = 0 lines). 176/176 Phase-1 tests pass. **Phase 3 + Phase 4 can begin in parallel** against the validated scores.json matrix.
+Last session: 2026-05-27T00:47:25.293Z
+Stopped at: Plan 03-05 complete. Phase 3 (Cross-Cutting Measurements) CLOSED. All 5 success criteria PASS (SC1=cold_start, SC2=tokens, SC3=stability, SC4=tool_call_counts, SC5=tools_inventory). CROSS_CUT_SUMMARY.md is the Phase-4 ingestion point. Three carried-forward limitations: SKIPPED composite=0.0 sentinel, transport-vs-semantic stability caveat, Playwright PASS-dir date gap.
 Resume file: None
