@@ -74,7 +74,7 @@ The work is **horizontally layered** (`PROJECT_MODE=standard`): harness foundati
 - [ ] 04-01-PLAN.md — Reproducibility manifest (versions.json + versions.lock.md + MACHINE.md)
 - [ ] 04-02-PLAN.md — docs/REPRODUCIBILITY.md third-party recipe
 - [ ] 04-03-PLAN.md — Scored comparison report (bench/build_report.py + results/2026-05-27-mcp-comparison.md)
-- [ ] 04-04-PLAN.md — Stage 2 graduation recommendations (bench/build_recommendations.py + results/recommendations.md)
+- [x] 04-04-PLAN.md — Stage 2 graduation recommendations (bench/build_recommendations.py + results/recommendations.md)
 - [ ] 04-05-PLAN.md — README headline verdict update
 - [ ] 04-06-PLAN.md — Wave-close ritual + final ROADMAP close
 **UI hint**: no
@@ -89,4 +89,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 | 1. Harness Foundation | 7/7 | Complete (calibration PASS 2026-05-26 per `results/2026-05-25/PHASE1_CALIBRATION.md`) | 2026-05-26 |
 | 2. Per-MCP Scoring Runs | 7/7 | Complete (all 6 per-MCP runs + attribution audit; all 5 SCs PASS per `.planning/phases/02-per-mcp-scoring-runs/PHASE2_AUDIT.md`) | 2026-05-27 |
 | 3. Cross-Cutting Measurements | 5/5 | Complete   | 2026-05-27 |
-| 4. Synthesis | 0/6 | In progress (planned 2026-05-27) | - |
+| 4. Synthesis | 1/6 | In Progress|  |
