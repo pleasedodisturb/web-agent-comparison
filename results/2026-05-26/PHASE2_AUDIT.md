@@ -1,7 +1,7 @@
 # Phase 2 Audit — 2026-05-26
 
 **Plan:** 02-07 (cross-row attribution audit)
-**Linear ticket:** G-703 (umbrella), G-715..G-720 (per-MCP sub-tickets)
+**Linear ticket:** G-703 (umbrella), G-714..G-720 (per-MCP sub-tickets per [`docs/LINEAR_SUBTICKETS.md`](../../docs/LINEAR_SUBTICKETS.md))
 **Auditor:** GSD executor (Plan 02-07 Task 1+2)
 **Verdict:** **PASS — Phase 2 contracts upheld. Phase 3 + 4 are unblocked.**
 
@@ -234,10 +234,10 @@ All Phase-1 tests still pass. No regressions.
 - **G-703 (parent):** Phase 2 complete — 7 MCPs evaluated (6 SCORED +
   1 SKIPPED dual-mode). Capability tags + attribution validated. Ready
   for Phase 3 + 4.
-- Per-MCP sub-tickets (G-715..G-720) referenced in each plan's
-  SUMMARY.md but NOT created at run time (per OUTREACH-03 ownership —
-  same pattern as 02-03/04/05/06). DEEP_ANALYSIS.md files are ready to
-  lift into ticket comments when the per-MCP ticket sweep lands.
+- Per-MCP sub-tickets (G-714..G-720, canonical mapping per
+  [`docs/LINEAR_SUBTICKETS.md`](../../docs/LINEAR_SUBTICKETS.md))
+  referenced in each plan's SUMMARY.md and filed 2026-05-22 by plan
+  01-02. DEEP_ANALYSIS.md files are ready to lift into ticket comments.
 
 ## Phase 3 + 4 readiness
 

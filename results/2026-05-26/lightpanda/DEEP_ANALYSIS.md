@@ -1,7 +1,7 @@
 # lightpanda — Deep Analysis
 
 **Run date:** 2026-05-26
-**Linear sub-ticket:** G-716 (Phase-2 per-MCP scoring; see G-703 umbrella)
+**Linear sub-ticket:** G-717 (Phase-2 per-MCP scoring; see G-703 umbrella — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 **Plan:** [02-02-lightpanda-PLAN.md](../../../.planning/phases/02-per-mcp-scoring-runs/02-02-lightpanda-PLAN.md)
 **Binary:** `~/.local/bin/lightpanda` (sha256 `4ca3897a1547c9b3b843a0a921c2b4d044afb3ad4914091a845ac608fe1cb047`)
 
@@ -71,7 +71,7 @@ The `bench/capture_versions.py` step and the live MCP handshake disagree about w
 | MCP JSON-RPC `initialize` response → `serverInfo.version` (sent by the running server) | **`0.1.0`** |
 | `versions.json` → `mcps.lightpanda.sha256` (canonical pin) | `4ca3897a1547c9b3b843a0a921c2b4d044afb3ad4914091a845ac608fe1cb047` |
 
-This was documented in `~/.claude/docs/browser-tools.md` (2026-05-21 verification) and reproduced byte-for-byte here. We **do not resolve the contradiction** — both numbers are recorded so a future Phase-4 reader can cite the actual artifact source. The canonical version reference for reproducibility is the SHA256 pin, not either human-facing version string. Phase 4's "Negative Results" section can use this as a documentation-hygiene callout against the vendor.
+This was documented in [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) and reproduced byte-for-byte here. We **do not resolve the contradiction** — both numbers are recorded so a future Phase-4 reader can cite the actual artifact source. The canonical version reference for reproducibility is the SHA256 pin, not either human-facing version string. Phase 4's "Negative Results" section can use this as a documentation-hygiene callout against the vendor.
 
 ## Pass-to-Pass Variance
 
@@ -109,7 +109,7 @@ No other sub-5 cells in the row (data_quality=7, reliability=9, speed=5, token_e
 
 ## Linear Sub-ticket Reference
 
-G-716 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G-720 split is owned by the OUTREACH-03 sweep and was not created at run time). This Deep Analysis can be lifted verbatim into the G-716 comment thread when it lands.
+G-717 (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md); the G-714..G-720 split was filed 2026-05-22 by plan 01-02). This Deep Analysis can be lifted verbatim into the G-717 comment thread when it lands.
 
 ## Stretch Items NOT Done (Deferred)
 

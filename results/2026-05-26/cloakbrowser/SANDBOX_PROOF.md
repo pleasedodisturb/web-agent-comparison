@@ -9,9 +9,9 @@ to any hostname other than 127.0.0.1; the harness refuses to spawn it against an
 other target."
 
 This proof attests the SAFETY-04 contract per CLAUDE.md `## Constraints` and
-`~/.claude/docs/browser-tools.md` (2026-05-21): cloakbrowser is a closed-source
-binary that touches cookies on launch; it must only ever be pointed at the
-loopback snapshot fixtures.
+[`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md):
+cloakbrowser is a closed-source binary that touches cookies on launch; it must
+only ever be pointed at the loopback snapshot fixtures.
 
 ## Pre-flight guard
 
@@ -164,4 +164,4 @@ cookies under default same-site policy).
 - `results/2026-05-26/cloakbrowser/PASS{1,2,3}/raw_stream.jsonl` — full tool-call streams
 - `results/2026-05-26/cloakbrowser/PASS{1,2,3}/transcript.md` — agent-derived transcripts
 - `CLAUDE.md ## Constraints` — sandbox-only policy origin
-- `~/.claude/docs/browser-tools.md` (2026-05-21) — closed-binary cookie-touching note
+- [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) — closed-binary cookie-touching note

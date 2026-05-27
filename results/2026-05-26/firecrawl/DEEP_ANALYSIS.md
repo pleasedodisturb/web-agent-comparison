@@ -1,7 +1,7 @@
 # firecrawl — Deep Analysis
 
 **Run date:** 2026-05-26
-**Linear sub-ticket:** G-717 (Phase-2 per-MCP scoring; see G-703 umbrella)
+**Linear sub-ticket:** G-719 (Phase-2 per-MCP scoring; see G-703 umbrella — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 **Plan:** [02-03-firecrawl-PLAN.md](../../../.planning/phases/02-per-mcp-scoring-runs/02-03-firecrawl-PLAN.md)
 **Package:** `firecrawl-mcp@3.17.0` (npm; sha256 `55d5fbb20270518f9cb6f0c16fb054e934847fe9a557b355503c0f05dce7d89f`)
 
@@ -129,7 +129,7 @@ This row's headline for Stage 2 toolkit selection: **adopt firecrawl as a comple
 
 ## Linear Sub-ticket Reference
 
-G-717 (proposed per CONTEXT.md § Implementation Decisions; the tickets G-715..G-720 split is owned by the OUTREACH-03 sweep and was not created at run time). This Deep Analysis can be lifted verbatim into the G-717 comment thread when it lands.
+G-719 (canonical mapping per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md); the G-714..G-720 split was filed 2026-05-22 by plan 01-02). This Deep Analysis can be lifted verbatim into the G-719 comment thread when it lands.
 
 ## Stretch Items NOT Done (Deferred)
 

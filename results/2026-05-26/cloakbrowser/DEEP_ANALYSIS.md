@@ -225,10 +225,11 @@ The binding constraint is the closed-source binary trust model:
 
 - **Closed-source** — `cloakbrowsermcp` ships a binary from PyPI (author
   `overtimepog`) that no third-party audit has reviewed.
-- **Touches cookies on launch** — per `~/.claude/docs/browser-tools.md`
-  (2026-05-21), the binary modifies host cookies before the harness has
-  a chance to intercept. This is the architectural reason for the
-  loopback-only contract.
+- **Touches cookies on launch** — per
+  [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md)
+  § "Cookie-touch on launch", the binary modifies host cookies before
+  the harness has a chance to intercept. This is the architectural
+  reason for the loopback-only contract.
 - **Telemetry surface unknown** — the binary may phone home; we have
   no way to know without reverse engineering. Loopback restriction
   bounds the exposure to the harness's ephemeral session.
@@ -340,7 +341,7 @@ ticket sweep per OUTREACH-03 ownership precedent).
 - `results/2026-05-26/scores.json` — median row alongside the 7 other MCPs
 - `bench/cloakbrowser_guard.py` — sandbox enforcement primitive
 - `CLAUDE.md ## Constraints` — sandbox-only policy origin
-- `~/.claude/docs/browser-tools.md` (2026-05-21) — closed-binary cookie-touching note
+- [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) — closed-binary cookie-touching note
 - `.planning/research/SUMMARY.md § Empirical Claims to Falsify` — stealth claim (DEFERRED to G-710)
 
 **Sacrosanct check:** `scoring/score.py` byte-for-byte unchanged

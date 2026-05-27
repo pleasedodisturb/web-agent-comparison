@@ -5,7 +5,7 @@
 **Mode:** `default` (no special invocation flags)
 **Median composite (3-pass, N/A-aware):** **5.6 / 10**
 **Run dates:** 2026-05-26 (all 3 passes within a 26-minute window)
-**Linear ticket:** G-715 (chrome-devtools sub-ticket of G-703)
+**Linear ticket:** G-716 (chrome-devtools sub-ticket of G-703 — per [`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md))
 
 ## Capability tag
 
@@ -148,10 +148,11 @@ sequentially with 3-pass median. Within plan budget; no time-budget escalation n
 
 ## Linear ticket
 
-Per CONTEXT.md `## Decisions § Execution Order`, this row belongs under sub-ticket
-**G-715** (chrome-devtools split of G-703). A summary comment will be posted via
-`linearis comments create G-715` referencing this DEEP_ANALYSIS.md and the median row in
-`scores.json`.
+Per CONTEXT.md `## Decisions § Execution Order` and the canonical mapping in
+[`docs/LINEAR_SUBTICKETS.md`](../../../docs/LINEAR_SUBTICKETS.md), this row
+belongs under sub-ticket **G-716** (chrome-devtools split of G-703). A
+summary comment will be posted via `linearis comments create G-716`
+referencing this DEEP_ANALYSIS.md and the median row in `scores.json`.
 
 ## Sources
 

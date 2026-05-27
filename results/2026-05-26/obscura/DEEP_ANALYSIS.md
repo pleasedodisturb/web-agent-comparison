@@ -17,7 +17,7 @@ The tag is honest about positioning, not about measurement. Phase 2's S1-S8 walk
 
 Obscura's tool surface exposes a per-call `stealth` parameter, and the underlying engine supports a `--stealth` command-line flag. **Neither was enabled in this benchmark.** The reason:
 
-- Per CLAUDE.md `## Conventions` + `~/.claude/docs/browser-tools.md` (2026-05-21): enabling `--stealth` on macOS leaks `Sec-CH-UA-Platform-*` client hints emitted by the network stack, regardless of any JS-level User-Agent shim. Cloudflare cross-checks this. The MCP would be tagged `stealth: leaks` under SAFETY-03 — a methodology-honesty choice, not a workaround.
+- Per CLAUDE.md `## Conventions` + [`docs/external-findings/browser-tools-2026-05-21.md`](../../../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03: enabling `--stealth` on macOS leaks `Sec-CH-UA-Platform-*` client hints emitted by the network stack, regardless of any JS-level User-Agent shim. Cloudflare cross-checks this. The MCP would be tagged `stealth: leaks` under SAFETY-03 — a methodology-honesty choice, not a workaround.
 - Per `.mcp.json` (verified pre-flight): `obscura` entry has `command: "obscura-mcp"`, `args: []`. No `--stealth`. The harness `scripts/run_mcp_session.sh` invokes the entry verbatim — no override.
 
 ```bash
