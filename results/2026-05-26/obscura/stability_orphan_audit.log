@@ -1,0 +1,11 @@
+# orphan_audit run at 2026-05-27T00:23:24Z
+BEFORE_PATH=results/2026-05-26/obscura/.stability_ps_before.tsv
+AFTER_PATH=results/2026-05-26/obscura/.stability_ps_after.tsv
+TARGET_PGID=unset
+BEFORE_COUNT=799
+AFTER_COUNT=805
+DIFF_COUNT=2
+KILLED pid=54854 pgid=54854 cmd=node /opt/homebrew/bin/obscura-mcp
+KILLED pid=54896 pgid=54854 cmd=/opt/homebrew/lib/node_modules/obscura-mcp/bin/obscura serve
+KILLED_COUNT=2
+ORPHANS=2

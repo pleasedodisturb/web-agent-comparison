@@ -1,0 +1,9 @@
+# orphan_audit run at 2026-05-27T00:23:24Z
+BEFORE_PATH=results/2026-05-26/obscura/.stability_ps_outer_before.tsv
+AFTER_PATH=results/2026-05-26/obscura/.stability_ps_outer_after.tsv
+TARGET_PGID=unset
+BEFORE_COUNT=798
+AFTER_COUNT=799
+DIFF_COUNT=0
+KILLED_COUNT=0
+ORPHANS=0
