@@ -214,24 +214,66 @@ def aggregate_scores(scores_path: Path) -> dict[str, Any]:
     return json.loads(scores_path.read_text(encoding="utf-8"))
 
 
+_RUBRIC_WEIGHTS_LOCAL: dict[str, int] = {
+    "data_quality": 3,
+    "reliability": 3,
+    "speed": 2,
+    "token_efficiency": 2,
+    "interaction_depth": 2,
+    "js_rendering": 1,
+    "setup_complexity": 1,
+    "error_handling": 1,
+}
+
+# Published medians per the 2026-05-26 audit (PHASE2_AUDIT.md). Used as a
+# fallback when scores.json does not carry a usable scores dict for a given
+# MCP — keeps the historical numbers visible if a future wave's scores.json
+# drops a row entirely. When scores.json provides data, that data wins
+# (IN-02: don't ignore the function's own parameter).
+_HARDCODED_COMPOSITES: dict[str, str] = {
+    "playwright": "7.93",
+    "lightpanda": "6.31",
+    "browser-use-direct": "5.87",
+    "chrome-devtools": "5.60",
+    "firecrawl": "4.23",
+    "cloakbrowser": "8.33",
+    "obscura": "3.27",
+    "browser-use-agent": "SKIPPED",
+}
+
+
 def _composite_for(mcp: str, scores: dict[str, Any]) -> str:
     """Return the published composite string for a given MCP.
 
-    Hardcoded medians per the 2026-05-26 audit; pulled from scores.json
-    when present. Returns 'SKIPPED' for the SKIPPED row.
+    Computes the N/A-aware weighted composite from `scores[mcp]["scores"]`
+    when available; falls back to the 2026-05-26 hardcoded medians only
+    when no usable scores dict exists for the row. SKIPPED rows return
+    'SKIPPED'.
+
+    IN-02 fix: the function previously ignored its `scores` parameter
+    entirely and always returned from the hardcoded dict, which silently
+    cited stale composites if scores.json was updated.
     """
-    # Hardcoded medians per the 2026-05-26 audit (PHASE2_AUDIT.md).
-    HARDCODED_COMPOSITES = {
-        "playwright": "7.93",
-        "lightpanda": "6.31",
-        "browser-use-direct": "5.87",
-        "chrome-devtools": "5.60",
-        "firecrawl": "4.23",
-        "cloakbrowser": "8.33",
-        "obscura": "3.27",
-        "browser-use-agent": "SKIPPED",
-    }
-    return HARDCODED_COMPOSITES.get(mcp, "—")
+    row = scores.get(mcp) if isinstance(scores, dict) else None
+    if isinstance(row, dict):
+        if row.get("status") == "SKIPPED":
+            return "SKIPPED"
+        row_scores = row.get("scores") or {}
+        num = 0.0
+        den = 0
+        for k, w in _RUBRIC_WEIGHTS_LOCAL.items():
+            v = row_scores.get(k)
+            if v is None or v == "N/A":
+                continue
+            try:
+                num += float(v) * w
+                den += w
+            except (TypeError, ValueError):
+                continue
+        if den > 0:
+            return f"{num / den:.2f}"
+    # Fall back to the historical median.
+    return _HARDCODED_COMPOSITES.get(mcp, "—")
 
 
 def _capability_for(mcp: str, scores: dict[str, Any]) -> str:

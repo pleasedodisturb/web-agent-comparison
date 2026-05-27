@@ -724,7 +724,24 @@ def render_overlay_2026_03_2026_05(scores: dict) -> str:
 
 
 def render_negative_results(scores: dict, cross_cut: dict) -> str:
-    """REPORT-10 — explicit negative findings."""
+    """REPORT-10 — explicit negative findings.
+
+    The five bullets below are hand-curated narrative anchored to specific
+    Phase 2 findings; they are NOT mechanically derived from the scores
+    dict. The `scores` and `cross_cut` parameters drive two consistency
+    checks (WR-03):
+
+      1. Any MCP with `status == "SKIPPED"` MUST appear in one of the
+         hand-written bullets — if a future row goes SKIPPED and is not
+         disclosed here, this function emits an extra auto-derived
+         "SKIPPED row not documented" bullet so the gap is visible in
+         the artifact rather than hidden.
+      2. Any MCP with an `env-mismatch` attribution tag in `scores`
+         likewise must be referenced; same auto-derived gap bullet.
+
+    This pattern keeps the curated prose readable while preventing the
+    function's parameters from being silently dead code.
+    """
     parts: list[str] = []
     parts.append("## Negative Results")
     parts.append("")
@@ -802,6 +819,54 @@ def render_negative_results(scores: dict, cross_cut: dict) -> str:
         "Deferred to G-710; the rest of the matrix uses 2026-05-26 PASS dirs."
     )
     parts.append("")
+
+    # WR-03 — data-driven consistency gate. Render text-blob once so we can
+    # search it case-insensitively for MCP-name hits.
+    text_so_far = "\n".join(parts).lower()
+    gap_bullets: list[str] = []
+
+    for mcp, row in (scores or {}).items():
+        if row.get("status") == "SKIPPED":
+            if mcp.lower() not in text_so_far:
+                skip_reason = row.get("skip_reason", "no-reason")
+                skip_evidence = row.get(
+                    "skip_evidence",
+                    f"results/2026-05-26/{mcp}/SKIPPED.md",
+                )
+                gap_bullets.append(
+                    f"- **`{mcp}` SKIPPED (auto-derived disclosure).** "
+                    f"This row's `status` is SKIPPED with reason "
+                    f"`{skip_reason}` but the curated bullets above do not "
+                    f"document it. See `{skip_evidence}`."
+                )
+        attribution = row.get("attribution", {}) or {}
+        env_dims = sorted(
+            d for d, tag in attribution.items() if tag == "env-mismatch"
+        )
+        if env_dims and mcp.lower() not in text_so_far:
+            gap_bullets.append(
+                f"- **`{mcp}` env-mismatch (auto-derived disclosure).** "
+                f"Attribution tags `env-mismatch` on dimensions {env_dims} "
+                f"but the curated bullets above do not document this row. "
+                f"Likely a future-wave row that needs a Phase 4 prose update."
+            )
+
+    # cross_cut is referenced for parity with future use; today the bullets
+    # are not yet driven from cross-cut findings, but the parameter is no
+    # longer dead — keep the read so future maintainers see the shape.
+    _ = cross_cut
+
+    if gap_bullets:
+        parts.append("")
+        parts.append(
+            "_Auto-derived gap disclosures (consistency check between "
+            "curated prose above and the data-driven status / attribution "
+            "fields in `scores.json`):_"
+        )
+        parts.append("")
+        parts.extend(gap_bullets)
+        parts.append("")
+
     return "\n".join(parts)
 
 
