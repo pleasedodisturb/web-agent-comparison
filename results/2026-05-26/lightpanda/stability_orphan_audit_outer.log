@@ -1,0 +1,10 @@
+# orphan_audit run at 2026-05-27T00:01:05Z
+BEFORE_PATH=results/2026-05-26/lightpanda/.stability_ps_outer_before.tsv
+AFTER_PATH=results/2026-05-26/lightpanda/.stability_ps_outer_after.tsv
+TARGET_PGID=unset
+BEFORE_COUNT=805
+AFTER_COUNT=801
+DIFF_COUNT=1
+GONE pid=59483 pgid=64109 cmd=.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-26/lightpanda/.stability_ps_outer_after.tsv
+KILLED_COUNT=0
+ORPHANS=1
