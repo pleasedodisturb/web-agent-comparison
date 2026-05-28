@@ -1,84 +1,131 @@
-# Web Agent Comparison Suite
+# Web Agent Comparison
 
-A public, reproducible benchmark of browser-automation MCP servers driven by Claude Code on the same S1-S8 job-application fixtures. Stage 1 of a 3-stage pipeline: this repo scores candidate MCPs, the winners graduate into the private `terminal-craft` toolkit (Stage 2), which is wired into the `Kestrel` and `Eyas` job-hunting agents (Stage 3). Wave 2 (2026-05-27) compares **7 MCP-layer browser-automation servers** under Claude Code on the same fixture pipeline used by the 2026-03 app-level wave; the candidate matrix and the graduate-to-toolkit recommendation are what must exist at the end.
+**Which browser-automation MCP server should your AI agent use?**
 
-> **2026-05-27 update:** Wave 2 MCP-layer comparison published. See [results/recommendations.md](results/recommendations.md) for Stage 2 graduation tiers and [results/2026-05-27-mcp-comparison.md](results/2026-05-27-mcp-comparison.md) for full scored evidence. The historical 2026-03-31 app-level wave is preserved at [results/2026-03-31_run.md](results/2026-03-31_run.md) for traceability; it is no longer the primary headline.
+Vendors all claim "real Chrome." Cold-start latencies vary **51×** across the field. One leader ships as a closed-source binary that touches your cookies on launch. Real tradeoffs are hidden behind marketing copy.
 
-## Headline verdict
+So we ran 7 of them on identical, frozen fixtures, scored every dimension that matters, and published the evidence. Pick a row.
 
-Stage 2 graduation tiers across the **7 MCP candidates** in [`.mcp.json`](.mcp.json). Tier assignments are LOCKED — full rationale, evidence, and per-MCP citations live in [results/recommendations.md](results/recommendations.md).
+> ⚠ **Scope of v1.0:** Job-application fixtures (Greenhouse server-rendered + Ashby React SPA). It's a useful proxy for "real, modern web pages" — but it is one specific use case. **v1.1 will expand the fixture set to general-purpose web tasks** (search, e-commerce, content extraction, multi-page navigation). The harness and rubric are designed to absorb the new fixtures without re-baselining.
 
-| Tier | MCPs |
-|------|------|
-| PRIMARY | playwright, lightpanda |
-| SECONDARY | browser-use (direct mode only — agent mode SKIPPED, see recommendations.md)[^1], chrome-devtools, firecrawl |
-| SANDBOX-ONLY | cloakbrowser (**sandbox only — do not point at authenticated sessions**) |
-| SKIP | obscura |
+## The verdict (2026-05-27)
 
-[^1]: browser-use produces TWO scored rows in `results/2026-05-26/scores.json` per FAIRNESS-05 (direct mode + agent mode), but counts as ONE candidate in the 7-MCP framing aligned with `.mcp.json`. Direct mode composite 5.87; agent mode SKIPPED (LLM_KEY_ABSENT). See [results/recommendations.md](results/recommendations.md) for the full dual-row narrative.
+| MCP | Composite | Cold-start (median) | Tier | Use it for | Skip it for |
+|-----|----------:|--------------------:|------|------------|-------------|
+| **[playwright](https://github.com/microsoft/playwright-mcp)** | **7.93** | 197 ms | 🟢 **PRIMARY** | Interactive forms, batch fills, the safe default | Nothing — it's the baseline |
+| **[lightpanda](https://github.com/lightpanda-io/browser)** | **6.31** | **13 ms** ⚡ | 🟢 **PRIMARY** | Read-only SSR extraction — pair with Playwright as a 51× faster cold-start specialist | JS-heavy SPAs (it's a Zig engine with no JS runtime — React-blind by design) |
+| [browser-use](https://github.com/browser-use/browser-use) (direct) | 5.87 | 668 ms | 🟡 SECONDARY | Direct tool mode without an LLM key for S1+S2+S3+S8 | Interactive form fill (S4–S7) — use Playwright |
+| [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) | 5.60 | 358 ms | 🟡 SECONDARY | DevTools-specific debugging (network, perf, console) | First-pass scraping — use Playwright |
+| [firecrawl](https://github.com/firecrawl/firecrawl-mcp-server) | 4.23 | 171 ms | 🟡 SECONDARY | Cloud SSR scraping at scale (9× byte-count lift on Greenhouse) | Local/loopback fixtures (cloud rejects 127.0.0.1) and React SPAs (203 bytes on Ashby) |
+| [cloakbrowser](https://pypi.org/project/cloakbrowsermcp/) | **8.33** | 235 ms | 🔴 **SANDBOX-ONLY** | Public-fixture stealth research only | **Authenticated sessions** — closed-source binary touches cookies on launch |
+| [obscura](https://www.npmjs.com/package/obscura-mcp) | 3.27 | 158 ms | ⚫ SKIP | (nothing on macOS today — wait for the Linux A/B in our follow-up wave) | macOS production use — `Sec-CH-UA-Platform-*` leaks the real OS |
+| browser-use (agent mode) | SKIPPED | — | ⚫ SKIP | Re-runnable if you set an LLM key | — |
 
-## Methodology summary
+**One-line takeaway:** Pair Playwright (interactive) with Lightpanda (read-only). Reach for Firecrawl when you need cloud SSR at scale and your targets are publicly reachable. Treat Cloakbrowser as a research sandbox. Wait on Obscura until a Linux re-test lands.
 
-Evaluated 2026-05-27 with the locked 8-dimension weighted rubric (Data Quality 3×, Reliability 3×, Speed 2×, Token Efficiency 2×, Interaction Depth 2×, JS Rendering 1×, Setup Complexity 1×, Error Handling 1× — unchanged from the 2026-03 wave) against the **S1-S8 job-application pipeline** (Greenhouse SSR + Ashby React SPA fixtures). All fixtures are **self-hosted loopback snapshots** (REPRO-04) served from `127.0.0.1` and frozen byte-for-byte so any third party with the public repo can reproduce the scores — no live URL dependency. Seven MCP candidates were scored (one row per MCP in [`.mcp.json`](.mcp.json)); browser-use produces two scored rows per FAIRNESS-05 dual-mode contract while still counting as one candidate. Every stage failure triggers a 3-pass-of-3 retry per FAIRNESS-01 with the median across attempts published; `N/A` (categorically inapplicable, e.g. read-only MCP × interactive stage) and `UNTESTED` (no measurement taken) are deliberately distinct per FAIRNESS-03 so a read-only candidate is not penalised for not attempting form-fill. A capability-tagged dual view (per FAIRNESS-04) prevents apples-to-oranges comparison between cloud, stealth, JS-light, LLM-augmented, and tool-only categories. Full reproducibility recipe lives at [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
+Full per-MCP rationale and citations: [`results/recommendations.md`](results/recommendations.md). Full 8-dimension score breakdown + S1-S8 stage matrix: [`results/2026-05-27-mcp-comparison.md`](results/2026-05-27-mcp-comparison.md).
 
-## Test stages
+## What we actually measured
 
-The locked S1-S8 job-application pipeline (same prompt drives every MCP for direct comparability — `prompts/stage_walk.md`):
+**8 weighted dimensions** (composite is a 0-10 blend, locked from the prior wave for direct comparability):
 
-1. **S1** Extract structured job data (Greenhouse — server-rendered)
-2. **S2** Extract from React SPA (Ashby — client-rendered)
-3. **S3** ATS platform detection
-4. **S4** Navigate to apply form
-5. **S5** Fill application form with mock data
-6. **S6** Upload mock resume
-7. **S7** Handle React-Select dropdown fields
-8. **S8** Screenshot filled form
+| Dimension | Weight | What it captures |
+|-----------|--------:|------------------|
+| Data Quality | 3× | Did the extracted JSON/structure match the source page faithfully? |
+| Reliability | 3× | Did the same prompt produce the same answer across 3 retry passes? |
+| Speed | 2× | Wall-clock per stage |
+| Token Efficiency | 2× | Tokens consumed per task completed |
+| Interaction Depth | 2× | How many of S4–S8 (form fill, upload, dropdown, screenshot) succeeded? |
+| JS Rendering | 1× | Did the MCP see the client-rendered DOM, not just the SSR shell? |
+| Setup Complexity | 1× | How painful was getting the MCP running at all? |
+| Error Handling | 1× | When something broke, did we get a useful error or silence? |
 
-## Key findings (2026-05-27)
+**N/A-aware composite.** A read-only MCP (Lightpanda, Firecrawl) marked `N/A` for "fill the form" cells **drops those cells from its weighted denominator** rather than being penalised with a 0. That's why Lightpanda's 6.31 is honest, not inflated. The handler is `scoring/score_with_na.py`; the rubric is `scoring/rubric.md` (sacrosanct — byte-for-byte unchanged from the start of the wave).
 
-- **Lightpanda cold-start is 51× faster than browser-use-direct** (13 ms median vs ~660 ms), making it the read-only specialist for SSR-only paths; categorically N/A for S4-S8 per FAIRNESS-03 — and that's the point: pair with an interactive PRIMARY peer.
-- **Playwright remains the interactive default** (composite **7.93**) but dropped from the 2026-03 live-URL baseline of 9.07 — same rubric, different fixture sourcing (loopback snapshot vs live URL) + 2026-05 vendor patches account for the delta. The `browser_fill_form` batch-fill claim is re-grounded by Phase 2 evidence.
-- **Cloakbrowser leads the S1-S8 surface at composite 8.33** but is pre-tiered SANDBOX-ONLY by construction — the closed-source binary + cookie-touch trust model is the binding constraint, not the score. **Sandbox only — do not point at authenticated sessions.**
-- **Firecrawl cloud cannot reach loopback fixtures by architecture** (cloud-API URL validator rejects `127.0.0.1` → tagged `env-mismatch` per FAIRNESS-06). The 9× byte-count lift on Greenhouse SSR (24,237 vs ~2.6 KB) is real; refuted on Ashby React SPA (203 bytes of footer chrome only).
-- **Browser-use direct-mode works without a user LLM key** for the deterministic S1+S2+S3+S8 subset; **agent-mode SKIPPED** for `LLM_KEY_ABSENT` per the FAIRNESS-05 dual-row contract. Re-run procedure in `results/2026-05-26/browser-use-agent/SKIPPED.md`.
+**Median of 3 passes.** Every run is repeated 3× and the median is published. This surfaced agent-discovery variance (Chrome DevTools MCP ran 5.6 / 5.6 / 8.33 across passes — one pass alone found a server-side-rendering rescue trick that the other two missed). Single-shot scores would have lied.
 
-## Results
+**Frozen loopback fixtures.** Every MCP hits a byte-for-byte snapshot of the same Greenhouse + Ashby pages served from `127.0.0.1`. No live URLs, no network jitter, no "the site changed under us." Anyone with this repo can reproduce the scores: [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
 
-- **Full scored report:** [results/2026-05-27-mcp-comparison.md](results/2026-05-27-mcp-comparison.md)
-- **Stage 2 recommendations** (the graduation gate): [results/recommendations.md](results/recommendations.md)
-- **Reproducibility recipe:** [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)
-- **Historical 2026-03 app-level wave** (preserved for traceability, not the primary headline): [results/2026-03-31_run.md](results/2026-03-31_run.md)
+## The S1–S8 stage walk
 
-## Structure
+Every MCP runs the same prompt ([`prompts/stage_walk.md`](prompts/stage_walk.md)). The first three stages are read-only; the last five are interactive:
+
+| Stage | What the MCP must do | Page type |
+|------:|----------------------|-----------|
+| S1 | Extract structured job data | Greenhouse (server-rendered) |
+| S2 | Extract from a React SPA | Ashby (client-rendered) |
+| S3 | Detect the ATS platform | both |
+| S4 | Navigate to the apply form | both |
+| S5 | Fill the application form with mock data | both |
+| S6 | Upload a mock resume PDF | both |
+| S7 | Handle React-Select dropdowns | both |
+| S8 | Screenshot the filled form | both |
+
+S1–S3 measure read-only extraction quality; S4–S8 measure interactive depth. Read-only MCPs (Lightpanda, Firecrawl) are categorically `N/A` for S4–S8 — and that's the point: don't pick a read-only specialist for a form-fill workload, and don't penalize it for being honest about its surface.
+
+## Key findings worth your time
+
+- **51× cold-start spread.** Lightpanda 13 ms vs Browser-Use direct 668 ms. If you're spawning MCPs per-request, this is your latency budget.
+- **Cloakbrowser leads the raw score (8.33)** but is **pre-tiered SANDBOX-ONLY** by construction. Closed-source binary + cookie-touch trust model is the binding constraint, not the score. Composite alone cannot drive graduation tier.
+- **Firecrawl confirms the SSR lift, refutes the SPA claim.** 9× byte-count lift on Greenhouse SSR (24 KB markdown vs Playwright's 2.6 KB structured YAML) — real. Same approach on Ashby React SPA: 203 bytes of footer chrome. Cloud LLM-extraction is the right tool for SSR-heavy targets, not a universal JS-SPA fallback.
+- **Browser-Use direct mode works without an LLM key** for the deterministic S1+S2+S3+S8 subset; the `retry_with_browser_use_agent` LLM escape hatch was never invoked. Agent mode SKIPPED for `LLM_KEY_ABSENT` per the dual-row contract.
+- **Headless Chromium leaks three independently fingerprintable signals** by default (`HeadlessChrome/` UA, SwiftShader WebGL, `navigator.plugins.length=0`). That's a fingerprint-resilience finding worth carrying into your stack — the deferred follow-up wave will quantify it against the live adversary set.
+
+## Try it yourself
+
+```bash
+git clone https://github.com/pleasedodisturb/web-agent-comparison
+cd web-agent-comparison
+
+# Inspect the rubric and rules
+cat scoring/rubric.md
+
+# Read the third-party reproducibility recipe
+cat docs/REPRODUCIBILITY.md
+
+# Reproduce the Playwright calibration row (~10 min)
+make bench-playwright && make score
+```
+
+The recipe in [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) walks you through prereq checking, snapshot serving, and per-MCP runs with the exact pinned binary SHA256s.
+
+## What's coming next (the follow-up wave: G-710)
+
+v1.0 deliberately deferred four expensive measurement axes so the headline could ship. They live in the next wave:
+
+- **TLS fingerprint capture per MCP** (JA3/JA4) — does any of these actually pass 2025-26 bot-detection, or is "real Chrome" marketing copy?
+- **Bot-detection adversary set** — Cloudflare, DataDome, Akamai Bot Manager, reCAPTCHA v2/v3
+- **Cross-machine reproducibility** — MacBook parity vs the Mac Mini that ran this wave
+- **Obscura Linux A/B** — re-test `--stealth` from a Linux host where `Sec-CH-UA-Platform-*` is honest, so the tier can actually move off SKIP
+- **General-purpose fixture expansion** — beyond the job-application use case, into search, e-commerce, content extraction, multi-page navigation
+
+Follow-up wave anchor: [G-710](https://linear.app/abandoned-yachts/issue/G-710). v1.0 umbrella: [G-703](https://linear.app/abandoned-yachts/issue/G-703).
+
+## How the repo is laid out
 
 ```
 .mcp.json          Project-scoped MCP server registry (the 7-candidate roster)
 bench/             Harness + scoring + report builders (Python 3.12, uv-locked)
-docs/              REPRODUCIBILITY recipe + run-environment docs
-fixtures/          Mock data, resume PDF, and loopback snapshot fixtures (REPRO-04)
-prompts/           Locked S1-S8 stage-walk prompt
+docs/              Reproducibility recipe + run-environment docs
+fixtures/          Mock data, resume PDF, loopback snapshot fixtures
+prompts/           Locked S1–S8 stage-walk prompt
 scoring/           Locked 8-dimension rubric + N/A-aware scoring engine
-scripts/           CLI agent test scripts + harness orchestration
+scripts/           Test orchestration + harness CLI
 results/           Per-wave dated subdirectories with scored evidence
 ```
 
-## Scoring
+`.mcp.json` is project-scoped (not user-scoped) so the 7 MCPs only spawn when Claude opens this repo. That isolation matters — the same trick keeps your other Claude sessions free of rocket-icon dock pollution.
 
-Eight dimensions, weighted by importance for job-application automation (locked from the 2026-03 wave for direct comparability):
+## Why this exists
 
-- Data Quality (3×), Reliability (3×), Speed (2×), Token Efficiency (2×)
-- Interaction Depth (2×), JS Rendering (1×), Setup Complexity (1×), Error Handling (1×)
+Stage 1 of a 3-stage pipeline:
 
-Composite is **N/A-aware**: cells marked `N/A` (categorically inapplicable) drop from the weighted denominator per FAIRNESS-03 rather than scoring 0. Run: `python3 bench/build_report.py` (regenerates the comparison matrix from `results/2026-05-26/scores.json` + cross-cutting JSON). Rubric: `scoring/rubric.md` — DO NOT MODIFY mid-wave.
+1. **This repo (public)** — score candidate browser MCPs on standardized fixtures
+2. **`terminal-craft` (private)** — package the winners as a production toolkit
+3. **Kestrel + Eyas (private)** — wire the toolkit into job-hunting agents
 
-## Future waves
+The repo's job is to produce defensible, third-party-verifiable graduation tiers so Stage 2 isn't picking tooling based on vendor marketing. The graduation gate is `results/recommendations.md`. v1.0 shipped it.
 
-The bot-detection + TLS-fingerprint + cross-machine reproducibility follow-up reuses this wave's harness and ships under [G-710](https://linear.app/abandoned-yachts/issue/G-710). Scope deferred from Wave 2:
+---
 
-- TLS fingerprint capture per MCP (JA3/JA4)
-- Bot-detection adversary set (Cloudflare, reCAPTCHA, FingerprintJS, BrowserScan)
-- Cross-machine reproducibility (MacBook parity vs the Mac Mini that ran this wave)
-- Obscura Linux A/B (re-test `--stealth` from a Linux host where `Sec-CH-UA-Platform-*` is honest)
-- Validation of the SANDBOX-ONLY tier's stealth claim against the live adversary set
-
-This wave's umbrella is [G-703](https://linear.app/abandoned-yachts/issue/G-703).
+**Historical wave (preserved for traceability):** the 2026-03-31 app-level comparison of 5 application-layer agents (Playwright MCP 9.07, WebFetch 7.87, Agent Browser 7.60, Lightpanda 5.87, BrowserMCP 5.53) lives at [`results/2026-03-31_run.md`](results/2026-03-31_run.md). Same rubric, different candidate set (apps, not MCP-layer servers).
