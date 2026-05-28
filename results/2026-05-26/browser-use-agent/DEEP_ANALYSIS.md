@@ -115,6 +115,10 @@ Our v1.0.1 [follow-up comment](https://github.com/browser-use/browser-use/issues
 
 **Status as of 2026-05-28:** issue open, awaiting maintainer triage. We'll revisit the score if a fix lands in a future browser-use release.
 
+**Local tracking:**
+- Repo issue: [pleasedodisturb/web-agent-comparison#8](https://github.com/pleasedodisturb/web-agent-comparison/issues/8) — re-score trigger + procedure
+- Linear: [G-735](https://linear.app/abandoned-yachts/issue/G-735) — parented under the wave umbrella G-703
+
 ## Evidence files in this directory
 
 - `PASS1/` — full evidence dir from the v1.0.1 OpenAI-keyed harness run (all 8 stage_s*.FAILED + transcript.md narrating the failure)
