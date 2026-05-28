@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: "governance debt: Phase 3 verification + traceability sync"
-status: verifying
+status: Awaiting next milestone
 stopped_at: Phase 5 complete (05-05 self-verification + ROADMAP close; milestone v1.0 archivable as complete)
-last_updated: "2026-05-28T16:47:07.600Z"
-last_activity: 2026-05-28
+last_updated: "2026-05-28T17:02:20.324Z"
+last_activity: 2026-05-28 — Milestone v1.0 completed and archived
 progress:
   total_phases: 1
   completed_phases: 1
@@ -25,18 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 
 ## Current Position
 
-Phase: 5 (Close v1.0 governance debt: Phase 3 verification + traceability sync) — EXECUTING
-Plan: 5 of 5 (P05 closed 2026-05-28 — final plan; phase complete)
-Status: Phase complete — ready for /gsd-complete-milestone v1.0
-Last activity: 2026-05-28
-
-Phase-1 progress: [██████████] 100%
-Phase-2 progress: [██████████] 7/7
-Phase-3 progress: [██████████] 5/5
-Phase-4 progress: [██████████] 6/6
-Phase-5 progress: [██████████] 5/5
-
-scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-05-28 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
@@ -182,3 +174,7 @@ Items acknowledged and carried forward from previous milestone close:
 Last session: 2026-05-28T16:47:07.595Z
 Stopped at: Phase 5 complete (05-05 self-verification + ROADMAP close; milestone v1.0 archivable as complete)
 Resume file: None — /gsd-complete-milestone v1.0 is next
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone
