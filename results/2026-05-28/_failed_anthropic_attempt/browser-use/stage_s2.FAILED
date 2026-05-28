@@ -1,0 +1,1 @@
+Same root cause as S1: browser-use MCP CDP client never initializes; LLM-dependent tools fail with placeholder OPENAI_API_KEY 401. No SPA rendering test possible.
