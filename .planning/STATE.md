@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: complete
-stopped_at: "Phase 4 (Synthesis) CLOSED. Wave 2 complete. All 5 SCs PASS. results/recommendations.md is the Stage 2 unblock gate. terminal-craft toolkit work can proceed in private repo using this wave's recommendations as input."
-last_updated: "2026-05-27T22:30:00Z"
+milestone_name: "governance debt: Phase 3 verification + traceability sync"
+status: completed
+stopped_at: Phase 5 context gathered
+last_updated: "2026-05-28T15:50:03.749Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 4
@@ -75,6 +75,10 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 04 P06 | 25min | 3 tasks | 4 files |
 
 ## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 5 added: Close v1.0 governance debt: Phase 3 verification + traceability sync
 
 ### Decisions
 
@@ -165,6 +169,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-27T22:30:00Z
-Stopped at: Phase 4 (Synthesis) CLOSED. Wave 2 complete. All 5 SCs PASS. results/recommendations.md is the Stage 2 unblock gate. terminal-craft toolkit work can proceed in private repo using this wave's recommendations as input.
-Resume file: None
+Last session: 2026-05-28T15:50:03.744Z
+Stopped at: Phase 5 context gathered
+Resume file: .planning/phases/05-close-v1-0-governance-debt-phase-3-verification-traceability/05-CONTEXT.md
