@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: "governance debt: Phase 3 verification + traceability sync"
-status: executing
-stopped_at: "Phase 5 P03 complete (recommendations.md date-drift fix — debt item #4 closed)"
-last_updated: "2026-05-28T16:39:24.886Z"
+status: verifying
+stopped_at: Phase 5 complete (05-05 self-verification + ROADMAP close; milestone v1.0 archivable as complete)
+last_updated: "2026-05-28T16:47:07.600Z"
 last_activity: 2026-05-28
 progress:
   total_phases: 1
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 4
-  percent: 0
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -26,15 +26,15 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 ## Current Position
 
 Phase: 5 (Close v1.0 governance debt: Phase 3 verification + traceability sync) — EXECUTING
-Plan: 5 of 5 (P03 closed 2026-05-28)
-Status: Ready to execute
+Plan: 5 of 5 (P05 closed 2026-05-28 — final plan; phase complete)
+Status: Phase complete — ready for /gsd-complete-milestone v1.0
 Last activity: 2026-05-28
 
 Phase-1 progress: [██████████] 100%
 Phase-2 progress: [██████████] 7/7
 Phase-3 progress: [██████████] 5/5
 Phase-4 progress: [██████████] 6/6
-Phase-5 progress: [██████░░░░] 3/5
+Phase-5 progress: [██████████] 5/5
 
 scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwright (7.93), lightpanda (6.31 N/A-aware), browser-use-direct (5.87), chrome-devtools (5.6), firecrawl (4.23), obscura (3.27), browser-use-agent (SKIPPED). cloakbrowser LEADS on S1-S8 surface coverage but is pre-tiered SANDBOX-ONLY for Phase 4 due to closed-binary trust model — the matrix synthesis cannot accidentally promote it. Note: matrix-builder must use row.status field (and the new sandbox_only field), NOT just composite, to distinguish SKIPPED + SANDBOX-ONLY rows from open-source scored rows.
 
@@ -78,6 +78,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase Phase 05 PP02 | 30min | 3 tasks | 3 files |
 | Phase 05 P03 | 8min | 1 task | 2 files (bench/build_recommendations.py + results/recommendations.md; 2-line diff per D-13) |
 | Phase 05 P04 | 12 | 1 tasks | 1 files |
+| Phase 05 P05 | 25 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -178,6 +179,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-28T16:39:09.516Z
-Stopped at: Phase 5 P03 complete (recommendations.md date-drift fix — debt item #4 closed)
-Resume file: None
+Last session: 2026-05-28T16:47:07.595Z
+Stopped at: Phase 5 complete (05-05 self-verification + ROADMAP close; milestone v1.0 archivable as complete)
+Resume file: None — /gsd-complete-milestone v1.0 is next
