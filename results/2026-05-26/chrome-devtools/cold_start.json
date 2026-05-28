@@ -1,0 +1,131 @@
+{
+  "captured_at": "2026-05-26T22:53:14Z",
+  "cold": {
+    "max": {
+      "t_first_useful_ms": 4,
+      "t_resolve_ms": 5,
+      "t_spawn_ms": 365,
+      "total_ms": 373
+    },
+    "median": {
+      "t_first_useful_ms": 3,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 352,
+      "total_ms": 358
+    },
+    "min": {
+      "t_first_useful_ms": 3,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 338,
+      "total_ms": 344
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 5,
+        "t_spawn_ms": 365,
+        "total_ms": 373
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 352,
+        "total_ms": 358
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 358,
+        "total_ms": 365
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 345,
+        "total_ms": 350
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 4,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 338,
+        "total_ms": 344
+      }
+    ]
+  },
+  "mcp": "chrome-devtools",
+  "metadata": {
+    "cache_eviction": "process_only",
+    "host": "Darwin 25.5.0 arm64 python=3.12.13",
+    "measurement_method": "python.mcp.client.stdio + time.perf_counter_ns",
+    "notes": [
+      "sudo purge not invoked; 'cold' approximates first-spawn-of-shell-session after pkill -f, not uncached-filesystem."
+    ],
+    "timing_decomposition": "t_resolve = stdio_client.__aenter__ to streams ready; t_spawn = session.initialize() duration; t_first_useful = session.list_tools() duration"
+  },
+  "n_runs": 5,
+  "status": "OK",
+  "warm": {
+    "max": {
+      "t_first_useful_ms": 4,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 377,
+      "total_ms": 383
+    },
+    "median": {
+      "t_first_useful_ms": 3,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 355,
+      "total_ms": 361
+    },
+    "min": {
+      "t_first_useful_ms": 3,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 351,
+      "total_ms": 356
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 351,
+        "total_ms": 356
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 4,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 355,
+        "total_ms": 361
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 354,
+        "total_ms": 359
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 377,
+        "total_ms": 383
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 3,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 363,
+        "total_ms": 369
+      }
+    ]
+  }
+}

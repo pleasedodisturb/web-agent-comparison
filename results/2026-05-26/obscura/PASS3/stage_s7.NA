@@ -1,0 +1,1 @@
+Skipped: form was never reached in S4. Obscura's eval hook (browse_page.eval / browse_session.extract) could in principle drive React Select state if the page loaded, but the loopback fetch is blocked upstream.

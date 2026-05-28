@@ -1,0 +1,300 @@
+{
+  "args": [],
+  "captured_at": "2026-05-26T18:41:52Z",
+  "categories": {
+    "capture": 1,
+    "diagnostics": 10,
+    "inspection": 3,
+    "interaction": 10,
+    "navigation": 1,
+    "other": 4
+  },
+  "command": "chrome-devtools-mcp",
+  "mcp": "chrome-devtools",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 29,
+  "tools": [
+    {
+      "category": "interaction",
+      "description_excerpt": "Clicks on the provided element",
+      "input_schema_keys": [
+        "dblClick",
+        "includeSnapshot",
+        "uid"
+      ],
+      "name": "click"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Closes the page by its index. The last open page cannot be closed.",
+      "input_schema_keys": [
+        "pageId"
+      ],
+      "name": "close_page"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Drag an element onto another element",
+      "input_schema_keys": [
+        "from_uid",
+        "includeSnapshot",
+        "to_uid"
+      ],
+      "name": "drag"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Emulates various features on the selected page.",
+      "input_schema_keys": [
+        "colorScheme",
+        "cpuThrottlingRate",
+        "geolocation",
+        "networkConditions",
+        "userAgent",
+        "viewport"
+      ],
+      "name": "emulate"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Evaluate a JavaScript function inside the currently selected page. Returns the response as JSON,\nso returned values have to be JSON-serializable.",
+      "input_schema_keys": [
+        "args",
+        "dialogAction",
+        "filePath",
+        "function"
+      ],
+      "name": "evaluate_script"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text into an input, text area or select an option from a <select> element.",
+      "input_schema_keys": [
+        "includeSnapshot",
+        "uid",
+        "value"
+      ],
+      "name": "fill"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Fill out multiple form elements (inputs, selects, checkboxes, radios) at once. ALWAYS prefer this tool over multiple individual 'fill' or 'click' calls when interacting with forms. It is significan...",
+      "input_schema_keys": [
+        "elements",
+        "includeSnapshot"
+      ],
+      "name": "fill_form"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Gets a console message by its ID. You can get all messages by calling list_console_messages.",
+      "input_schema_keys": [
+        "msgid"
+      ],
+      "name": "get_console_message"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Gets a network request by an optional reqid, if omitted returns the currently selected request in the DevTools Network panel.",
+      "input_schema_keys": [
+        "reqid",
+        "requestFilePath",
+        "responseFilePath"
+      ],
+      "name": "get_network_request"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "If a browser dialog was opened, use this command to handle it",
+      "input_schema_keys": [
+        "action",
+        "promptText"
+      ],
+      "name": "handle_dialog"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Hover over the provided element",
+      "input_schema_keys": [
+        "includeSnapshot",
+        "uid"
+      ],
+      "name": "hover"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Get Lighthouse score and reports for accessibility, SEO, best practices, and agentic browsing. This excludes performance. For performance audits, run performance_start_trace",
+      "input_schema_keys": [
+        "device",
+        "mode",
+        "outputDirPath"
+      ],
+      "name": "lighthouse_audit"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "List all console messages for the currently selected page since the last navigation.",
+      "input_schema_keys": [
+        "includePreservedMessages",
+        "pageIdx",
+        "pageSize",
+        "types"
+      ],
+      "name": "list_console_messages"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "List all requests for the currently selected page since the last navigation.",
+      "input_schema_keys": [
+        "includePreservedRequests",
+        "pageIdx",
+        "pageSize",
+        "resourceTypes"
+      ],
+      "name": "list_network_requests"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Get a list of pages open in the browser.",
+      "input_schema_keys": [],
+      "name": "list_pages"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Go to a URL, or back, forward, or reload. Use project URL if not specified otherwise.",
+      "input_schema_keys": [
+        "handleBeforeUnload",
+        "ignoreCache",
+        "initScript",
+        "timeout",
+        "type",
+        "url"
+      ],
+      "name": "navigate_page"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Open a new tab and load a URL. Use project URL if not specified otherwise.",
+      "input_schema_keys": [
+        "background",
+        "isolatedContext",
+        "timeout",
+        "url"
+      ],
+      "name": "new_page"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Provides more detailed information on a specific Performance Insight of an insight set that was highlighted in the results of a trace recording.",
+      "input_schema_keys": [
+        "insightName",
+        "insightSetId"
+      ],
+      "name": "performance_analyze_insight"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Start a performance trace on the selected webpage. Use to find frontend performance issues, Core Web Vitals (LCP, INP, CLS), and improve page load speed.",
+      "input_schema_keys": [
+        "autoStop",
+        "filePath",
+        "reload"
+      ],
+      "name": "performance_start_trace"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Stop the active performance trace recording on the selected webpage.",
+      "input_schema_keys": [
+        "filePath"
+      ],
+      "name": "performance_stop_trace"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Press a key or key combination. Use this when other input methods like fill() cannot be used (e.g., keyboard shortcuts, navigation keys, or special key combinations).",
+      "input_schema_keys": [
+        "includeSnapshot",
+        "key"
+      ],
+      "name": "press_key"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Resizes the selected page's window so that the page has specified dimension",
+      "input_schema_keys": [
+        "height",
+        "width"
+      ],
+      "name": "resize_page"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Select a page as a context for future tool calls.",
+      "input_schema_keys": [
+        "bringToFront",
+        "pageId"
+      ],
+      "name": "select_page"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Capture a heap snapshot of the currently selected page. Use to analyze the memory distribution of JavaScript objects and debug memory leaks.",
+      "input_schema_keys": [
+        "filePath"
+      ],
+      "name": "take_memory_snapshot"
+    },
+    {
+      "category": "capture",
+      "description_excerpt": "Take a screenshot of the page or element.",
+      "input_schema_keys": [
+        "filePath",
+        "format",
+        "fullPage",
+        "quality",
+        "uid"
+      ],
+      "name": "take_screenshot"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Take a text snapshot of the currently selected page based on the a11y tree. The snapshot lists page elements along with a unique\nidentifier (uid). Always use the latest snapshot. Prefer taking a sn...",
+      "input_schema_keys": [
+        "filePath",
+        "verbose"
+      ],
+      "name": "take_snapshot"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text using keyboard into a previously focused input",
+      "input_schema_keys": [
+        "submitKey",
+        "text"
+      ],
+      "name": "type_text"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Upload a file through a provided element.",
+      "input_schema_keys": [
+        "filePath",
+        "includeSnapshot",
+        "uid"
+      ],
+      "name": "upload_file"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Wait for the specified text to appear on the selected page.",
+      "input_schema_keys": [
+        "text",
+        "timeout"
+      ],
+      "name": "wait_for"
+    }
+  ],
+  "version_handshake": "1.0.1"
+}

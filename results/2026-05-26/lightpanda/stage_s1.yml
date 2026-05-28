@@ -1,0 +1,59 @@
+stage: S1
+mcp: lightpanda
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tool_chain:
+  - mcp__lightpanda__goto (directory listing)
+  - mcp__lightpanda__links (drill into anthropic/jobs/)
+  - mcp__lightpanda__goto (final job posting URL)
+  - mcp__lightpanda__structuredData
+  - mcp__lightpanda__markdown
+extraction:
+  title: "Jane Testworth Program"
+  company: Anthropic
+  ats_platform: Greenhouse
+  location: "London, UK; Ontario, CAN; Remote-Friendly, [REDACTED]; [REDACTED], CA"
+  employment_type: "Full-time, 4-month fellowship"
+  duration_weeks: 16
+  hours_per_week: 40
+  workstreams:
+    - "AI [REDACTED]"
+    - "AI [REDACTED]"
+    - "ML Systems & [REDACTED]"
+    - "[REDACTED] Fellows"
+    - "[REDACTED] (Economics & Policy)"
+  requirements_summary:
+    must_have:
+      - "Fluent in Python programming"
+      - "Available to work full-time on the Fellows program"
+      - "Work authorization in US, UK, or Canada (no visa sponsorship)"
+    nice_to_have:
+      - "Strong technical background in CS, math, or physics"
+      - "Experience with empirical ML research"
+      - "Open-source contributions in LLM/security-adjacent repos"
+      - "Experience with LLMs / deep learning frameworks"
+  compensation:
+    weekly_usd: 3850
+    weekly_gbp: 2310
+    weekly_cad: 4300
+    compute_budget_monthly_usd: 15000
+    extras: "benefits vary by country, research expense funding"
+  salary_band_present: true
+  apply_button_url: "https://bit.ly/afpsafety"
+  apply_form_present_inline: true
+  apply_form_fields_visible_in_markdown:
+    - first_name
+    - last_name
+    - email
+    - phone
+    - country
+    - resume_cv (pdf/doc/docx/txt/rtf)
+    - source_dropdown ("Please note that you will not be considered...")
+  meta:
+    description: "London, UK; Ontario, CAN; Remote-Friendly, [REDACTED]; [REDACTED], CA"
+    og_url: "https://job-boards.greenhouse.io/anthropic/jobs/5023394008"
+    canonical: "http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html"
+notes:
+  - "Fixture has been scrubbed: all PII-bearing strings (mentor names, program codename) replaced with 'Jane Testworth' literal. This is the fixture state, not a lightpanda artifact."
+  - "Full SSR HTML page; lightpanda renders static markdown faithfully — including the inline Greenhouse apply form schema."
+  - "Apply button is an absolute https URL (https://bit.ly/afpsafety), NOT an in-fixture relative path — S4 navigation must use the inline form on this same page."
+verdict: PASS

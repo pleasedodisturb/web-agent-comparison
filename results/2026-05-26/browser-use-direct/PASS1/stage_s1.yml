@@ -1,0 +1,58 @@
+stage: S1
+mcp: browser-use
+target_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tools_used:
+  - mcp__browser-use__browser_navigate
+  - mcp__browser-use__browser_get_state
+  - mcp__browser-use__browser_extract_content
+  - mcp__browser-use__browser_get_html
+
+navigation:
+  status: ok
+  page_title_observed: "Jane Testworth for Jane Testworth Program at Anthropic"
+
+extraction:
+  status: failed_post_render
+  failure_mode: |
+    The Greenhouse snapshot loads job-boards.cdn.greenhouse.io React + vendor
+    bundles via absolute URLs (preserved by the wget capture). browser-use runs a
+    real Playwright Chromium with JS enabled, so the React app boots, fails to
+    match its expected route, and replaces <body> with an empty
+    <div id="react-portal-mount-point"></div> + "Page not found" message.
+    The saved job-posting and apply-form DOM is destroyed before any
+    extract/get_html call can read it.
+  evidence:
+    - browser_extract_content returned "No content extracted" twice.
+    - browser_get_html with no selector returned the post-render "Page not found"
+      shell, NOT the source DOM.
+    - browser_get_html for selectors that exist in the source HTML
+      (h1, .job-post-container) returned "No element found".
+    - browser_get_state listed only 2 interactive elements (a span and an svg)
+      after render — the source has 100+.
+  signals_that_survived_render:
+    - <title> tag (set in <head> before React mount):
+      "Jane Testworth for Jane Testworth Program at Anthropic"
+    - URL path implies anthropic/jobs/<id>
+
+# What the source HTML contains (verified via Read of the fixture file, NOT
+# via the MCP, so labelled as ground-truth for the score, not as an MCP
+# extraction).
+ground_truth_from_source:
+  title: "Jane Testworth Program"
+  role_heading: "Jane Testworth Jane Testworth (Economics & Policy)"
+  company: Anthropic
+  apply_form_action: "5023394008.html"
+  form_method: get
+  apply_form_present: true
+  note: |
+    Fixture is scrubbed: "Jane Testworth" replaces every two-word capitalized
+    string in the original (190 substitutions per PROVENANCE.md), so the real
+    company/role/location names are intentionally obliterated. Source bytes:
+    84609.
+
+score_implication: |
+  For the bot-aware scoring (Token Efficiency, Stability), this is a
+  JS-execution penalty for browser-use on Greenhouse fixtures: the engine
+  is too "real" — it lets the page's own JS demolish the DOM before any
+  tool call lands. A read-only fetcher (firecrawl, lightpanda) sees the
+  raw source and "wins" this stage by being less capable.

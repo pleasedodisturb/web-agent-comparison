@@ -1,0 +1,76 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+
+# Secrets — NEVER commit. The harness reads FIRECRAWL_API_KEY from env, never disk.
+.env
+.env.*
+.envrc
+/tmp/firecrawl_api_token
+
+# Per-run scratch space (results/<date>/ directories are committed; .scratch/ inside is not)
+results/*/.scratch/
+results/*/*.tmp
+
+# Per-MCP evidence subdirs: hide runtime hidden files (.ps_*.tsv, .prompt.md,
+# .watchdog.log, .harness_leaked) — they're internal scratch the aggregator
+# doesn't need and that may carry process noise we don't want in the public repo.
+results/*/*/.ps_before.tsv
+results/*/*/.ps_after.tsv
+results/*/*/.prompt.md
+results/*/*/.watchdog.log
+results/*/*/.harness_leaked
+results/*/.sc4_retry.json
+# Stability soak scratch (plan 03-04). The committed artefacts are
+# stability.log + stability_metadata.json + stability_orphan_audit.log;
+# the raw ps tables and stdout dumps are debugging-only.
+results/*/*/.stability_ps_before.tsv
+results/*/*/.stability_ps_after.tsv
+results/*/*/.stability_ps_outer_before.tsv
+results/*/*/.stability_ps_outer_after.tsv
+results/*/*/stability.stdout.log
+results/*/*/stability.err
+
+# Phase 2 per-pass subdirectories (PASS1/PASS2/PASS3): same runtime-hidden
+# files as the per-MCP root, one level deeper. Plus the inline merge script
+# (.merge.py) and the composite-check stdout capture (.composite_check.txt),
+# which are scratch — their outputs land in scores.json + DEEP_ANALYSIS.md.
+results/*/*/PASS*/.ps_before.tsv
+results/*/*/PASS*/.ps_after.tsv
+results/*/*/PASS*/.prompt.md
+results/*/*/PASS*/.watchdog.log
+results/*/*/PASS*/.harness_leaked
+results/*/*/.merge.py
+results/*/*/.composite_check.txt
+
+# Playwright MCP runtime cache — written by @playwright/mcp during a session.
+# Console/page logs, screenshots, traces. Not part of the benchmark evidence
+# directory contract; aggregator never reads from here.
+.playwright-mcp/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# Note: the following files MUST stay tracked. Listed here for documentation only.
+#   .mcp.json
+#   uv.lock
+#   package-lock.json
+#   pyproject.toml
+#   package.json
+#   .python-version
+#   .nvmrc

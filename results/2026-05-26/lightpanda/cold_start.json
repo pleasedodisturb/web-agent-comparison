@@ -1,0 +1,131 @@
+{
+  "captured_at": "2026-05-26T22:53:24Z",
+  "cold": {
+    "max": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 8,
+      "t_spawn_ms": 14,
+      "total_ms": 22
+    },
+    "median": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 10,
+      "total_ms": 13
+    },
+    "min": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 7,
+      "total_ms": 11
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 4,
+        "t_spawn_ms": 11,
+        "total_ms": 16
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 10,
+        "total_ms": 13
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 8,
+        "total_ms": 11
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 8,
+        "t_spawn_ms": 14,
+        "total_ms": 22
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 7,
+        "total_ms": 11
+      }
+    ]
+  },
+  "mcp": "lightpanda",
+  "metadata": {
+    "cache_eviction": "process_only",
+    "host": "Darwin 25.5.0 arm64 python=3.12.13",
+    "measurement_method": "python.mcp.client.stdio + time.perf_counter_ns",
+    "notes": [
+      "sudo purge not invoked; 'cold' approximates first-spawn-of-shell-session after pkill -f, not uncached-filesystem."
+    ],
+    "timing_decomposition": "t_resolve = stdio_client.__aenter__ to streams ready; t_spawn = session.initialize() duration; t_first_useful = session.list_tools() duration"
+  },
+  "n_runs": 5,
+  "status": "OK",
+  "warm": {
+    "max": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 4,
+      "t_spawn_ms": 11,
+      "total_ms": 15
+    },
+    "median": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 9,
+      "total_ms": 12
+    },
+    "min": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 8,
+      "total_ms": 11
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 9,
+        "total_ms": 12
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 8,
+        "total_ms": 11
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 9,
+        "total_ms": 13
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 4,
+        "t_spawn_ms": 11,
+        "total_ms": 15
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 9,
+        "total_ms": 12
+      }
+    ]
+  }
+}

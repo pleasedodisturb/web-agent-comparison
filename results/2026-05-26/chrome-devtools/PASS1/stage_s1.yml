@@ -1,0 +1,61 @@
+stage: S1
+target_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+mcp: chrome-devtools
+
+# Two-layer extraction. The rendered DOM resolves to "Page not found" because
+# the snapshot fixture cannot load Greenhouse's CDN-hosted Remix bundles
+# (manifest-3629d205.js etc.) over loopback, so client hydration fails.
+# The static loader data is preserved in window.__remixContext.
+
+rendered_dom:
+  visible_h3: "Page not found"
+  visible_body: "Page not found\n\nThe job board you were viewing is no longer active."
+  apply_buttons: []
+  forms: []
+  note: "Hydration failed — CDN assets unreachable from snapshot server."
+
+remix_loader_data:
+  title: "Jane Testworth Program"   # scrubbed (real title hidden by snapshot scrubber)
+  company: Anthropic
+  location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+  employment_type: hidden            # field in payload: "employment": "hidden"
+  published_at: "2025-12-11T12:27:23-05:00"
+  application_deadline: null
+  salary_band: null                  # pay_ranges: []
+  is_featured: false
+  job_post_id: "5023394008"
+  url_token: anthropic
+  public_url: https://job-boards.greenhouse.io/anthropic/jobs/5023394008
+  apply_submit_path: https://boards.greenhouse.io/anthropic/jobs/5023394008
+  external_apply_link: https://bit.ly/afpsafety   # Constellation (offsite partner)
+  confirmation_path: /anthropic/jobs/5023394008/confirmation
+
+  requirements_summary: >
+    Fellowship-style program — 4 months full-time, mentorship by Anthropic
+    researchers, shared workspace in Berkeley or London (remote in
+    US/UK/Canada also accepted). Stipend 3,850 USD / 2,310 GBP / 4,300 CAD
+    per week plus ~$15k/month compute funding. Candidates must be fluent in
+    Python and available full-time. Multiple workstreams: AI alignment, AI
+    safety/security, ML Systems, Reinforcement Learning, Economics & Policy.
+
+  required_form_fields:
+    - first_name (input_text, required)
+    - last_name (input_text, required)
+    - email (input_text, required)
+    - phone (input_text, optional)
+    - resume (input_file, pdf/doc/docx/txt/rtf — optional)
+    - resume_text (textarea, optional)
+    - question_14364081008 (multi_value_single_select, required acknowledgement
+      that Greenhouse application is not the official one — Constellation is)
+
+tools_used:
+  - mcp__chrome-devtools__new_page
+  - mcp__chrome-devtools__navigate_page
+  - mcp__chrome-devtools__evaluate_script
+
+caveats: >
+  chrome-devtools accessed the page via real Chromium, so it executed JS.
+  Greenhouse 2025/2026 ships a Remix SPA that fails open by showing
+  "Page not found" when the JS bundles can't load (here: CDN over loopback).
+  Recovery path was reading window.__remixContext directly, which would
+  generalize to any Remix-hosted Greenhouse board.

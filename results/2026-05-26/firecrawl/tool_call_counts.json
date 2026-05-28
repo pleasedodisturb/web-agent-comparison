@@ -1,0 +1,21 @@
+{
+  "interesting": {
+    "s5_calls_per_field_filled": null
+  },
+  "mcp": "firecrawl",
+  "median_per_stage": {},
+  "median_total_calls": 0,
+  "median_total_per_stage": {},
+  "passes": {
+    "PASS1": {},
+    "PASS2": {},
+    "PASS3": {}
+  },
+  "stage_attribution_mode": "marker",
+  "status": "OK",
+  "total_calls_per_pass": {
+    "PASS1": 0,
+    "PASS2": 0,
+    "PASS3": 0
+  }
+}

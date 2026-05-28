@@ -1,0 +1,1 @@
+Only S1 produced data (degraded "Page not found" rendering); S2 never executed because obscura wedged, so there is no second snapshot to compare against for Greenhouse-vs-Ashby platform detection.

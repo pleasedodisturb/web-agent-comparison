@@ -1,0 +1,10 @@
+# orphan_audit run at 2026-05-26T19:24:10Z
+BEFORE_PATH=results/2026-05-26/lightpanda/.ps_before.tsv
+AFTER_PATH=results/2026-05-26/lightpanda/.ps_after.tsv
+TARGET_PGID=28820
+BEFORE_COUNT=798
+AFTER_COUNT=802
+DIFF_COUNT=1
+GONE pid=2432 pgid=28776 cmd=/Users/pleasedodisturb/Projects/web-agent-comparison/.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-26/lightpanda/.ps_after.tsv
+KILLED_COUNT=0
+ORPHANS=1

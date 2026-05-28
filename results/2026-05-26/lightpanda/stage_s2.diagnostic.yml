@@ -1,0 +1,35 @@
+stage: S2
+mcp: lightpanda
+target: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+tool_chain:
+  - mcp__lightpanda__goto (Ashby directory listing)
+  - mcp__lightpanda__links (drill into replit/)
+  - mcp__lightpanda__goto (final job posting URL)
+  - mcp__lightpanda__markdown
+  - mcp__lightpanda__structuredData
+  - mcp__lightpanda__semantic_tree (maxDepth=5)
+observed_outputs:
+  markdown: "" # 0 bytes
+  structuredData:
+    jsonLd: []
+    openGraph: {}
+    twitterCard: {}
+    meta:
+      language: en
+      charset: utf-8
+      viewport: "width=device-width, initial-scale=1, shrink-to-fit=no"
+      theme-color: "#483fad"
+      title: Jobs
+    links:
+      icon: "https://cdn.ashbyprd.com/cdn_assets/28bf2c68843f0e857af65bbb3340c962b6e7fe64/favicon.png"
+      apple-touch-icon: "https://cdn.ashbyprd.com/cdn_assets/28bf2c68843f0e857af65bbb3340c962b6e7fe64/favicon.png"
+  semantic_tree: |
+    1 RootWebArea 'Jobs'
+extraction:
+  title: null
+  company: null
+  location: null
+  role_summary: null
+failure_mode: "JS-rendering gap: lightpanda does not execute the React bundle, so the body of the Ashby SPA never populates. Empty-shell extraction is the EXPECTED behaviour and the load-bearing finding for this MCP."
+verdict: FAIL (expected — by-design for Zig-based read-only browser)
+note: "Same failure mode confirmed in 2026-03-31 baseline run and 2026-05-22 PASS1/PASS2. Three consecutive identical outcomes; the result is stable."

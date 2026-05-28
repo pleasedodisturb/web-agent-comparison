@@ -1,0 +1,70 @@
+{
+  "browser-use": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug"
+    },
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 2,
+      "interaction_depth": 2,
+      "js_rendering": 10,
+      "reliability": 5,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "FAIL",
+      "S5": "FAIL",
+      "S6": "FAIL",
+      "S7": "FAIL",
+      "S8": "PASS"
+    }
+  }
+}

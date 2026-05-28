@@ -1,0 +1,13 @@
+# orphan_audit run at 2026-05-27T00:31:06Z
+BEFORE_PATH=results/2026-05-26/browser-use-direct/.stability_ps_before.tsv
+AFTER_PATH=results/2026-05-26/browser-use-direct/.stability_ps_after.tsv
+TARGET_PGID=unset
+BEFORE_COUNT=807
+AFTER_COUNT=826
+DIFF_COUNT=4
+GONE pid=41643 pgid=50412 cmd=/Users/pleasedodisturb/Projects/web-agent-comparison/.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-26/browser-use-direct/.stability_ps_after.tsv
+KILLED pid=50550 pgid=50550 cmd=/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/pleasedodisturb/.local/bin/browser-use --mcp
+KILLED pid=50800 pgid=50797 cmd=/Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Versions/148.0.7778.179/Helpers/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --database=/Users/pleasedodisturb/Library/Application Support/Google/Chrome/Crashpad --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=OS X --annotation=prod=Chrome_Mac --annotation=ver=148.0.7778.179 --handshake-fd=5
+KILLED pid=51758 pgid=51758 cmd=/bin/zsh -c source /Users/pleasedodisturb/.claude/shell-snapshots/snapshot-zsh-1779716822603-0flb9a.sh 2>/dev/null || true && setopt NO_EXTENDED_GLOB 2>/dev/null || true && eval 'until [ -f results/2026-05-26/browser-use-direct/stability_metadata.json ]; do sleep 60; lines=$(wc -l < results/2026-05-26/browser-use-direct/stability.log 2>/dev/null | tr -d '"'"' '"'"'); tail=$(tail -1 results/2026-05-26/browser-use-direct/stability.log 2>/dev/null | cut -c1-150); echo "$(date -u +%H:%M:%S) iters=$lines | $tail"; done; cat results/2026-05-26/browser-use-direct/stability_metadata.json' && pwd -P >| /tmp/claude-f8a6-cwd
+KILLED_COUNT=3
+ORPHANS=4

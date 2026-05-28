@@ -1,0 +1,47 @@
+stage: S2
+mcp: chrome-devtools
+target: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+extraction_method: |
+  Navigated, allowed React bundle to load + hydrate (CDN https://cdn.ashbyprd.com/... was
+  reachable, returned 200). Inspected the rendered DOM via take_snapshot and evaluate_script,
+  and the window.__appData payload baked into the HTML.
+ssr_state:
+  embedded_posting: null
+  embedded_organization: null
+  embedded_jobBoard: null
+  note: |
+    Per fixtures/snapshots/ashby_2026-05-22/PROVENANCE.md the snapshot is intentionally a
+    pure SPA shell — wget --mirror could not capture the runtime API fetch that normally
+    hydrates an Ashby posting. Every MCP gets the same inert shell; this stage measures what
+    each MCP can recover from it. For chrome-devtools that recovery is bounded by what the
+    fixture contains.
+rendered_state:
+  title: Jobs
+  h1: Page not found
+  body_text: |
+    Page not found
+    The page you requested was not found
+    Powered by
+    Privacy PolicySecurityVulnerability Disclosure
+  body_len_chars: 113
+  react_mounted: true
+job_data_extracted:
+  title: null
+  company: replit (inferred from URL path only, not from rendered content)
+  location: null
+  role_summary: null
+  reason_null: |
+    chrome-devtools rendered the SPA correctly (JS executed, React mounted, hydration
+    completed) — the rendered output is Ashby's own "Page not found" fallback because the
+    fixture's __appData.posting === null. No job data was captured into the fixture.
+mcp_capability_finding: |
+  - Chrome JS engine + DevTools protocol: PASS (renders SPA, hydrates, runs network)
+  - Ability to extract from this specific fixture: 0 bytes of job data, because the fixture
+    has 0 bytes of job data. Not an MCP defect.
+  - Contrast vs. a renderless MCP (e.g. lightpanda, firecrawl no-JS mode): they would see the
+    raw HTML shell ("You need to enable JavaScript to run this app") instead of the rendered
+    "Page not found" — neither has job data.
+tools_used:
+  - mcp__chrome-devtools__navigate_page
+  - mcp__chrome-devtools__take_snapshot
+  - mcp__chrome-devtools__evaluate_script

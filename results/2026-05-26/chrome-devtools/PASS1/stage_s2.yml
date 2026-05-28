@@ -1,0 +1,52 @@
+stage: S2
+target_url: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+mcp: chrome-devtools
+
+# Ashby is a client-side React SPA hosted under jobs.ashbyhq.com. Unlike
+# Greenhouse's Remix SSR (which embeds the full post in window.__remixContext),
+# Ashby fetches posting data via an authenticated GraphQL call AFTER hydration.
+# The static HTML captured by wget therefore contains NO posting data —
+# window.__appData.posting is null in the source.
+
+rendered_dom:
+  title_tag: "Jobs"
+  visible_h1: "Page not found"
+  visible_body: "Page not found\n\nThe page you requested was not found\n\nPowered by \n\nPrivacy PolicySecurityVulnerability Disclosure"
+  apply_buttons: []
+  forms: 0
+
+embedded_appdata:
+  organization: null
+  posting: null
+  jobBoard: null
+  environment: production
+  routerPrefix: "/"
+  note: "All four data slots are null in source HTML — Ashby fetches post-hydration via GraphQL"
+
+extracted_job_data:
+  title: null
+  company: null   # likely "Replit" based on URL path
+  company_from_url_path: replit
+  location: null
+  role_summary: null
+
+tools_used:
+  - mcp__chrome-devtools__navigate_page
+  - mcp__chrome-devtools__evaluate_script
+
+result: empty_extraction
+reason: >
+  Chrome-devtools successfully rendered the SPA (React mounted, "Page not
+  found" component displayed). But the posting fields in window.__appData
+  are null in the captured HTML — Ashby's SSR shipped an empty shell
+  expecting the client to GraphQL-fetch the post. Since the snapshot has no
+  GraphQL backend, no data hydrates. Only the company slug ("replit") can
+  be inferred from the URL path.
+
+caveats: >
+  This is NOT a chrome-devtools rendering failure — JS executed correctly.
+  It is a fixture limitation: the wget capture froze the Ashby app at the
+  moment before the GraphQL call resolved, so the structured data was never
+  in the bytes. A live Ashby URL would have populated window.__appData via
+  client-side fetch, but live fixtures rot (Pitfall 8 — captured snapshots
+  are the test target by design).

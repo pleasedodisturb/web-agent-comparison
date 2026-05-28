@@ -1,0 +1,1 @@
+No filled form to screenshot — depends on S4-S7. chrome-devtools take_screenshot is fully capable (verified earlier in stage walk by snapshot/eval calls succeeding); no meaningful target to capture.

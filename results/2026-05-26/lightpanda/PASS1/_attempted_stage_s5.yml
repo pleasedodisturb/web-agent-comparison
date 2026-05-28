@@ -1,0 +1,45 @@
+stage: S5
+mcp: lightpanda
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tool_used: mcp__lightpanda__fill (one call per field — no batch primitive)
+batch_fill_supported: false
+note_on_batching: |
+  Lightpanda does not expose a Playwright-style `browser_fill_form`
+  multi-field tool. Each `fill` call drives ONE input by backendNodeId.
+  Four sequential tool calls were required for four fields.
+fills:
+  - field: first_name
+    backendNodeId: 7
+    value: "Jane"
+    result: ok
+  - field: last_name
+    backendNodeId: 8
+    value: "Testworth"
+    result: ok
+  - field: email
+    backendNodeId: 9
+    value: "jane.testworth@example.com"
+    result: ok
+  - field: phone
+    backendNodeId: 11
+    value: "+1 555 867 5309"
+    result: ok
+verification_via_dom:
+  first_name: "Jane"
+  last_name: "Testworth"
+  email: "jane.testworth@example.com"
+  phone: "+1 555 867 5309"
+  country: ""              # combobox NOT filled (deferred to dedicated dropdown handling in S7)
+  source: ""               # combobox NOT filled (S7)
+skipped_fields:
+  linkedin:
+    reason: "Field does not exist in this Greenhouse fixture (no input[id*=linkedin] in DOM)."
+  github:
+    reason: "Field does not exist in this Greenhouse fixture (no input[id*=github] in DOM)."
+note: |
+  The stage spec lists linkedin/github among the 6 fields to fill, but this
+  Anthropic Fellows snapshot does NOT include those inputs (verified via
+  document.querySelector). Filled the 4 fields actually present.
+  Combobox fields (country, source) intentionally deferred to S7 since
+  Greenhouse's React Select pattern requires the type+Enter or JS-eval
+  approach S7 is designed to test.

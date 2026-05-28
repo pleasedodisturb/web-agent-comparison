@@ -1,0 +1,1 @@
+No filled form to screenshot — upstream S4 failure (apply form not in snapshot fixture). A diagnostic full-page screenshot of the actual Greenhouse post-hydration state was captured separately as stage_s8_greenhouse_post_hydration.png to document what chrome-devtools renders against this fixture (the "Page not found" empty state).

@@ -1,0 +1,50 @@
+stage: S2
+mcp: lightpanda
+target_url: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+status: FAILED
+failure_mode: spa_no_render
+
+navigation: succeeded (HTTP 200, page loaded into memory)
+extraction_attempts:
+  - tool: mcp__lightpanda__markdown
+    result: empty_output    # 0 bytes returned
+  - tool: mcp__lightpanda__structuredData
+    result: |
+      jsonLd: []
+      openGraph: {}
+      meta.title: "Jobs"   # only the static <title> from the HTML shell
+  - tool: mcp__lightpanda__semantic_tree
+    result: |
+      1 RootWebArea 'Jobs'
+      # Single node, no descendants — React never hydrated
+  - tool: mcp__lightpanda__evaluate
+    script: |
+      JSON.stringify({title, bodyTextLen, bodyHtmlLen, rootDiv, rootChildren, scripts})
+    result:
+      title: "Jobs"
+      bodyTextLen: 55              # tiny <noscript> fallback text only
+      bodyHtmlLen: 4555            # the static React shell HTML
+      rootDiv: true                # <div id="root"> exists in source
+      rootChildren: 2              # only the static skeleton, not the rendered app
+      scripts: 2                   # 2 <script> tags present but not executed
+
+root_cause: |
+  Lightpanda's Zig-based JS engine implements a minimal subset of browser
+  APIs — sufficient for many server-rendered pages, but it does not execute
+  bundled React runtime. Ashby is a client-rendered SPA: the HTML payload
+  is essentially <div id="root"></div> + script tags that fetch/hydrate
+  the job posting JSON client-side. Without a real JS engine, the page is
+  permanently empty as far as content extraction goes.
+
+reproducibility: |
+  This is a stable, deterministic failure — fixture is a frozen on-disk
+  copy of the Ashby page, served by python's SimpleHTTP. Any future
+  lightpanda run against this snapshot will produce identical 0-byte
+  extraction unless lightpanda ships a JS runtime upgrade.
+
+scoring_implication: |
+  This is the expected and intended behavior for the SPA-rendering
+  dimension of the 8-pillar rubric. Lightpanda should score 0 here while
+  Playwright / chrome-devtools / browser-use / cloakbrowser score full
+  marks. Documenting the failure cleanly is the deliverable, not masking
+  it.

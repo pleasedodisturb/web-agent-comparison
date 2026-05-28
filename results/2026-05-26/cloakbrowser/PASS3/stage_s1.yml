@@ -1,0 +1,36 @@
+stage: S1
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+extraction_method: cloak_evaluate(fetch + DOMParser) — bypasses React hydration that overwrites body with "Page not found"
+title: Jane Testworth Program
+company: Anthropic
+location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+employment_type: "Fellowship / Full-time, 4 months (with possible extension)"
+salary_band: "3,850 USD / 2,310 GBP / 4,300 CAD per week (varies by country); compute funding ~$15k/month"
+requirements_summary: >
+  Motivated by AI safety and excited to transition into empirical AI research; strong
+  technical background in computer science, mathematics, or physics; thrives in
+  fast-paced, collaborative environments; can implement ideas quickly and communicate
+  clearly; fluent in Python; available to work full-time. Strong candidates may also
+  have a discipline-relevant background (economics, social sciences, cybersecurity)
+  or prior research/engineering experience aligned with a workstream.
+apply_url: https://bit.ly/afpsafety
+apply_button:
+  selector: 'button[aria-label="Apply"]'
+  text: Apply
+  outer_html: '<button type="button" class="btn btn--rounded" aria-label="Apply">Apply</button>'
+  href: null  # button has no href; in-body "Apply using this link" / "Apply here" anchors carry the real URL
+canonical_job_url: https://job-boards.greenhouse.io/anthropic/jobs/5023394008
+workstreams:
+  - AI Jane Testworth
+  - ML Systems & Jane Testworth
+  - Jane Testworth Fellows
+  - Jane Testworth (Economics & Policy)
+extraction_provenance:
+  static_html_bytes: 84577
+  hydrated_dom_state: "Page not found — The job board you were viewing is no longer active."
+  workaround: |
+    cloak_evaluate() ran `fetch(url) → DOMParser` inside the page context, returning the
+    pre-hydration body. This is a first-class MCP primitive; no external network library
+    used. Without it, cloak_read_page() / cloak_snapshot() only see the React 'Page not
+    found' stub.

@@ -1,0 +1,81 @@
+stage: S4
+mcp: lightpanda
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tool_used: mcp__lightpanda__detectForms + interactiveElements + nodeDetails
+navigation_required: false
+reason_no_navigation: |
+  This Greenhouse fixture renders the apply form INLINE on the job page.
+  No /apply route exists in the snapshot. The S1 page IS the apply page.
+  Re-loaded the same URL to capture form structure.
+form_detected:
+  action: "5023394008.html"   # self-referential snapshot fixture
+  method: "get"
+  fields:
+    - backendNodeId: 7
+      id: "first_name"
+      role: "textbox"
+      type: "text"
+      required: false
+    - backendNodeId: 8
+      id: "last_name"
+      role: "textbox"
+      type: "text"
+      required: false
+    - backendNodeId: 9
+      id: "email"
+      role: "textbox"
+      type: "text"
+      required: false
+    - backendNodeId: 10
+      id: "country"
+      role: "combobox"     # React Select — type+Enter needed
+      type: "text"
+      required: false
+    - backendNodeId: 11
+      id: "phone"
+      role: "textbox"
+      type: "tel"
+      required: false
+    - backendNodeId: 12
+      id: "resume"
+      role: null
+      type: "file"
+      required: false
+      class: "visually-hidden"   # hidden, driven by Attach/Dropbox/Manual buttons
+    - backendNodeId: 13
+      id: "question_14364081008"
+      role: "combobox"     # React Select source/Constellation question
+      type: "text"
+      required: false
+      accessible_name: "Please note that you will not be considered unless you complete the Constellation application form. *"
+    - backendNodeId: 14
+      role: "textbox"
+      type: "text"
+      required: true            # detectForms flagged required
+      isInteractive: false      # but a11y tree says non-interactive — likely a hidden mirror of the required combobox state
+      class: "remix-css-1a0ro4n-requiredInput"
+spec_vs_fixture_drift:
+  expected_by_stage_spec:
+    - first_name
+    - last_name
+    - email
+    - phone
+    - linkedin
+    - github
+  found_in_fixture:
+    - first_name
+    - last_name
+    - email
+    - phone
+    - country (combobox)
+    - resume (file)
+    - source-question (combobox)
+  missing_fields:
+    - linkedin
+    - github
+  note: |
+    The stage walk's S5 field list assumes a richer Greenhouse form than this
+    snapshot provides. This Anthropic Fellows job uses a stripped form
+    (no LinkedIn/GitHub inputs). S5 will fill the 4 plain text/tel inputs
+    Lightpanda can drive (first_name, last_name, email, phone) and document
+    the linkedin/github gap as a fixture property, not an MCP failure.

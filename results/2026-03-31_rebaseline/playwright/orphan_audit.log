@@ -1,0 +1,13 @@
+# orphan_audit reconstruction for 2026-03-31 re-baseline
+# The 2026-03 wave predates the orphan-audit machinery (bench/orphan_audit.py
+# landed in plan 01-04). This synthetic log records zero survivors so the
+# aggregator's reliability scorer does not dock the row for a measurement the
+# 2026-03 wave never made.
+BEFORE_PATH=N/A
+AFTER_PATH=N/A
+TARGET_PGID=0
+BEFORE_COUNT=0
+AFTER_COUNT=0
+DIFF_COUNT=0
+KILLED_COUNT=0
+ORPHANS=0

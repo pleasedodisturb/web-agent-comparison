@@ -1,0 +1,10 @@
+stage: S1
+mcp: playwright
+status: pass
+notes: |
+  Full accessibility snapshot 33KB; all fields present.
+fields_extracted:
+  - title
+  - company
+  - location
+  - salary

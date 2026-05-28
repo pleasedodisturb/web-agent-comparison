@@ -1,0 +1,8 @@
+uid=1_0 RootWebArea "Directory listing for /greenhouse_2026-05-22/" url="http://127.0.0.1:8765/greenhouse_2026-05-22/"
+  uid=1_1 heading "Directory listing for /greenhouse_2026-05-22/" level="1"
+  uid=1_2 link ".sha256" url="http://127.0.0.1:8765/greenhouse_2026-05-22/.sha256"
+    uid=1_3 StaticText ".sha256"
+  uid=1_4 link "anthropic/" url="http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/"
+    uid=1_5 StaticText "anthropic/"
+  uid=1_6 link "PROVENANCE.md" url="http://127.0.0.1:8765/greenhouse_2026-05-22/PROVENANCE.md"
+    uid=1_7 StaticText "PROVENANCE.md"

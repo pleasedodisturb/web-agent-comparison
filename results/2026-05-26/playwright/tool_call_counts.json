@@ -1,0 +1,6 @@
+{
+  "mcp": "playwright",
+  "reason": "No PASS{1,2,3} directories and no SKIPPED.md found in playwright.",
+  "stage_attribution_mode": "marker",
+  "status": "NO_EVIDENCE"
+}

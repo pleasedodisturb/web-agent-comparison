@@ -1,0 +1,132 @@
+{
+  "captured_at": "2026-05-26T22:54:20Z",
+  "cold": {
+    "max": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 7,
+      "t_spawn_ms": 876,
+      "total_ms": 884
+    },
+    "median": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 665,
+      "total_ms": 668
+    },
+    "min": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 653,
+      "total_ms": 657
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 7,
+        "t_spawn_ms": 876,
+        "total_ms": 884
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 656,
+        "total_ms": 660
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 719,
+        "total_ms": 723
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 665,
+        "total_ms": 668
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 653,
+        "total_ms": 657
+      }
+    ]
+  },
+  "mcp": "browser-use-direct",
+  "metadata": {
+    "cache_eviction": "process_only",
+    "host": "Darwin 25.5.0 arm64 python=3.12.13",
+    "measurement_method": "python.mcp.client.stdio + time.perf_counter_ns",
+    "mode": "variant=browser-use-direct: cold-start measured against shared 'browser-use' MCP binary; direct vs agent only diverges at agent-session time, not at spawn.",
+    "notes": [
+      "sudo purge not invoked; 'cold' approximates first-spawn-of-shell-session after pkill -f, not uncached-filesystem."
+    ],
+    "timing_decomposition": "t_resolve = stdio_client.__aenter__ to streams ready; t_spawn = session.initialize() duration; t_first_useful = session.list_tools() duration"
+  },
+  "n_runs": 5,
+  "status": "OK",
+  "warm": {
+    "max": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 3,
+      "t_spawn_ms": 695,
+      "total_ms": 699
+    },
+    "median": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 667,
+      "total_ms": 671
+    },
+    "min": {
+      "t_first_useful_ms": 1,
+      "t_resolve_ms": 2,
+      "t_spawn_ms": 657,
+      "total_ms": 661
+    },
+    "n_runs": 5,
+    "samples": [
+      {
+        "run": 1,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 3,
+        "t_spawn_ms": 667,
+        "total_ms": 671
+      },
+      {
+        "run": 2,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 667,
+        "total_ms": 670
+      },
+      {
+        "run": 3,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 695,
+        "total_ms": 699
+      },
+      {
+        "run": 4,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 657,
+        "total_ms": 661
+      },
+      {
+        "run": 5,
+        "t_first_useful_ms": 1,
+        "t_resolve_ms": 2,
+        "t_spawn_ms": 677,
+        "total_ms": 680
+      }
+    ]
+  }
+}

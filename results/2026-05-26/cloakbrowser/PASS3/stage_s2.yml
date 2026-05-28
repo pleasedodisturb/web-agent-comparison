@@ -1,0 +1,38 @@
+stage: S2
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+extraction_method: cloak_navigate (real Chromium hydration) + cloak_evaluate(fetch + DOMParser + appData scrape)
+title: null
+company: null
+location: null
+role_summary: null
+extracted_appData:
+  organization: null
+  posting: null
+  jobBoard: null
+  routerPrefix: "/"
+  recaptchaPublicSiteKey: 6LeFb_YUAAAAALUD5h-BiQEp8JaFChe0e0A6r49Y
+  environment: production
+rendered_body_text: |
+  Page not found
+  The page you requested was not found
+ashby_spa_finding:
+  static_html_size_bytes: 6294
+  static_html_contains_job_data: false
+  static_html_role: "bootstrap shell — loads bundle from cdn.ashbyprd.com, then fetches posting from api.ashbyhq.com"
+  appData_at_load: "{organization: null, posting: null, jobBoard: null}"
+  cloakbrowser_executed_js: true
+  cloakbrowser_loaded_remote_bundle: true
+  cloakbrowser_rendered_react: true
+  rendered_state: "Page not found"  # SPA ran, API call failed (fixture cannot replay api.ashbyhq.com), 404 path branched
+honest_capability_finding: |
+  CloakBrowser IS capable of rendering this React SPA — it is real Chromium and the JS
+  bundle did execute (verifiable via `Object.keys(window).filter(k => k.startsWith('__'))`
+  and the populated `window.__appData` shape). The absent job content is a fixture limit,
+  not an MCP limit: the snapshot server cannot proxy api.ashbyhq.com, so the SPA correctly
+  routed to its 404 branch. In a live Ashby setting, CloakBrowser would render the full
+  posting.
+contrast:
+  - Lightpanda would return a literally empty body — its Zig engine cannot execute the bundle at all.
+  - Firecrawl-as-cloud would return the same "Page not found" — same SPA, same fixture, same dead API.
+  - The distinction CloakBrowser earns here is "got an authoritative 404 from the real Ashby SPA," not "got the job content."

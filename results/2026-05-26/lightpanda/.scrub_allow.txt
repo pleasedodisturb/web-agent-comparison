@@ -1,0 +1,121 @@
+# PII scrub allow-list for lightpanda row (G-716).
+# Plan 02-02 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / brand / prose bigrams that appear in the lightpanda
+# evidence. Allow-listing them does NOT loosen the real-PII guard.
+
+# Brand / product names appearing in transcripts and outputs
+Anthropic Fellows
+Claude Code
+Claude Opus
+Constellation Talent
+React Select
+Ashby React
+This Anthropic
+This Greenhouse
+The Greenhouse
+The Anthropic
+The Ashby
+The React
+The React-Select
+The Remix
+Static Greenhouse
+Greenhouse Remix
+Greenhouse React
+Hong Kong
+Sao Paulo
+San Francisco
+
+# Section headers / prose bigrams from rubric / transcripts
+Best For
+Data Quality
+Deep Analysis
+Error Handling
+Execution Order
+Executive Summary
+Final Ranking
+Interaction Depth
+Job Board
+Mock Data
+Platform Detection
+Privacy Policy
+Setup Complexity
+Stage Walk
+Stage Results
+Stop Conditions
+Submit Form
+Submit Application
+Token Efficiency
+Tools Inventory
+Total Tools
+Toggle Flyout
+Upload Resume
+Vulnerability Disclosure
+Weighted Composite
+Work From
+Working Hours
+Agent Browser
+File Types
+File Name
+First Name
+Last Name
+Phone Number
+Country Code
+Page Number
+Pull Request
+Issue Title
+Resume CV
+Web Agent
+Title Case
+Test Environment
+
+# Mock identity in reversed-order or fragmentary forms
+Jane Test
+Testworth Jane
+Testworth Program
+
+# Prose-style "Whenever X" / "The X" bigrams from explanatory text
+Whenever Lightpanda
+The Apply
+The Chrome
+The Lightpanda
+
+# Claude Code session-system-prompt bigrams (these are CC's own markdown headings)
+Explanatory Mode
+Learning Mode
+Request User
+Request Contributions
+Example Request
+Set React
+Extracting Greenhouse
+Testing Ashby
+Hugging Face
+Google Calendar
+Google Drive
+Apple Silicon
+Microsoft Office
+United States
+Tools Available
+Demonstrate React-Select
+Red Team
+Lightpanda Zig
+Public Greenhouse
+Public Ashby
+Walk Transcript
+
+# DEEP_ANALYSIS.md section-heading bigrams
+Capability Tag
+Median Composite
+Median Score
+Semantics Callout
+The Falsifiable
+Empirical Finding
+Empirical Claims
+String Inconsistency
+Negative Results
+Pass Variance
+Attribution Table
+Tool Inventory
+Linear Sub
+Implementation Decisions
+This Deep
+Stretch Items

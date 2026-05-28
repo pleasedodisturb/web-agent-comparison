@@ -1,0 +1,19 @@
+# S2 Ashby raw-byte capture — PASS1
+# Falsifiable 2026-03 claim: lightpanda returned 0 bytes on Ashby
+# 2026-05 nightly observation:
+
+pass: PASS1
+raw_html_chars: 6805
+body_text_chars: 55
+scripts_in_dom: 2
+has_root_div: true
+root_div_children: 2
+markdown_tool_output_empty: true
+semantic_tree_children: 0
+job_data_fields_extracted: 0
+
+# Interpretation:
+# - 2026-03 "0 bytes" claim REFUTED on the raw-shell axis: nightly returns 6.8KB of SSR shell.
+# - 2026-03 "React-blind" claim CONFIRMED on hydrated-content axis: React never hydrates;
+#   #root has 2 SSR'd placeholder children only, body_text_chars=55, markdown output empty,
+#   semantic_tree has no child nodes under RootWebArea, zero job-data fields extracted.

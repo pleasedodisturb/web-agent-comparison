@@ -1,0 +1,44 @@
+stage: S2
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+extraction_method: cloak_navigate (real Chromium hydration) + cloak_evaluate for window.__appData
+title: null
+company: null
+location: null
+role_summary: null
+extracted_appData:
+  organization: null
+  posting: null
+  jobBoard: null
+  recaptchaPublicSiteKey: 6LeFb_YUAAAAALUD5h-BiQEp8JaFChe0e0A6r49Y
+  environment: production
+rendered_body_text: |
+  Page not found
+  The page you requested was not found
+  Powered by
+  Privacy Policy  Security  Vulnerability Disclosure
+ashby_spa_finding:
+  static_html_size_bytes: 6294
+  static_html_contains_job_data: false
+  static_html_role: bootstrap shell — loads bundle from cdn.ashbyprd.com
+  appData_at_load: '{organization: null, posting: null, jobBoard: null}'
+  cloakbrowser_executed_js: true
+  cloakbrowser_loaded_remote_bundle: true
+  cloakbrowser_rendered_react: true
+  rendered_state: "Page not found"  # bundle ran, hit Ashby API, posting is gone
+notes:
+  - This is the SPA rendering test. Ashby SPAs ship a ~6KB HTML shell that contains
+    no job data; the posting metadata arrives via a runtime API call to
+    api.ashbyhq.com keyed off the URL path or appData.posting (which is null here).
+  - CloakBrowser executed the JS bundle (visible via cdn.ashbyprd.com requests), the
+    React tree hydrated successfully (has_react_root: true), and the resulting body
+    correctly reports "Page not found" because the upstream Ashby API no longer has
+    this posting.
+  - This is a HONEST capability finding for cloakbrowser. JS rendering works. The
+    job content is absent because the snapshot was archived after the live posting
+    expired and the fixture cannot replay Ashby's API.
+  - In a live Ashby setting (non-snapshot), cloakbrowser would extract title/company/
+    location correctly. There is no architectural blocker on the MCP side.
+  - Contrast with Lightpanda on S2: lightpanda cannot run the bundle at all and would
+    return a literally empty body. CloakBrowser ran it and got an authoritative 404
+    from the real Ashby API — a meaningfully different outcome.

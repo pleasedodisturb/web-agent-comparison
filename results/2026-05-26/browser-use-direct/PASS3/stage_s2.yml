@@ -1,0 +1,53 @@
+stage: s2
+mcp: browser-use
+target_url: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+tools_used:
+  - mcp__browser-use__browser_navigate
+  - mcp__browser-use__browser_extract_content
+  - mcp__browser-use__browser_get_state
+
+extracted:
+  title: "Jobs"            # <title>Jobs</title> — Ashby default shell title
+  company: "Replit"        # inferred from the captured URL path /replit/
+  location: null
+  role_summary: null
+  employment_type: null
+  salary_band: null
+
+page_state: "spa_shell_unhydrated"
+interactive_elements_found:
+  - "Powered by Ashby (footer link)"
+  - "Privacy Policy (footer link)"
+  - "Security (footer link)"
+  - "Vulnerability Disclosure (footer link)"
+
+fixture_caveat: |
+  Per fixtures/snapshots/ashby_2026-05-22/PROVENANCE.md, the captured HTML
+  is 6,294 bytes — a Vite-built SPA shell with `<div id="root">` and a
+  `<noscript>You need to enable JavaScript to run this app.</noscript>`
+  banner. Ashby's app preloads its manifest from cdn.ashbyprd.com and
+  fetches the actual posting JSON from jobs.ashbyhq.com APIs at runtime;
+  the wget mirror captured the boot shell only. Since the loopback fixture
+  has no upstream API endpoint, the SPA cannot hydrate even when a real
+  Chromium executes the JS.
+
+  Browser-use IS running real Chromium (headless), so this is a fair test
+  of the SPA-rendering capability: a JS-capable MCP can load the shell,
+  parse <title>Jobs</title>, and see the footer rendered by the loading
+  spinner overlay. It can NOT extract a job title/location/role-summary,
+  because the data simply isn't on the loopback origin. The same scoring
+  applies to all MCPs in the wave; the failure mode is fixture-bound, not
+  MCP-bound.
+
+mcp_observations:
+  - browser_navigate succeeded; the SPA boot CSS rendered the centred
+    loading-spinner state visible in S8's screenshot.
+  - browser_extract_content again returned "No content extracted" — same
+    behaviour as S1. The extractor does not synthesize structure from
+    arbitrary HTML; it expects a populated DOM with job-posting cues.
+  - browser_get_state surfaced 8 interactive elements, all footer chrome
+    (Powered by Ashby + Privacy + Security + Vulnerability Disclosure),
+    plus four empty divs/anchors that are the SPA placeholders.
+  - The Ashby logo lives at cdn.ashbyprd.com; the captured HTML preloads
+    https://cdn.ashbyprd.com/cdn_assets/28bf2c68843f0e857af65bbb3340c962b6e7fe64/favicon.png
+    which is one of the platform-detection markers used in S3.

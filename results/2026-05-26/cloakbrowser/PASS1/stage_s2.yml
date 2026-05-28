@@ -1,0 +1,38 @@
+stage: S2
+mcp: cloakbrowser
+fixture: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+extraction_method: cloak_navigate (full Chromium hydration) + cloak_evaluate + fetch fallback
+result: PARTIAL — fixture is an empty Ashby SPA shell
+title_from_static_head: Jobs
+company_from_url_path: replit
+job_id_from_url_path: 1e1a651f-693d-4f9d-bfd9-280a50d28d13
+role_summary: ~null — Ashby ships a 6,294-byte SPA shell with no embedded job data
+location: ~null
+employment_type: ~null
+salary_band: ~null
+post_hydration_dom:
+  h1: "Page not found"
+  body_text: "Page not found\n\nThe page you requested was not found\n\nPowered by \n\nPrivacy PolicySecurityVulnerability Disclosure"
+  body_text_length: 113
+static_html_meta:
+  viewport: "width=device-width, initial-scale=1, shrink-to-fit=no"
+  theme-color: "#483fad"
+  csp-nonce: present
+  title: "Jobs"
+  og_tags: {}
+  ld_json: false
+notes:
+  - "This is the canonical Ashby SPA-rendering test. CloakBrowser DOES execute
+    JavaScript (full source-patched Chromium), so unlike a static fetcher it
+    DID hydrate the SPA. The SPA reached out to Ashby's live API (api.ashbyhq.com
+    or similar), got no data for this job ID against the local fixture host,
+    and rendered its built-in 'Page not found' fallback."
+  - "The fixture file itself is 6,294 bytes — Ashby's served HTML is a pure
+    bootstrap shell with no inline JSON island. Compare to Greenhouse, whose
+    static HTML contained the full job body."
+  - "Verdict for the rubric: cloakbrowser passed the JS-execution test but the
+    fixture lacks the data; lightpanda would fail the JS-execution test for the
+    same reason (no React) and ALSO get no data. The two failure modes look
+    identical from the outside but the underlying behavior differs."
+  - "No data to extract. This is an honest failure of fixture composition, not
+    of the MCP — recording the empty-shell behavior IS the finding."

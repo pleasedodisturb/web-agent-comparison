@@ -1,0 +1,164 @@
+- generic [ref=e2]:
+  - list [ref=e4]:
+    - listitem [ref=e5]:
+      - link "Replit" [ref=e6] [cursor=pointer]:
+        - /url: http://replit.com
+        - img "Replit" [ref=e7]
+    - listitem [ref=e8]:
+      - link "Back to Replit’s Job Listings" [ref=e9] [cursor=pointer]:
+        - /url: /replit
+        - img [ref=e10]
+    - listitem
+  - generic [ref=e12]:
+    - heading "Staff Technical Program Manager, AI / Agent Systems" [level=1] [ref=e14]
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - heading "Location" [level=2] [ref=e18]
+          - paragraph [ref=e19]: Foster City, CA (Hybrid) In office M,W,F
+        - generic [ref=e20]:
+          - heading "Employment Type" [level=2] [ref=e21]
+          - paragraph [ref=e22]: Full time
+        - generic [ref=e23]:
+          - heading "Location Type" [level=2] [ref=e24]
+          - paragraph [ref=e25]: Hybrid
+        - generic [ref=e26]:
+          - heading "Department" [level=2] [ref=e27]
+          - paragraph [ref=e28]:
+            - generic [ref=e29]: Engineering ›
+            - generic [ref=e30]: Data
+        - generic [ref=e31]:
+          - heading "Compensation" [level=2] [ref=e32]
+          - list [ref=e33]:
+            - listitem [ref=e34]:
+              - generic [ref=e35]: Compensation is determined based on career level, with the base salary for this role ranging from $208K – $286K • Offers Equity
+      - generic [ref=e36]:
+        - tablist [ref=e37]:
+          - tab "Overview" [selected] [ref=e38] [cursor=pointer]
+          - tab "Application" [ref=e39] [cursor=pointer]
+        - tabpanel "Overview" [ref=e41]:
+          - generic [ref=e42]:
+            - paragraph [ref=e43]: Replit is the agentic software creation platform that enables anyone to build applications using natural language. With millions of users worldwide, Replit is democratizing software development by removing traditional barriers to application creation.
+            - paragraph [ref=e44]
+            - heading "About the Role" [level=2] [ref=e45]:
+              - strong [ref=e46]: About the Role
+            - paragraph [ref=e47]: We're looking for a senior, deeply technical TPM to own delivery of Replit's highest-stakes, most complex programs—starting with our evergreen Agent roadmaps. This is an IC role for someone who has previously been an engineering manager or senior engineer, can operate comfortably in AI/LLM-heavy systems, and brings order, momentum, and sharp decision-making to cross-team ambiguity. The ideal candidate uses AI and automation aggressively to scale themselves, but understands that the core value is clarity, tradeoffs, and execution, not just tooling.
+            - heading "You Will" [level=2] [ref=e48]:
+              - strong [ref=e49]: You Will
+            - list [ref=e50]:
+              - listitem [ref=e51]:
+                - paragraph [ref=e52]: Own end-to-end delivery of Replit's most complex, cross-functional programs, with Agent development as the primary, evergreen focus
+              - listitem [ref=e53]:
+                - paragraph [ref=e54]: Drive execution across Product, Eng, Research, GTM, and Leadership—surfacing dependencies, risks, and disagreements early
+              - listitem [ref=e55]:
+                - paragraph [ref=e56]: "Operate as the technical glue between teams: able to follow architecture decisions, challenge assumptions, and translate tradeoffs without slowing velocity"
+              - listitem [ref=e57]:
+                - paragraph [ref=e58]: Establish and run program operating cadence (milestones, reviews, decision logs, retros) for long-running bets
+              - listitem [ref=e59]:
+                - paragraph [ref=e60]: Use AI, automation, and agent workflows to scale program management (status synthesis, risk detection, incident follow-ups, guardrails, retros)
+              - listitem [ref=e61]:
+                - paragraph [ref=e62]: Take on additional high-stakes programs as needed (e.g. Enterprise initiatives, external integrations, priority conflicts)
+              - listitem [ref=e63]:
+                - paragraph [ref=e64]: Partner closely with EMs and PMs without duplicating their roles—this role exists where ownership is otherwise fragmented
+            - heading "Required skills and experience" [level=2] [ref=e65]:
+              - strong [ref=e66]: Required skills and experience
+            - list [ref=e67]:
+              - listitem [ref=e68]:
+                - paragraph [ref=e69]: 8+ years of TPM experience (or equivalent) with a track record of leading complex, high-impact programs
+              - listitem [ref=e70]:
+                - paragraph [ref=e71]: Deep technical fluency in systems like distributed architecture, infrastructure, platform engineering, or AI/ML
+              - listitem [ref=e72]:
+                - paragraph [ref=e73]: Clear, direct communication style with strong decision-making skills
+              - listitem [ref=e74]:
+                - paragraph [ref=e75]: Thrives in ambiguity and can drive progress independently—this is a high-impact IC role, not the foundation of a TPM organization
+            - heading "Preferred Qualifications" [level=2] [ref=e76]:
+              - strong [ref=e77]: Preferred Qualifications
+            - list [ref=e78]:
+              - listitem [ref=e79]:
+                - paragraph [ref=e80]: Background as an engineering manager or senior engineer
+              - listitem [ref=e81]:
+                - paragraph [ref=e82]: Experience leveraging AI tools, agents, or automation to increase execution velocity—we'd love to hear specific examples
+              - listitem [ref=e83]:
+                - paragraph [ref=e84]: Values clarity and momentum over process for process's sake
+            - heading "Bonus Points" [level=2] [ref=e85]:
+              - strong [ref=e86]: Bonus Points
+            - list [ref=e87]:
+              - listitem [ref=e88]:
+                - paragraph [ref=e89]: You've led programs for AI/ML or agent-based systems
+              - listitem [ref=e90]:
+                - paragraph [ref=e91]: You've brought structure and accountability to cross-functional initiatives in fast-paced environments
+              - listitem [ref=e92]:
+                - paragraph [ref=e93]: You have a portfolio of ways you've used automation or tooling to scale your impact as a program manager
+            - paragraph [ref=e94]:
+              - emphasis [ref=e95]: This is a full-time role that can be held from our Foster City, CA office. The role has an in-office requirement of Monday, Wednesday, and Friday.
+            - paragraph [ref=e96]
+            - paragraph [ref=e97]:
+              - strong [ref=e98]: "Full-Time Employee Benefits Include:"
+            - paragraph [ref=e99]: 💰 Competitive Salary & Equity
+            - paragraph [ref=e100]: 💹 401(k) Program with a 4% match
+            - paragraph [ref=e101]: ⚕️ Health, Dental, Vision and Life Insurance
+            - paragraph [ref=e102]: 🩼 Short Term and Long Term Disability
+            - paragraph [ref=e103]: 🚼 Paid Parental, Medical, Caregiver Leave
+            - paragraph [ref=e104]: 🚗 Commuter Benefits
+            - paragraph [ref=e105]: 📱 Monthly Wellness Stipend
+            - paragraph [ref=e106]: 🧑‍💻 Autonomous Work Environment
+            - paragraph [ref=e107]: 🖥 In Office Set-Up Reimbursement
+            - paragraph [ref=e108]: 🏝 Flexible Time Off (FTO) + Holidays
+            - paragraph [ref=e109]: 🚀 Quarterly Team Gatherings
+            - paragraph [ref=e110]: ☕ In Office Amenities
+            - paragraph [ref=e111]
+            - paragraph [ref=e112]:
+              - strong [ref=e113]: Want to learn more about what we are up to?
+            - list [ref=e114]:
+              - listitem [ref=e115]:
+                - paragraph [ref=e116]:
+                  - link "Meet the Replit Agent" [ref=e117] [cursor=pointer]:
+                    - /url: https://www.youtube.com/watch?v=IYiVPrxY8-Y
+              - listitem [ref=e118]:
+                - paragraph [ref=e119]:
+                  - 'link "Replit: Make an app for that" [ref=e120] [cursor=pointer]':
+                    - /url: https://www.youtube.com/watch?v=4zd9hzngFwY
+              - listitem [ref=e121]:
+                - paragraph [ref=e122]:
+                  - link "Replit Blog" [ref=e123] [cursor=pointer]:
+                    - /url: https://blog.replit.com/
+              - listitem [ref=e124]:
+                - paragraph [ref=e125]:
+                  - link "Amjad TED Talk" [ref=e126] [cursor=pointer]:
+                    - /url: https://youtu.be/kCudFI4tcpg?si=l4ViCejV_f2RZkDi
+            - paragraph [ref=e127]:
+              - strong [ref=e128]: Interviewing + Culture at Replit
+            - list [ref=e129]:
+              - listitem [ref=e130]:
+                - paragraph [ref=e131]:
+                  - link "Operating Principles" [ref=e132] [cursor=pointer]:
+                    - /url: https://blog.replit.com/operating-principles
+              - listitem [ref=e133]:
+                - paragraph [ref=e134]:
+                  - link "Reasons not to work at Replit" [ref=e135] [cursor=pointer]:
+                    - /url: https://blog.replit.com/reasons-not-to-join-replit
+            - paragraph [ref=e136]
+            - paragraph [ref=e137]: To achieve our mission of making programming more accessible around the world, we need our team to be representative of the world. We welcome your unique perspective and experiences in shaping this product. We encourage people from all kinds of backgrounds to apply, including and especially candidates from underrepresented and non-traditional backgrounds.
+          - link "Apply for this Job" [ref=e138] [cursor=pointer]:
+            - /url: /replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13/application
+            - button "Apply for this Job" [ref=e139]
+  - paragraph [ref=e140]:
+    - text: This site is protected by reCAPTCHA and the Google
+    - link "Privacy Policy" [ref=e141] [cursor=pointer]:
+      - /url: https://policies.google.com/privacy
+    - text: and
+    - link "Terms of Service" [ref=e142] [cursor=pointer]:
+      - /url: https://policies.google.com/terms
+    - text: apply.
+  - contentinfo [ref=e143]:
+    - link "Learn more about Ashby" [ref=e144] [cursor=pointer]:
+      - /url: https://www.ashbyhq.com
+      - generic [ref=e145]: Powered by
+      - img "Ashby" [ref=e146]
+    - paragraph [ref=e152]:
+      - link "Privacy Policy" [ref=e153] [cursor=pointer]:
+        - /url: https://www.ashbyhq.com/privacy
+      - link "Security" [ref=e154] [cursor=pointer]:
+        - /url: https://www.ashbyhq.com/security
+      - link "Vulnerability Disclosure" [ref=e155] [cursor=pointer]:
+        - /url: https://www.ashbyhq.com/disclosure

@@ -1,0 +1,1 @@
+Obscura wedged after S1; cannot fill the apply form. No batch-fill primitive exists in obscura's surface anyway (would have used per-field browse_interact action=type with CSS selectors, or browse_session click/type pairs).

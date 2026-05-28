@@ -1,0 +1,1 @@
+No apply form in fixture DOM — Greenhouse Remix SPA rendered "Page not found" because cdn.greenhouse.io bundles unreachable from loopback; the form schema exists in window.__remixContext but no form elements were ever rendered. Affects all MCPs identically.

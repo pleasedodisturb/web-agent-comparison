@@ -1,0 +1,5 @@
+uid=3_0 RootWebArea "Page not found" url="http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html"
+  uid=3_1 StaticText "The job board you were viewing is no longer active."
+  uid=3_2 main
+    uid=3_3 heading "Page not found" level="3"
+    uid=3_4 StaticText "The job board you were viewing is no longer active."

@@ -1,0 +1,240 @@
+{
+  "args": [],
+  "captured_at": "2026-05-26T22:32:25Z",
+  "categories": {
+    "capture": 1,
+    "diagnostics": 5,
+    "inspection": 1,
+    "interaction": 11,
+    "navigation": 2,
+    "other": 3
+  },
+  "command": "playwright-mcp",
+  "mcp": "playwright",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 23,
+  "tools": [
+    {
+      "category": "other",
+      "description_excerpt": "Close the page",
+      "input_schema_keys": [],
+      "name": "browser_close"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Resize the browser window",
+      "input_schema_keys": [
+        "height",
+        "width"
+      ],
+      "name": "browser_resize"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Returns all console messages",
+      "input_schema_keys": [
+        "all",
+        "filename",
+        "level"
+      ],
+      "name": "browser_console_messages"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Handle a dialog",
+      "input_schema_keys": [
+        "accept",
+        "promptText"
+      ],
+      "name": "browser_handle_dialog"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Evaluate JavaScript expression on page or element",
+      "input_schema_keys": [
+        "element",
+        "filename",
+        "function",
+        "target"
+      ],
+      "name": "browser_evaluate"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Upload one or multiple files",
+      "input_schema_keys": [
+        "paths"
+      ],
+      "name": "browser_file_upload"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Drop files or MIME-typed data onto an element, as if dragged from outside the page. At least one of \"paths\" or \"data\" must be provided.",
+      "input_schema_keys": [
+        "data",
+        "element",
+        "paths",
+        "target"
+      ],
+      "name": "browser_drop"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Fill multiple form fields",
+      "input_schema_keys": [
+        "fields"
+      ],
+      "name": "browser_fill_form"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Press a key on the keyboard",
+      "input_schema_keys": [
+        "key"
+      ],
+      "name": "browser_press_key"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text into editable element",
+      "input_schema_keys": [
+        "element",
+        "slowly",
+        "submit",
+        "target",
+        "text"
+      ],
+      "name": "browser_type"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate to a URL",
+      "input_schema_keys": [
+        "url"
+      ],
+      "name": "browser_navigate"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Go back to the previous page in the history",
+      "input_schema_keys": [],
+      "name": "browser_navigate_back"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Returns a numbered list of network requests since loading the page. Use browser_network_request with the number to get full details.",
+      "input_schema_keys": [
+        "filename",
+        "filter",
+        "static"
+      ],
+      "name": "browser_network_requests"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Returns full details (headers and body) of a single network request, or a single part if `part` is set. Use the number from browser_network_requests.",
+      "input_schema_keys": [
+        "filename",
+        "index",
+        "part"
+      ],
+      "name": "browser_network_request"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Run a Playwright code snippet. Unsafe: executes arbitrary JavaScript in the Playwright server process and is RCE-equivalent.",
+      "input_schema_keys": [
+        "code",
+        "filename"
+      ],
+      "name": "browser_run_code_unsafe"
+    },
+    {
+      "category": "capture",
+      "description_excerpt": "Take a screenshot of the current page. You can't perform actions based on the screenshot, use browser_snapshot for actions.",
+      "input_schema_keys": [
+        "element",
+        "filename",
+        "fullPage",
+        "target",
+        "type"
+      ],
+      "name": "browser_take_screenshot"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Capture accessibility snapshot of the current page, this is better than screenshot",
+      "input_schema_keys": [
+        "boxes",
+        "depth",
+        "filename",
+        "target"
+      ],
+      "name": "browser_snapshot"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Perform click on a web page",
+      "input_schema_keys": [
+        "button",
+        "doubleClick",
+        "element",
+        "modifiers",
+        "target"
+      ],
+      "name": "browser_click"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Perform drag and drop between two elements",
+      "input_schema_keys": [
+        "endElement",
+        "endTarget",
+        "startElement",
+        "startTarget"
+      ],
+      "name": "browser_drag"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Hover over element on page",
+      "input_schema_keys": [
+        "element",
+        "target"
+      ],
+      "name": "browser_hover"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Select an option in a dropdown",
+      "input_schema_keys": [
+        "element",
+        "target",
+        "values"
+      ],
+      "name": "browser_select_option"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "List, create, close, or select a browser tab.",
+      "input_schema_keys": [
+        "action",
+        "index",
+        "url"
+      ],
+      "name": "browser_tabs"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Wait for text to appear or disappear or a specified time to pass",
+      "input_schema_keys": [
+        "text",
+        "textGone",
+        "time"
+      ],
+      "name": "browser_wait_for"
+    }
+  ],
+  "version_handshake": "1.61.0-alpha-1778188671000"
+}

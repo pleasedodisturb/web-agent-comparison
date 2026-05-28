@@ -1,0 +1,1 @@
+Greenhouse React bundle destroys the <form id="application-form"> on mount (same DOM-replacement as S1); navigation succeeded but get_state shows only 2 post-render elements (span/svg), so no apply form is reachable to interact with.

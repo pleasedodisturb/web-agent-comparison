@@ -1,0 +1,9 @@
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":0.42,"error":null,"stage":"S1"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":0.55,"error":null,"stage":"S2"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":0.31,"error":null,"stage":"S3"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":1.10,"error":null,"stage":"S4"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":0.88,"error":null,"stage":"S5"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":0.72,"error":null,"stage":"S6"}
+{"attempt_no":1,"passed":false,"tag":"transient","duration_s":2.10,"error":"RuntimeError: ECONNRESET on combobox","stage":"S7"}
+{"attempt_no":2,"passed":true,"tag":null,"duration_s":0.95,"error":null,"stage":"S7"}
+{"attempt_no":1,"passed":true,"tag":null,"duration_s":1.30,"error":null,"stage":"S8"}

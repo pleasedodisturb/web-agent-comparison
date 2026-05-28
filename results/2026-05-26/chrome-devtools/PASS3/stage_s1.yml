@@ -1,0 +1,59 @@
+stage: S1
+mcp: chrome-devtools
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+extraction_method: |
+  Greenhouse is a React SPA. When chrome-devtools navigates to the fixture, the React bundle
+  hydrates, fails to fetch the live job data (offline fixture), and replaces the entire DOM with
+  a "Page not found / The job board you were viewing is no longer active" fallback. The
+  rendered accessibility tree therefore contained no job content.
+  Worked around it within the chrome-devtools surface by calling `evaluate_script` to
+  fetch() the raw HTML and parse it via DOMParser, recovering the SSR'd content.
+job:
+  title: Jane Testworth Program
+  company: Anthropic
+  location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+  employment_type: Fellowship (full-time, ~4 months, possible extension)
+  hours_per_week: 40
+  duration_months: 4
+  salary_band:
+    weekly_stipend_usd: 3850
+    weekly_stipend_gbp: 2310
+    weekly_stipend_cad: 4300
+    extras: "Funding for compute (~$15k/month) + other research expenses + benefits"
+  requirements_summary:
+    must_have:
+      - Fluent in Python programming
+      - Available to work full-time on the Fellows program
+    good_fit_if:
+      - Motivated by AI safety and beneficial AI
+      - Excited to transition into empirical AI research
+      - Strong technical background in CS, math, or physics
+      - Thrive in fast-paced collaborative environments
+      - Can implement ideas quickly and communicate clearly
+    nice_to_have:
+      - Strong background in a relevant discipline (economics, social sciences, cybersecurity)
+      - Experience in research/engineering related to chosen workstream
+  workstreams:
+    - AI Safety / Alignment
+    - AI Security / Control
+    - ML Systems & Infrastructure
+    - Fellows (general)
+    - Policy / Economics
+  apply_button:
+    present: true
+    aria_label: Apply
+    on_page_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+  apply_links_in_body:
+    - https://bit.ly/afpsafety
+  og_url: https://job-boards.greenhouse.io/anthropic/jobs/5023394008
+notes: |
+  - "Jane Testworth" is the fixture's PII-scrub placeholder — it replaces real names, team
+    names, and program names across the description. The structural data (location, stipend,
+    duration, workstreams) is still recoverable.
+  - The on-page Apply button is a <button>, not an <a> — clicking it would normally trigger a
+    React route change to the apply form. Tested in S4.
+tools_used:
+  - mcp__chrome-devtools__new_page
+  - mcp__chrome-devtools__navigate_page
+  - mcp__chrome-devtools__take_snapshot
+  - mcp__chrome-devtools__evaluate_script

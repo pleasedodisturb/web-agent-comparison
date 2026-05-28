@@ -1,0 +1,51 @@
+stage: S2
+mcp: browser-use
+target_url: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+tools_used:
+  - mcp__browser-use__browser_navigate
+  - mcp__browser-use__browser_get_state
+  - mcp__browser-use__browser_extract_content
+  - mcp__browser-use__browser_get_html
+
+navigation:
+  status: ok
+
+rendering:
+  js_executed: true
+  evidence_of_render:
+    - Footer links from Ashby's React app appeared in interactive_elements after
+      hydration: "Powered by" (ashbyhq.com), "Privacy Policy", "Security",
+      "Vulnerability Disclosure". None of these strings exist in the captured
+      source HTML — they were injected by the bundled React app.
+    - browser_get_state listed only 8 interactive elements; the original SPA
+      would have dozens once data fetches resolve.
+
+extraction:
+  status: empty
+  failure_mode: |
+    Ashby is a true client-rendered SPA. The captured HTML (139 lines, source
+    title "Jobs") is just a hydration shell; the actual job posting data is
+    fetched from jobs.ashbyhq.com's API after mount. The local snapshot server
+    has no API endpoint to satisfy those XHRs, so the page hydrates partially
+    (footer/chrome) but the job title, description, and apply-form regions
+    never populate.
+    browser_extract_content returned "No content extracted".
+    browser_get_html for <title> returned "<title>Jobs</title>" — the static
+    shell title, not the job title.
+
+ground_truth_from_source:
+  source_title: "Jobs"
+  source_lines: 139
+  note: |
+    Ashby snapshots intentionally have no job data in raw HTML — the SPA needs
+    a live API. This stage is the "SPA rendering with missing backend" test;
+    every MCP scored on this fixture should report effectively empty
+    extraction.
+
+score_implication: |
+  Ashby is the negative-control fixture. browser-use behaves correctly here
+  (JS ran, hydration started, footer appeared) but cannot magic up data the
+  backend never served. A "0-byte extraction" verdict on this stage is
+  expected for ALL MCPs unless someone wired an API mock — which is out of
+  scope for the 2026-05-26 wave. Score this stage on whether the MCP
+  CRASHED or gracefully reported emptiness; browser-use did the latter.

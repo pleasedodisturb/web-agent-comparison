@@ -1,0 +1,5 @@
+FAILED — Ashby SPA never hydrates in lightpanda's Zig 'Browsercore' engine; no V8/SpiderMonkey runtime.
+Page <title>="Jobs" (page-level title, not job-posting title); company/location/role_summary all null.
+Body text = 55 chars (SSR loader shell only). markdown tool returned empty. semantic_tree empty.
+Raw HTML shell delivered (6805 chars) but React never mounts — same architectural limitation 2026-03 wave reported.
+See stage_s2.diagnostic.yml for full extracted diagnostic.

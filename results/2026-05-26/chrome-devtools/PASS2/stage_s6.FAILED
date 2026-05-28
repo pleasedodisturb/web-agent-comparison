@@ -1,0 +1,1 @@
+Upstream S4 failure: no apply form reachable in the snapshot fixture, so there is no file input to target. chrome-devtools has an upload_file tool (operates by uid from snapshot) that would have been used had a form been reachable.

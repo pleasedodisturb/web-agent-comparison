@@ -1,0 +1,1 @@
+Downstream of S4: no resume <input type="file"> reachable post-render. browser-use exposes file upload only via retry_with_browser_use_agent (requires LLM key) or via a real DOM index — neither viable here because the form node is destroyed.

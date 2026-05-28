@@ -1,0 +1,20 @@
+# Empirical probe: firecrawl cloud against loopback URL (2026-05-26)
+#
+# Command (api key redacted):
+#   curl -X POST https://api.firecrawl.dev/v1/scrape \
+#     -H "Authorization: Bearer fc-REDACTED" \
+#     -H "Content-Type: application/json" \
+#     -d '{"url": "http://127.0.0.1:8765/greenhouse_2026-05-22/jobs/5023394008/",
+#          "formats": ["markdown"], "timeout": 15000}'
+#
+# HTTP status: 400
+# Response body:
+#   {"success":false,"code":"BAD_REQUEST",
+#    "error":"URL must have a valid top-level domain or be a valid path",
+#    "details":[{"code":"custom","path":["url"],
+#                "message":"URL must have a valid top-level domain or be a valid path"}]}
+#
+# Verdict: firecrawl cloud refuses 127.0.0.1 URLs at the request-validation
+# layer — they never reach the scraper. This is the architectural mismatch
+# between cloud-only MCPs and the Phase-1 fixture-loopback contract.
+# The same response shape will be returned for every S1-S3 stage URL.

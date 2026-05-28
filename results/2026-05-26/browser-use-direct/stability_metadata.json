@@ -1,0 +1,22 @@
+{
+  "actual_duration_minutes": 7.14,
+  "captured_at": "2026-05-27T00:23:56Z",
+  "completion_status": "COMPLETED",
+  "configured_duration_minutes": 7.0,
+  "fixture_base_url": "http://127.0.0.1:8765",
+  "iterations_completed": 14,
+  "iterations_failed": {
+    "s1": 0,
+    "s5": 0,
+    "s5_skipped_readonly": 0
+  },
+  "loopback_only_verified": false,
+  "mcp": "browser-use-direct",
+  "notes": [],
+  "orphan_audit_survivors": 0,
+  "rss_first_kb": 178352,
+  "rss_growth_kb": 5616,
+  "rss_max_kb": 183968,
+  "skip_reason": null,
+  "wallclock_decision": "executor_reduced_top3_15min_rest_7min"
+}

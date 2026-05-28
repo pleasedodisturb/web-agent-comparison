@@ -1,0 +1,1 @@
+Skipped: lightpanda treated as read-only per prompt rule. Even though selectOption exists, the Greenhouse source dropdown is a React Select (not native <select>) — same combobox-not-select problem documented in 2026-03-31 baseline. Skipped to maintain apples-to-apples with the read-only sentinel cascade.

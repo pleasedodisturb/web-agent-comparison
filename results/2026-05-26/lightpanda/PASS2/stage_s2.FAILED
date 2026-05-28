@@ -1,0 +1,1 @@
+Lightpanda Zig JS engine does not execute React/SPA hydration — Ashby React shell renders only the empty <div id="root"> wrapper; markdown is empty, semantic tree is a single RootWebArea, structuredData yields only meta title="Jobs". No job-posting content extractable.

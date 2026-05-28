@@ -1,0 +1,1 @@
+SPA empty-shell: Ashby renders client-side via React; lightpanda's JS engine does not execute the framework, so the DOM contains only <title>Jobs</title> and the empty mount-point. markdown returned 0 bytes; semantic_tree returned 1 node (RootWebArea 'Jobs').

@@ -1,0 +1,32 @@
+# Live-URL probe (interesting-angle evidence) — S1 Greenhouse
+# Trimmed for public-repo hygiene; see _note field.
+
+{
+  "stage": "S1",
+  "url": "https://job-boards.greenhouse.io/anthropic/jobs/5023394008",
+  "http_status": 200,
+  "success": true,
+  "markdown_bytes": 24237,
+  "markdown_first_400_chars": "[![Anthropic Logo](https://s8-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/040/300/original/2025-04-07-greenhouse.png?1744052732)](https://www.anthropic.com/jobs)\n\n[Back to jobs](https://job-boards.greenhouse.io/anthropic)\n\n# Anthropic Fellows Program\n\nLondon, UK; Ontario, CAN; Remote-Friendly, United States; San Francisco, CA\n\nApply\n\n## **About Anthropic**\n\nAnthropic’s mi",
+  "headings_count": 31,
+  "headings_top_10": [
+    "Anthropic Fellows Program",
+    "**About Anthropic**",
+    "**Anthropic Fellows Program overview**",
+    "**What to expect**",
+    "**Interview process**",
+    "**Compensation**",
+    "**Fellows workstreams**",
+    "**Across the workstreams, you may be a good fit if you:**",
+    "**Strong candidates may also have:**",
+    "**Candidates must be:**"
+  ],
+  "metadata_title": "Job Application for Anthropic Fellows Program at Anthropic",
+  "metadata_og_title": "Anthropic Fellows Program",
+  "metadata_og_description_bytes": 75,
+  "creditsUsed": 1,
+  "cacheState": "hit",
+  "proxyUsed": "basic",
+  "scrapeId_present": true,
+  "_note": "Full body content trimmed for public-repo hygiene. Republishing 24KB of Anthropic's job posting (including real researcher names) is out of scope; this trimmed evidence preserves all empirical signals needed for the DEEP_ANALYSIS.md claim audit."
+}

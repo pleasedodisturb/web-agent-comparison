@@ -1,0 +1,57 @@
+stage: S2
+mcp: playwright
+target: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+
+result: partial_render
+extraction_outcome: empty_payload
+
+job:
+  title: null
+  company: "Replit (inferred from snapshot path)"
+  location: null
+  role_summary: null
+
+snapshot_pathology:
+  static_html_size_bytes: 6294
+  static_h1: null
+  static_title: "Jobs"
+  rendered_h1_after_js: "Page not found"
+  rendered_body_chars: 113
+  rendered_body_preview: "Page not found / The page you requested was not found / Powered by ..."
+
+root_cause: |
+  The captured Ashby snapshot is the SPA *loader shell only* — a 6.3 KB
+  HTML scaffold whose body is literally "You need to enable JavaScript to
+  run this app." Inline JS sets `window.__appData = { ..., posting: null,
+  jobBoard: null, ... }` and then fetches the bundle manifest from
+  `https://cdn.ashbyprd.com/frontend_non_user/.../manifest.json`.
+
+  The job content has never been serialized into the HTML — it would
+  normally arrive via a runtime API call from the React bundle. Both the
+  bundle CDN and the data API are unreachable offline, so even a full
+  JS-rendering browser ends up at Ashby's client-side "Page not found"
+  state with no job content to extract.
+
+playwright_can_render_js: true
+playwright_extracted_meaningful_content: false
+
+why_this_matters: |
+  This is a *snapshot fidelity* failure rather than a Playwright capability
+  failure. Playwright correctly hydrated the SPA and reported the
+  observable end state (Page not found). A non-rendering MCP (e.g.
+  Lightpanda) would return the 6 KB loader shell text verbatim — visibly
+  "more content" but equally useless for benchmark scoring.
+
+  For honest scoring: Playwright's S2 outcome is "rendered, payload empty
+  by design of the snapshot" — distinguish from "rendered, payload present
+  but extraction failed" and from "could not render JS at all."
+
+artifacts:
+  static_appdata:
+    organization: null
+    posting: null
+    jobBoard: null
+    recaptchaPublicSiteKey: "6LeFb_YUAAAAALUD5h-BiQEp8JaFChe0e0A6r49Y"
+    environment: "production"
+
+  bundle_cdn: "https://cdn.ashbyprd.com/frontend_non_user/28bf2c68843f0e857af65bbb3340c962b6e7fe64/.vite/manifest.json"

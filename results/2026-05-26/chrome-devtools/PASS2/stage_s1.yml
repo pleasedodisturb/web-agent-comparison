@@ -1,0 +1,48 @@
+stage: S1
+mcp: chrome-devtools
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+tool_used: mcp__chrome-devtools__evaluate_script (fetch + DOMParser on response body)
+extraction_notes: |
+  In-browser rendered DOM showed "Page not found" — the Greenhouse React SPA
+  hydrated over the server-rendered HTML and replaced it after detecting that
+  job_boards CDN bundles tried to call the live Greenhouse API (unavailable from
+  the loopback snapshot). The complete SSR payload is still present in the raw
+  HTML body. Extraction therefore went via fetch(location.href) inside the same
+  page, then parsed in a detached DOMParser document so the live SPA could not
+  re-mutate the result.
+  The fixture has all PII redacted to the literal string "Jane Testworth" — this
+  is by design of the snapshot generator, not a chrome-devtools artifact.
+
+job:
+  title: "Jane Testworth Program"
+  company: "Anthropic"
+  location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+  employment_type: "Full-time fellowship (4 months, ~40 hrs/week, possible extension)"
+  apply_button_present: true
+  apply_url: "https://bit.ly/afpsafety"
+  canonical_url: "https://job-boards.greenhouse.io/anthropic/jobs/5023394008"
+  salary_band: "Weekly stipend 3,850 USD / 2,310 GBP / 4,300 CAD + benefits"
+  compute_budget: "~$15k/month"
+  start_dates: "Cohorts starting July 2026 and beyond; next cohort late September"
+  workstreams:
+    - "AI Jane Testworth"
+    - "AI Jane Testworth"
+    - "ML Systems & Jane Testworth"
+    - "Jane Testworth Fellows"
+    - "Jane Testworth"
+  requirements_summary:
+    must_have:
+      - "Fluent in Python programming"
+      - "Available full-time on the Fellows program"
+    good_fit_if:
+      - "Motivated by AI safety and societal benefit"
+      - "Excited to transition into empirical AI research"
+      - "Strong technical background (CS, math, physics)"
+      - "Thrive in fast-paced collaborative environments"
+      - "Can implement ideas quickly and communicate clearly"
+    strong_candidates_also:
+      - "Strong discipline-specific background (economics, social science, cybersecurity, etc.)"
+      - "Prior research/engineering experience in relevant area"
+  process: "Initial application + reference check, technical assessments & interviews, research discussion"
+  static_html_bytes: 84577
+  description_chars_in_dom: 17363

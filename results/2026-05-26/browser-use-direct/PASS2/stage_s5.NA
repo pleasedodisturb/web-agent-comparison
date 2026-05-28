@@ -1,0 +1,1 @@
+N/A: depends on S4 reaching an apply form. S4 FAILED structurally (no JS-eval primitive to bypass React-hydration 404). browser-use also has no batch form-fill primitive — each field would be one browser_type call against the index-addressed element from browser_get_state.

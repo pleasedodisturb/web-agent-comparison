@@ -1,0 +1,78 @@
+# PII scrub allow-list for browser-use-direct row (G-715 — browser-use sub-ticket).
+# Plan 02-05 acceptance: scrub_artifacts must report 0 PII findings.
+# These are technical / prose / brand Title-Case bigrams that appear in the
+# browser-use evidence — DEEP_ANALYSIS section headings, tool-description
+# bigrams, transcript narrative bigrams, snapshot-injected synthetic
+# names, Claude Code metadata bigrams, error-message bigrams.
+# Allow-listing does NOT loosen the real-PII guard (resembles-name +
+# resembles-email regex still active — only LITERAL allow-listed bigrams
+# are skipped).
+
+# === Snapshot-injected synthetic name (PII-scrubbed mock per snapshot_fixtures.sh) ===
+# The Greenhouse fixture had its candidate name scrubbed to "Jane Testworth"
+# at snapshot time; the literal "Jane Test" / "Testworth Program" pair appears
+# whenever the bench reads back the synthetic page title.
+Jane Test
+Testworth Program
+
+# === Anthropic fixture page metadata (role title bigram) ===
+Anthropic Fellows
+
+# === DEEP_ANALYSIS + transcript section headings + prose bigrams ===
+Stage Walk
+Stage Results
+Final Ranking
+Scoring Comparison
+Data Quality
+Token Efficiency
+Setup Complexity
+Interaction Depth
+Error Handling
+Weighted Composite
+
+# === Greenhouse + ashby react-app bigrams (fixture content, not PII) ===
+Greenhouse React
+Greenhouse React-Select
+Greenhouse Rec
+Greenhouse Recruiting
+Greenhouse Remix
+Ashby Production
+Canonical Ashby
+The Ashby
+The Greenhouse
+The Apply
+React Select
+Set React-Select
+Playwright Chromium
+Open Greenhouse
+Inspect Ashby
+Extract Ashby
+Extract Gre
+Extract Greenhouse
+Extracting Ashby
+Extracting Greenhouse
+
+# === Ashby footer link bigrams (legitimate snapshot content) ===
+Privacy Policy
+Vulnerability Dis
+Vulnerability Disclosure
+
+# === Brand / product Title-Case bigrams that appear in Claude Code
+# stream-json metadata, tool descriptions, or Greenhouse/Ashby snapshot ===
+Claude Code
+Hugging Face
+Google Calendar
+Google Drive
+San Francisco
+
+# === Error-message + Claude Code internal-system Title-Case bigrams ===
+Example Request
+Explanatory Mode
+Learning Mode
+Request User
+Request Contributions
+
+# === DEEP_ANALYSIS narrative bigrams (prose section headings + references) ===
+Deep Analysis
+Empirical Claims
+The Claude

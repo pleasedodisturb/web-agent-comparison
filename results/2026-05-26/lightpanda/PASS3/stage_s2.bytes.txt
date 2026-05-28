@@ -1,0 +1,17 @@
+# S2 Ashby raw-byte capture — PASS3
+# Falsifiable 2026-03 claim: lightpanda returned 0 bytes on Ashby
+# 2026-05 nightly observation:
+
+pass: PASS3
+markdown_tool_output_bytes: 0          # <-- this matches 2026-03 "0 bytes" wording exactly
+semantic_tree_nodes: 1                 # just RootWebArea 'Jobs', no children
+structured_data_json_ld: 0             # empty []
+structured_data_open_graph_keys: 0     # empty {}
+structured_data_meta_title: "Jobs"     # static <title> only
+job_data_fields_extracted: 0
+
+# Interpretation: PASS3 captures the cleanest framing of the 2026-03 claim.
+# The 'markdown' tool — lightpanda's primary content-extraction primitive —
+# returns exactly 0 bytes for Ashby. The 2026-03 claim was MEASUREMENT-PRECISE
+# about THIS metric. The shell HTML is non-zero (4-7KB), but the user-facing
+# content the tool exposes is zero. CONFIRMED with high specificity.

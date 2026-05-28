@@ -1,0 +1,558 @@
+{
+  "browser-use-agent": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {},
+    "capability": "LLM-augmented",
+    "mode": "agent",
+    "scores": {
+      "data_quality": "N/A",
+      "error_handling": "N/A",
+      "interaction_depth": "N/A",
+      "js_rendering": "N/A",
+      "reliability": "N/A",
+      "setup_complexity": "N/A",
+      "speed": "N/A",
+      "token_efficiency": "N/A"
+    },
+    "skip_evidence": "results/2026-05-26/browser-use-agent/SKIPPED.md",
+    "skip_reason": "LLM_KEY_ABSENT",
+    "stages": {
+      "S1": "N/A",
+      "S2": "N/A",
+      "S3": "N/A",
+      "S4": "N/A",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    },
+    "status": "SKIPPED"
+  },
+  "browser-use-direct": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug"
+    },
+    "capability": "LLM-augmented",
+    "mode": "direct",
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 2,
+      "interaction_depth": 2,
+      "js_rendering": 10,
+      "reliability": 5,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "FAIL",
+      "S5": "FAIL",
+      "S6": "FAIL",
+      "S7": "FAIL",
+      "S8": "PASS"
+    }
+  },
+  "chrome-devtools": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug"
+    },
+    "capability": "tool-only",
+    "mode": "default",
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 2,
+      "interaction_depth": 0,
+      "js_rendering": 10,
+      "reliability": 5,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "FAIL",
+      "S5": "FAIL",
+      "S6": "FAIL",
+      "S7": "FAIL",
+      "S8": "FAIL"
+    }
+  },
+  "cloakbrowser": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {},
+    "capability": "stealth-specialist",
+    "mode": "sandbox-loopback",
+    "sandbox_only": true,
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 8,
+      "interaction_depth": 10,
+      "js_rendering": 10,
+      "reliability": 10,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS",
+      "S8": "PASS"
+    }
+  },
+  "firecrawl": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "data_quality": "env-mismatch",
+      "js_rendering": "env-mismatch"
+    },
+    "capability": "cloud",
+    "mode": "markdown",
+    "scores": {
+      "data_quality": 0,
+      "error_handling": 5,
+      "interaction_depth": "N/A",
+      "js_rendering": 2,
+      "reliability": 7,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "FAIL",
+      "S2": "FAIL",
+      "S3": "FAIL",
+      "S4": "N/A",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    }
+  },
+  "lightpanda": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "js_rendering": "tool-bug"
+    },
+    "capability": "js-light",
+    "mode": "default",
+    "scores": {
+      "data_quality": 7,
+      "error_handling": 5,
+      "interaction_depth": "N/A",
+      "js_rendering": 2,
+      "reliability": 9,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "FAIL",
+      "S3": "PASS",
+      "S4": "N/A",
+      "S5": "N/A",
+      "S6": "N/A",
+      "S7": "N/A",
+      "S8": "N/A"
+    }
+  },
+  "obscura": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {
+      "data_quality": "tool-bug",
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug",
+      "js_rendering": "tool-bug"
+    },
+    "capability": "stealth-specialist",
+    "mode": "no-stealth-flag",
+    "scores": {
+      "data_quality": 0,
+      "error_handling": 2,
+      "interaction_depth": 0,
+      "js_rendering": 2,
+      "reliability": 6,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "FAIL",
+      "S2": "FAIL",
+      "S3": "FAIL",
+      "S4": "FAIL",
+      "S5": "FAIL",
+      "S6": "FAIL",
+      "S7": "FAIL",
+      "S8": "FAIL"
+    }
+  },
+  "playwright": {
+    "attempts": {
+      "S1": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S2": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S3": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S4": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S5": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S6": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S7": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      },
+      "S8": {
+        "passes": 0,
+        "tag": null,
+        "total": 0
+      }
+    },
+    "attribution": {},
+    "capability": "tool-only",
+    "mode": "default",
+    "scores": {
+      "data_quality": 10,
+      "error_handling": 5,
+      "interaction_depth": 10,
+      "js_rendering": 10,
+      "reliability": 9,
+      "setup_complexity": 7,
+      "speed": 5,
+      "token_efficiency": 5
+    },
+    "stages": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS",
+      "S8": "PASS"
+    }
+  }
+}

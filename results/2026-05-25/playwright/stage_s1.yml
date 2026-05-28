@@ -1,0 +1,65 @@
+stage: S1
+mcp: playwright
+target: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+
+extraction_strategy: |
+  Greenhouse runs a Next.js SPA that on hydration tried to refetch from the
+  live backend (job-boards.greenhouse.io); when offline, it wipes the body
+  and renders "Page not found". So `browser_snapshot` after navigation is
+  unreliable. The reliable Playwright-native extraction path is
+  `browser_evaluate` with `fetch()` + `DOMParser` over the served HTML —
+  that bypasses React hydration and reads the raw SSR HTML the snapshot
+  server returned.
+
+job:
+  title: "Jane Testworth Program"
+  company: "Anthropic"
+  page_title_static: "Jane Testworth for Jane Testworth Program at Anthropic"
+  locations:
+    - "London, UK"
+    - "Ontario, CAN"
+    - "Remote-Friendly, Jane Testworth"
+    - "Jane Testworth, CA"
+  employment_type: "Full-time (inferred from body text — no explicit field)"
+  canonical_url: "https://job-boards.greenhouse.io/anthropic/jobs/5023394008"
+  og_url: "https://job-boards.greenhouse.io/anthropic/jobs/5023394008"
+
+requirements_summary: |
+  Mission-driven AI research fellowship. Four months full-time research with
+  mentorship. Cohorts run on rolling basis; this listing is for July 2026+
+  cohorts. Strong candidates: empirical research experience, ability to
+  ship a public output (paper / preprint). Open to applicants without prior
+  formal experience.
+
+section_headings:
+  - "Jane Testworth"
+  - "What to expect"
+  - "Interview process"
+  - "Compensation"
+  - "Fellows workstreams"
+  - "Across the workstreams, you may be a good fit if you:"
+  - "Strong candidates may also have:"
+  - "Candidates must be:"
+  - "Mentors, research areas, & past projects"
+  - "Unique candidate criteria"
+  - "Logistics"
+  - "How we're different"
+  - "Come work with us!"
+  - "Apply for this job"
+
+salary_band:
+  found: false
+  note: "Compensation H2 section present but no $-formatted band in the static HTML; likely rendered via JS template that did not run."
+
+apply_links:
+  external_bitly:
+    href: "https://bit.ly/afpsafety"
+    note: "Program-external apply link used 4 times in body copy."
+  inline_form_present: true
+  inline_form_anchor_h2: "Apply for this job"
+  inline_form_url_assumption: "Same URL — Greenhouse's standard inline form renders below the posting (S4 will verify)."
+
+notes:
+  - "Fixture content is scrubbed (Jane Testworth used as placeholder for real role names/blurbs)."
+  - "Apply buttons in static HTML: ['Apply', 'Submit application']."
+  - "After SPA hydration the visible DOM collapses to 'Page not found' (120 chars). Always extract from raw HTML for Greenhouse snapshots."
