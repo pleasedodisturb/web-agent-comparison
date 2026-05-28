@@ -109,7 +109,11 @@ navigate (30s): {"...","text":"Error: Event handler ...BrowserSession.on_Browser
 
 ## Upstream
 
-This bug is reportable to browser-use upstream (`browser-use/browser-use`). The minimal stdio reproducer above is sufficient for triage. Filing the issue is left as a manual follow-up; vendor courtesy disclosure was descoped from v1.0 to a follow-up wave.
+**Tracked at:** [`browser-use/browser-use#4846`](https://github.com/browser-use/browser-use/issues/4846) — open as of 2026-05-28. The original report (2026-05-16, browser-use 0.12.5/0.12.6 on Ubuntu + remote Edge via `--cdp-url`) describes the same symptom: `browser_navigate` returns a success string while `get_state`/`screenshot`/`list_tabs` fail with `Root CDP client not initialized` and `Expected at least one handler to return a non-None result`. Different platform, same MCP-mode failure shape.
+
+Our v1.0.1 [follow-up comment](https://github.com/browser-use/browser-use/issues/4846#issuecomment-4567226373) adds the env-LLM-key bisection finding (Anthropic and OpenAI both trigger the bug; env-scrubbed direct mode works on the same binary) and a raw-stdio reproducer that bypasses the MCP client entirely. The trigger appears to be browser-use's MCP startup path running some LLM-related pre-flight when it detects a key in env.
+
+**Status as of 2026-05-28:** issue open, awaiting maintainer triage. We'll revisit the score if a fix lands in a future browser-use release.
 
 ## Evidence files in this directory
 

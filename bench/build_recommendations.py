@@ -392,8 +392,10 @@ def _render_mcp_entry(
                 "without the harness via direct JSON-RPC to `browser-use --mcp` "
                 "— see `stdio_probe_evidence.log`. Same binary in **direct mode** "
                 "scores 5.87 with S1/S2/S3/S8 passing; the failure is gated on "
-                "env-LLM-key presence. Tool-bug attribution per FAIRNESS-06; "
-                "upstream issue filing is a manual follow-up."
+                "env-LLM-key presence. Tool-bug attribution per FAIRNESS-06. "
+                "Tracked upstream at "
+                "[browser-use/browser-use#4846](https://github.com/browser-use/"
+                "browser-use/issues/4846) — re-score if a fix ships."
             )
         lines.append("")
 

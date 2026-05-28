@@ -92,7 +92,7 @@ Does not graduate this wave. Documented reasons below; follow-up tickets noted i
 
 **Use for:** Do NOT graduate this wave. Composite **0.00** with `tool-bug` attribution per FAIRNESS-06 — browser-use 0.12.7's MCP-agent path is deterministically broken when an LLM key is in env. Same binary in **direct mode** scores 5.87. Detail below.
 
-**Headline finding (v1.0.1):** 30s `BrowserStartEvent` timeout on the first `browser_navigate` call when `OPENAI_API_KEY` (or `ANTHROPIC_API_KEY`) is set in env. Every CDP-dependent tool then errors with `Root CDP client not initialized`. Reproducible without the harness via direct JSON-RPC to `browser-use --mcp` — see `stdio_probe_evidence.log`. Same binary in **direct mode** scores 5.87 with S1/S2/S3/S8 passing; the failure is gated on env-LLM-key presence. Tool-bug attribution per FAIRNESS-06; upstream issue filing is a manual follow-up.
+**Headline finding (v1.0.1):** 30s `BrowserStartEvent` timeout on the first `browser_navigate` call when `OPENAI_API_KEY` (or `ANTHROPIC_API_KEY`) is set in env. Every CDP-dependent tool then errors with `Root CDP client not initialized`. Reproducible without the harness via direct JSON-RPC to `browser-use --mcp` — see `stdio_probe_evidence.log`. Same binary in **direct mode** scores 5.87 with S1/S2/S3/S8 passing; the failure is gated on env-LLM-key presence. Tool-bug attribution per FAIRNESS-06. Tracked upstream at [browser-use/browser-use#4846](https://github.com/browser-use/browser-use/issues/4846) — re-score if a fix ships.
 
 **Evidence:**
 - Per-MCP deep analysis — `results/2026-05-26/browser-use-agent/DEEP_ANALYSIS.md`
