@@ -105,22 +105,21 @@ Phases execute in numeric order: 1 → 2 → 3 → 4. Phases 2 and 3 are explici
 | 2. Per-MCP Scoring Runs | 7/7 | Complete (all 6 per-MCP runs + attribution audit; all 5 SCs PASS per `.planning/phases/02-per-mcp-scoring-runs/PHASE2_AUDIT.md`) | 2026-05-27 |
 | 3. Cross-Cutting Measurements | 5/5 | Complete (retroactive 03-VERIFICATION.md authored 2026-05-28 in Phase 5 P01 — `86ea408`) | 2026-05-27 |
 | 4. Synthesis | 6/6 | Complete | 2026-05-27 |
-| 5. Close v1.0 governance debt | 4/5 | In Progress|  |
+| 5. Close v1.0 governance debt | 5/5 | Complete (per `.planning/phases/05-close-v1-0-governance-debt-phase-3-verification-traceability/05-VERIFICATION.md` status=passed) | 2026-05-28 |
 
 ### Phase 5: Close v1.0 governance debt: Phase 3 verification + traceability sync
 
-**Goal:** Close the 5 non-blocking debt items from `.planning/v1.0-MILESTONE-AUDIT.md` so the milestone can be archived as `complete` instead of `tech_debt`. Items 1–4 are internal-codebase edits; item 5 (Linear closure) is documented as external follow-up.
-**Requirements**: governance only (no new MEAS-/REPORT-/FAIRNESS- requirements introduced)
+**Goal**: Close the 4 in-tree audit debt items from `.planning/v1.0-MILESTONE-AUDIT.md` — author the missing Phase 3 VERIFICATION.md, sweep the 31 stale Pending rows in REQUIREMENTS.md §Traceability to Complete, backfill the 3 missing Phase 4 plan SUMMARY.md files, and fix the 2-line recommendations.md date drift — without touching the sacrosanct scoring/.mcp.json invariants, so the milestone can be archived as `complete` rather than `tech_debt`. External Linear closure (G-703 + G-714..G-720 + G-721) is deferred to a manual follow-up per CONTEXT.md D-02.
+**Requirements**: (none — documentation-only governance-debt closure)
 **Depends on:** Phase 4
-**Plans:** 4/5 plans executed
+**Plans**: 5 plans
 
 Plans:
-
-- [x] 05-01-PLAN.md — Retroactive Phase 3 VERIFICATION.md (debt item #1) — closed 2026-05-28, `86ea408`
-- [x] 05-02-PLAN.md — Phase 4 SUMMARY.md backfill (04-01/02/03) (debt item #3)
-- [x] 05-03-PLAN.md — recommendations.md date-drift fix (debt item #4) — closed 2026-05-28, `37d4edd`
-- [x] 05-04-PLAN.md — REQUIREMENTS.md traceability sweep (debt item #2)
-- [ ] 05-05-PLAN.md — Phase 5 self-verification (05-VERIFICATION.md)
+- [x] 05-01-PLAN.md — Dispatch gsd-verifier against Phase 3 to author 03-VERIFICATION.md
+- [x] 05-02-PLAN.md — Backfill 04-01/04-02/04-03 plan-level SUMMARY.md files
+- [x] 05-03-PLAN.md — Fix recommendations.md date drift (2026-05-28 → 2026-05-27)
+- [x] 05-04-PLAN.md — Sweep REQUIREMENTS.md §Traceability (31 Pending → Complete)
+- [x] 05-05-PLAN.md — Self-verification (05-VERIFICATION.md) + ROADMAP close
 
 **Cross-cutting constraints:**
 
