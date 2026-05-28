@@ -309,7 +309,7 @@ def render_executive_summary() -> str:
     sandbox_n = len(TIER_ASSIGNMENTS["SANDBOX_ONLY"])
     skip_n = len(TIER_ASSIGNMENTS["SKIP"])
     return (
-        f"Of 7 MCP candidates evaluated 2026-05-28, **{primary_n} graduate to "
+        f"Of 7 MCP candidates evaluated 2026-05-27, **{primary_n} graduate to "
         f"PRIMARY**, **{secondary_n} to SECONDARY**, **{sandbox_n} SANDBOX-ONLY**, "
         f"and **{skip_n} are excluded (SKIP)** from the Stage-2 terminal-craft "
         "toolkit this wave. The 8 tier-row total reflects browser-use's "
@@ -547,7 +547,7 @@ def build_recommendations(scores_path: Path, out_path: Path) -> str:
     parts.append("# Stage 2 Graduation Recommendations")
     parts.append("")
     parts.append(
-        "> Evaluated as of 2026-05-28 with the locked 8-dimension rubric "
+        "> Evaluated as of 2026-05-27 with the locked 8-dimension rubric "
         "and the 7-MCP candidate list from `.mcp.json`. **Not intrinsic "
         "tool quality** — this is a snapshot of how each MCP performed on "
         "the S1-S8 fixture walk and the cross-cutting measurement suite "

@@ -1,10 +1,10 @@
 # Stage 2 Graduation Recommendations
 
-> Evaluated as of 2026-05-28 with the locked 8-dimension rubric and the 7-MCP candidate list from `.mcp.json`. **Not intrinsic tool quality** — this is a snapshot of how each MCP performed on the S1-S8 fixture walk and the cross-cutting measurement suite (MEAS-01/02/07/08/09). Re-run any time the harness ships or the candidate list changes; the recommendation is a function of the rubric + fixtures, not the MCPs alone.
+> Evaluated as of 2026-05-27 with the locked 8-dimension rubric and the 7-MCP candidate list from `.mcp.json`. **Not intrinsic tool quality** — this is a snapshot of how each MCP performed on the S1-S8 fixture walk and the cross-cutting measurement suite (MEAS-01/02/07/08/09). Re-run any time the harness ships or the candidate list changes; the recommendation is a function of the rubric + fixtures, not the MCPs alone.
 
 ## Executive Summary
 
-Of 7 MCP candidates evaluated 2026-05-28, **2 graduate to PRIMARY**, **3 to SECONDARY**, **1 SANDBOX-ONLY**, and **2 are excluded (SKIP)** from the Stage-2 terminal-craft toolkit this wave. The 8 tier-row total reflects browser-use's FAIRNESS-05 dual-mode contract (one candidate, two rows: direct + agent). Detailed scoring + per-MCP deep analysis + methodology + negative-results + 2026-03 → 2026-05 overlay live at [results/2026-05-27-mcp-comparison.md](2026-05-27-mcp-comparison.md). Tier assignments below are LOCKED per [`.planning/phases/04-synthesis/04-CONTEXT.md`](../.planning/phases/04-synthesis/04-CONTEXT.md) — this file does not re-litigate them, it publishes them with citations.
+Of 7 MCP candidates evaluated 2026-05-27, **2 graduate to PRIMARY**, **3 to SECONDARY**, **1 SANDBOX-ONLY**, and **2 are excluded (SKIP)** from the Stage-2 terminal-craft toolkit this wave. The 8 tier-row total reflects browser-use's FAIRNESS-05 dual-mode contract (one candidate, two rows: direct + agent). Detailed scoring + per-MCP deep analysis + methodology + negative-results + 2026-03 → 2026-05 overlay live at [results/2026-05-27-mcp-comparison.md](2026-05-27-mcp-comparison.md). Tier assignments below are LOCKED per [`.planning/phases/04-synthesis/04-CONTEXT.md`](../.planning/phases/04-synthesis/04-CONTEXT.md) — this file does not re-litigate them, it publishes them with citations.
 
 ## PRIMARY
 
