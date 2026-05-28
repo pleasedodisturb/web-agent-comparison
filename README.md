@@ -19,7 +19,8 @@ So we ran 7 of them on identical, frozen fixtures, scored every dimension that m
 | [firecrawl](https://github.com/firecrawl/firecrawl-mcp-server) | 4.23 | 171 ms | 🟡 SECONDARY | Cloud SSR scraping at scale (9× byte-count lift on Greenhouse) | Local/loopback fixtures (cloud rejects 127.0.0.1) and React SPAs (203 bytes on Ashby) |
 | [cloakbrowser](https://pypi.org/project/cloakbrowsermcp/) | **8.33** | 235 ms | 🔴 **SANDBOX-ONLY** | Public-fixture stealth research only | **Authenticated sessions** — closed-source binary touches cookies on launch |
 | [obscura](https://www.npmjs.com/package/obscura-mcp) | 3.27 | 158 ms | ⚫ SKIP | (nothing on macOS today — wait for the Linux A/B in our follow-up wave) | macOS production use — `Sec-CH-UA-Platform-*` leaks the real OS |
-| browser-use (agent mode) | SKIPPED | — | ⚫ SKIP | Re-runnable if you set an LLM key | — |
+
+> Browser-use is scored above in **direct mode** (no LLM key required, deterministic tool surface). Its **agent mode** (LLM-driven planning via `retry_with_browser_use_agent`) shipped SKIPPED in v1.0 — no LLM key was available in the autonomous executor session. It's being re-run as **v1.0.1** and will be added to this table when the 3-pass median lands. Tracked in [`results/2026-05-26/browser-use-agent/`](results/2026-05-26/browser-use-agent/).
 
 **One-line takeaway:** Pair Playwright (interactive) with Lightpanda (read-only). Reach for Firecrawl when you need cloud SSR at scale and your targets are publicly reachable. Treat Cloakbrowser as a research sandbox. Wait on Obscura until a Linux re-test lands.
 
