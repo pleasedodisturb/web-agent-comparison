@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: "governance debt: Phase 3 verification + traceability sync"
 status: executing
 stopped_at: "Phase 5 P03 complete (recommendations.md date-drift fix — debt item #4 closed)"
-last_updated: "2026-05-28T16:45:00.000Z"
+last_updated: "2026-05-28T16:39:24.886Z"
 last_activity: 2026-05-28
 progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 ## Current Position
 
 Phase: 5 (Close v1.0 governance debt: Phase 3 verification + traceability sync) — EXECUTING
-Plan: 4 of 5 (P03 closed 2026-05-28)
+Plan: 5 of 5 (P03 closed 2026-05-28)
 Status: Ready to execute
 Last activity: 2026-05-28
 
@@ -77,6 +77,7 @@ scores.json now has 8 rows: **cloakbrowser (8.33, NEW, SANDBOX-ONLY)**, playwrig
 | Phase 05 P01 | 25min | 1 task | 1 file (03-VERIFICATION.md retroactive) |
 | Phase Phase 05 PP02 | 30min | 3 tasks | 3 files |
 | Phase 05 P03 | 8min | 1 task | 2 files (bench/build_recommendations.py + results/recommendations.md; 2-line diff per D-13) |
+| Phase 05 P04 | 12 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -142,6 +143,7 @@ Recent decisions affecting current work:
 - [Phase 5 P01]: Retroactive Phase 3 VERIFICATION.md authored at `86ea408` — debt item #1 from `.planning/v1.0-MILESTONE-AUDIT.md` closed. Walked 5 SCs verbatim from ROADMAP.md L62-68 per D-04. Status: PASSED. 3 documented carry-forward partials per D-05 (firecrawl payload=0 env-mismatch, playwright cross-cut NO_EVIDENCE date-dir gap, token schema null absent-API-key) re-stated as documented partials — none demote PASS verdict because each carries explicit traceable cause + deferred-to-when and was propagated forward into Phase 4's Negative Results. Sacrosanct invariants unchanged from main (`git diff main -- scoring/score.py scoring/rubric.md .mcp.json` = 0 lines); pytest 309/309 baseline holds; wave_close_check returns all_pass=True. Format mirrors 04-VERIFICATION.md per gsd-verifier convention. Unblocks Plan 05-04 (REQUIREMENTS.md MEAS-* traceability sweep) per D-06.
 - [Phase ?]: Plan 05-02: Phase 4 SUMMARY.md backfill closed v1.0 audit debt item #3 (governance asymmetry). Three SUMMARY.md files (04-01/02/03) authored from commit history + 04-VERIFICATION.md evidence per D-11 (NO re-execution). Each mirrors 04-04-SUMMARY.md canonical template per D-10. Sacrosanct invariants unchanged; wave_close_check all_pass=True; pytest 309/309 baseline holds. Atomic commits: e4b8fe4 (04-01), 9e4ac01 (04-02), c728aec (04-03).
 - [Phase 5 P03]: recommendations.md date-drift fix closed v1.0 audit debt item #4. Two string literals in bench/build_recommendations.py (L312 executive-summary f-string + L550 title-blockquote) swapped 2026-05-28 → 2026-05-27 per D-12 (fix root cause in builder, not generated file). Regenerated results/recommendations.md via canonical CLI (python3 -m bench.build_recommendations --scores results/2026-05-26/scores.json --out results/recommendations.md); diff is exactly 4 entries (2 deletions + 2 additions on L3 + L7) per D-13. Sacrosanct invariants unchanged from main; pytest 309/309 baseline holds; wave_close_check all_pass=True. No test updates needed (tests/test_build_recommendations.py is date-agnostic). Commit: 37d4edd.
+- [Phase ?]: Plan 05-04: Status flips sourced exclusively from owning-phase VERIFICATION.md per D-07; SAFETY-03 locked-surface deferral flipped Complete since verifier marks it satisfied and D-09 admits no Deferred state
 
 ### Pending Todos
 
@@ -176,6 +178,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-28T16:45:00.000Z
+Last session: 2026-05-28T16:39:09.516Z
 Stopped at: Phase 5 P03 complete (recommendations.md date-drift fix — debt item #4 closed)
 Resume file: None
