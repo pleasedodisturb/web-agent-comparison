@@ -113,11 +113,13 @@ rmdir results/${TODAY}/<mcp>
 ### 5. Cleanup
 
 ```bash
-shred -u ~/.anth-key-tmp
-cp scripts/run_mcp_session.sh.macos-original scripts/run_mcp_session.sh
-rm scripts/run_mcp_session.sh.macos-original
-sudo docker image prune -f  # optional, recovers ~2 GB
+shred -u ~/.anth-key-tmp                          # remove transient key
+git checkout -- scripts/run_mcp_session.sh        # restore canonical harness
+rm -f scripts/run_mcp_session.sh.macos-original   # remove backup
+sudo docker image prune -f                        # optional, recovers ~2 GB
 ```
+
+`git checkout` is preferred over `cp` here so any other local edits to the harness raise a merge conflict instead of being silently overwritten.
 
 ## Per-MCP Linux notes
 

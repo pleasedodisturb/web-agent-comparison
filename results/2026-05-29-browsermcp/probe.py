@@ -41,15 +41,19 @@ def recv(proc):
     line = proc.stdout.readline()
     return json.loads(line) if line else None
 
-def call_tool(proc, msg_id, name, args=None, timeout_for_recv=None):
+def call_tool(proc, msg_id, name, args=None):
     send(proc, {"jsonrpc": "2.0", "id": msg_id, "method": "tools/call",
                 "params": {"name": name, "arguments": args or {}}})
     return recv(proc)
 
 def main():
+    # stderr is piped to a companion file so we can see vendor errors
+    # (e.g., the recursive server.close stack overflow on shutdown)
+    # without polluting the events log on stdout.
+    stderr_log = open("results/2026-05-29-browsermcp/probe.stderr.log", "w")
     proc = subprocess.Popen(
         ["mcp-server-browsermcp"],
-        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=stderr_log,
         text=True, bufsize=1,
     )
     try:
@@ -132,6 +136,10 @@ def main():
             proc.kill()
 
     finally:
+        try:
+            stderr_log.close()
+        except Exception:
+            pass
         print("\n\n=== EVENTS_JSON_BEGIN ===")
         print(json.dumps(events, indent=2, default=str))
         print("=== EVENTS_JSON_END ===")
