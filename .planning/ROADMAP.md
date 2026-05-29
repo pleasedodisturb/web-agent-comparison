@@ -51,7 +51,7 @@ Work is **horizontally layered** (mode: standard, granularity: standard): fixtur
   5. Sacrosanct triad audit (`bench/wave_close_check.py` — `scoring/score.py`, `scoring/rubric.md`, `.mcp.json`) reports `all_pass=True` with byte-for-byte hashes identical to v1.0 close (2026-05-28); no rubric column added for FAIRNESS-08..12 — fairness coverage is asserted via fixture-set composition, not new rubric dimensions.
 
 **Plans**: 12 plans (4 waves: Wave 0 prep × 1; Wave 1 captured × 3; Wave 2 synthetic × 3; Wave 3 framework variants × 4; Wave 4 finalize × 1)
-- [ ] 06-00-PLAN.md — Wave 0 test infrastructure + shared data.json + stage_walk preamble
+- [x] 06-00-PLAN.md — Wave 0 test infrastructure + shared data.json + stage_walk preamble
 - [ ] 06-01-PLAN.md — Wave 1 Wikipedia capture (S13/14/15/21/22)
 - [ ] 06-02-PLAN.md — Wave 1 HN pagination capture (S16)
 - [ ] 06-03-PLAN.md — Wave 1 DDG + Brave SERP capture (S12) — human-verify before commit
@@ -194,7 +194,7 @@ Stealth axis additions (Phase 10) live **alongside** the composite, never inside
 | 3. Cross-Cutting Measurements                        | v1.0      | 5/5            | Complete    | 2026-05-27 |
 | 4. Synthesis                                         | v1.0      | 6/6            | Complete    | 2026-05-27 |
 | 5. Close v1.0 governance debt                        | v1.0      | 5/5            | Complete    | 2026-05-28 |
-| 6. Fixture authoring (S9-S26)                        | v1.1      | 0/0            | Not started | -          |
+| 6. Fixture authoring (S9-S26)                        | v1.1      | 1/12 | In Progress|  |
 | 7. Harness portability + Linux v1.0 baseline         | v1.1      | 0/0            | Not started | -          |
 | 8. Re-validate v1.0 candidates on v1.1 fixtures      | v1.1      | 0/0            | Not started | -          |
 | 9. BrowserMCP candidate decision (G-744)             | v1.1      | 0/0            | Not started | -          |
