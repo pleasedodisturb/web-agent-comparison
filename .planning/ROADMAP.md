@@ -50,7 +50,19 @@ Work is **horizontally layered** (mode: standard, granularity: standard): fixtur
   4. `prompts/stage_walk.md` v1.1 extension contains S9-S26 prompt cells with read-vs-drive parity at ~50/50 (DESIGN-01); FIXTURE-08 (S16 pagination) prompt explicitly requires state across ≥3 pages (DESIGN-02); FIXTURE-11+12 prompt pair (S19 fill / S20 recover) exercises the form-error-recovery muscle in a single transcript.
   5. Sacrosanct triad audit (`bench/wave_close_check.py` — `scoring/score.py`, `scoring/rubric.md`, `.mcp.json`) reports `all_pass=True` with byte-for-byte hashes identical to v1.0 close (2026-05-28); no rubric column added for FAIRNESS-08..12 — fairness coverage is asserted via fixture-set composition, not new rubric dimensions.
 
-**Plans**: TBD
+**Plans**: 12 plans (4 waves: Wave 0 prep × 1; Wave 1 captured × 3; Wave 2 synthetic × 3; Wave 3 framework variants × 4; Wave 4 finalize × 1)
+- [ ] 06-00-PLAN.md — Wave 0 test infrastructure + shared data.json + stage_walk preamble
+- [ ] 06-01-PLAN.md — Wave 1 Wikipedia capture (S13/14/15/21/22)
+- [ ] 06-02-PLAN.md — Wave 1 HN pagination capture (S16)
+- [ ] 06-03-PLAN.md — Wave 1 DDG + Brave SERP capture (S12) — human-verify before commit
+- [ ] 06-04-PLAN.md — Wave 2 synthetic e-commerce PDP + cart + verify (S9-S11)
+- [ ] 06-05-PLAN.md — Wave 2 synthetic auth-walled login + dashboard (S17-S18)
+- [ ] 06-06-PLAN.md — Wave 2 synthetic complex form fill + recovery (S19-S20)
+- [ ] 06-07-PLAN.md — Wave 3 vanilla framework variant baseline (S26) — establishes DOM contract
+- [ ] 06-08-PLAN.md — Wave 3 Vue 3 + Vite variant (S25) — Wave 3 package-legitimacy gate
+- [ ] 06-09-PLAN.md — Wave 3 SvelteKit + adapter-static variant (S24)
+- [ ] 06-10-PLAN.md — Wave 3 Next.js output:export variant + Client Component hydration marker (S23, FAIRNESS-09)
+- [ ] 06-11-PLAN.md — Wave 4 finalize: append S9-S26 cells to stage_walk.md, defer FAIRNESS-11, phase-close audit
 **UI hint**: no
 
 ### Phase 7: Harness portability + Linux v1.0 baseline
