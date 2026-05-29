@@ -1,0 +1,1 @@
+Source dropdown unreachable: cascades from S4 — no React Select combobox in the 404 DOM. Worth noting: BrowserMCP exposes no `evaluate`/`run_code` tool either, so even if the combobox were present, the documented Greenhouse fallback (driving React state via JS evaluation) would also be unavailable; only the type+Enter pattern would remain.

@@ -87,6 +87,6 @@ echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":
 # → "Obscura CDP client is not connected" on any tool call
 ```
 
-## Upstream filing recommendation
+## Upstream filing
 
-This is reportable to whichever upstream maintains the obscura engine binary (the `dist/bin/obscura` ELF — separate from the `obscura-mcp` npm wrapper). Per the v1.0 STACK research, the engine source is at `github.com/h4ckf0r0day/obscura`. Issue filing is **not done in this patch** (vendor courtesy disclosure remains G-710-deferred) but the minimal reproducer above is sufficient for triage when filed.
+**Filed 2026-05-29 as [h4ckf0r0day/obscura#197](https://github.com/h4ckf0r0day/obscura/issues/197)** — includes the bisection, environment details, and the minimal reproducer above. The npm wrapper repo (`Metadrama/obscura-mcp`) is a thin client around this engine and was not cross-filed; the bug is in the engine binary itself.

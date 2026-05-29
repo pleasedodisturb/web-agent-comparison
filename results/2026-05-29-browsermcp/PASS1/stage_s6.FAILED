@@ -1,0 +1,1 @@
+Resume upload unreachable: cascades from S4 — no `<input type="file">` exists in the post-hydration 404 DOM; BrowserMCP's surface (no `browser_file_upload` primitive at all in this MCP) could not have completed the upload even with the form present.

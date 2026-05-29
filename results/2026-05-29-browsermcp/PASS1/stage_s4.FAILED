@@ -1,0 +1,1 @@
+Apply form unreachable: Greenhouse SSR HTML embeds `<form id="application-form">` but Chrome's JS execution refetches the job, fails locally, and replaces the entire DOM with a 404 view; BrowserMCP exposes no JS-disable or raw-HTML surface to recover the SSR form.

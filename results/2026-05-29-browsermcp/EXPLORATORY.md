@@ -27,7 +27,7 @@ So this is an **exploratory probe**, not a v1.0 row. It captures empirical data 
 | **Connection-fragility claim from 2026-04 NOT reproduced** | The previous app-level wave noted "disconnected mid-test." During this probe's ~6-second walk, zero disconnects observed. Sample size is small — fragility may surface on longer runs. |
 | **Operational model: WebSocket on port 9009** | The MCP server binds `127.0.0.1:9009`; the Chrome extension's "Connect" button initiates the WebSocket handshake. The server kills any prior process on 9009 on startup — re-running `mcp-server-browsermcp` requires the extension to Disconnect → Connect to re-pair. |
 | **Output model: YAML accessibility tree, not raw HTML** | BrowserMCP's `browser_snapshot` returns an a11y tree formatted as YAML (e.g., `link "anthropic/" [ref=s1e10]`). Tools use `element + ref` interaction (similar to Playwright's accessibility API), not CSS selectors. **This is a real methodology divergence from v1.0 MCPs** — direct comparison against `data_quality` would require either normalizing outputs or expanding the rubric. |
-| **Node-side stack-overflow bug discovered** | When `mcp-server-browsermcp` shuts down without a Chrome connection, `server.close` recurses infinitely → `RangeError: Maximum call stack size exceeded`. Reproducible deterministically. Affects clean exit but not steady-state operation. Worth flagging upstream. |
+| **Node-side stack-overflow bug discovered (already filed)** | When `mcp-server-browsermcp` shuts down, `server.close` recurses infinitely → `RangeError: Maximum call stack size exceeded`. Same bug already documented at [browsermcp/mcp#163](https://github.com/browsermcp/mcp/issues/163) by Cyberneticsplus; we added an [independent reproducer comment](https://github.com/browsermcp/mcp/issues/163#issuecomment-4573363335). Affects clean exit but not steady-state operation. |
 | **Operator's REAL Chrome TLS fingerprint captured (gold for #11/G-739)** | Because BrowserMCP drives the operator's actual Chrome, navigating to `tools.scrapfly.io/api/fp/ja3?extended=1` and reading the response captures the production-baseline TLS handshake. See `tls_fingerprint.json`. |
 
 ## Tool surface
@@ -63,26 +63,31 @@ Critically, **GREASE values are present** (`0x5A5A` in cipher list, `GREASE-4865
 
 **This is the baseline for #11 / G-739** (TLS fingerprint capture per MCP). When other MCPs claim "real Chrome" stealth, their `ja4_hash` should match `3fc5444b6956` or very close. Anything substantially different is a different TLS stack regardless of marketing claims.
 
-## How would BrowserMCP score on the rubric (if we ran it formally)?
+## How would BrowserMCP score on the rubric (single harness pass, 2026-05-29)
 
-This is not done in v1.0.x — it would require either including BrowserMCP in the candidate set (changes the 7-MCP framing) or running it as an explicit 8th row with an `extension-attached` capability tag. Both decisions belong to v1.1, not v1.0.x.
+**v1.0.3 update**: ran the actual v1.0 harness against BrowserMCP and computed a real composite. This is a single-pass result (not 3-pass median per FAIRNESS-01) so reliability is estimated; the per-dim scores below come from the harness evidence in `PASS1/`.
 
-**Speculative rough scoring** based on the exploratory data, NOT to be cited as a real composite:
+| Dim | Weight | Score | Reasoning (from `PASS1/transcript.md`) |
+|-----|------:|------:|--------------------|
+| Data Quality | 3× | **6** | S1 PARTIAL_VIA_MCP + S2 EMPTY_BY_DESIGN (Ashby React hydration wipe — same as Playwright, chrome-devtools) + S3 OK |
+| Reliability | 3× | **7** | Single-pass; no flakiness observed during the run. 3-pass median would refine; bumped from speculative 6 because connection-fragility from 2026-04 did NOT reproduce |
+| Speed | 2× | **9** | Sub-100ms per tool call against loopback; real-Chrome native perf |
+| Token Efficiency | 2× | **7** | Clean YAML accessibility tree; structurally tighter than raw HTML, less compact than Firecrawl's markdown |
+| Interaction Depth | 2× | **2** | S4 FAILED (React app's failed re-fetch wipes DOM with 404), S5-S7 cascaded, S6 categorically N/A (no file_upload primitive), only S8 (screenshot) worked in the interactive set |
+| JS Rendering | 1× | **10** | Real Chrome IS the JS rendering engine — full hydration support |
+| Setup Complexity | 1× | **3** | Requires Chrome Agent profile + extension install + tab pre-bound. The Chrome Agent profile script (`~/.claude/scripts/chrome-agent.sh`) auto-reconnects but does NOT work on remote/CI runners |
+| Error Handling | 1× | **5** | Clear "No connection to browser extension" messages; but the recursive-close bug (browsermcp/mcp#163) shows internal error handling is brittle |
 
-| Dim | Score | Reasoning |
-|-----|------:|-----------|
-| Data Quality | ~8 | Accessibility-tree output is structurally clean, lossless of semantic info, more LLM-friendly than raw HTML. |
-| Reliability | ~6 | Connection-fragility risk noted in 2026-04 prior wave; not reproduced here but sample size is N=1 probe. Stack-overflow shutdown bug. |
-| Speed | ~9 | Sub-100ms per tool call against loopback. Real Chrome native perf. |
-| Token Efficiency | ~7 | YAML a11y tree is more verbose than Firecrawl's clean-markdown but tighter than raw HTML. |
-| Interaction Depth | ~6 | 12 tools, no batch-fill, no file upload. S5 form fill via `browser_type` + `browser_press_key` should work; S6 categorically N/A. |
-| JS Rendering | ~10 | It IS real Chrome; React/SPA rendering is trivially the user's Chrome's responsibility. |
-| Setup Complexity | ~3 | Requires Chrome Agent profile launcher script + extension install + manual Connect click. NOT a self-contained `.mcp.json` setup. |
-| Error Handling | ~5 | Clear error messages ("No connection to browser extension..."), but the recursive-close bug suggests internal error handling is fragile. |
+**Composite calculation:** `(6×3 + 7×3 + 9×2 + 7×2 + 2×2 + 10×1 + 3×1 + 5×1) / 15 = 93 / 15 = **6.20**`
 
-**Estimated composite (NOT official):** ~ (8×3 + 6×3 + 9×2 + 7×2 + 6×2 + 10×1 + 3×1 + 5×1) / 15 = (24+18+18+14+12+10+3+5) / 15 = 104 / 15 = **6.93**
+**Where this would slot** (if added to the 7-MCP table, which we are NOT doing in v1.0.x):
+- Above firecrawl (4.23), chrome-devtools (5.60), browser-use-direct (5.87)
+- Below lightpanda (6.31 N/A-aware), playwright (7.93)
+- Same tier as **SECONDARY** in v1.0's recommendation matrix
 
-This would slot BrowserMCP in the **SECONDARY tier**, above browser-use-direct (5.87) but below Playwright (7.93) and Lightpanda (6.31 N/A-aware). The trust model (your Chrome, your tabs) makes it the **only correct choice for authenticated personal sessions** — but the operational model (must launch Chrome + click Connect) makes it impractical for any scenario where the operator isn't present.
+**Note on the prior speculative score (~6.93):** my original rough estimate over-weighted Interaction Depth (assumed S5 form-fill would work via `browser_type` + `browser_press_key`). In the actual harness pass, the Greenhouse React app re-fetches the job from a non-existent backend URL, fails, and replaces the SSR DOM with a 404 view BEFORE S5 can try the form. This isn't a BrowserMCP-specific bug — Playwright, chrome-devtools, browser-use would all hit the same wall — but BrowserMCP lacks `browser_evaluate` / request-interception / JS-disable to work around it. **Real composite is 6.20, not 6.93.**
+
+The trust model (your Chrome, your tabs) makes BrowserMCP the **only correct choice for authenticated personal sessions** — but the operational model (must launch Chrome + click Connect) makes it impractical for any scenario where the operator isn't present.
 
 ## What we did NOT test in this probe
 
