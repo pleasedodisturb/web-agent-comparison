@@ -51,7 +51,7 @@
 - [ ] **FAIRNESS-08**: Rendering archetype coverage — fixture set includes at least one each of classic server-rendered HTML (S15 from v1.0 baseline), React 18 / Next.js SSR-with-hydration (S23), SvelteKit (S24), Vue 3 SPA (S25), vanilla static (S26)
 - [ ] **FAIRNESS-09**: Workload coverage — each new fixture exercises at least one rubric dimension that S1-S8 does not stress, or stresses it in a categorically different way (table extraction ≠ form extraction even if both score Data Quality)
 - [ ] **FAIRNESS-10**: No MCP-specific bias — no fixture may be selected because it is known to favor any one v1.0 MCP; firecrawl's SSR strength does not exempt the set from including hard JS fixtures
-- [ ] **FAIRNESS-11**: Internationalization — at least one non-English fixture and at least one fixture with non-ASCII characters in extracted fields *(stretch — cut to v1.2 if scope tight)*
+- [~] **FAIRNESS-11**: Internationalization — at least one non-English fixture and at least one fixture with non-ASCII characters in extracted fields. **Deferred to v1.2** per Phase 6 CONTEXT.md D-15 (2026-05-29 discuss-phase decision). v1.1's report carries an explicit "i18n not measured — see v1.2" callout.
 - [ ] **FAIRNESS-12**: Semantic vs div-soup — at least one fixture with rich ARIA + semantic HTML5 and at least one intentionally div-soup; MCPs that lean on accessibility tree should be measurably better on the first
 
 ### Reproducibility (continued from v1.0)
