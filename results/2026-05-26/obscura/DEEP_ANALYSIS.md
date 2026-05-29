@@ -7,6 +7,8 @@
 **Run dates:** 2026-05-26 (all 3 passes within a 15-minute window, 20:07–20:22 UTC)
 **Linear ticket:** G-718 (obscura sub-ticket of G-703)
 
+> **v1.0.2 cross-platform follow-up (2026-05-29):** Re-tested on Linux x86_64 with `--stealth` enabled (which is suppressed on macOS per SAFETY-03 — see § "Stealth flag suppression"). Result was **not** a comparable composite: the `obscura serve` engine has a phantom-listener bug on Linux that prevents CDP startup entirely. The macOS 3.27 above stands; Linux is N/A pending vendor fix. Full bisection: [`../../2026-05-29-linux/obscura/DEEP_ANALYSIS.md`](../../2026-05-29-linux/obscura/DEEP_ANALYSIS.md). Tracked at [`#9`](https://github.com/pleasedodisturb/web-agent-comparison/issues/9) / [G-737](https://linear.app/abandoned-yachts/issue/G-737).
+
 ## Capability tag
 
 `stealth-specialist` — obscura's market positioning and architectural choice is anti-detection: a CDP-direct (not Playwright-on-CDP) engine intended for scraping behind bot-detection layers. Same category as `cloakbrowser`; distinct from `playwright` / `chrome-devtools` (`tool-only`), `browser-use-agent` (`LLM-augmented`), and `firecrawl` (`cloud`).

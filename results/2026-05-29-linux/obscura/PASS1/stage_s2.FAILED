@@ -1,0 +1,1 @@
+S2 FAILED: Obscura CDP browser tools (browse_page/browse_interact/browse_session) return "CDP client is not connected" — engine logs "listening on ws://127.0.0.1:9222" but never binds the port; browse_scrape refuses loopback ("private/internal IP 127.0.0.1 not allowed"). Could not navigate/extract Ashby SPA fixture.

@@ -1,0 +1,18 @@
+<stdin>:4: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+# Direct stdio probe — browser-use 0.12.7 --mcp with OPENAI_API_KEY
+# Bypasses harness + Claude Code session. Tests browser-use binary in isolation.
+# Date: 2026-05-28T18:41:52.334765Z
+# Env: OPENAI_API_KEY set (len=164, sk-proj-... format)
+
+>>> initialize
+<<< {"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"browser-use","version":"0.1.0"}}}
+
+>>> tools/call browser_navigate http://127.0.0.1:8765/
+<<< [30.0s] {"jsonrpc":"2.0","id":2,"result":{"content":[{"type":"text","text":"Error: Event handler browser_use.browser.watchdog_base.BrowserSession.on_BrowserStartEvent#9472(?▶ BrowserStartEvent#6b37 🏃) timed out after 30.0s and interrupted any processing of 1 child events"}],"isError":false}}
+
+>>> tools/call browser_get_state
+<<< {"jsonrpc":"2.0","id":3,"result":{"content":[{"type":"text","text":"Error: Expected at least one handler to return a non-None result, but none did! ?▶ BrowserStateRequestEvent#86f5 ✅ -> {'4532655440.4534765168': browser_use.browser.watchdog_base.DownloadsWatchdog.on_BrowserStateRequestEvent#5168() ✅, '4532655440.4534776432': browser_use.browser.watchdog_base.DOMWatchdog.on_BrowserStateRequestEvent#6432() ✅}"}],"isError":false}}
+
+# CONCLUSION: BrowserStartEvent timeout fires after ~30s.
+# browser-use --mcp does not start its browser when an LLM key is in env.
+# Same binary in v1.0 direct mode (no LLM key) completes S1/S2/S3/S8 successfully.

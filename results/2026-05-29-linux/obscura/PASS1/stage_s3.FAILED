@@ -1,0 +1,1 @@
+S3 FAILED: No S1/S2 snapshots were ever obtained (CDP engine never bound port 9222; browse_scrape blocks loopback), so there is nothing to compare for platform detection.

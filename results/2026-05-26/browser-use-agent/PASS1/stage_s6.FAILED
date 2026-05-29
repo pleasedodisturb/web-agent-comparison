@@ -1,0 +1,1 @@
+browser-use MCP exposes no file_upload primitive in its 0.12.x tool surface, and the underlying browser is unreachable anyway (CDP not initialized).

@@ -15,7 +15,7 @@ Seven browser-automation MCP servers measured against an identical 8-stage job-a
 - `chrome-devtools` — **5.60**
 - `firecrawl` — **4.23**
 - `obscura` — **3.27**
-- `browser-use-agent` — **SKIPPED** — SKIPPED (LLM_KEY_ABSENT)
+- `browser-use-agent` — **0.00**
 
 **Stage 2 graduation tier preview** (see `recommendations.md` for full rationale):
 
@@ -23,8 +23,6 @@ Seven browser-automation MCP servers measured against an identical 8-stage job-a
 - **SECONDARY** (situational / fallback): `browser-use-direct`, `chrome-devtools`, `firecrawl`
 - **SANDBOX-ONLY**: `cloakbrowser` (closed-binary trust model is the binding constraint, not the score)
 - **SKIP** (do not graduate this wave): `obscura`, `browser-use-agent`
-
-**Partial-run disclosure (REPORT-09):** browser-use-agent SKIPPED — the report does NOT silently emit an N/M score in the composite. For `browser-use-agent` the skip reason is `LLM_KEY_ABSENT`; the re-run procedure is documented in `results/2026-05-26/browser-use-agent/SKIPPED.md`. See § Negative Results for full disclosure of all partial / environment-conditioned outcomes.
 
 
 ## Methodology disclaimer
@@ -69,7 +67,7 @@ Eight-dimension N/A-aware composite. Cell legend: `N/A` for categorically-inappl
 | `chrome-devtools` | tool-only | 10 | 5 | 5 | 5 | 0 | 10 | 7 | 2 | **5.60** | — |
 | `firecrawl` | cloud | 0 | 7 | 5 | 5 | N/A | 2 | 7 | 5 | **4.23** | — |
 | `obscura` | stealth-specialist | 0 | 6 | 5 | 5 | 0 | 2 | 7 | 2 | **3.27** | stability: COMPLETED ⚠ transport-only (Phase 2 semantic-output FAIL stands) |
-| `browser-use-agent` | LLM-augmented | — | — | — | — | — | — | — | — | **SKIPPED** | SKIPPED (LLM_KEY_ABSENT) |
+| `browser-use-agent` | LLM-augmented | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0.00** | — |
 
 ## Stage Matrix (REPORT-02)
 
@@ -85,7 +83,7 @@ Per-stage outcomes across the 8-stage job-application pipeline. `N/A` (categoric
 | `chrome-devtools` | PASS | PASS | PASS | FAIL | FAIL | FAIL | FAIL | FAIL | SCORED |
 | `firecrawl` | FAIL | FAIL | FAIL | N/A | N/A | N/A | N/A | N/A | SCORED |
 | `obscura` | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | SCORED |
-| `browser-use-agent` | SKIPPED | SKIPPED | SKIPPED | SKIPPED | SKIPPED | SKIPPED | SKIPPED | SKIPPED | SKIPPED |
+| `browser-use-agent` | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | FAIL | SCORED |
 
 **Cell legend:** `PASS` = stage attempted and met success criteria; `FAIL` = stage attempted but criteria unmet; `PARTIAL` = partial / degraded; `N/A` = categorically inapplicable (e.g. read-only MCP × interactive stage); `UNTESTED` = stage exists in schema but no measurement taken; `SKIPPED` = entire row skipped at the harness level (see row-status column).
 
@@ -618,53 +616,7 @@ later session), the falsifiable test for agent mode is:
 
 **Status:** SKIPPED (reason: `LLM_KEY_ABSENT`). The harness can spawn the browser-use `--mcp` server in agent mode (the initialize handshake does not consume LLM keys) but cannot exercise the agent-driven planning path without an OpenAI or Anthropic key. Below is the SKIPPED narrative lifted verbatim from `results/2026-05-26/browser-use-agent/SKIPPED.md`.
 
-### browser-use-agent — SKIPPED (LLM API key absent)
-
-- **reason:** LLM_KEY_ABSENT
-- **attempted_command:** `bash scripts/run_mcp_session.sh browser-use` (with
-  intent to spawn browser-use's --mcp server in agent mode; the harness's
-  Claude session would call browser-use's tool surface, which internally
-  invokes an LLM via OPENAI_API_KEY / ANTHROPIC_API_KEY for action planning)
-- **error_excerpt:** "No OPENAI_API_KEY or ANTHROPIC_API_KEY with non-empty
-  value present in env; cannot test agent mode."
-- **linear_ticket:** G-715 (browser-use sub-ticket of G-703)
-- **partial_evidence_path:** results/2026-05-26/browser-use-direct/  (direct
-  mode IS scored — 3-pass median composite 5.87/10)
-- **diagnosis:**
-  Per plan 02-05 Task 2 and CONTEXT.md `## Decisions § Claude's Discretion`,
-  the harness allows BYO key via env. On this host (2026-05-26), the env
-  contains `OPENAI_API_KEY=<empty>` and `ANTHROPIC_API_KEY=<unset>` —
-  zero-length sentinels that signal "intentionally not provided." rbw (the
-  Bitwarden CLI) is locked, and the autonomous executor cannot prompt the
-  user for unlock. The plan explicitly anticipates this branch:
-  > If `HAS_LLM_KEY == 0`: write SKIPPED.md for the agent row, complete
-  > row for direct mode.
-- **what was verified before skipping:**
-  - browser-use initialize handshake works in both modes (see
-    `init_smoke.json`) — HANDOFF-GSD-AUTO STOP #2 is CONFIRMED FIXED in
-    v0.12.7. The 2026-05-21 testbench's `initialize` timeout no longer
-    reproduces. This is the headline empirical re-test required by the plan.
-  - `bench.tools_inventory browser-use --out ...` returns
-    `status=OK, tool_count=16` within ~7s with EITHER empty or unset
-    OPENAI_API_KEY/ANTHROPIC_API_KEY. The LLM key is consumed only when
-    an agent-driven tool call is invoked (extract / agent-planning), NOT
-    at the MCP handshake. So the harness can spawn the server but cannot
-    exercise the agent-mode code path.
-- **what a follow-up run would need to do:**
-  1. Unlock rbw: `rbw unlock` (requires interactive password)
-  2. Retrieve a real LLM key, e.g. `rbw get "Anthropic API"` (or OpenAI
-     equivalent), export ANTHROPIC_API_KEY=... in the spawning shell
-  3. Re-run plan 02-05 Task 2 against THIS evidence directory
-  4. The expected outcome (per research/SUMMARY.md): agent mode should
-     outperform direct mode on S4-S8 form-handling via browser-use's
-     internal LLM-driven `retry_with_browser_use_agent` escape hatch
-- **scores.json row treatment:** marked `status: SKIPPED` so the
-  N/A-aware composite excludes it (does not count as 0/10 — that's
-  reserved for actually-attempted-and-failed runs per the SKIPPED.md
-  pattern documented in CONTEXT.md `## Decisions § SKIPPED.md Pattern`)
-- **FAIRNESS-05 contract:** preserved. scores.json still contains BOTH
-  `browser-use-direct` AND `browser-use-agent` rows. The agent row is
-  SKIPPED-with-reason rather than absent.
+_SKIPPED.md not found at `results/2026-05-26/browser-use-agent/SKIPPED.md`._
 
 
 ## chrome-devtools — Deep Analysis (2026-05-26)

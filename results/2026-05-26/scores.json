@@ -42,32 +42,41 @@
         "total": 0
       }
     },
-    "attribution": {},
+    "attribution": {
+      "data_quality": "tool-bug",
+      "error_handling": "tool-bug",
+      "interaction_depth": "tool-bug",
+      "js_rendering": "tool-bug",
+      "reliability": "tool-bug",
+      "setup_complexity": "tool-bug",
+      "speed": "tool-bug",
+      "token_efficiency": "tool-bug"
+    },
+    "bug_evidence": "results/2026-05-26/browser-use-agent/DEEP_ANALYSIS.md",
+    "bug_summary": "browser-use 0.12.7 --mcp: 30s BrowserStartEvent timeout when LLM key in env. Reproducible without harness (see stdio_probe_evidence.log). Direct mode (env scrubbed) works in same binary.",
     "capability": "LLM-augmented",
     "mode": "agent",
     "scores": {
-      "data_quality": "N/A",
-      "error_handling": "N/A",
-      "interaction_depth": "N/A",
-      "js_rendering": "N/A",
-      "reliability": "N/A",
-      "setup_complexity": "N/A",
-      "speed": "N/A",
-      "token_efficiency": "N/A"
+      "data_quality": 0,
+      "error_handling": 0,
+      "interaction_depth": 0,
+      "js_rendering": 0,
+      "reliability": 0,
+      "setup_complexity": 0,
+      "speed": 0,
+      "token_efficiency": 0
     },
-    "skip_evidence": "results/2026-05-26/browser-use-agent/SKIPPED.md",
-    "skip_reason": "LLM_KEY_ABSENT",
     "stages": {
-      "S1": "N/A",
-      "S2": "N/A",
-      "S3": "N/A",
-      "S4": "N/A",
-      "S5": "N/A",
-      "S6": "N/A",
-      "S7": "N/A",
-      "S8": "N/A"
+      "S1": "FAIL",
+      "S2": "FAIL",
+      "S3": "FAIL",
+      "S4": "FAIL",
+      "S5": "FAIL",
+      "S6": "FAIL",
+      "S7": "FAIL",
+      "S8": "FAIL"
     },
-    "status": "SKIPPED"
+    "status": "scored"
   },
   "browser-use-direct": {
     "attempts": {

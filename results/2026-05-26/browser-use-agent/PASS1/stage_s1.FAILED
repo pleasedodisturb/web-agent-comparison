@@ -1,0 +1,1 @@
+browser_navigate returns success but no session is created; browser_get_state, browser_get_html, browser_screenshot all error with "Root CDP client not initialized". Cannot read the Greenhouse page.

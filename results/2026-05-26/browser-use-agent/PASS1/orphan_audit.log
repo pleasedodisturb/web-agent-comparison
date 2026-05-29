@@ -1,0 +1,11 @@
+# orphan_audit run at 2026-05-28T18:34:09Z
+BEFORE_PATH=results/2026-05-28/browser-use/.ps_before.tsv
+AFTER_PATH=results/2026-05-28/browser-use/.ps_after.tsv
+TARGET_PGID=71504
+BEFORE_COUNT=759
+AFTER_COUNT=765
+DIFF_COUNT=2
+KILLED pid=20366 pgid=20365 cmd=/Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Versions/148.0.7778.179/Helpers/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --database=/Users/pleasedodisturb/Library/Application Support/Google/Chrome/Crashpad --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=OS X --annotation=prod=Chrome_Mac --annotation=ver=148.0.7778.179 --handshake-fd=5
+GONE pid=27256 pgid=71348 cmd=/Users/pleasedodisturb/Projects/web-agent-comparison/.venv/bin/python -m bench.orphan_audit --snapshot-only results/2026-05-28/browser-use/.ps_after.tsv
+KILLED_COUNT=1
+ORPHANS=2

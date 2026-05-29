@@ -141,11 +141,10 @@ USE_FOR_RATIONALES: dict[str, str] = {
         "A/B."
     ),
     "browser-use-agent": (
-        "Do NOT graduate this wave. SKIPPED with reason "
-        "`LLM_KEY_ABSENT` (no OPENAI_API_KEY / ANTHROPIC_API_KEY in "
-        "the autonomous executor's env, rbw locked). The agent-mode "
-        "code path is measurable but was not exercised. Revisit when "
-        "an LLM key is available."
+        "Do NOT graduate this wave. Composite **0.00** with `tool-bug` "
+        "attribution per FAIRNESS-06 — browser-use 0.12.7's MCP-agent "
+        "path is deterministically broken when an LLM key is in env. "
+        "Same binary in **direct mode** scores 5.87. Detail below."
     ),
 }
 
@@ -186,7 +185,10 @@ EVIDENCE_LINKS: dict[str, list[str]] = {
         "(../docs/external-findings/browser-tools-2026-05-21.md) § SAFETY-03",
     ],
     "browser-use-agent": [
-        "Skip evidence + re-run procedure — `results/2026-05-26/browser-use-agent/SKIPPED.md`",
+        "Per-MCP deep analysis — `results/2026-05-26/browser-use-agent/DEEP_ANALYSIS.md`",
+        "Raw stdio reproducer (no harness) — `results/2026-05-26/browser-use-agent/stdio_probe_evidence.log`",
+        "v1.0.1 harness pass — `results/2026-05-26/browser-use-agent/PASS1/transcript.md`",
+        "v1.0 SKIPPED baseline (sequestered) — `results/2026-05-26/browser-use-agent/_SKIPPED_20260528T180853Z/SKIPPED.md`",
         "Phase 2 audit — `results/2026-05-26/PHASE2_AUDIT.md`",
     ],
 }
@@ -238,7 +240,7 @@ _HARDCODED_COMPOSITES: dict[str, str] = {
     "firecrawl": "4.23",
     "cloakbrowser": "8.33",
     "obscura": "3.27",
-    "browser-use-agent": "SKIPPED",
+    "browser-use-agent": "0.00",
 }
 
 
@@ -370,16 +372,31 @@ def _render_mcp_entry(
     lines.append(f"**Use for:** {rationale}")
     lines.append("")
 
-    # browser-use-agent re-run procedure summary
+    # browser-use-agent: bug callout for v1.0.1 tool-bug, OR (legacy) re-run
+    # procedure if a future wave finds the row reverted to SKIPPED.
     if mcp == "browser-use-agent":
-        lines.append(
-            "**Re-run procedure:** SKIPPED reason `LLM_KEY_ABSENT`. To "
-            "re-run: (1) `rbw unlock`, (2) `export ANTHROPIC_API_KEY=$(rbw "
-            "get \"Anthropic API\")`, (3) re-invoke plan 02-05 Task 2 "
-            "against `results/<new-date>/browser-use-agent/`. Full "
-            "procedure in `results/2026-05-26/browser-use-agent/"
-            "SKIPPED.md`."
-        )
+        if status == "SKIPPED":
+            lines.append(
+                "**Re-run procedure:** SKIPPED reason `LLM_KEY_ABSENT`. To "
+                "re-run: (1) `rbw unlock`, (2) `export ANTHROPIC_API_KEY=$(rbw "
+                "get \"Anthropic Claude\" --field Anthropic_API)`, (3) re-invoke "
+                "plan 02-05 Task 2. Full procedure in `results/2026-05-26/"
+                "browser-use-agent/_SKIPPED_*/SKIPPED.md`."
+            )
+        else:
+            lines.append(
+                "**Headline finding (v1.0.1):** 30s `BrowserStartEvent` timeout "
+                "on the first `browser_navigate` call when `OPENAI_API_KEY` (or "
+                "`ANTHROPIC_API_KEY`) is set in env. Every CDP-dependent tool "
+                "then errors with `Root CDP client not initialized`. Reproducible "
+                "without the harness via direct JSON-RPC to `browser-use --mcp` "
+                "— see `stdio_probe_evidence.log`. Same binary in **direct mode** "
+                "scores 5.87 with S1/S2/S3/S8 passing; the failure is gated on "
+                "env-LLM-key presence. Tool-bug attribution per FAIRNESS-06. "
+                "Tracked upstream at "
+                "[browser-use/browser-use#4846](https://github.com/browser-use/"
+                "browser-use/issues/4846) — re-score if a fix ships."
+            )
         lines.append("")
 
     # For cloakbrowser, repeat the sandbox callout right before Evidence

@@ -1,0 +1,41 @@
+==> run_mcp_session: browser-use
+==> make check (prereq gate)
+==> Checking host tools
+==> Checking MCP binaries from .mcp.json
+check_prereqs: ok (0 warning(s))
+==> fixture server already running — using existing instance
+==> ps snapshot (before)
+orphan_audit: snapshot wrote 767 rows to results/2026-05-28/browser-use/.ps_before.tsv
+==> rendering prompt: prompts/stage_walk.md → results/2026-05-28/browser-use/.prompt.md
+run_mcp_session: ulimit -v unsupported on this platform (skipping)
+==> spawning Claude Code with --allowedTools mcp__browser-use__*,Read,Write,Bash
+==> Claude PID=39156 PGID=39156
+==> spawning timeout watchdog (per-tool-call=30s, overall=1800s)
+==> Claude exited rc=0
+==> kill_group on PGID=39156
+==> ps snapshot (after)
+orphan_audit: snapshot wrote 753 rows to results/2026-05-28/browser-use/.ps_after.tsv
+==> orphan audit diff
+orphan_audit: survivors=1 killed=0 log=results/2026-05-28/browser-use/orphan_audit.log
+==> orphan audit flagged survivors; see results/2026-05-28/browser-use/orphan_audit.log (continuing — Phase 1 policy)
+==> tools_inventory: probing browser-use via mcp.client.stdio
+tools_inventory: browser-use -> results/2026-05-28/browser-use/tools_inventory.json (status=OK, tool_count=16)
+==> stub_writers: emitting tls.json + cold_start.json + stability.log
+stub_writers: wrote tls -> results/2026-05-28/browser-use/tls.json
+stub_writers: wrote cold_start -> results/2026-05-28/browser-use/cold_start.json
+stub_writers: wrote stability -> results/2026-05-28/browser-use/stability.log
+==> capture_versions: writing results/2026-05-28/versions.{json,lock.md}
+capture_versions: wrote results/2026-05-28/versions.json
+capture_versions: wrote results/2026-05-28/versions.lock.md
+capture_versions: SHA256 captured for 7/7 MCPs
+==> MACHINE.md: rendering from /Users/pleasedodisturb/Projects/web-agent-comparison/templates/MACHINE.md
+==> evidence-directory audit:
+    OK      transcript.md
+    OK      raw_stream.jsonl
+    OK      cold_start.json
+    OK      tokens.json
+    OK      tls.json
+    OK      stability.log
+    OK      orphan_audit.log
+    OK      tools_inventory.json
+==> done: results/2026-05-28/browser-use
