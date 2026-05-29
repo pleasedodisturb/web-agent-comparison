@@ -143,10 +143,87 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| FIXTURE-01 | Phase 6 | Pending |
+| FIXTURE-02 | Phase 6 | Pending |
+| FIXTURE-03 | Phase 6 | Pending |
+| FIXTURE-04 | Phase 6 | Pending |
+| FIXTURE-05 | Phase 6 | Pending |
+| FIXTURE-06 | Phase 6 | Pending |
+| FIXTURE-07 | Phase 6 | Pending |
+| FIXTURE-08 | Phase 6 | Pending |
+| FIXTURE-09 | Phase 6 | Pending |
+| FIXTURE-10 | Phase 6 | Pending |
+| FIXTURE-11 | Phase 6 | Pending |
+| FIXTURE-12 | Phase 6 | Pending |
+| FIXTURE-13 | Phase 6 | Pending |
+| FIXTURE-14 | Phase 6 | Pending |
+| FIXTURE-15 | Phase 6 | Pending |
+| FIXTURE-16 | Phase 6 | Pending |
+| FIXTURE-17 | Phase 6 | Pending |
+| FIXTURE-18 | Phase 6 | Pending |
+| DESIGN-01 | Phase 6 | Pending |
+| DESIGN-02 | Phase 6 | Pending |
+| DESIGN-03 | Phase 6 | Pending |
+| FAIRNESS-08 | Phase 6 | Pending |
+| FAIRNESS-09 | Phase 6 | Pending |
+| FAIRNESS-10 | Phase 6 | Pending |
+| FAIRNESS-11 | Phase 6 | Pending |
+| FAIRNESS-12 | Phase 6 | Pending |
+| REPRO-09 | Phase 6 | Pending |
+| REPRO-10 | Phase 6 | Pending |
+| REPRO-11 | Phase 6 | Pending |
+| REPRO-12 | Phase 6 | Pending |
+| REPRO-13 | Phase 6 | Pending |
+| HARNESS-10 | Phase 7 | Pending |
+| HARNESS-11 | Phase 7 | Pending |
+| HARNESS-12 | Phase 7 | Pending |
+| VALIDATE-10 | Phase 7 | Pending |
+| VALIDATE-01 | Phase 8 | Pending |
+| VALIDATE-02 | Phase 8 | Pending |
+| VALIDATE-03 | Phase 8 | Pending |
+| VALIDATE-04 | Phase 8 | Pending (gated on browser-use#4846) |
+| VALIDATE-05 | Phase 8 | Pending |
+| VALIDATE-06 | Phase 8 | Pending |
+| VALIDATE-07 | Phase 8 | Pending |
+| VALIDATE-08 | Phase 8 | Pending (gated on h4ckf0r0day/obscura#197) |
+| VALIDATE-09 | Phase 8 | Pending |
+| VALIDATE-11 | Phase 8 | Pending |
+| VALIDATE-12 | Phase 8 | Pending |
+| CANDIDATE-01 | Phase 9 | Pending |
+| CANDIDATE-02 | Phase 9 | Pending |
+| CANDIDATE-03 | Phase 9 | Pending |
+| STEALTH-01 | Phase 10 | Pending |
+| STEALTH-02 | Phase 10 | Pending |
+| STEALTH-03 | Phase 10 | Pending |
+| STEALTH-04 | Phase 10 | Pending |
+| STEALTH-05 | Phase 10 | Pending |
+| STEALTH-06 | Phase 10 | Pending |
+| STEALTH-07 | Phase 10 | Pending |
+| STEALTH-08 | Phase 10 | Pending |
+| STEALTH-09 | Phase 10 | Pending |
+| STEALTH-10 | Phase 10 | Pending |
+| REPORT-13 | Phase 11 | Pending |
+| REPORT-14 | Phase 11 | Pending |
+| REPORT-15 | Phase 11 | Pending |
+| REPORT-16 | Phase 11 | Pending |
+| REPORT-17 | Phase 11 | Pending |
+| REPORT-18 | Phase 11 | Pending |
 
-*Phase mapping populates at `/gsd:plan-phase [N]` time via the roadmapper.*
+**Coverage:** 65/65 requirements mapped to exactly one phase. No orphans. No duplicates.
 
-### Coverage Summary
+### Phase Coverage Summary
+
+| Phase | Requirements | Count |
+|-------|--------------|-------|
+| Phase 6 (Fixture authoring) | FIXTURE-01..18, DESIGN-01..03, FAIRNESS-08..12, REPRO-09..13 | 31 |
+| Phase 7 (Harness portability + Linux v1.0 baseline) | HARNESS-10..12, VALIDATE-10 | 4 |
+| Phase 8 (Re-validate v1.0 on v1.1) | VALIDATE-01..09, VALIDATE-11, VALIDATE-12 | 11 |
+| Phase 9 (BrowserMCP decision) | CANDIDATE-01..03 | 3 |
+| Phase 10 (Stealth axis) | STEALTH-01..10 | 10 |
+| Phase 11 (Synthesis + publication) | REPORT-13..18 | 6 |
+| **Total v1.1 requirements mapped** | | **65** |
+
+### Coverage Summary (by category)
 
 | Category | Requirements | Count |
 |----------|--------------|-------|
