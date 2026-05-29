@@ -797,32 +797,39 @@ DEFAULT_ALLOW: frozenset[str] = frozenset({
 | A7 | The Mac Mini has Node 22 LTS + npx + npm in the path | Stack | LOW — CLAUDE.md project standard is Node 22 LTS; confirm with `node --version` at the start of the framework-variant wave. |
 | A8 | Wikipedia article is ~400-500KB body HTML | WebFetch estimate | LOW — within 5MB budget by 10× margin. |
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> All 5 open questions resolved during planning. Resolution path documented inline below; concrete implementation lives in the listed plan task.
 
 1. **Wikipedia infobox presence in `Comparison_of_programming_languages_(syntax)`?**
    - What we know: WebFetch suggests no traditional infobox; uses "navigation templates and content boxes."
    - What's unclear: Whether S14 prompt cell ("extract table-in-article + infobox") needs the article changed OR the prompt loosened to "infobox-or-equivalent floating-info block".
    - Recommendation: Planner checks the live page during snapshot. If infobox absent, either (a) pick a different "Comparison of X" article with a confirmed infobox (e.g., a less-comparison-table-y article would also serve), or (b) adjust the S14 prompt cell wording. Both are fast resolutions.
+   - **RESOLVED:** 06-01 Task 1 includes the article-confirmation step + adaptive prompt wording in 06-11 Task 1 (S14 cell phrasing "infobox-or-equivalent floating-info block" if absent).
 
 2. **Sortable-table JS capture for S22?**
    - What we know: Wikipedia tables marked `class="wikitable sortable"` use `mw-sortable` JS for in-page sort.
    - What's unclear: Whether `wget --mirror` captures the sort JS (loaded from `https://en.wikipedia.org/w/load.php?...`) into the snapshot.
    - Recommendation: Planner does a smoke test after capture: serve the fixture, open in browser, click a sortable column header. If it sorts → snapshot is complete. If not → write a 30-line inline `<script>` that adds click handlers + sorts. This is an in-the-wave acceptance step.
+   - **RESOLVED:** 06-01 Task 2 includes the post-capture sort-JS smoke test + inline-script fallback.
 
 3. **Per-fixture `.scrub_allow.txt` vs global `DEFAULT_ALLOW` extension?**
    - What we know: Existing CLI already supports `--allow <file>`. Test harness pattern is `subprocess.run([..., "-m", "bench.scrub_artifacts", str(target)])`.
    - What's unclear: Which is the lower-friction extension — per-fixture file (more files, tighter scope) or global extension (fewer files, broader allowance).
    - Recommendation: **Per-fixture `.scrub_allow.txt`** with a small `bench/scrub_artifacts.py` enhancement to auto-discover `.scrub_allow.txt` siblings to the scanned root. Confines allow-list scope to the fixture that needs it; no global allow-list growth across milestones.
+   - **RESOLVED:** Per-fixture `.scrub_allow.txt` convention adopted; PATTERNS.md confirms `bench/scrub_artifacts.py` already supports `--allow <file>` so no source change required — call-site discovery happens in each Wave-1/2/3 plan's scrub task (e.g., 06-04 Task 2, 06-05 Task 2, 06-07 Task 2).
 
 4. **Should DDG/Brave captures be replaced with synthetic SERP fixtures?**
    - What we know: Both robots.txt say `Disallow: /`. CONTEXT.md D-02 locks captured.
    - What's unclear: Whether the legal posture is comfortable enough to ship a public benchmark with these captures.
    - Recommendation: Planner proceeds with captured per CONTEXT.md, but Phase 6 finalize wave includes a "human-verify" checkpoint where the author reviews the captured SERP HTML + the legal-posture note in PROVENANCE.md before commit. If unease, the planner inserts a discuss-phase reopener task.
+   - **RESOLVED:** 06-03 Task 2 implements the `checkpoint:human-verify` gate before commit; PROVENANCE.md in `s12_serp_ddg/` and `s12_serp_brave/` carries the legal-posture statement (research/benchmark use, no redistribution at scale).
 
 5. **Does Next.js 16.2.6 SSR-with-hydration ship a noticeable JS-rendering surface, or is `output: 'export'` effectively just a static SPA?**
    - What we know: Next.js docs say Server Components run at build time → HTML is pre-rendered. Client Components hydrate after.
    - What's unclear: Whether a read-only MCP like Firecrawl sees the pre-rendered HTML directly (which would make Next.js indistinguishable from vanilla for that MCP), or if there's a meaningful difference.
    - Recommendation: Author the Next.js variant with a Client Component that does at least one post-mount DOM mutation (e.g., a "Loading..." → "Loaded N products" transition driven by `useEffect`) so the SSR-vs-hydration distinction is observable. This is what FAIRNESS-08 is asking the fixture to test.
+   - **RESOLVED:** 06-10 Task 1 implements a `HydrationMarker` Client Component with `data-hydrated="false"` → `"true"` post-mount transition; FAIRNESS-09 acceptance asserts both states are reachable.
 
 ## Environment Availability
 
