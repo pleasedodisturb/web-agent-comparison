@@ -28,6 +28,25 @@ expected_dirs=(
     "$repo_root/fixtures/snapshots/greenhouse_${date_tag}"
     "$repo_root/fixtures/snapshots/ashby_${date_tag}"
 )
+
+# v1.1 fixture roots (Phase 6 — S9-S26 fixture authoring). These are
+# checked against the running server below but are NOT required to exist
+# as directories before the test runs — they come online progressively
+# across Phase 6 Waves 1-3. Each entry is the snapshot-dir slug.
+v11_fixture_dirs=(
+    "s09_ecommerce_pdp"
+    "s12_serp_ddg"
+    "s12_serp_brave"
+    "s13_15_21_22_wikipedia"
+    "s16_hn_pagination"
+    "s17_18_auth_walled"
+    "s19_20_complex_form"
+    "s23_framework_variant_nextjs"
+    "s24_framework_variant_sveltekit"
+    "s25_framework_variant_vue"
+    "s26_framework_variant_vanilla"
+)
+
 for d in "${expected_dirs[@]}"; do
     if [ ! -d "$d" ]; then
         echo "FAIL: missing snapshot dir $d — run scripts/snapshot_fixtures.sh first" >&2
@@ -95,6 +114,25 @@ check_url "greenhouse primary" \
 check_url "ashby primary" \
     "http://127.0.0.1:8765/ashby_${date_tag}/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html" \
     4096
+
+# v1.1 fixture index-page reachability checks (Phase 6 — S9-S26).
+#
+# Each v1.1 fixture dir is curled at its index URL and must return HTTP
+# 200 with a body > 512 bytes (smaller threshold than v1.0's 4096 to
+# accommodate the vanilla framework variant's minimal static HTML).
+#
+# IMPORTANT: a v1.1 fixture is only checked if its directory exists on
+# disk. Wave 0 (this commit) creates the test scaffolding; the fixture
+# dirs come online in Waves 1-3. A missing dir is a "not authored yet"
+# signal, not a failure. Once Wave 4 closes, every v1.1 dir must exist
+# and pass this check.
+for dir in "${v11_fixture_dirs[@]}"; do
+    if [ -d "$repo_root/fixtures/snapshots/$dir" ]; then
+        check_url "$dir index" \
+            "http://127.0.0.1:8765/${dir}/" \
+            512
+    fi
+done
 
 # Stop the server (the trap will also try, but doing it here lets us
 # verify the stop subcommand exits 0 on a running server).

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Mechanical Keyboard Y50",
+    "price": "$129.00",
+    "short_description": "Compact 60% mechanical keyboard with hot-swappable switches and PBT keycaps.",
+    "image_alt_text": "Black 60-percent mechanical keyboard with backlit keys on a wooden desk"
+  },
+  {
+    "id": 2,
+    "name": "USB-C Hub Pro",
+    "price": "$45.00",
+    "short_description": "7-in-1 USB-C hub with HDMI, two USB-A 3.0 ports, SD slot, and 100W passthrough.",
+    "image_alt_text": "Aluminum USB-C hub with multiple ports laid flat on a white surface"
+  },
+  {
+    "id": 3,
+    "name": "Stand-up Desk Mat",
+    "price": "$38.50",
+    "short_description": "Anti-fatigue cushioned floor mat for standing desks; non-slip backing.",
+    "image_alt_text": "Charcoal-gray anti-fatigue mat placed in front of a standing desk"
+  },
+  {
+    "id": 4,
+    "name": "Cable Sleeve Kit",
+    "price": "$14.99",
+    "short_description": "Set of three neoprene cable sleeves with self-closing seam; covers monitor and power cords.",
+    "image_alt_text": "Three rolled neoprene cable sleeves in black against a plain background"
+  },
+  {
+    "id": 5,
+    "name": "Outpost Mug",
+    "price": "$18.00",
+    "short_description": "12 oz ceramic mug with the Open Source Outpost logo etched in matte finish.",
+    "image_alt_text": "White ceramic coffee mug with a small etched logo on the side"
+  },
+  {
+    "id": 6,
+    "name": "Webcam Privacy Slider",
+    "price": "$6.50",
+    "short_description": "Magnetic adhesive privacy cover that slides over your laptop webcam; pack of three.",
+    "image_alt_text": "Three thin black webcam privacy sliders displayed on a card"
+  },
+  {
+    "id": 7,
+    "name": "Monitor Light Bar",
+    "price": "$82.00",
+    "short_description": "USB-powered screen-clip light bar with stepless dimming and color-temperature control.",
+    "image_alt_text": "Slim horizontal light bar clipped to the top edge of a monitor"
+  },
+  {
+    "id": 8,
+    "name": "Headphone Stand Wood",
+    "price": "$29.75",
+    "short_description": "Solid walnut over-ear headphone stand with felt cradle; cable cutout in back.",
+    "image_alt_text": "Walnut wooden headphone stand holding a pair of over-ear headphones"
+  },
+  {
+    "id": 9,
+    "name": "Travel Adapter Globe",
+    "price": "$22.00",
+    "short_description": "Universal travel adapter covering US, EU, UK, and AU plug shapes plus two USB-A.",
+    "image_alt_text": "White universal travel adapter with multiple fold-out plug prongs"
+  },
+  {
+    "id": 10,
+    "name": "Pocket Notebook Pair",
+    "price": "$11.25",
+    "short_description": "Two 48-page softcover pocket notebooks with dot-grid pages; lay-flat binding.",
+    "image_alt_text": "Two slim pocket notebooks stacked at an angle, one open showing dot-grid paper"
+  }
+]
