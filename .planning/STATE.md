@@ -1,17 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: "governance debt: Phase 3 verification + traceability sync"
-status: Awaiting next milestone
-stopped_at: Phase 5 complete (05-05 self-verification + ROADMAP close; milestone v1.0 archivable as complete)
-last_updated: "2026-05-28T17:02:20.324Z"
-last_activity: 2026-05-28 — Milestone v1.0 completed and archived
+milestone: v1.1
+milestone_name: General-purpose fixture expansion + stealth axis
+status: planning
+last_updated: "2026-05-29T10:09:15.159Z"
+last_activity: 2026-05-29
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-05-22)
 
 ## Current Position
 
-Phase: Milestone v1.0 complete
+Phase: Not started (defining requirements)
 Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-05-28 — Milestone v1.0 completed and archived
+Status: Defining requirements
+Last activity: 2026-05-29 — Milestone v1.1 started
 
 ## Performance Metrics
 

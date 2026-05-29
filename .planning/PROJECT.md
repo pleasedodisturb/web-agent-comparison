@@ -42,11 +42,33 @@ A public benchmark of browser-automation MCP servers driven by Claude Code, with
 - ✓ **Governance debt closed** — Phase 3 retroactive VERIFICATION.md, REQUIREMENTS.md §Traceability 45/45 Complete, Phase 4 plan SUMMARY.md backfill, recommendations.md date drift fixed — v1.0 (Phase 5)
 - ⚠ **Bot-detection resilience + TLS fingerprinting (JA3/JA4)** — explicitly DEFERRED from v1.0 scope per 2026-05-22 decision; moved to G-710 follow-up wave. Not invalidated — just descoped because Greenhouse/Ashby targets don't aggressively fingerprint-check.
 
+## Current Milestone: v1.1 General-purpose fixture expansion + stealth axis
+
+**Goal:** Expand the fixture set from job-application-only to general-purpose web tasks AND validate stealth claims via TLS fingerprint + bot-detection adversary work — so v1.1 answers both *"which browser MCP is best for general web automation?"* and *"which MCP actually passes 2025-26 bot detection?"* without breaking comparability with v1.0's 7-MCP scoreboard.
+
+**Target features:**
+
+1. **Fixture-set expansion (S9+)** — 8 new categories: e-commerce + cart flow, SERP parsing, long-form content (Wikipedia/arXiv), multi-page pagination, auth-walled (snapshot bypass), complex form (multi-section + validation recovery), table/list extraction, modern JS framework variants (Next.js / SvelteKit / Vue / vanilla)
+2. **Re-validate the 7 v1.0 MCPs** against the new stages — preserve v1.0 composite as the comparison anchor; add v1.1 composite per MCP
+3. **BrowserMCP candidate decision** (G-744) — formally include as 8th MCP, separate `extension-attached` capability category, or stay out
+4. **TLS fingerprint capture per MCP** (G-739) — JA3 / JA3n / JA4 per candidate against `tools.scrapfly.io/api/fp/ja3`; cross-reference against the real-Chrome baseline captured in v1.0.2 (`ja4_hash: 3fc5444b6956`)
+5. **Bot-detection adversary set** (G-738) — Cloudflare (nowsecure.nl), DataDome, Akamai Bot Manager, reCAPTCHA v2 — per-MCP probe + per-detector pass/fail
+6. **Harness portability fix** — OS-detecting `ulimit -v` in `run_mcp_session.sh` (the Linux gotcha hit in v1.0.2)
+7. **Cross-platform re-baseline** — run v1.0 + v1.1 fixtures on both macOS arm64 and Linux x86_64 for honest cross-platform scores
+8. **Obscura Linux re-test** (G-737) — runs only when h4ckf0r0day/obscura#197 ships a fix; otherwise documented as still-broken
+
+**Key context / constraints (carried from v1.0 + lessons from v1.0.x):**
+
+- **Rubric is byte-for-byte locked from v1.0.** Comparability is the load-bearing claim; rubric reset belongs in v2.0 with explicit "v1 vs v2 not directly comparable" disclosure
+- **Stage IDs continue at S9** — S1-S8 are locked in `prompts/stage_walk.md`
+- **Loopback fixtures only** — no live URLs in the scored harness, ever; 50 MB total v1.1 fixture budget; license-clean sources only (Wikipedia CC BY-SA, arXiv, OSS project pages, synthetic fixtures)
+- **React 404 cascade lesson from v1.0.3** — fixtures must include either a patched React backend OR a no-JS variant so the rubric differentiates MCPs that *would* recover via `evaluate`/request-interception (Playwright, chrome-devtools, browser-use) from those that don't (BrowserMCP, lightpanda)
+- **Sacrosanct triad** (`scoring/score.py`, `scoring/rubric.md`, `.mcp.json`) continues byte-for-byte vs v1.0; `bench/wave_close_check.py` audits this at every plan boundary
+- **Stealth axis additions are out-of-rubric** — TLS fingerprint and adversary results live alongside the composite, not inside it (a "real Chrome" MCP that fails Cloudflare doesn't get a composite penalty; it gets a separate "stealth verdict" column)
+
 ### Active
 
-<!-- Empty. No active milestone — run /gsd:new-milestone to define next scope. -->
-
-(No active requirements — v1.0 shipped. Next milestone scope is TBD pending Stage 2 needs.)
+<!-- v1.1 REQ-IDs populate from `.planning/REQUIREMENTS.md` at the requirements-definition step. -->
 
 ### Out of Scope
 
@@ -117,4 +139,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-28 after v1.0 milestone close*
+*Last updated: 2026-05-29 — milestone v1.1 cycle started (general-purpose fixture expansion + stealth axis)*
