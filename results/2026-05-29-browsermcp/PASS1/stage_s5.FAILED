@@ -1,0 +1,1 @@
+Form fields unreachable: cascades from S4 — Greenhouse 404 view contains no input elements; BrowserMCP cannot type into nodes that no longer exist in the post-hydration DOM.

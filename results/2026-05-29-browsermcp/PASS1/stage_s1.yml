@@ -1,0 +1,52 @@
+stage: S1
+target_url: http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html
+mcp: browsermcp
+tools_used:
+  - mcp__browsermcp__browser_navigate
+  - mcp__browsermcp__browser_wait
+  - mcp__browsermcp__browser_snapshot
+
+# What BrowserMCP's accessibility snapshot actually returned after navigation:
+extracted_from_browser:
+  page_title: "Page not found"
+  page_url: "http://127.0.0.1:8765/greenhouse_2026-05-22/anthropic/jobs/5023394008.html"
+  body_heading: "Page not found"
+  body_paragraph: "The job board you were viewing is no longer active."
+  apply_button: null
+  job_title: null
+  company: null
+  location: null
+  employment_type: null
+  requirements_summary: null
+  salary_band: null
+  apply_url: null
+
+# Why the extraction is empty:
+finding: |
+  Greenhouse ships the snapshot as SSR HTML (job data IS embedded in the file
+  at fixtures/snapshots/greenhouse_2026-05-22/anthropic/jobs/5023394008.html) PLUS
+  a React mount point. When Chrome executes the bundled React app, it tries to
+  re-fetch the job from a backend endpoint that does not exist on the local
+  snapshot server, and falls back to Greenhouse's "no longer active" 404 view.
+  The DOM is replaced before BrowserMCP captures the accessibility snapshot.
+
+  BrowserMCP is a thin wrapper over the real Chrome tab — there is no
+  "disable JS" or "fetch raw HTML" surface on this MCP — so what Chrome
+  renders is what gets scored. This is the SAME failure mode that
+  Playwright / chrome-devtools-mcp would exhibit on this fixture; the
+  data is only recoverable for MCPs that skip JS execution
+  (lightpanda) or that bypass the React refetch (server-side scrapers
+  like Firecrawl reading the SSR shell).
+
+# Salvaged from a side-channel Bash read of the snapshot file (NOT via the MCP,
+# included here for the auditor to see what the SSR shell actually contained
+# before hydration nuked it):
+ssr_shell_contents:
+  job_title: "Jane Testworth Program"
+  company: "Anthropic"
+  location: "London, UK; Ontario, CAN; Remote-Friendly, Jane Testworth; Jane Testworth, CA"
+  apply_button_text: "Apply"
+  framework_markers: [greenhouse, react-select]
+  source: "fixtures/snapshots/greenhouse_2026-05-22/anthropic/jobs/5023394008.html (Bash grep, NOT BrowserMCP)"
+
+status: PARTIAL_VIA_MCP  # BrowserMCP-only extraction is 0 fields

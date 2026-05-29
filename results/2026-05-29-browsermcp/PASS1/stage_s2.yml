@@ -1,0 +1,41 @@
+stage: S2
+target_url: http://127.0.0.1:8765/ashby_2026-05-22/replit/1e1a651f-693d-4f9d-bfd9-280a50d28d13.html
+mcp: browsermcp
+tools_used:
+  - mcp__browsermcp__browser_navigate
+  - mcp__browsermcp__browser_wait
+  - mcp__browsermcp__browser_snapshot
+
+# What BrowserMCP's accessibility snapshot returned after navigation + 3s wait:
+extracted_from_browser:
+  page_title: "Jobs"
+  body_heading: "Page not found"
+  body_paragraph: "The page you requested was not found"
+  visible_branding: "Powered by Ashby"
+  footer_links: ["Learn more about Ashby", "Privacy Policy", "Security", "Vulnerability Disclosure"]
+  job_title: null
+  company: null
+  location: null
+  role_summary: null
+
+finding: |
+  Ashby snapshot is SPA-shell-only by design (per
+  fixtures/snapshots/ashby_2026-05-22/PROVENANCE.md): wget mirrored only the
+  React shell, not the runtime API response. Ashby's React app boots, calls
+  its /api/job-postings endpoint, gets nothing locally, and routes to its
+  built-in "Page not found" view.
+
+  BrowserMCP runs against real Chrome with JS enabled, so it gets the
+  hydrated 404, NOT the SSR HTML. The snapshot file itself contains zero
+  job data — there is no SSR fallback to recover from on Ashby (unlike
+  Greenhouse, which embeds the job in SSR HTML that JS then overwrites).
+  This is intentional and acceptable per the project's Phase-1 scope cut
+  (recording-proxy capture deferred).
+
+  Comparing S1 (Greenhouse) and S2 (Ashby):
+    - Greenhouse: SSR shell HAS data but JS hydration overwrites it.
+    - Ashby:      Pure SPA shell; data was never captured by wget.
+    - For a JS-rendering MCP like BrowserMCP, both render as "Page not
+      found", but for different underlying reasons.
+
+status: EMPTY_BY_DESIGN

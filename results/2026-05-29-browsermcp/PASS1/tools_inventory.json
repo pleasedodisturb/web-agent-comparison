@@ -1,0 +1,113 @@
+{
+  "args": [],
+  "captured_at": "2026-05-29T09:49:25Z",
+  "categories": {
+    "capture": 1,
+    "diagnostics": 1,
+    "inspection": 1,
+    "interaction": 5,
+    "navigation": 3,
+    "other": 1
+  },
+  "command": "mcp-server-browsermcp",
+  "mcp": "browsermcp",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 12,
+  "tools": [
+    {
+      "category": "navigation",
+      "description_excerpt": "Navigate to a URL",
+      "input_schema_keys": [
+        "url"
+      ],
+      "name": "browser_navigate"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Go back to the previous page",
+      "input_schema_keys": [],
+      "name": "browser_go_back"
+    },
+    {
+      "category": "navigation",
+      "description_excerpt": "Go forward to the next page",
+      "input_schema_keys": [],
+      "name": "browser_go_forward"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Capture accessibility snapshot of the current page. Use this for getting references to elements to interact with.",
+      "input_schema_keys": [],
+      "name": "browser_snapshot"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Perform click on a web page",
+      "input_schema_keys": [
+        "element",
+        "ref"
+      ],
+      "name": "browser_click"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Hover over element on page",
+      "input_schema_keys": [
+        "element",
+        "ref"
+      ],
+      "name": "browser_hover"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Type text into editable element",
+      "input_schema_keys": [
+        "element",
+        "ref",
+        "submit",
+        "text"
+      ],
+      "name": "browser_type"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Select an option in a dropdown",
+      "input_schema_keys": [
+        "element",
+        "ref",
+        "values"
+      ],
+      "name": "browser_select_option"
+    },
+    {
+      "category": "interaction",
+      "description_excerpt": "Press a key on the keyboard",
+      "input_schema_keys": [
+        "key"
+      ],
+      "name": "browser_press_key"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Wait for a specified time in seconds",
+      "input_schema_keys": [
+        "time"
+      ],
+      "name": "browser_wait"
+    },
+    {
+      "category": "diagnostics",
+      "description_excerpt": "Get the console logs from the browser",
+      "input_schema_keys": [],
+      "name": "browser_get_console_logs"
+    },
+    {
+      "category": "capture",
+      "description_excerpt": "Take a screenshot of the current page",
+      "input_schema_keys": [],
+      "name": "browser_screenshot"
+    }
+  ],
+  "version_handshake": "0.1.3"
+}
