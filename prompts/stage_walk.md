@@ -26,7 +26,7 @@ ${OUT_DIR}.
 # Web-Agent MCP Stage Walk — `${MCP}`
 
 You are driving the **${MCP}** MCP against snapshot fixtures of Greenhouse +
-Ashby job postings. Your job is to execute stages S1 through S8 using ONLY
+Ashby job postings. Your job is to execute stages S1 through S26 using ONLY
 the tools `mcp__${MCP}__*`, `Read`, `Write`, and `Bash`. Save evidence to
 `${OUT_DIR}/`.
 
