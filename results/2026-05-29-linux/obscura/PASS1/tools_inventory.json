@@ -1,0 +1,77 @@
+{
+  "args": [
+    "--stealth"
+  ],
+  "captured_at": "2026-05-29T09:04:01Z",
+  "categories": {
+    "capture": 0,
+    "diagnostics": 0,
+    "inspection": 1,
+    "interaction": 0,
+    "navigation": 0,
+    "other": 3
+  },
+  "command": "obscura-mcp",
+  "mcp": "obscura",
+  "protocol_version": "2025-06-18",
+  "status": "OK",
+  "tool_count": 4,
+  "tools": [
+    {
+      "category": "other",
+      "description_excerpt": "Fetch a page and extract content in any format \u2014 text, markdown, html, links, or cookies. Optionally evaluate JavaScript. One-shot: no session needed.",
+      "input_schema_keys": [
+        "cookies",
+        "eval",
+        "format",
+        "headers",
+        "stealth",
+        "url",
+        "userAgent"
+      ],
+      "name": "browse_page"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Click an element or type text into a page. One-shot: pass url. For multi-step flows use browse_session.",
+      "input_schema_keys": [
+        "action",
+        "cookies",
+        "selector",
+        "stealth",
+        "text",
+        "url"
+      ],
+      "name": "browse_interact"
+    },
+    {
+      "category": "other",
+      "description_excerpt": "Create and manage persistent browser sessions. Supports multi-step flows: create \u2192 goto/wait/extract/click/type \u2192 close. Sessions auto-close after 5 minutes.",
+      "input_schema_keys": [
+        "action",
+        "clearCookies",
+        "expression",
+        "headers",
+        "selector",
+        "session_id",
+        "text",
+        "timeout",
+        "url",
+        "userAgent"
+      ],
+      "name": "browse_session"
+    },
+    {
+      "category": "inspection",
+      "description_excerpt": "Scrape multiple URLs in parallel using Obscura's worker processes. Each URL gets its own isolated worker \u2014 ideal for bulk data extraction. Returns structured JSON with per-URL results, timing, and ...",
+      "input_schema_keys": [
+        "concurrency",
+        "eval",
+        "timeout",
+        "urls"
+      ],
+      "name": "browse_scrape"
+    }
+  ],
+  "version_handshake": "1.0.0"
+}

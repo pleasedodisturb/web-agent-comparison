@@ -1,0 +1,122 @@
+[initialize] {"result": {"name": "Browser MCP", "version": "0.1.3"}}
+[tools_list] {"count": 12, "names": ["browser_navigate", "browser_go_back", "browser_go_forward", "browser_snapshot", "browser_click", "browser_hover", "browser_type", "browser_select_option", "browser_press_key", "browser_wait", "browser_get_console_logs", "brow
+
+======================================================================
+WAITING FOR CHROME EXTENSION TO RECONNECT
+In Chrome Agent: click the BrowserMCP extension icon →
+  if it says 'Connect': click it now
+  if it says 'Disconnect': click Disconnect THEN Connect again
+(this probe will auto-detect the handshake within 30s)
+======================================================================
+
+[handshake_complete] {"dt_s": 2.0, "snapshot_bytes": 722, "head": "\n- Page URL: http://127.0.0.1:8765/\n- Page Title: Directory listing for /\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - heading \"Directory listing for /\" [level=1] [ref=s1e4]\n  - separator [
+[stage_begin] {"stage": "S1_greenhouse", "url": "http://127.0.0.1:8765/greenhouse_2026-05-22/"}
+[navigate_result] {"stage": "S1_greenhouse", "dt_s": 0.05, "is_error": false, "text_head": "\n- Page URL: http://127.0.0.1:8765/greenhouse_2026-05-22/\n- Page Title: Directory listing for /greenhouse_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - h
+[snapshot_result] {"stage": "S1_greenhouse", "dt_s": 0.01, "bytes": 626, "text_head": "\n- Page URL: http://127.0.0.1:8765/greenhouse_2026-05-22/\n- Page Title: Directory listing for /greenhouse_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - headin
+[stage_begin] {"stage": "S2_ashby", "url": "http://127.0.0.1:8765/ashby_2026-05-22/"}
+[navigate_result] {"stage": "S2_ashby", "dt_s": 0.04, "is_error": false, "text_head": "\n- Page URL: http://127.0.0.1:8765/ashby_2026-05-22/\n- Page Title: Directory listing for /ashby_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - heading \"Direct
+[snapshot_result] {"stage": "S2_ashby", "dt_s": 0.01, "bytes": 605, "text_head": "\n- Page URL: http://127.0.0.1:8765/ashby_2026-05-22/\n- Page Title: Directory listing for /ashby_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - heading \"Directory l
+[tls_probe_begin] {"url": "https://tools.scrapfly.io/api/fp/ja3?extended=1"}
+[tls_navigate] {"dt_s": 0.61, "text_head": "\n- Page URL: https://tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Title: tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - text: \"{\\\"ja3\\\":\\\"772,4865-4866-4867-49195
+[tls_snapshot] {"bytes": 3507, "full_text": "\n- Page URL: https://tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Title: tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - text: \"{\\\"ja3\\\":\\\"772,4865-4866-4867-4919
+
+
+=== EVENTS_JSON_BEGIN ===
+[
+  {
+    "t": "2026-05-29T09:07:27.927966+00:00",
+    "type": "initialize",
+    "result": {
+      "name": "Browser MCP",
+      "version": "0.1.3"
+    }
+  },
+  {
+    "t": "2026-05-29T09:07:28.233468+00:00",
+    "type": "tools_list",
+    "count": 12,
+    "names": [
+      "browser_navigate",
+      "browser_go_back",
+      "browser_go_forward",
+      "browser_snapshot",
+      "browser_click",
+      "browser_hover",
+      "browser_type",
+      "browser_select_option",
+      "browser_press_key",
+      "browser_wait",
+      "browser_get_console_logs",
+      "browser_screenshot"
+    ]
+  },
+  {
+    "t": "2026-05-29T09:07:30.251558+00:00",
+    "type": "handshake_complete",
+    "dt_s": 2.0,
+    "snapshot_bytes": 722,
+    "head": "\n- Page URL: http://127.0.0.1:8765/\n- Page Title: Directory listing for /\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - heading \"Directory listing for /\" [level=1] [ref=s1e4]\n  - separator [ref=s"
+  },
+  {
+    "t": "2026-05-29T09:07:30.251597+00:00",
+    "type": "stage_begin",
+    "stage": "S1_greenhouse",
+    "url": "http://127.0.0.1:8765/greenhouse_2026-05-22/"
+  },
+  {
+    "t": "2026-05-29T09:07:30.304378+00:00",
+    "type": "navigate_result",
+    "stage": "S1_greenhouse",
+    "dt_s": 0.05,
+    "is_error": false,
+    "text_head": "\n- Page URL: http://127.0.0.1:8765/greenhouse_2026-05-22/\n- Page Title: Directory listing for /greenhouse_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - heading \"Directory listing for /greenhouse_2026-05-22/\" [level=1] [ref=s1e4]\n  - separator [ref=s1e5]\n  - list [ref=s1e6]:\n    - listitem [ref=s1e7]:\n      - link \".sha256\" [ref=s1e8]:\n        - /url: .sha256\n    - listitem [ref=s1e9]:\n      - link \"anthropic/\" [ref=s1e10]:\n        - /url: anthropic/\n    - listitem [ref=s1e11]:\n "
+  },
+  {
+    "t": "2026-05-29T09:07:31.812379+00:00",
+    "type": "snapshot_result",
+    "stage": "S1_greenhouse",
+    "dt_s": 0.01,
+    "bytes": 626,
+    "text_head": "\n- Page URL: http://127.0.0.1:8765/greenhouse_2026-05-22/\n- Page Title: Directory listing for /greenhouse_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - heading \"Directory listing for /greenhouse_2026-05-22/\" [level=1] [ref=s2e4]\n  - separator [ref=s2e5]\n  - list [ref=s2e6]:\n    - listitem [ref=s2e7]:\n      - link \".sha256\" [ref=s2e8]:\n        - /url: .sha256\n    - listitem [ref=s2"
+  },
+  {
+    "t": "2026-05-29T09:07:31.812441+00:00",
+    "type": "stage_begin",
+    "stage": "S2_ashby",
+    "url": "http://127.0.0.1:8765/ashby_2026-05-22/"
+  },
+  {
+    "t": "2026-05-29T09:07:31.853387+00:00",
+    "type": "navigate_result",
+    "stage": "S2_ashby",
+    "dt_s": 0.04,
+    "is_error": false,
+    "text_head": "\n- Page URL: http://127.0.0.1:8765/ashby_2026-05-22/\n- Page Title: Directory listing for /ashby_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - heading \"Directory listing for /ashby_2026-05-22/\" [level=1] [ref=s1e4]\n  - separator [ref=s1e5]\n  - list [ref=s1e6]:\n    - listitem [ref=s1e7]:\n      - link \".sha256\" [ref=s1e8]:\n        - /url: .sha256\n    - listitem [ref=s1e9]:\n      - link \"PROVENANCE.md\" [ref=s1e10]:\n        - /url: PROVENANCE.md\n    - listitem [ref=s1e11]:\n      - li"
+  },
+  {
+    "t": "2026-05-29T09:07:33.363774+00:00",
+    "type": "snapshot_result",
+    "stage": "S2_ashby",
+    "dt_s": 0.01,
+    "bytes": 605,
+    "text_head": "\n- Page URL: http://127.0.0.1:8765/ashby_2026-05-22/\n- Page Title: Directory listing for /ashby_2026-05-22/\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - heading \"Directory listing for /ashby_2026-05-22/\" [level=1] [ref=s2e4]\n  - separator [ref=s2e5]\n  - list [ref=s2e6]:\n    - listitem [ref=s2e7]:\n      - link \".sha256\" [ref=s2e8]:\n        - /url: .sha256\n    - listitem [ref=s2e9]:\n      - li"
+  },
+  {
+    "t": "2026-05-29T09:07:33.363885+00:00",
+    "type": "tls_probe_begin",
+    "url": "https://tools.scrapfly.io/api/fp/ja3?extended=1"
+  },
+  {
+    "t": "2026-05-29T09:07:33.971462+00:00",
+    "type": "tls_navigate",
+    "dt_s": 0.61,
+    "text_head": "\n- Page URL: https://tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Title: tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Snapshot\n```yaml\n- document [ref=s1e2]:\n  - text: \"{\\\"ja3\\\":\\\"772,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,35-16-18-11-27-43-65281-17613-23-13"
+  },
+  {
+    "t": "2026-05-29T09:07:36.976377+00:00",
+    "type": "tls_snapshot",
+    "bytes": 3507,
+    "full_text": "\n- Page URL: https://tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Title: tools.scrapfly.io/api/fp/ja3?extended=1\n- Page Snapshot\n```yaml\n- document [ref=s2e2]:\n  - text: \"{\\\"ja3\\\":\\\"772,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,35-16-18-11-27-43-65281-17613-23-13-0-45-65037-10-51-5,4588-29-23-24,0\\\",\\\"ja3n\\\":\\\"772,4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53,0-5-10-11-13-16-18-23-27-35-43-45-51-17613-65037-65281,4588-29-23-24,0\\\",\\\"ja3_digest\\\":\\\"16f5c1035ce7f60fdd6afe5224275811\\\",\\\"ja3n_digest\\\":\\\"dcefaf3f0e71d260d19dc1d0749c9278\\\",\\\"scrapfly_fp\\\":\\\"version:772|ch_ciphers:GREASE-4865-4866-4867-49195-49199-49196-49200-52393-52392-49171-49172-156-157-47-53|ch_extensions:GREASE-0-5-10-11-13-16-18-23-27-35-43-45-51-17613-65037-65281-GREASE|groups:GREASE-4588-29-23-24|points:0|compression:0|supported_versions:GREASE-772-771|supported_protocols:h2-http11|key_shares:GREASE-4588-29|psk:1|signature_algs:1027-2052-1025-1283-2053-1281-2054-1537|early_data:0|\\\",\\\"scrapfly_fp_digest\\\":\\\"2084695c9595178c76ba04d5d080dab8\\\",\\\"ja4\\\":\\\"t13d1514h2_8daaf6152771_9a55b862dad6\\\",\\\"ja4_r\\\":\\\"t13d1514h2_002f,0035,009c,009d,1301,1302,1303,c013,c014,c02b,c02c,c02f,c030,cca8,cca9_0005,000a,000b,000d,0012,0017,001b,0023,002b,002d,0033,44cd,fe0d,ff01_0401,0403,0501,0503,0601,0804,0805,0806\\\",\\\"ja4_hash\\\":\\\"3fc5444b6956\\\",\\\"tls\\\":{\\\"version\\\":\\\"0x0303 - TLS 1.2\\\",\\\"ciphers\\\":[\\\"0x5A5A\\\",\\\"TLS_AES_128_GCM_SHA256\\\",\\\"TLS_AES_256_GCM_SHA384\\\",\\\"TLS_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384\\\",\\\"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384\\\",\\\"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA\\\",\\\"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA\\\",\\\"TLS_RSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_RSA_WITH_AES_256_GCM_SHA384\\\",\\\"TLS_RSA_WITH_AES_128_CBC_SHA\\\",\\\"TLS_RSA_W"
+  }
+]
+=== EVENTS_JSON_END ===
