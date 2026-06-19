@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/pleasedodisturb-web-agent-comparison-badge.png)](https://mseep.ai/app/pleasedodisturb-web-agent-comparison)
+
 # Web Agent Comparison
 
 **Which browser-automation MCP server should your AI agent use?**
