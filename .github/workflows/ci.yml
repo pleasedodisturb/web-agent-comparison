@@ -1,0 +1,45 @@
+name: CI
+
+# Base CI: runs the Python test suite and audits both ecosystems on every
+# push to main and every PR. Added under G-1161 (the repo previously had no CI).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python tests + audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Sync deps
+        run: uv sync --frozen
+      - name: Test
+        run: uv run pytest -q
+      - name: Audit (pip)
+        run: uvx pip-audit || true   # report-only for now; tighten once green
+
+  npm-audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: Audit
+        run: npm audit --audit-level=high

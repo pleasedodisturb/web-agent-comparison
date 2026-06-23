@@ -2,12 +2,15 @@
   "name": "web-agent-comparison-harness",
   "version": "0.1.0",
   "private": true,
-  "description": "Node-side dependencies for the web-agent MCP comparison harness. The four npm-based MCPs are pinned here (playwright, chrome-devtools, obscura, firecrawl) plus the official MCP Inspector for tools-inventory snapshots. These are tools the harness invokes via npx, not libraries it imports — hence devDependencies rather than dependencies.",
+  "description": "Node-side dependencies for the web-agent MCP comparison harness. The four npm-based MCPs are pinned here (playwright, chrome-devtools, obscura, firecrawl) plus the official MCP Inspector for tools-inventory snapshots. These are tools the harness invokes via npx, not libraries it imports \u2014 hence devDependencies rather than dependencies.",
   "devDependencies": {
     "@modelcontextprotocol/inspector": "0.21.2",
     "@playwright/mcp": "0.0.75",
-    "chrome-devtools-mcp": "1.0.1",
-    "firecrawl-mcp": "3.17.0",
+    "chrome-devtools-mcp": "1.4.0",
+    "firecrawl-mcp": "3.21.4",
     "obscura-mcp": "0.1.4-3"
+  },
+  "overrides": {
+    "@modelcontextprotocol/sdk": "^1.26.0"
   }
 }
