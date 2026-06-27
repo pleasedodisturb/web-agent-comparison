@@ -9,7 +9,7 @@
 
 ## 0. Bottom line
 
-The published v1.0 scoreboard (2026-05-27) is **not broadly invalid** — 5 of 7 candidates are directionally unchanged. But there are **3 genuinely stale findings**, and **all 3 already fall inside v1.1's Phase 8 re-validation scope**.
+The published v1.0 scoreboard (2026-05-27) is **not broadly invalid** — 4 of 7 candidates are unchanged or only cosmetic drift (2 confirmed unchanged + 2 cosmetic), while **3 are genuinely stale**, and **all 3 already fall inside v1.1's Phase 8 re-validation scope**.
 
 - **Do NOT run a standalone maintenance rescore.** v1.1 Phase 8 re-runs the entire corpus (new fixtures + Linux, median-of-3); a separate rescore now produces a throwaway scoreboard.
 - **Do refresh the version pins now** (documentation-level; cheap hygiene) — §2.
