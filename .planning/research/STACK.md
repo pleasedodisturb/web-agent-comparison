@@ -6,6 +6,8 @@
 
 ---
 
+> ⚠️ **PIN REFRESH 2026-06-27 — the version table below is superseded.** A staleness audit re-checked all candidates ~5 weeks later; see [`STALENESS-AUDIT-2026-06-27.md`](STALENESS-AUDIT-2026-06-27.md) for the full drift analysis and v1.1 gate impacts. Current pin targets: `@playwright/mcp` **0.0.76**, `chrome-devtools-mcp` **1.4.0**, `firecrawl-mcp` **3.22.1** (must be ≥3.20.1 — 3.18.0–3.20.0 are stdio-broken), `browser-use` **0.13.1** (PyPI; GH tag 0.13.2), `lightpanda` **0.3.3** (tagged, not nightly), `cloakbrowsermcp` **2.0.4** (unchanged). **Obscura: the `obscura-mcp` npm wrapper is now ARCHIVED** — use the native `obscura mcp` subcommand (engine v0.1.9). The 2026-05-22 table is retained below for traceability.
+
 ## 1. Verified Latest Stable Versions of the 7 Candidate MCPs
 
 All seven version strings in `HANDOFF.md` / `.mcp.json` were re-checked against npm registry, PyPI, and GitHub on 2026-05-22. Two are stale, one has a non-obvious provenance change, and Lightpanda's "0.3.0" needs an asterisk.
